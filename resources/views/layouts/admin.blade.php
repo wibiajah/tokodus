@@ -73,7 +73,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>@Allright Reserved by: <a href="#" target="_blank">Rivael GTG                            </a></span>
+                        <span>@Allright Reserved by: <a href="#" target="_blank">TokoDus                          </a></span>
 
                     </div>
                 </div>

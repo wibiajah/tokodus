@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\TokoController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\KepalaToko\KepalaTokController;
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function () {
         
         // Manajemen Toko
         Route::resource('toko', TokoController::class);
+
+            // Manajemen User
+         Route::resource('user', UserController::class);
     });
 
     // Kepala Toko routes

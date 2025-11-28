@@ -55,10 +55,8 @@
             <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Menu User:</h6>
-                    <a class="collapse-item" href="#">Daftar Super Admin</a>
-                    <a class="collapse-item" href="#">Daftar Admin</a>
-                    <a class="collapse-item" href="#">Daftar Kepala Toko</a>
-                    <a class="collapse-item" href="#">Daftar Staff Admin</a>
+                    <a class="collapse-item" href="{{ route('user.index') }}">Daftar User</a>
+                    <a class="collapse-item" href="{{ route('user.create') }}">Tambah User</a>
                 </div>
             </div>
         </li>
