@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Toko;
+use App\Helpers\NotificationHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    const HEAD_OFFICE_ID = 999; // ID Head Office
+
     // Tampilkan daftar user
     public function index()
     {
@@ -20,33 +23,19 @@ class UserController extends Controller
     // Form tambah user
     public function create()
     {
-        $tokos = Toko::all();
+        $tokos = Toko::where('id', '!=', self::HEAD_OFFICE_ID)->get();
+        $headOffice = Toko::find(self::HEAD_OFFICE_ID);
         
-        // Tentukan role yang boleh dibuat berdasarkan user login
-        if (auth()->user()->role === 'super_admin') {
-            // Super Admin bisa buat semua role
-            $availableRoles = [
-                'super_admin' => 'Super Admin',
-                'admin' => 'Admin',
-                'kepala_toko' => 'Kepala Toko',
-                'staff_admin' => 'Staff Admin',
-            ];
-        } else {
-            // Admin tidak bisa buat Super Admin
-            $availableRoles = [
-                'admin' => 'Admin',
-                'kepala_toko' => 'Kepala Toko',
-                'staff_admin' => 'Staff Admin',
-            ];
-        }
+        $availableRoles = auth()->user()->role === 'super_admin' 
+            ? User::ROLES
+            : collect(User::ROLES)->except('super_admin')->toArray();
         
-        return view('admin.user.create', compact('tokos', 'availableRoles'));
+        return view('admin.user.create', compact('tokos', 'headOffice', 'availableRoles'));
     }
 
     // Simpan user baru
     public function store(Request $request)
     {
-        // Validasi role berdasarkan user login
         $allowedRoles = auth()->user()->role === 'super_admin' 
             ? ['super_admin', 'admin', 'kepala_toko', 'staff_admin']
             : ['admin', 'kepala_toko', 'staff_admin'];
@@ -59,20 +48,39 @@ class UserController extends Controller
             'toko_id' => ['nullable', 'exists:tokos,id'],
         ]);
 
-        // Cek: jika admin coba buat super_admin
-        if (auth()->user()->role !== 'super_admin' && $validated['role'] === 'super_admin') {
-            return back()->withErrors(['role' => 'Anda tidak memiliki akses untuk membuat Super Admin.']);
+        // 🔥 LOGIKA BARU: Jika tidak memilih toko, otomatis Head Office
+        if (empty($validated['toko_id'])) {
+            $validated['toko_id'] = self::HEAD_OFFICE_ID;
         }
 
-        // Validasi: kepala_toko dan staff_admin harus punya toko
-        if (in_array($validated['role'], ['kepala_toko', 'staff_admin']) && !$validated['toko_id']) {
-            return back()->withErrors(['toko_id' => 'Kepala Toko dan Staff Admin harus memiliki toko.']);
+        // 🔥 CEK: Jika role kepala_toko dan memilih toko cabang (bukan Head Office)
+        if ($validated['role'] === 'kepala_toko' && $validated['toko_id'] != self::HEAD_OFFICE_ID) {
+            $existingKepala = User::where('role', 'kepala_toko')
+                ->where('toko_id', $validated['toko_id'])
+                ->first();
+
+            if ($existingKepala) {
+                return back()->withErrors([
+                    'toko_id' => "Toko ini sudah memiliki Kepala Toko ({$existingKepala->name}). Silakan pilih toko lain atau kosongkan untuk Head Office."
+                ])->withInput();
+            }
         }
 
-        // Hash password
         $validated['password'] = Hash::make($validated['password']);
+        $user = User::create($validated);
 
-        User::create($validated);
+        // Sync status toko jika user adalah Kepala Toko DAN bukan Head Office
+        if ($validated['role'] === 'kepala_toko' && $validated['toko_id'] != self::HEAD_OFFICE_ID) {
+            $toko = Toko::find($validated['toko_id']);
+            if ($toko) {
+                $toko->update(['status' => 'aktif']);
+            }
+        }
+
+        NotificationHelper::notifyRoles(
+            ['super_admin', 'admin'],
+            NotificationHelper::userCreated($user, auth()->user())
+        );
 
         return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan!');
     }
@@ -87,41 +95,27 @@ class UserController extends Controller
     // Form edit user
     public function edit(User $user)
     {
-        // Cek: Admin tidak bisa edit Super Admin
         if (auth()->user()->role !== 'super_admin' && $user->role === 'super_admin') {
             abort(403, 'Anda tidak memiliki akses untuk mengedit Super Admin.');
         }
 
-        $tokos = Toko::all();
+        $tokos = Toko::where('id', '!=', self::HEAD_OFFICE_ID)->get();
+        $headOffice = Toko::find(self::HEAD_OFFICE_ID);
         
-        // Tentukan role yang boleh dipilih
-        if (auth()->user()->role === 'super_admin') {
-            $availableRoles = [
-                'super_admin' => 'Super Admin',
-                'admin' => 'Admin',
-                'kepala_toko' => 'Kepala Toko',
-                'staff_admin' => 'Staff Admin',
-            ];
-        } else {
-            $availableRoles = [
-                'admin' => 'Admin',
-                'kepala_toko' => 'Kepala Toko',
-                'staff_admin' => 'Staff Admin',
-            ];
-        }
+        $availableRoles = auth()->user()->role === 'super_admin' 
+            ? User::ROLES
+            : collect(User::ROLES)->except('super_admin')->toArray();
         
-        return view('admin.user.edit', compact('user', 'tokos', 'availableRoles'));
+        return view('admin.user.edit', compact('user', 'tokos', 'headOffice', 'availableRoles'));
     }
 
     // Update user
     public function update(Request $request, User $user)
     {
-        // Cek: Admin tidak bisa edit Super Admin
         if (auth()->user()->role !== 'super_admin' && $user->role === 'super_admin') {
             abort(403, 'Anda tidak memiliki akses untuk mengedit Super Admin.');
         }
 
-        // Validasi role berdasarkan user login
         $allowedRoles = auth()->user()->role === 'super_admin' 
             ? ['super_admin', 'admin', 'kepala_toko', 'staff_admin']
             : ['admin', 'kepala_toko', 'staff_admin'];
@@ -131,11 +125,40 @@ class UserController extends Controller
             'email' => ['required', 'email', 'unique:users,email,' . $user->id],
             'role' => ['required', 'in:' . implode(',', $allowedRoles)],
             'toko_id' => ['nullable', 'exists:tokos,id'],
+            'confirm_replace' => ['nullable', 'boolean'],
         ]);
 
-        // Validasi: kepala_toko dan staff_admin harus punya toko
-        if (in_array($validated['role'], ['kepala_toko', 'staff_admin']) && !$validated['toko_id']) {
-            return back()->withErrors(['toko_id' => 'Kepala Toko dan Staff Admin harus memiliki toko.']);
+        // 🔥 LOGIKA BARU: Jika tidak memilih toko, otomatis Head Office
+        if (empty($validated['toko_id'])) {
+            $validated['toko_id'] = self::HEAD_OFFICE_ID;
+        }
+
+        // 🔥 LOGIKA KEPALA TOKO (hanya untuk toko cabang, bukan Head Office)
+        if ($validated['role'] === 'kepala_toko' && $validated['toko_id'] != self::HEAD_OFFICE_ID) {
+            $existingKepala = User::where('role', 'kepala_toko')
+                ->where('toko_id', $validated['toko_id'])
+                ->where('id', '!=', $user->id)
+                ->first();
+
+            if ($existingKepala) {
+                // Jika belum konfirmasi, tampilkan pesan konfirmasi
+                if (!$request->has('confirm_replace')) {
+                    return back()->withInput()->with('confirm_replace', [
+                        'message' => "Toko ini sudah memiliki Kepala Toko: <strong>{$existingKepala->name}</strong>. Jika Anda melanjutkan, {$existingKepala->name} akan dipindahkan ke Head Office.",
+                        'existing_kepala_name' => $existingKepala->name,
+                    ]);
+                }
+
+                // Jika sudah konfirmasi, pindahkan kepala toko lama ke Head Office
+                $existingKepala->update(['toko_id' => self::HEAD_OFFICE_ID]);
+                
+                // 🔥 Kirim notifikasi dengan format yang benar
+                $toko = Toko::find($validated['toko_id']);
+                NotificationHelper::notifyRoles(
+                    ['super_admin', 'admin'],
+                    NotificationHelper::kepalaTokoReplaced($existingKepala, $user, $toko, auth()->user())
+                );
+            }
         }
 
         // Update password jika diisi
@@ -146,7 +169,31 @@ class UserController extends Controller
             $validated['password'] = Hash::make($request->password);
         }
 
+        $oldRole = $user->role;
+        $oldTokoId = $user->toko_id;
+
         $user->update($validated);
+
+        // Handle Kepala Toko status (hanya untuk toko cabang)
+        if ($validated['role'] === 'kepala_toko' && $validated['toko_id'] != self::HEAD_OFFICE_ID) {
+            $toko = Toko::find($validated['toko_id']);
+            if ($toko) {
+                $toko->update(['status' => 'aktif']);
+            }
+        }
+
+        // Handle role change dari Kepala Toko (hanya untuk toko cabang)
+        if ($oldRole === 'kepala_toko' && $validated['role'] !== 'kepala_toko' && $oldTokoId && $oldTokoId != self::HEAD_OFFICE_ID) {
+            $toko = Toko::find($oldTokoId);
+            if ($toko && !$toko->kepalaToko()->exists()) {
+                $toko->update(['status' => 'tidak_aktif']);
+            }
+        }
+
+        NotificationHelper::notifyRoles(
+            ['super_admin', 'admin'],
+            NotificationHelper::userUpdated($user, auth()->user())
+        );
 
         return redirect()->route('user.index')->with('success', 'User berhasil diperbarui!');
     }
@@ -154,17 +201,34 @@ class UserController extends Controller
     // Hapus user
     public function destroy(User $user)
     {
-        // Cek: Admin tidak bisa hapus Super Admin
         if (auth()->user()->role !== 'super_admin' && $user->role === 'super_admin') {
-            return redirect()->route('user.index')->with('error', 'Anda tidak memiliki akses untuk menghapus Super Admin.');
+            return redirect()->route('user.index')
+                ->with('error', 'Anda tidak memiliki akses untuk menghapus Super Admin.');
         }
 
-        // Tidak bisa hapus diri sendiri
         if ($user->id === auth()->id()) {
-            return redirect()->route('user.index')->with('error', 'Anda tidak dapat menghapus akun sendiri!');
+            return redirect()->route('user.index')
+                ->with('error', 'Anda tidak dapat menghapus akun sendiri!');
         }
+
+        $tokoId = $user->toko_id;
+        $role = $user->role;
+        $userName = $user->name;
 
         $user->delete();
+
+        // Handle Kepala Toko status saat dihapus (hanya untuk toko cabang)
+        if ($role === 'kepala_toko' && $tokoId && $tokoId != self::HEAD_OFFICE_ID) {
+            $toko = Toko::find($tokoId);
+            if ($toko && !$toko->kepalaToko()->exists()) {
+                $toko->update(['status' => 'tidak_aktif']);
+            }
+        }
+
+        NotificationHelper::notifyRoles(
+            ['super_admin', 'admin'],
+            NotificationHelper::userDeleted($userName, auth()->user())
+        );
 
         return redirect()->route('user.index')->with('success', 'User berhasil dihapus!');
     }
