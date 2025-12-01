@@ -11,98 +11,130 @@
             </script>
         @endif
     @else
-        <div class="min-vh-100 d-flex align-items-center position-relative bg-gradient-light">
-            <!-- Enhanced Background -->
-            <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern"></div>
+        <div class="auth-overlay">
+            <div class="container" id="authContainer">
+                <button type="button" class="close-icon" onclick="window.history.back()">
+                    <i class="fas fa-times"></i>
+                </button>
 
-            <!-- Main Container -->
-            <div class="container position-relative py-4">
-                <div class="row justify-content-center">
-                    <div class="col-12" style="max-width: 1100px;">
-                        <!-- Completely Redesigned Card Layout -->
-                        <div class="login-container">
-                            <!-- Top Section with Company Info -->
-                           
+                <!-- FORM REGISTER -->
+                <div class="form-container sign-up-container">
+                    <form action="{{ route('register') }}" method="POST" novalidate>
+                        @csrf
+                        <h1>Buat Akun</h1>
 
-                            <!-- Two Cards Side by Side -->
-                            <div class="row g-0">
-                                <!-- Left Card: Illustration -->
-                                <div class="col-lg-6 mb-4 mb-lg-0">
-                                    <div
-                                        class="illustration-card h-100 d-flex flex-column justify-content-center align-items-center p-4">
-                                        
-                                        <div class="welcome-text text-center">
-                                            <h3 class="fw-bold welcome-title">Welcome Back!</h3>
-                                            <p class="welcome-subtitle">We're glad to see you again</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="social-login">
+                            <button type="button" class="social-btn google" aria-label="Login with Google">
+                                <i class="fab fa-google"></i>
+                            </button>
+                            <button type="button" class="social-btn facebook" aria-label="Login with Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                        </div>
 
-                                <!-- Right Card: Login Form -->
-                                <div class="col-lg-6">
-                                    <div class="login-form-card h-100 p-4 p-lg-5">
-                                        <h3 class="text-center mb-4 form-title">Sign In</h3>
+                        <div class="name-fields">
+                            <input type="text" name="firstname" placeholder="Nama Depan" 
+                                   value="{{ old('firstname') }}" />
+                            <input type="text" name="lastname" placeholder="Nama Belakang" 
+                                   value="{{ old('lastname') }}" />
+                        </div>
 
-                                        <form action="{{ route('login') }}" method="POST" class="floating-labels">
-                                            @csrf
-                                            @method('POST')
+                        <input type="text" name="username" placeholder="Username" 
+                               value="{{ old('username') }}" required />
 
-                                            <div class="form-group mb-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-text">
-                                                        <i class="fas fa-envelope text-primary"></i>
-                                                    </span>
-                                                    <div class="form-floating flex-grow-1">
-                                                        <input type="email"
-                                                            class="form-control custom-input @error('email') is-invalid @enderror"
-                                                            name="email" id="email" placeholder="Email"
-                                                            value="{{ old('email') }}">
-                                                        <label for="email">Email Address</label>
-                                                    </div>
-                                                    @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
+                        <input type="email" name="email" placeholder="Email" 
+                               value="{{ old('email') }}" required />
 
-                                            <div class="form-group mb-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-text">
-                                                        <i class="fas fa-lock text-primary"></i>
-                                                    </span>
-                                                    <div class="form-floating flex-grow-1">
-                                                        <input type="password"
-                                                            class="form-control custom-input @error('password') is-invalid @enderror"
-                                                            name="password" id="password" placeholder="Password">
-                                                        <label for="password">Password</label>
-                                                    </div>
-                                                    <button type="button"
-                                                        class="btn btn-link position-absolute end-0 top-50 translate-middle-y text-decoration-none password-toggle"
-                                                        style="z-index: 5;" onclick="togglePassword()">
-                                                        <i class="fas fa-eye" id="toggleIcon"></i>
-                                                    </button>
-                                                    @error('password')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
+                        <div class="password-field">
+                            <input type="password" name="password" id="regPassword" 
+                                   placeholder="Kata Sandi" required />
+                            <span class="toggle-password" onclick="togglePassword('regPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
 
-                                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                                <div class="form-check custom-checkbox">
-                                                    <input type="checkbox" class="form-check-input" name="remember"
-                                                        id="remember">
-                                                    <label class="form-check-label" for="remember">Remember me</label>
-                                                </div>
-                                            </div>
+                        <div class="password-field">
+                            <input type="password" name="password_confirmation" id="regConfirmPassword" 
+                                   placeholder="Konfirmasi Kata Sandi" required />
+                            <span class="toggle-password" onclick="togglePassword('regConfirmPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
 
-                                            <button type="submit" class="btn btn-primary w-100 btn-lg mb-4 pulse-button">
-                                                Sign In <i class="fas fa-sign-in-alt ms-2"></i>
-                                            </button>
-
-                                        </form>
-                                    </div>
-                                </div>
+                        @if ($errors->any())
+                            <div class="auth-error">
+                                @foreach ($errors->all() as $error)
+                                    <div>{{ $error }}</div>
+                                @endforeach
                             </div>
+                        @endif
+
+                        <button type="submit">Daftar</button>
+                    </form>
+                </div>
+
+                <!-- FORM LOGIN -->
+                <div class="form-container sign-in-container">
+                    <form action="{{ route('login') }}" method="POST" novalidate>
+                        @csrf
+                        <h1>Masuk</h1>
+
+                        <div class="social-login">
+                            <button type="button" class="social-btn google" aria-label="Login with Google">
+                                <i class="fab fa-google"></i>
+                            </button>
+                            <button type="button" class="social-btn facebook" aria-label="Login with Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                        </div>
+
+                        <input type="email" name="email" placeholder="Email" 
+                               value="{{ old('email') }}" required />
+
+                        <div class="password-field">
+                            <input type="password" name="password" id="loginPassword" 
+                                   placeholder="Kata Sandi" required />
+                            <span class="toggle-password" onclick="togglePassword('loginPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+
+                        <div class="login-options">
+                            <label class="remember-me">
+                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} />
+                                Tetap masuk
+                            </label>
+                            <a href="#" class="forgot-password" onclick="event.preventDefault()">
+                                Lupa kata sandi?
+                            </a>
+                        </div>
+
+                        @if ($errors->has('email') || $errors->has('password'))
+                            <div class="auth-error">
+                                {{ $errors->first('email') ?: $errors->first('password') }}
+                            </div>
+                        @endif
+
+                        <button type="submit">Masuk</button>
+                    </form>
+                </div>
+
+                <!-- OVERLAY -->
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-left">
+                            <h1>Selamat Datang Kembali!</h1>
+                            <p>Untuk tetap terhubung, silakan masuk dengan akun Anda</p>
+                            <button type="button" class="ghost" onclick="togglePanel(false)">
+                                Masuk
+                            </button>
+                        </div>
+                        <div class="overlay-panel overlay-right">
+                            <h1>Halo, Teman Baru!</h1>
+                            <p>Masukkan data pribadi Anda dan mulai perjalanan bersama kami</p>
+                            <button type="button" class="ghost" onclick="togglePanel(true)">
+                                Daftar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -110,346 +142,408 @@
         </div>
 
         <style>
-            /* Modern Color Scheme */
             :root {
-
-                --primary-color: #048bd4;
-                --primary-hover: #0442d4;
-                --secondary-color: #b22222;
-                --success-color: #22c55e;
-                --background-color: #f8fafc;
-                --card-background: #ffffff;
-                --text-primary: #1e293b;
-                --text-secondary: #64748b;
+                --primary: #ffffff;
+                --secondary: #048bd4;
+                --thirdary: #0442d4;
+                --edition: #1e293b;
+                --contrast: #ffffff;
             }
 
-            /* Enhanced Background */
-            .bg-gradient-light {
-                background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            .auth-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.6);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
             }
 
-            .bg-pattern {
-                background-image: radial-gradient(#d4c704 0.5px, transparent 0.5px), radial-gradient(#d4c704 0.5px, #b22222 0.5px);
-
-                background-size: 20px 20px;
-                background-position: 0 0, 10px 10px;
-                opacity: 0.05;
-            }
-
-            /* Completely Redesigned Container */
-            .login-container {
-                max-width: 1100px;
-                margin: 0 auto;
-            }
-
-            /* Company Banner at Top */
-            .company-banner {
-                padding: 1.5rem;
-                border-radius: 20px;
-                margin-bottom: 2rem;
-                background-color: rgba(255, 255, 255, 0.9);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            }
-
-            .logo-container {
+            .container {
+                background-color: var(--contrast);
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
                 position: relative;
-                z-index: 1;
+                overflow: hidden;
+                width: 860px;
+                max-width: 95%;
+                min-height: 520px;
+                transition: all 0.6s ease-in-out;
+                display: flex;
             }
 
-            .logo-background {
+            .close-icon {
                 position: absolute;
-                width: 150px;
-                height: 150px;
-                background: radial-gradient(circle, rgba(79, 70, 229, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-                border-radius: 50%;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: -1;
+                top: 18px;
+                right: 22px;
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--thirdary);
+                cursor: pointer;
+                z-index: 101;
+                transition: transform 0.2s ease;
+                background: none;
+                border: none;
+            }
+            .close-icon:hover {
+                transform: scale(1.1);
             }
 
-            .logo-animate {
-                height: 130px;
-                position: relative;
+            .form-container {
+                position: absolute;
+                top: 0;
+                height: 100%;
+                transition: all 0.6s ease-in-out;
+            }
+
+            .sign-in-container {
+                left: 0;
+                width: 50%;
                 z-index: 2;
             }
 
-            .company-name {
-                font-weight: 700;
-                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                margin-bottom: 0.5rem;
+            .sign-up-container {
+                left: 0;
+                width: 50%;
+                opacity: 0;
+                z-index: 1;
             }
 
-            .company-address {
-                color: var(--text-secondary);
-                font-size: 0.95rem;
-                margin-bottom: 0;
+            .container.right-panel-active .sign-in-container {
+                transform: translateX(100%);
+                opacity: 0;
             }
 
-            /* Two Cards Layout */
-            .illustration-card,
-            .login-form-card {
-                border-radius: 20px;
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-                overflow: hidden;
-                height: 100%;
+            .container.right-panel-active .sign-up-container {
+                transform: translateX(100%);
+                opacity: 1;
+                z-index: 5;
             }
 
-            /* Left Card: Illustration */
-            .illustration-card {
-                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-                padding: 2rem;
+            form {
+                background-color: var(--contrast);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                position: relative;
+                padding: 0 50px;
+                height: 100%;
+                text-align: center;
+                transition: all 0.3s ease;
             }
 
-            .illustration-card::before {
-                content: '';
+            form h1 {
+                font-weight: 800;
+                font-size: 28px;
+                color: var(--edition);
+                margin-bottom: 20px;
+            }
+
+            form input {
+                background-color: #fff;
+                border: 1px solid #e2e8f0;
+                padding: 12px 15px;
+                margin: 8px 0;
+                width: 100%;
+                border-radius: 8px;
+                font-size: 14px;
+                color: #333;
+                outline: none;
+                transition: all 0.2s;
+            }
+            form input:focus {
+                border-color: var(--secondary);
+                box-shadow: 0 0 0 3px rgba(4, 139, 212, 0.1);
+            }
+
+            form button[type="submit"] {
+                border-radius: 25px;
+                border: none;
+                background-color: var(--secondary);
+                color: var(--contrast);
+                font-size: 14px;
+                font-weight: 600;
+                padding: 12px 45px;
+                margin-top: 20px;
+                letter-spacing: 0.5px;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+            form button[type="submit"]:hover {
+                background-color: var(--thirdary);
+                transform: scale(1.05);
+            }
+
+            .overlay-container {
                 position: absolute;
                 top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-                opacity: 0.5;
-            }
-
-            .floating-illustration {
-                max-width: 90%;
-                max-height: 300px;
-                filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
-                animation: float 8s ease-in-out infinite;
-            }
-
-            .welcome-text {
-                color: white;
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                position: relative;
-                z-index: 2;
-            }
-
-            .welcome-title {
-                font-size: 2.2rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .welcome-subtitle {
-                font-size: 1.1rem;
-                opacity: 0.9;
-            }
-
-            /* Right Card: Login Form */
-            .login-form-card {
-                background-color: white;
-                padding: 2.5rem;
-            }
-
-            .form-title {
-                color: var(--text-primary);
-                font-weight: 700;
-                margin-bottom: 2rem;
-                position: relative;
-            }
-
-            .form-title:after {
-                content: '';
-                position: absolute;
-                width: 50px;
-                height: 3px;
-                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-                bottom: -10px;
                 left: 50%;
-                transform: translateX(-50%);
-                border-radius: 3px;
+                width: 50%;
+                height: 100%;
+                overflow: hidden;
+                transition: transform 0.6s ease-in-out;
+                z-index: 100;
             }
 
-            /* Enhanced Input Styling */
-            .input-group-text {
-                background-color: white;
-                border-right: none;
-                border-top-left-radius: 12px;
-                border-bottom-left-radius: 12px;
-                border: 2px solid #e2e8f0;
-                border-right: none;
-                padding-left: 1.25rem;
-                padding-right: 0.75rem;
+            .container.right-panel-active .overlay-container {
+                transform: translateX(-100%);
             }
 
-            .custom-input {
-                border-top-right-radius: 12px !important;
-                border-bottom-right-radius: 12px !important;
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                padding: 1.15rem 1rem;
-                border: 2px solid #e2e8f0;
-                border-left: none;
-                font-size: 1rem;
-                transition: all 0.3s ease;
-                background-color: #ffffff;
+            .overlay {
+                background: linear-gradient(to right, var(--edition), var(--secondary));
+                background-repeat: no-repeat;
+                background-size: cover;
+                color: var(--contrast);
+                position: relative;
+                left: -100%;
+                height: 100%;
+                width: 200%;
+                transform: translateX(0);
+                transition: transform 0.6s ease-in-out;
             }
 
-            .form-floating>label {
-                padding-left: 0.75rem;
+            .container.right-panel-active .overlay {
+                transform: translateX(50%);
             }
 
-            .custom-input:focus {
-                border-color: var(--primary-color);
-                box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
-                border-left: none;
+            .overlay-panel {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                top: 0;
+                height: 100%;
+                width: 50%;
+                padding: 0 40px;
+                transition: transform 0.6s ease-in-out;
             }
 
-            .custom-input:focus+label {
-                color: var(--primary-color);
+            .overlay-left {
+                transform: translateX(-20%);
+            }
+            .container.right-panel-active .overlay-left {
+                transform: translateX(0);
             }
 
-            .input-group:focus-within .input-group-text {
-                border-color: var(--primary-color);
+            .overlay-right {
+                right: 0;
+            }
+            .container.right-panel-active .overlay-right {
+                transform: translateX(20%);
             }
 
-            /* Enhanced Button Styling */
-            .pulse-button {
-                border-radius: 12px;
-                padding: 0.875rem 1.5rem;
-                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-                border: none;
+            .overlay-panel h1 {
+                font-size: 40px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                color: var(--primary);
+            }
+            .overlay-panel p {
+                font-size: 14px;
+                line-height: 1.5;
+                margin-bottom: 20px;
+                max-width: 260px;
+            }
+
+            button.ghost {
+                background-color: transparent;
+                border: 2px solid #fff;
+                color: #fff;
+                border-radius: 25px;
+                padding: 10px 40px;
+                font-size: 14px;
                 font-weight: 600;
                 letter-spacing: 0.5px;
-                transition: all 0.3s ease;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+            }
+
+            button.ghost:hover {
+                background-color: #fff;
+                color: var(--thirdary);
+                transform: scale(1.05);
+            }
+
+            .password-field {
                 position: relative;
-                overflow: hidden;
-            }
-
-            .pulse-button:before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
                 width: 100%;
-                height: 100%;
-                background: rgba(255, 255, 255, 0.1);
-                transform: translateX(-100%);
-                transition: transform 0.6s ease-out;
+            }
+            .password-field input {
+                width: 100%;
+                padding-right: 40px;
+            }
+            .toggle-password {
+                position: absolute;
+                top: 50%;
+                right: 12px;
+                transform: translateY(-50%);
+                cursor: pointer;
+                color: #555;
+                font-size: 18px;
+            }
+            .toggle-password:hover {
+                color: var(--thirdary);
             }
 
-            .pulse-button:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+            .login-options {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 10px;
+                font-size: 14px;
             }
 
-            .pulse-button:hover:before {
-                transform: translateX(100%);
+            .remember-me {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                color: var(--secondary);
+                user-select: none;
+                cursor: pointer;
             }
 
-            /* Enhanced Checkbox Styling */
-            .custom-checkbox .form-check-input {
-                border-radius: 6px;
-                border: 2px solid #e2e8f0;
+            .remember-me input[type="checkbox"] {
+                accent-color: var(--thirdary);
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+                margin: 0;
             }
 
-            .custom-checkbox .form-check-input:checked {
-                background-color: var(--primary-color);
-                border-color: var(--primary-color);
+            .forgot-password {
+                color: var(--thirdary);
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+            .forgot-password:hover {
+                text-decoration: underline;
             }
 
-            /* Password Toggle */
-            .password-toggle {
-                color: var(--text-secondary);
-                transition: color 0.3s ease;
-                margin-right: 0.5rem;
-                z-index: 10;
+            .social-login {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                width: 100%;
+                margin-bottom: 20px;
             }
 
-            .password-toggle:hover {
-                color: var(--primary-color);
+            .social-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                border: 1px solid #ddd;
+                cursor: pointer;
+                background-color: #fff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                padding: 0;
+            }
+            .social-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+            .social-btn i {
+                font-size: 18px;
+            }
+            .social-btn.google i {
+                color: #DB4437;
+            }
+            .social-btn.facebook i {
+                color: #4267B2;
             }
 
-            /* Animations */
-            @keyframes float {
-
-                0%,
-                100% {
-                    transform: translateY(0) scale(1);
-                }
-
-                50% {
-                    transform: translateY(-15px) scale(1.02);
-                }
+            .name-fields {
+                display: flex;
+                gap: 10px;
+                width: 100%;
             }
 
-            @keyframes logoFloat {
-
-                0%,
-                100% {
-                    transform: translateY(0) scale(1);
-                }
-
-                50% {
-                    transform: translateY(-8px) scale(1.05);
-                }
+            .name-fields input {
+                flex: 1;
             }
 
-            .logo-animate {
-                animation: logoFloat 6s ease-in-out infinite;
+            .auth-error {
+                background-color: #fee;
+                color: #c33;
+                padding: 10px;
+                border-radius: 8px;
+                margin-top: 10px;
+                font-size: 13px;
+                width: 100%;
+                text-align: center;
             }
 
-            /* Responsive Styles */
-            @media (max-width: 991.98px) {
-                .company-banner {
-                    margin-bottom: 1.5rem;
-                    padding: 1rem;
+            @media (max-width: 768px) {
+                .container {
+                    width: 95%;
+                    min-height: 600px;
                 }
 
-                .logo-animate {
-                    height: 100px;
+                .overlay-container {
+                    display: none;
                 }
 
-                .company-name {
-                    font-size: 1.5rem;
+                .form-container {
+                    position: relative !important;
+                    width: 100% !important;
+                    left: 0 !important;
+                    opacity: 1 !important;
+                    transform: none !important;
                 }
 
-                .company-address {
-                    font-size: 0.85rem;
+                .sign-up-container {
+                    display: none;
                 }
 
-                .illustration-card {
-                    margin-bottom: 1.5rem;
-                    padding: 1.5rem;
+                .container.right-panel-active .sign-up-container {
+                    display: flex;
                 }
 
-                .welcome-title {
-                    font-size: 1.8rem;
-                }
-
-                .welcome-subtitle {
-                    font-size: 1rem;
-                }
-
-                .login-form-card {
-                    padding: 1.5rem;
+                .container.right-panel-active .sign-in-container {
+                    display: none;
                 }
             }
         </style>
 
         <script>
-            function togglePassword() {
-                const passwordInput = document.getElementById('password');
-                const toggleIcon = document.getElementById('toggleIcon');
-
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    toggleIcon.classList.remove('fa-eye');
-                    toggleIcon.classList.add('fa-eye-slash');
+            function togglePanel(showRegister) {
+                const container = document.getElementById('authContainer');
+                if (showRegister) {
+                    container.classList.add('right-panel-active');
                 } else {
-                    passwordInput.type = 'password';
-                    toggleIcon.classList.remove('fa-eye-slash');
-                    toggleIcon.classList.add('fa-eye');
+                    container.classList.remove('right-panel-active');
                 }
             }
+
+            function togglePassword(inputId, toggleElement) {
+                const passwordInput = document.getElementById(inputId);
+                const icon = toggleElement.querySelector('i');
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+
+            // Jika ada error validasi pada register, tampilkan form register
+            @if (old('username') || old('firstname') || old('lastname') || ($errors->any() && !$errors->has('email')))
+                document.addEventListener('DOMContentLoaded', function() {
+                    togglePanel(true);
+                });
+            @endif
         </script>
     @endauth
 </x-guest-layout>

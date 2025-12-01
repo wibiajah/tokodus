@@ -1,252 +1,348 @@
-{{-- resources/views/layouts/components/sidebar.blade.php --}}
-<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('home') }}">
-        <img src="{{ asset('logo') }}" alt="Logo" class="img-fluid" style="max-height: 60px;">
-    </a>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    {{-- ============================================ --}}
-    {{-- SUPER ADMIN MENU --}}
-    {{-- ============================================ --}}
-    @if (auth()->user()->role === 'super_admin')
-        <!-- Dashboard -->
-        <li class="nav-item {{ request()->routeIs('superadmin.dashboard') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('superadmin.dashboard') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Manajemen Master
-        </div>
-
-        <!-- Manajemen Toko -->
-        <!-- Manajemen Toko -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseToko"
-        aria-expanded="true" aria-controls="collapseToko">
-        <i class="fas fa-fw fa-store"></i>
-        <span>Manajemen Toko</span>
-    </a>
-    <div id="collapseToko" class="collapse" aria-labelledby="headingToko" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Menu Toko:</h6>
-            <a class="collapse-item" href="{{ route('toko.index') }}">Daftar Toko</a>
-            <a class="collapse-item" href="{{ route('toko.create') }}">Tambah Toko</a>
-        </div>
+{{-- resources/views/layouts/sidebar.blade.php --}}
+<div class="sidebar-container" id="sidebarContainer">
+    <!-- Sidebar Toggle Button (untuk expand/collapse) -->
+    <div class="sidebar-header">
+        <button class="sidebar-collapse-btn" id="sidebarCollapseBtn">
+            <i class="fas fa-ellipsis-h"></i>
+        </button>
     </div>
-</li>
 
-        <!-- Manajemen User -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
-                aria-expanded="true" aria-controls="collapseUser">
-                <i class="fas fa-fw fa-users-cog"></i>
-                <span>Manajemen User</span>
+    <nav class="sidebar-nav">
+        @if (auth()->user()->role === 'super_admin')
+            <!-- Dashboard -->
+            <a href="{{ route('superadmin.dashboard') }}" 
+               class="nav-item {{ request()->routeIs('superadmin.dashboard') ? 'active' : '' }}"
+               title="Dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span class="nav-text">Dashboard</span>
             </a>
-            <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Menu User:</h6>
-                    <a class="collapse-item" href="{{ route('user.index') }}">Daftar User</a>
-                    <a class="collapse-item" href="{{ route('user.create') }}">Tambah User</a>
-                </div>
+
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-heading">Manajemen Master</div>
+
+            <!-- Manajemen Toko -->
+            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseToko" title="Manajemen Toko">
+                <i class="fas fa-store"></i>
+                <span class="nav-text">Manajemen Toko</span>
+                <i class="fas fa-chevron-down nav-arrow"></i>
+            </a>
+            <div id="collapseToko" class="collapse nav-collapse">
+                <h6 class="collapse-header">Menu Toko:</h6>
+                <a class="collapse-item" href="{{ route('toko.index') }}">Daftar Toko</a>
+                <a class="collapse-item" href="{{ route('toko.create') }}">Tambah Toko</a>
             </div>
-        </li>
-    @endif
 
-    {{-- ============================================ --}}
-    {{-- ADMIN MENU --}}
-    {{-- ============================================ --}}
-    @if (auth()->user()->role === 'admin')
-        <!-- Dashboard -->
-        <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
+            <!-- Manajemen User -->
+            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseUser" title="Manajemen User">
+                <i class="fas fa-users-cog"></i>
+                <span class="nav-text">Manajemen User</span>
+                <i class="fas fa-chevron-down nav-arrow"></i>
             </a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Manajemen Master
-        </div>
-
-        <!-- Manajemen Toko -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseToko"
-                aria-expanded="true" aria-controls="collapseToko">
-                <i class="fas fa-fw fa-store"></i>
-                <span>Manajemen Toko</span>
-            </a>
-            <div id="collapseToko" class="collapse" aria-labelledby="headingToko" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Menu Toko:</h6>
-                    <a class="collapse-item" href="#">Daftar Toko</a>
-                    <a class="collapse-item" href="#">Tambah Toko</a>
-                </div>
+            <div id="collapseUser" class="collapse nav-collapse">
+                <h6 class="collapse-header">Menu User:</h6>
+                <a class="collapse-item" href="{{ route('user.index') }}">Daftar User</a>
+                <a class="collapse-item" href="{{ route('user.create') }}">Tambah User</a>
             </div>
-        </li>
+        @endif
 
-        <!-- Manajemen User (Tanpa Super Admin) -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
-                aria-expanded="true" aria-controls="collapseUser">
-                <i class="fas fa-fw fa-users"></i>
-                <span>Manajemen User</span>
+        @if (auth()->user()->role === 'admin')
+            <!-- Dashboard Admin -->
+            <a href="{{ route('admin.dashboard') }}" 
+               class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+               title="Dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span class="nav-text">Dashboard</span>
             </a>
-            <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Menu User:</h6>
-                    <a class="collapse-item" href="#">Daftar Admin</a>
-                    <a class="collapse-item" href="#">Daftar Kepala Toko</a>
-                    <a class="collapse-item" href="#">Daftar Staff Admin</a>
-                </div>
+
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-heading">Manajemen Master</div>
+
+            <!-- Manajemen Toko -->
+            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseToko" title="Manajemen Toko">
+                <i class="fas fa-store"></i>
+                <span class="nav-text">Manajemen Toko</span>
+                <i class="fas fa-chevron-down nav-arrow"></i>
+            </a>
+            <div id="collapseToko" class="collapse nav-collapse">
+                <h6 class="collapse-header">Menu Toko:</h6>
+                <a class="collapse-item" href="#">Daftar Toko</a>
+                <a class="collapse-item" href="#">Tambah Toko</a>
             </div>
-        </li>
-    @endif
 
-    {{-- ============================================ --}}
-    {{-- KEPALA TOKO MENU --}}
-    {{-- ============================================ --}}
-    @if (auth()->user()->role === 'kepala_toko')
-        <!-- Dashboard -->
-        <li class="nav-item {{ request()->routeIs('kepala-toko.dashboard') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('kepala-toko.dashboard') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
+            <!-- Manajemen User -->
+            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseUser" title="Manajemen User">
+                <i class="fas fa-users"></i>
+                <span class="nav-text">Manajemen User</span>
+                <i class="fas fa-chevron-down nav-arrow"></i>
             </a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Manajemen Toko
-        </div>
-
-        <!-- Informasi Toko -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-store"></i>
-                <span>Informasi Toko</span>
-            </a>
-        </li>
-
-        <!-- Manajemen Staff -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStaff"
-                aria-expanded="true" aria-controls="collapseStaff">
-                <i class="fas fa-fw fa-users"></i>
-                <span>Manajemen Staff</span>
-            </a>
-            <div id="collapseStaff" class="collapse" aria-labelledby="headingStaff" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Menu Staff:</h6>
-                    <a class="collapse-item" href="#">Daftar Staff</a>
-                    <a class="collapse-item" href="#">Tambah Staff</a>
-                </div>
+            <div id="collapseUser" class="collapse nav-collapse">
+                <h6 class="collapse-header">Menu User:</h6>
+                <a class="collapse-item" href="#">Daftar Admin</a>
+                <a class="collapse-item" href="#">Daftar Kepala Toko</a>
+                <a class="collapse-item" href="#">Daftar Staff Admin</a>
             </div>
-        </li>
+        @endif
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Transaksi
-        </div>
-
-        <!-- Orderan -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-shopping-cart"></i>
-                <span>Orderan</span>
-                <span class="badge badge-warning badge-counter ml-auto">Coming Soon</span>
+        @if (auth()->user()->role === 'kepala_toko')
+            <!-- Dashboard Kepala Toko -->
+            <a href="{{ route('kepala-toko.dashboard') }}" 
+               class="nav-item {{ request()->routeIs('kepala-toko.dashboard') ? 'active' : '' }}"
+               title="Dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span class="nav-text">Dashboard</span>
             </a>
-        </li>
 
-        <!-- Laporan -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-chart-line"></i>
-                <span>Laporan</span>
-                <span class="badge badge-warning badge-counter ml-auto">Coming Soon</span>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-heading">Manajemen Toko</div>
+
+            <a href="#" class="nav-item" title="Informasi Toko">
+                <i class="fas fa-store"></i>
+                <span class="nav-text">Informasi Toko</span>
             </a>
-        </li>
-    @endif
 
-    {{-- ============================================ --}}
-    {{-- STAFF ADMIN MENU --}}
-    {{-- ============================================ --}}
-    @if (auth()->user()->role === 'staff_admin')
-        <!-- Dashboard -->
-        <li class="nav-item {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('staff.dashboard') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
+            <!-- Manajemen Staff -->
+            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseStaff" title="Manajemen Staff">
+                <i class="fas fa-users"></i>
+                <span class="nav-text">Manajemen Staff</span>
+                <i class="fas fa-chevron-down nav-arrow"></i>
             </a>
-        </li>
+            <div id="collapseStaff" class="collapse nav-collapse">
+                <h6 class="collapse-header">Menu Staff:</h6>
+                <a class="collapse-item" href="#">Daftar Staff</a>
+                <a class="collapse-item" href="#">Tambah Staff</a>
+            </div>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-heading">Transaksi</div>
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Transaksi
-        </div>
-
-        <!-- Orderan -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-shopping-cart"></i>
-                <span>Orderan</span>
-                <span class="badge badge-warning badge-counter ml-auto">Coming Soon</span>
+            <a href="#" class="nav-item" title="Orderan">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="nav-text">Orderan</span>
+                <span class="badge badge-warning badge-counter">Soon</span>
             </a>
-        </li>
 
-        <!-- Riwayat Orderan -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-history"></i>
-                <span>Riwayat Orderan</span>
-                <span class="badge badge-warning badge-counter ml-auto">Coming Soon</span>
+            <a href="#" class="nav-item" title="Laporan">
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-text">Laporan</span>
+                <span class="badge badge-warning badge-counter">Soon</span>
             </a>
-        </li>
+        @endif
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Informasi
-        </div>
-
-        <!-- Informasi Toko -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-store"></i>
-                <span>Informasi Toko</span>
+        @if (auth()->user()->role === 'staff_admin')
+            <!-- Dashboard Staff -->
+            <a href="{{ route('staff.dashboard') }}" 
+               class="nav-item {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}"
+               title="Dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span class="nav-text">Dashboard</span>
             </a>
-        </li>
-    @endif
 
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-heading">Transaksi</div>
 
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-</ul>
+            <a href="#" class="nav-item" title="Orderan">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="nav-text">Orderan</span>
+                <span class="badge badge-warning badge-counter">Soon</span>
+            </a>
+
+            <a href="#" class="nav-item" title="Riwayat Orderan">
+                <i class="fas fa-history"></i>
+                <span class="nav-text">Riwayat Orderan</span>
+                <span class="badge badge-warning badge-counter">Soon</span>
+            </a>
+
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-heading">Informasi</div>
+
+            <a href="#" class="nav-item" title="Informasi Toko">
+                <i class="fas fa-store"></i>
+                <span class="nav-text">Informasi Toko</span>
+            </a>
+        @endif
+
+        <div class="sidebar-divider"></div>
+    </nav>
+</div>
+
+<style>
+    /* Sidebar Header with Toggle Button */
+    .sidebar-header {
+        padding: 1rem;
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .sidebar-collapse-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #fff;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+    }
+
+    .sidebar-collapse-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+    /* Sidebar Collapsed State */
+    .sidebar-container.collapsed {
+        width: 80px !important;
+    }
+
+    .sidebar-container.collapsed .sidebar-header {
+        justify-content: center;
+    }
+
+    .sidebar-container.collapsed .nav-text,
+    .sidebar-container.collapsed .nav-arrow,
+    .sidebar-container.collapsed .sidebar-heading,
+    .sidebar-container.collapsed .badge-counter {
+        display: none !important;
+    }
+
+    .sidebar-container.collapsed .nav-item {
+        justify-content: center;
+        padding: 0.8rem;
+        border-left: 3px solid transparent;
+    }
+
+    .sidebar-container.collapsed .nav-item i {
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    .sidebar-container.collapsed .nav-collapse,
+    .sidebar-container.collapsed .collapse.show {
+        display: none !important;
+    }
+
+    /* Nav Item Styling */
+    .nav-item {
+        position: relative;
+    }
+
+    .nav-text {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .nav-arrow {
+        margin-left: auto;
+        font-size: 0.7rem;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-item[aria-expanded="true"] .nav-arrow {
+        transform: rotate(180deg);
+    }
+
+    /* Badge Counter */
+    .badge-counter {
+        margin-left: auto;
+    }
+
+    /* Responsive - Desktop Layout */
+    @media (min-width: 992px) {
+        body {
+            grid-template-columns: 260px 1fr;
+            transition: grid-template-columns 0.3s ease;
+        }
+
+        body.sidebar-collapsed {
+            grid-template-columns: 80px 1fr;
+        }
+
+        .sidebar-container {
+            transition: width 0.3s ease;
+        }
+
+        .sidebar-collapse-btn {
+            display: flex !important;
+        }
+    }
+
+    /* Responsive - Mobile Layout */
+    @media (max-width: 991px) {
+        .sidebar-collapse-btn {
+            display: none !important;
+        }
+
+        .sidebar-container.collapsed {
+            width: 100% !important;
+        }
+
+        .sidebar-container.collapsed .nav-text,
+        .sidebar-container.collapsed .nav-arrow,
+        .sidebar-container.collapsed .sidebar-heading,
+        .sidebar-container.collapsed .badge-counter {
+            display: inline !important;
+        }
+
+        .sidebar-container.collapsed .nav-item {
+            justify-content: flex-start;
+            padding: 0.6rem 1.25rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
+        const sidebarContainer = document.getElementById('sidebarContainer');
+        const body = document.body;
+
+        // Load saved state from localStorage
+        const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+        if (isCollapsed && window.innerWidth >= 992) {
+            sidebarContainer.classList.add('collapsed');
+            body.classList.add('sidebar-collapsed');
+        }
+
+        // Toggle collapse on button click
+        if (sidebarCollapseBtn) {
+            sidebarCollapseBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebarContainer.classList.toggle('collapsed');
+                body.classList.toggle('sidebar-collapsed');
+                
+                // Save state to localStorage
+                const isNowCollapsed = sidebarContainer.classList.contains('collapsed');
+                localStorage.setItem('sidebarCollapsed', isNowCollapsed);
+
+                // Close all open collapses when collapsing
+                if (isNowCollapsed) {
+                    document.querySelectorAll('.nav-collapse.show').forEach(collapse => {
+                        $(collapse).collapse('hide');
+                    });
+                }
+            });
+        }
+
+        // Prevent collapse on mobile
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 992) {
+                sidebarContainer.classList.remove('collapsed');
+                body.classList.remove('sidebar-collapsed');
+            } else {
+                // Restore saved state on resize to desktop
+                const savedState = localStorage.getItem('sidebarCollapsed') === 'true';
+                if (savedState) {
+                    sidebarContainer.classList.add('collapsed');
+                    body.classList.add('sidebar-collapsed');
+                }
+            }
+        });
+    });
+</script>

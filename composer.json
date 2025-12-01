@@ -33,7 +33,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/TerbilangHelper.php"
+            "app/Helpers/TerbilangHelper.php",
+            "app/Helpers/NotificationHelper.php" 
         ]
     },
     "autoload-dev": {

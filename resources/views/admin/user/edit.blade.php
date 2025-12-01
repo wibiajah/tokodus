@@ -11,6 +11,32 @@
             </a>
         </div>
 
+        <!-- 🔥 Alert Konfirmasi Ganti Kepala Toko -->
+        @if(session('confirm_replace'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <h5 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Konfirmasi Penggantian Kepala Toko</h5>
+                <p>{!! session('confirm_replace')['message'] !!}</p>
+                <hr>
+                <form action="{{ route('user.update', $user) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('PUT')
+                    
+                    <input type="hidden" name="name" value="{{ old('name') }}">
+                    <input type="hidden" name="email" value="{{ old('email') }}">
+                    <input type="hidden" name="role" value="{{ old('role') }}">
+                    <input type="hidden" name="toko_id" value="{{ old('toko_id') }}">
+                    <input type="hidden" name="confirm_replace" value="1">
+                    
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-check"></i> Ya, Ganti Kepala Toko
+                    </button>
+                </form>
+                <a href="{{ route('user.edit', $user) }}" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Batal
+                </a>
+            </div>
+        @endif
+
         <!-- Form Card -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -104,14 +130,27 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="toko_id">Toko</label>
+                                <label for="toko_id">Penempatan Toko</label>
                                 <select class="form-control @error('toko_id') is-invalid @enderror" 
                                     id="toko_id" 
                                     name="toko_id">
-                                    <option value="">-- Pilih Toko (Opsional) --</option>
+                                    <option value="">-- Head Office (Default) --</option>
                                     @foreach($tokos as $toko)
-                                        <option value="{{ $toko->id }}" {{ old('toko_id', $user->toko_id) == $toko->id ? 'selected' : '' }}>
+                                        @php
+                                            $kepalaToko = $toko->kepalaToko;
+                                            $hasKepala = $kepalaToko !== null;
+                                            $isCurrentUser = $kepalaToko && $kepalaToko->id === $user->id;
+                                        @endphp
+                                        <option value="{{ $toko->id }}" 
+                                            {{ old('toko_id', $user->toko_id) == $toko->id ? 'selected' : '' }}
+                                            data-has-kepala="{{ ($hasKepala && !$isCurrentUser) ? 'true' : 'false' }}"
+                                            data-kepala-name="{{ $hasKepala && !$isCurrentUser ? $kepalaToko->name : '' }}">
                                             {{ $toko->nama_toko }}
+                                            @if($hasKepala && !$isCurrentUser)
+                                                (Kepala: {{ $kepalaToko->name }})
+                                            @elseif($isCurrentUser)
+                                                (Kepala Toko Saat Ini)
+                                            @endif
                                         </option>
                                     @endforeach
                                 </select>
@@ -119,8 +158,12 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 <small class="form-text text-muted">
-                                    * Wajib untuk Kepala Toko dan Staff Admin
+                                    💡 Kosongkan untuk menempatkan di <strong>Head Office</strong>
                                 </small>
+                                <div id="kepalaTokoWarning" class="alert alert-info mt-2" style="display: none;">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span id="warningText"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -139,4 +182,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const roleSelect = document.getElementById('role');
+        const tokoSelect = document.getElementById('toko_id');
+        const warningDiv = document.getElementById('kepalaTokoWarning');
+        const warningText = document.getElementById('warningText');
+
+        function checkKepalaToko() {
+            const role = roleSelect.value;
+            const selectedOption = tokoSelect.options[tokoSelect.selectedIndex];
+            
+            if (role === 'kepala_toko' && tokoSelect.value) {
+                const hasKepala = selectedOption.getAttribute('data-has-kepala') === 'true';
+                const kepalaName = selectedOption.getAttribute('data-kepala-name');
+                
+                if (hasKepala) {
+                    warningText.textContent = `Toko ini sudah memiliki Kepala Toko: ${kepalaName}. Jika Anda melanjutkan, user tersebut akan dipindahkan ke Head Office.`;
+                    warningDiv.style.display = 'block';
+                } else {
+                    warningDiv.style.display = 'none';
+                }
+            } else {
+                warningDiv.style.display = 'none';
+            }
+        }
+
+        roleSelect.addEventListener('change', checkKepalaToko);
+        tokoSelect.addEventListener('change', checkKepalaToko);
+        checkKepalaToko();
+    </script>
 </x-admin-layout>

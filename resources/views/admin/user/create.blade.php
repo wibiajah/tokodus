@@ -17,7 +17,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Form Tambah User</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('user.store') }}" method="POST">
+                <form action="{{ route('user.store') }}" method="POST" id="createUserForm">
                     @csrf
 
                     <div class="row">
@@ -106,14 +106,24 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="toko_id">Toko</label>
+                                <label for="toko_id">Penempatan Toko</label>
                                 <select class="form-control @error('toko_id') is-invalid @enderror" 
                                     id="toko_id" 
                                     name="toko_id">
-                                    <option value="">-- Pilih Toko (Opsional) --</option>
+                                    <option value="">-- Head Office (Default) --</option>
                                     @foreach($tokos as $toko)
-                                        <option value="{{ $toko->id }}" {{ old('toko_id') == $toko->id ? 'selected' : '' }}>
+                                        @php
+                                            $kepalaToko = $toko->kepalaToko;
+                                            $hasKepala = $kepalaToko !== null;
+                                        @endphp
+                                        <option value="{{ $toko->id }}" 
+                                            {{ old('toko_id') == $toko->id ? 'selected' : '' }}
+                                            data-has-kepala="{{ $hasKepala ? 'true' : 'false' }}"
+                                            data-kepala-name="{{ $hasKepala ? $kepalaToko->name : '' }}">
                                             {{ $toko->nama_toko }}
+                                            @if($hasKepala)
+                                                (Kepala: {{ $kepalaToko->name }})
+                                            @endif
                                         </option>
                                     @endforeach
                                 </select>
@@ -121,8 +131,13 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 <small class="form-text text-muted">
-                                    * Wajib untuk Kepala Toko dan Staff Admin
+                                    💡 Kosongkan untuk menempatkan di <strong>Head Office</strong>
                                 </small>
+                                <!-- 🔥 Warning jika toko sudah punya kepala -->
+                                <div id="kepalaTokoWarning" class="alert alert-warning mt-2" style="display: none;">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span id="warningText"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -141,4 +156,46 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // 🔥 Validasi jika role = kepala_toko dan toko sudah punya kepala
+        const roleSelect = document.getElementById('role');
+        const tokoSelect = document.getElementById('toko_id');
+        const warningDiv = document.getElementById('kepalaTokoWarning');
+        const warningText = document.getElementById('warningText');
+        const form = document.getElementById('createUserForm');
+
+        function checkKepalaToko() {
+            const role = roleSelect.value;
+            const selectedOption = tokoSelect.options[tokoSelect.selectedIndex];
+            
+            // Hanya cek jika role = kepala_toko DAN memilih toko cabang (bukan Head Office/kosong)
+            if (role === 'kepala_toko' && tokoSelect.value) {
+                const hasKepala = selectedOption.getAttribute('data-has-kepala') === 'true';
+                const kepalaName = selectedOption.getAttribute('data-kepala-name');
+                
+                if (hasKepala) {
+                    warningText.textContent = `Toko ini sudah memiliki Kepala Toko: ${kepalaName}. Pilih toko lain atau kosongkan untuk Head Office!`;
+                    warningDiv.style.display = 'block';
+                    return false;
+                } else {
+                    warningDiv.style.display = 'none';
+                    return true;
+                }
+            } else {
+                warningDiv.style.display = 'none';
+                return true;
+            }
+        }
+
+        roleSelect.addEventListener('change', checkKepalaToko);
+        tokoSelect.addEventListener('change', checkKepalaToko);
+
+        form.addEventListener('submit', function(e) {
+            if (!checkKepalaToko()) {
+                e.preventDefault();
+                alert('Tidak dapat menambahkan Kepala Toko! Toko yang dipilih sudah memiliki Kepala Toko.');
+            }
+        });
+    </script>
 </x-admin-layout>

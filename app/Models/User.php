@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public const ROLES = [
+    const ROLES = [
         'super_admin' => 'Super Admin',
         'admin' => 'Admin',
         'kepala_toko' => 'Kepala Toko',
@@ -30,13 +30,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // Relasi ke toko
+    // Relasi: User milik satu Toko
     public function toko()
     {
         return $this->belongsTo(Toko::class);
     }
 
-    // Helper methods
+    // Helper: Cek role
     public function isSuperAdmin()
     {
         return $this->role === 'super_admin';
@@ -55,5 +55,11 @@ class User extends Authenticatable
     public function isStaffAdmin()
     {
         return $this->role === 'staff_admin';
+    }
+
+    // Scope: Filter by role
+    public function scopeByRole($query, $role)
+    {
+        return $query->where('role', $role);
     }
 }
