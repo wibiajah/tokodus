@@ -231,4 +231,118 @@ class TokoController extends Controller
 
         return redirect()->route('toko.index')->with('success', 'Toko berhasil dihapus!');
     }
+
+    public function toggleStatus(Toko $toko)
+{
+    // 🔥 PREVENT toggling Head Office status
+    if ($toko->id === self::HEAD_OFFICE_ID) {
+        return redirect()->back()
+            ->with('error', 'Status Head Office tidak dapat diubah.');
+    }
+
+    // Toggle status
+    $newStatus = $toko->status === 'aktif' ? 'tidak_aktif' : 'aktif';
+    
+    $toko->update(['status' => $newStatus]);
+
+    // Kirim notifikasi
+    $message = $newStatus === 'aktif' 
+        ? "Toko {$toko->nama_toko} telah diaktifkan"
+        : "Toko {$toko->nama_toko} telah dinonaktifkan";
+    
+    NotificationHelper::notifyRoles(
+        ['super_admin', 'admin'],
+        [
+            'title' => 'Status Toko Diubah',
+            'message' => $message,
+            'type' => 'info',
+            'action_url' => route('toko.show', $toko->id),
+            'icon' => 'fas fa-toggle-on'
+        ]
+    );
+
+    $statusText = $newStatus === 'aktif' ? 'diaktifkan' : 'dinonaktifkan';
+    return redirect()->back()
+        ->with('success', "Toko berhasil {$statusText}!");
+}
+
+/**
+ * Update kepala toko
+ */
+public function updateKepalaToko(Request $request, Toko $toko)
+{
+    // 🔥 PREVENT updating Head Office kepala toko
+    if ($toko->id === self::HEAD_OFFICE_ID) {
+        return redirect()->back()
+            ->with('error', 'Kepala Toko Head Office tidak dapat diubah.');
+    }
+
+    $validated = $request->validate([
+        'kepala_toko_id' => ['nullable', 'exists:users,id'],
+    ]);
+
+    // Simpan kepala toko lama
+    $oldKepalaTokoId = $toko->kepalaToko?->id;
+
+    // Jika ada kepala toko baru
+    if ($request->filled('kepala_toko_id')) {
+        $newKepalaTokoId = $request->kepala_toko_id;
+
+        // Lepas kepala toko lama (jika ada dan berbeda)
+        if ($oldKepalaTokoId && $oldKepalaTokoId != $newKepalaTokoId) {
+            User::find($oldKepalaTokoId)->update(['toko_id' => null]);
+        }
+
+        // Set kepala toko baru
+        User::find($newKepalaTokoId)->update(['toko_id' => $toko->id]);
+        
+        // Update status toko menjadi aktif
+        $toko->update([
+            'kepala_toko_id' => $newKepalaTokoId,
+            'status' => 'aktif'
+        ]);
+
+        $newKepala = User::find($newKepalaTokoId);
+        
+        // Kirim notifikasi
+        NotificationHelper::notifyRoles(
+            ['super_admin', 'admin'],
+            [
+                'title' => 'Kepala Toko Diperbarui',
+                'message' => "Kepala toko {$toko->nama_toko} telah diubah menjadi {$newKepala->name}",
+                'type' => 'success',
+                'action_url' => route('toko.show', $toko->id),
+                'icon' => 'fas fa-user-tie'
+            ]
+        );
+
+        return redirect()->back()
+            ->with('success', 'Kepala toko berhasil diperbarui!');
+    } else {
+        // Lepas kepala toko
+        if ($oldKepalaTokoId) {
+            User::find($oldKepalaTokoId)->update(['toko_id' => null]);
+        }
+
+        $toko->update([
+            'kepala_toko_id' => null,
+            'status' => 'tidak_aktif'
+        ]);
+
+        // Kirim notifikasi
+        NotificationHelper::notifyRoles(
+            ['super_admin', 'admin'],
+            [
+                'title' => 'Kepala Toko Dihapus',
+                'message' => "Kepala toko {$toko->nama_toko} telah dihapus",
+                'type' => 'warning',
+                'action_url' => route('toko.show', $toko->id),
+                'icon' => 'fas fa-user-times'
+            ]
+        );
+
+        return redirect()->back()
+            ->with('success', 'Kepala toko berhasil dihapus!');
+    }
+}
 }  

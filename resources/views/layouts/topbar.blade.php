@@ -37,57 +37,57 @@
     </div>
 
     <div class="topbar-right">
-    <!-- Notifications -->
-    <div class="dropdown">
-        <button class="notification-btn" data-toggle="dropdown" id="notificationBtn">
-            <i class="fas fa-bell"></i>
-            <span class="notification-badge" id="notificationCount" style="display: none;">0</span>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" style="width: 350px; max-height: 400px; overflow-y: auto;">
-            <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
-                <h6 class="m-0 font-weight-bold">Notifikasi</h6>
-                <button class="btn btn-sm btn-link text-primary p-0" id="markAllRead">
-                    <small>Tandai Semua Dibaca</small>
-                </button>
-            </div>
-            
-            <div id="notificationList">
-                <div class="text-center py-4">
-                    <i class="fas fa-spinner fa-spin"></i> Loading...
+        <!-- Notifications -->
+        <div class="dropdown dropdown-notif-x2024">
+            <button class="notif-btn-x2024" data-toggle="dropdown" id="notificationBtn">
+                <i class="fas fa-bell"></i>
+                <span class="notif-badge-x2024" id="notificationCount" style="display: none;">0</span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right shadow notif-dropdown-x2024">
+                <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom notif-header-x2024">
+                    <h6 class="m-0 font-weight-bold">Notifikasi</h6>
+                    <button class="btn btn-sm btn-link text-primary p-0" id="markAllReadX2024">
+                        <small>Tandai Semua Dibaca</small>
+                    </button>
                 </div>
+                
+                <div id="notificationList">
+                    <div class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i> Loading...
+                    </div>
+                </div>
+                
+                <div class="dropdown-divider m-0"></div>
+                <a class="dropdown-item text-center small text-gray-500 py-2" href="{{ route('notifications.index') }}">
+                    Lihat Semua Notifikasi
+                </a>
             </div>
-            
-            <div class="dropdown-divider m-0"></div>
-            <a class="dropdown-item text-center small text-gray-500 py-2" href="{{ route('notifications.index') }}">
-                Lihat Semua Notifikasi
-            </a>
         </div>
-    </div>
 
-    <!-- User Dropdown -->
-    <div class="dropdown">
-        <a class="user-dropdown" href="#" data-toggle="dropdown">
-            <img src="{{ auth()->user()->coveruser ? asset('storage/' . auth()->user()->coveruser) : asset('logo.png') }}" 
-                 alt="User" class="user-avatar">
-            <span class="user-name d-none d-sm-inline">{{ auth()->user()->name }}</span>
-            <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-            <a class="dropdown-item" href="{{ route('profile.show') }}">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Profil Saya
+        <!-- User Dropdown -->
+        <div class="dropdown">
+            <a class="user-dropdown" href="#" data-toggle="dropdown">
+                <img src="{{ auth()->user()->coveruser ? asset('storage/' . auth()->user()->coveruser) : asset('logo.png') }}" 
+                     alt="User" class="user-avatar">
+                <span class="user-name d-none d-sm-inline">{{ auth()->user()->name }}</span>
+                <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
             </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Logout
-            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                <a class="dropdown-item" href="{{ route('profile.show') }}">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profil Saya
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-// Load notifications saat halaman dimuat
 // Load notifications saat halaman dimuat
 document.addEventListener('DOMContentLoaded', function() {
     loadNotifications();
@@ -137,7 +137,7 @@ function displayNotifications(notifications) {
         const timeAgo = formatTimeAgo(notif.created_at);
         
         return `
-            <a class="dropdown-item d-flex align-items-start py-3 border-bottom notification-item" 
+            <a class="dropdown-item d-flex align-items-start py-3 border-bottom notif-item-x2024" 
                href="${data.url}" 
                data-id="${notif.id}"
                onclick="markAsRead('${notif.id}')">
@@ -191,7 +191,7 @@ function markAsRead(notifId) {
 }
 
 // Mark all as read
-document.getElementById('markAllRead').addEventListener('click', function(e) {
+document.getElementById('markAllReadX2024').addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
     
@@ -208,194 +208,394 @@ document.getElementById('markAllRead').addEventListener('click', function(e) {
 </script>
 
 <style>
-.notification-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #e74a3b;
-    color: white;
-    border-radius: 10px;
-    padding: 2px 6px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    min-width: 18px;
-    text-align: center;
+/* ===== TOPBAR NOTIFICATION STYLES X2024 ===== */
+
+/* Dropdown Container Fix */
+.topbar-right .dropdown.dropdown-notif-x2024 {
+    position: relative !important;
 }
 
-.notification-item:hover {
-    background-color: #f8f9fc;
+/* Dropdown Animation */
+.topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024 {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    width: 380px !important;
+    max-width: 90vw !important;
+    max-height: 500px !important;
+    overflow-y: auto !important;
+    margin-top: 0.5rem !important;
+    opacity: 0 !important;
+    transform: translateY(-15px) scale(0.95) !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    display: none !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
 }
 
-.notification-item i {
-    width: 30px;
-    text-align: center;
+.topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024.show {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    display: block !important;
+    animation: slideDownX2024 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
-</style>
-</div>
 
-<style>
-    /* Update Topbar Styles */
-    .topbar-custom {
-        background: linear-gradient(135deg, #4e73df 0%, #224abe 100%) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+@keyframes slideDownX2024 {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header */
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .notif-header-x2024 {
+    background: linear-gradient(135deg, #f8f9fc 0%, #e7eaf3 100%) !important;
+    animation: fadeInHeaderX2024 0.5s ease-in !important;
+}
+
+@keyframes fadeInHeaderX2024 {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Badge with Pulse */
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-btn-x2024 .notif-badge-x2024 {
+    position: absolute !important;
+    top: -5px !important;
+    right: -5px !important;
+    background: linear-gradient(135deg, #e74a3b 0%, #c0392b 100%) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    padding: 2px 6px !important;
+    font-size: 0.7rem !important;
+    font-weight: bold !important;
+    min-width: 18px !important;
+    text-align: center !important;
+    animation: pulseBadgeX2024 2s ease-in-out infinite !important;
+    box-shadow: 0 2px 8px rgba(231, 74, 59, 0.4) !important;
+}
+
+@keyframes pulseBadgeX2024 {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(231, 74, 59, 0.4);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(231, 74, 59, 0.6);
+    }
+}
+
+/* Button Hover */
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-btn-x2024 {
+    position: relative !important;
+    transition: all 0.3s ease !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-btn-x2024:hover {
+    transform: scale(1.1) !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-btn-x2024:active {
+    transform: scale(0.95) !important;
+}
+
+/* Notification Items */
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024 {
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+    animation: slideInItemX2024 0.4s ease-out backwards !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(1) { animation-delay: 0.1s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(2) { animation-delay: 0.15s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(3) { animation-delay: 0.2s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(4) { animation-delay: 0.25s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(5) { animation-delay: 0.3s !important; }
+
+@keyframes slideInItemX2024 {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 0 !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, rgba(78, 115, 223, 0.1) 0%, transparent 100%) !important;
+    transition: width 0.4s ease !important;
+    z-index: 0 !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:hover::before {
+    width: 100% !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:hover {
+    background-color: #f8f9fc !important;
+    transform: translateX(5px) !important;
+    box-shadow: inset 3px 0 0 #4e73df !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024 i {
+    width: 30px !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:hover i {
+    transform: scale(1.2) rotate(5deg) !important;
+    color: #4e73df !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024 .flex-grow-1 {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Scrollbar */
+.topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024::-webkit-scrollbar {
+    width: 0px !important;
+    display: none !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 10px !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #4e73df 0%, #224abe 100%) !important;
+    border-radius: 10px !important;
+    transition: background 0.3s ease !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #224abe 0%, #1a3a9e 100%) !important;
+}
+
+/* Mark All Button */
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 #markAllReadX2024 {
+    transition: all 0.3s ease !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 #markAllReadX2024:hover {
+    transform: scale(1.05) !important;
+    text-decoration: underline !important;
+}
+
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 #markAllReadX2024:active {
+    transform: scale(0.95) !important;
+}
+
+/* Empty State */
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .fa-bell-slash {
+    animation: swingBellX2024 2s ease-in-out infinite !important;
+}
+
+@keyframes swingBellX2024 {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+}
+
+/* ===== EXISTING TOPBAR STYLES ===== */
+.topbar-custom {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.sidebar-toggle-btn {
+    color: #fff !important;
+}
+
+.sidebar-toggle-btn:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.brand-text {
+    color: #fff !important;
+}
+
+.dashboard-label {
+    margin-left: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.dashboard-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.3px;
+}
+
+/* Search Container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 0.5rem 0.8rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+}
+
+.search-container:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.search-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #4e73df;
+    font-size: 0.85rem;
+}
+
+.search-btn:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+}
+
+.search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 0.35rem 0.75rem;
+    color: #fff;
+    font-size: 0.9rem;
+    width: 100%;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.search-input:focus {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Notification Button Base */
+.notif-btn-x2024 {
+    color: #fff !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+.notif-btn-x2024:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* User Dropdown */
+.user-dropdown {
+    color: #fff !important;
+}
+
+.user-dropdown:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.user-name {
+    color: #fff !important;
+}
+
+.user-avatar {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-label {
+        display: none;
     }
 
     .topbar-center {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 2rem;
+        padding: 0 1rem;
     }
 
-    .sidebar-toggle-btn {
-        color: #fff !important;
-    }
-
-    .sidebar-toggle-btn:hover {
-        color: rgba(255, 255, 255, 0.8) !important;
-    }
-
-    .brand-text {
-        color: #fff !important;
-    }
-
-    .dashboard-label {
-        margin-left: 1.5rem;
-        padding-left: 1.5rem;
-        border-left: 2px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .dashboard-text {
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #fff;
-        letter-spacing: 0.3px;
-    }
-
-    /* Search Container */
     .search-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        background-color: rgba(255, 255, 255, 0.2);
-        border-radius: 50px;
-        padding: 0.5rem 0.8rem;
-        transition: all 0.3s ease;
-        width: 100%;
-        max-width: 400px;
+        max-width: 300px;
+    }
+    
+    .topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024 {
+        width: 320px !important;
+        max-width: calc(100vw - 30px) !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .topbar-center {
+        padding: 0 0.5rem;
     }
 
-    .search-container:hover {
-        background-color: rgba(255, 255, 255, 0.25);
+    .search-container {
+        padding: 0.4rem 0.6rem;
+        max-width: 200px;
     }
 
     .search-btn {
-        background-color: rgba(255, 255, 255, 0.9);
-        border: none;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        color: #4e73df;
-        font-size: 0.85rem;
-    }
-
-    .search-btn:hover {
-        background-color: #fff;
-        transform: scale(1.05);
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
     }
 
     .search-input {
-        border: none;
-        background: transparent;
-        outline: none;
-        padding: 0.35rem 0.75rem;
-        color: #fff;
-        font-size: 0.9rem;
-        width: 100%;
-        flex: 1;
-        transition: all 0.3s ease;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
     }
-
-    .search-input::placeholder {
-        color: rgba(255, 255, 255, 0.8);
-        font-weight: 500;
+    
+    .topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024 {
+        width: 300px !important;
+        max-width: calc(100vw - 20px) !important;
     }
-
-    .search-input:focus {
-        background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    /* Notification Button */
-    .notification-btn {
-        color: #fff !important;
-    }
-
-    .notification-btn:hover {
-        color: rgba(255, 255, 255, 0.8) !important;
-    }
-
-    /* User Dropdown */
-    .user-dropdown {
-        color: #fff !important;
-    }
-
-    .user-dropdown:hover {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-    }
-
-    .user-name {
-        color: #fff !important;
-    }
-
-    .user-avatar {
-        border: 2px solid rgba(255, 255, 255, 0.5);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .dashboard-label {
-            display: none;
-        }
-
-        .topbar-center {
-            padding: 0 1rem;
-        }
-
-        .search-container {
-            max-width: 300px;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .topbar-center {
-            padding: 0 0.5rem;
-        }
-
-        .search-container {
-            padding: 0.4rem 0.6rem;
-            max-width: 200px;
-        }
-
-        .search-btn {
-            width: 28px;
-            height: 28px;
-            font-size: 0.75rem;
-        }
-
-        .search-input {
-            font-size: 0.8rem;
-            padding: 0.25rem 0.5rem;
-        }
-    }
+}
 </style>
 
 <script>
@@ -416,7 +616,6 @@ document.getElementById('markAllRead').addEventListener('click', function(e) {
                 if (searchQuery) {
                     console.log('Search query:', searchQuery);
                     // TODO: Implement search functionality
-                    // Example: window.location.href = '/search?q=' + encodeURIComponent(searchQuery);
                 }
             }
         });

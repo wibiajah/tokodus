@@ -24,13 +24,11 @@ class ActivityNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type' => $this->activity['type'],
-            'message' => $this->activity['message'],
-            'actor_name' => $this->activity['actor_name'],
+            'type' => $this->activity['type'] ?? 'info',
+            'message' => $this->activity['message'] ?? '',
+            'actor_name' => $this->activity['actor_name'] ?? 'System', // ✅ FIX: Default value
             'icon' => $this->activity['icon'] ?? 'fas fa-info-circle',
             'url' => $this->activity['url'] ?? '#',
-            // ❌ JANGAN INI: 'created_at' => now()->diffForHumans(),
-            // ✅ Biarkan Laravel auto-handle created_at dari tabel notifications
         ];
     }
 }

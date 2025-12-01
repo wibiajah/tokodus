@@ -233,34 +233,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group mb-3">
-                                <label for="kepala_toko_id" class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">
-                                    <i class="fas fa-user-tie text-primary"></i> Kepala Toko
-                                </label>
-                                <select class="form-control @error('kepala_toko_id') is-invalid @enderror" 
-                                    id="kepala_toko_id" 
-                                    name="kepala_toko_id"
-                                    style="border-radius: 8px; border: 1px solid #e3e6f0; padding: 0.85rem; font-size: 0.95rem; min-height: 45px;">
-                                    <option value="">-- Belum ada --</option>
-                                    @foreach($kepalaTokos as $kt)
-                                        <option value="{{ $kt->id }}" 
-                                            {{ old('kepala_toko_id', $toko->kepalaToko?->id) == $kt->id ? 'selected' : '' }}>
-                                            {{ $kt->name }} ({{ $kt->email }})
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <small class="form-text text-muted mt-2" style="font-size: 0.85rem;">
-                                    <i class="fas fa-info-circle"></i> Pilih dari daftar yang tersedia
-                                </small>
-                                @error('kepala_toko_id')
-                                    <div class="invalid-feedback d-block mt-2" style="font-size: 0.85rem;">
-                                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
                     </div>
 
                     <hr class="my-3">

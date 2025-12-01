@@ -92,7 +92,8 @@
             text-decoration: none;
         }
 
-        .notification-btn {
+        /* NOTIFICATION BUTTON X2024 - ADMIN BLADE */
+        .notif-btn-x2024 {
             position: relative;
             background: none;
             border: none;
@@ -102,11 +103,12 @@
             padding: 0.35rem;
         }
 
-        .notification-btn:hover {
+        .notif-btn-x2024:hover {
             color: #224abe;
         }
 
-        .notification-badge {
+        /* NOTIFICATION BADGE X2024 - ADMIN BLADE */
+        .notif-badge-x2024 {
             position: absolute;
             top: -2px;
             right: -2px;
