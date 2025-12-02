@@ -590,7 +590,7 @@ function renderTokoDetail(toko) {
                 <!-- Store Name Card -->
                 <div class="store-name-card">
                     <h3 class="store-name-title">${toko.nama_toko || '-'}</h3>
-                    <form action="/admin/toko/${toko.id}/toggle-status" method="POST" style="display: inline;">
+                    <form action="/superadmin/toko/${toko.id}/toggle-status" method="POST" style="display: inline;">
                         <input type="hidden" name="_token" value="${csrfToken}">
                         <button type="submit" class="status-badge-large ${statusClass}" style="border: none; cursor: pointer;">
                             <i class="fas fa-circle"></i>
@@ -716,7 +716,7 @@ function renderTokoDetail(toko) {
 
         <!-- Action Buttons -->
         <div class="action-button-group">
-            <a href="/admin/toko/${toko.id}/edit" class="modal-action-btn btn-edit">
+            <a href="/superadmin/toko/${toko.id}/edit" class="modal-action-btn btn-edit">
                 <i class="fas fa-edit"></i> Edit Toko
             </a>
             <button onclick="confirmDeleteFromModal(${toko.id})" class="modal-action-btn btn-delete">
@@ -724,7 +724,7 @@ function renderTokoDetail(toko) {
             </button>
         </div>
 
-        <form id="delete-form-modal-${toko.id}" action="/admin/toko/${toko.id}" method="POST" style="display: none;">
+        <form id="delete-form-modal-${toko.id}" action="/superadmin/toko/${toko.id}" method="POST" style="display: none;">
             <input type="hidden" name="_token" value="${csrfToken}">
             <input type="hidden" name="_method" value="DELETE">
         </form>
