@@ -9,156 +9,13 @@
 
     <nav class="sidebar-nav">
         @if (auth()->user()->role === 'super_admin')
-            <!-- Dashboard -->
-            <a href="{{ route('superadmin.dashboard') }}" 
-               class="nav-item {{ request()->routeIs('superadmin.dashboard') ? 'active' : '' }}"
-               title="Dashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span class="nav-text">Dashboard</span>
-            </a>
-
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-heading">Manajemen Master</div>
-
-            <!-- Manajemen Toko -->
-            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseToko" title="Manajemen Toko">
-                <i class="fas fa-store"></i>
-                <span class="nav-text">Manajemen Toko</span>
-                <i class="fas fa-chevron-down nav-arrow"></i>
-            </a>
-            <div id="collapseToko" class="collapse nav-collapse">
-                <h6 class="collapse-header">Menu Toko:</h6>
-                <a class="collapse-item" href="{{ route('toko.index') }}">Daftar Toko</a>
-                <a class="collapse-item" href="{{ route('toko.create') }}">Tambah Toko</a>
-            </div>
-
-            <!-- Manajemen User -->
-            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseUser" title="Manajemen User">
-                <i class="fas fa-users-cog"></i>
-                <span class="nav-text">Manajemen User</span>
-                <i class="fas fa-chevron-down nav-arrow"></i>
-            </a>
-            <div id="collapseUser" class="collapse nav-collapse">
-                <h6 class="collapse-header">Menu User:</h6>
-                <a class="collapse-item" href="{{ route('user.index') }}">Daftar User</a>
-                <a class="collapse-item" href="{{ route('user.create') }}">Tambah User</a>
-            </div>
-        @endif
-
-        @if (auth()->user()->role === 'admin')
-            <!-- Dashboard Admin -->
-            <a href="{{ route('admin.dashboard') }}" 
-               class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
-               title="Dashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span class="nav-text">Dashboard</span>
-            </a>
-
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-heading">Manajemen Master</div>
-
-            <!-- Manajemen Toko -->
-            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseToko" title="Manajemen Toko">
-                <i class="fas fa-store"></i>
-                <span class="nav-text">Manajemen Toko</span>
-                <i class="fas fa-chevron-down nav-arrow"></i>
-            </a>
-            <div id="collapseToko" class="collapse nav-collapse">
-                <h6 class="collapse-header">Menu Toko:</h6>
-                <a class="collapse-item" href="#">Daftar Toko</a>
-                <a class="collapse-item" href="#">Tambah Toko</a>
-            </div>
-
-            <!-- Manajemen User -->
-            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseUser" title="Manajemen User">
-                <i class="fas fa-users"></i>
-                <span class="nav-text">Manajemen User</span>
-                <i class="fas fa-chevron-down nav-arrow"></i>
-            </a>
-            <div id="collapseUser" class="collapse nav-collapse">
-                <h6 class="collapse-header">Menu User:</h6>
-                <a class="collapse-item" href="#">Daftar Admin</a>
-                <a class="collapse-item" href="#">Daftar Kepala Toko</a>
-                <a class="collapse-item" href="#">Daftar Staff Admin</a>
-            </div>
-        @endif
-
-        @if (auth()->user()->role === 'kepala_toko')
-            <!-- Dashboard Kepala Toko -->
-            <a href="{{ route('kepala-toko.dashboard') }}" 
-               class="nav-item {{ request()->routeIs('kepala-toko.dashboard') ? 'active' : '' }}"
-               title="Dashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span class="nav-text">Dashboard</span>
-            </a>
-
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-heading">Manajemen Toko</div>
-
-            <a href="#" class="nav-item" title="Informasi Toko">
-                <i class="fas fa-store"></i>
-                <span class="nav-text">Informasi Toko</span>
-            </a>
-
-            <!-- Manajemen Staff -->
-            <a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseStaff" title="Manajemen Staff">
-                <i class="fas fa-users"></i>
-                <span class="nav-text">Manajemen Staff</span>
-                <i class="fas fa-chevron-down nav-arrow"></i>
-            </a>
-            <div id="collapseStaff" class="collapse nav-collapse">
-                <h6 class="collapse-header">Menu Staff:</h6>
-                <a class="collapse-item" href="#">Daftar Staff</a>
-                <a class="collapse-item" href="#">Tambah Staff</a>
-            </div>
-
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-heading">Transaksi</div>
-
-            <a href="#" class="nav-item" title="Orderan">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="nav-text">Orderan</span>
-                <span class="badge badge-warning badge-counter">Soon</span>
-            </a>
-
-            <a href="#" class="nav-item" title="Laporan">
-                <i class="fas fa-chart-line"></i>
-                <span class="nav-text">Laporan</span>
-                <span class="badge badge-warning badge-counter">Soon</span>
-            </a>
-        @endif
-
-        @if (auth()->user()->role === 'staff_admin')
-            <!-- Dashboard Staff -->
-            <a href="{{ route('staff.dashboard') }}" 
-               class="nav-item {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}"
-               title="Dashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span class="nav-text">Dashboard</span>
-            </a>
-
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-heading">Transaksi</div>
-
-            <a href="#" class="nav-item" title="Orderan">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="nav-text">Orderan</span>
-                <span class="badge badge-warning badge-counter">Soon</span>
-            </a>
-
-            <a href="#" class="nav-item" title="Riwayat Orderan">
-                <i class="fas fa-history"></i>
-                <span class="nav-text">Riwayat Orderan</span>
-                <span class="badge badge-warning badge-counter">Soon</span>
-            </a>
-
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-heading">Informasi</div>
-
-            <a href="#" class="nav-item" title="Informasi Toko">
-                <i class="fas fa-store"></i>
-                <span class="nav-text">Informasi Toko</span>
-            </a>
+            @include('layouts.sidebars.super-admin')
+        @elseif (auth()->user()->role === 'admin')
+            @include('layouts.sidebars.admin')
+        @elseif (auth()->user()->role === 'kepala_toko')
+            @include('layouts.sidebars.kepala-toko')
+        @elseif (auth()->user()->role === 'staff_admin')
+            @include('layouts.sidebars.staff')
         @endif
 
         <div class="sidebar-divider"></div>
@@ -172,6 +29,7 @@
         display: flex;
         justify-content: flex-end;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .sidebar-collapse-btn {
@@ -182,7 +40,7 @@
         height: 36px;
         border-radius: 8px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -194,13 +52,25 @@
         transform: scale(1.05);
     }
 
+    .sidebar-collapse-btn i {
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     /* Sidebar Collapsed State */
+    .sidebar-container {
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     .sidebar-container.collapsed {
         width: 80px !important;
     }
 
     .sidebar-container.collapsed .sidebar-header {
         justify-content: center;
+    }
+
+    .sidebar-container.collapsed .sidebar-collapse-btn i {
+        transform: rotate(180deg);
     }
 
     .sidebar-container.collapsed .nav-text,
@@ -253,11 +123,38 @@
         margin-left: auto;
     }
 
+    /* Smooth hover effects */
+    .nav-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background: rgba(255, 255, 255, 0.5);
+        transform: scaleY(0);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-item:hover::before {
+        transform: scaleY(1);
+    }
+
+    .nav-item.active::before {
+        background: #fff;
+        transform: scaleY(1);
+    }
+
+    /* Sidebar divider animation */
+    .sidebar-divider {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     /* Responsive - Desktop Layout */
     @media (min-width: 992px) {
         body {
             grid-template-columns: 260px 1fr;
-            transition: grid-template-columns 0.3s ease;
+            transition: grid-template-columns 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body.sidebar-collapsed {
@@ -265,7 +162,7 @@
         }
 
         .sidebar-container {
-            transition: width 0.3s ease;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .sidebar-collapse-btn {
@@ -294,6 +191,29 @@
             justify-content: flex-start;
             padding: 0.6rem 1.25rem;
         }
+    }
+
+    /* Smooth scrollbar for sidebar */
+    .sidebar-container {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    }
+
+    .sidebar-container::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .sidebar-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .sidebar-container::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+    }
+
+    .sidebar-container::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
     }
 </style>
 

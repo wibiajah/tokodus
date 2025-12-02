@@ -40,8 +40,11 @@
         <!-- Notifications -->
         <div class="dropdown dropdown-notif-x2024">
             <button class="notif-btn-x2024" data-toggle="dropdown" id="notificationBtn">
-                <i class="fas fa-bell"></i>
-                <span class="notif-badge-x2024" id="notificationCount" style="display: none;">0</span>
+                <svg class="notif-icon-modern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span class="notif-badge-modern" id="notificationCount" style="display: none;">0</span>
             </button>
             <div class="dropdown-menu dropdown-menu-right shadow notif-dropdown-x2024">
                 <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom notif-header-x2024">
@@ -64,30 +67,51 @@
             </div>
         </div>
 
-        <!-- User Dropdown -->
-        <div class="dropdown">
+          <!-- User Dropdown -->
+        <div class="dropdown dropdown-user-x2024">
             <a class="user-dropdown" href="#" data-toggle="dropdown">
-                <img src="{{ auth()->user()->coveruser ? asset('storage/' . auth()->user()->coveruser) : asset('logo.png') }}" 
+                <img src="{{ auth()->user()->foto_profil ? asset('storage/' . auth()->user()->foto_profil) : asset('img/default-avatar.png') }}" 
                      alt="User" class="user-avatar">
                 <span class="user-name d-none d-sm-inline">{{ auth()->user()->name }}</span>
                 <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
             </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+            <div class="dropdown-menu dropdown-menu-right shadow user-dropdown-menu-x2024">
                 <a class="dropdown-item" href="{{ route('profile.show') }}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profil Saya
                 </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
+                <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                    <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Edit Profil
                 </a>
+                <a class="dropdown-item" href="{{ route('profile.password.edit') }}">
+                    <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Ubah Password
+                </a>
+                <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" onclick="confirmLogout(event)">
+    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+    Logout
+</a>
             </div>
         </div>
+
     </div>
 </div>
 
+<form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
 <script>
+    // konfirmasi logout
+    function confirmLogout(event) {
+    event.preventDefault();
+    
+    if (confirm('Yakin mau logout?')) {
+        document.getElementById('logoutForm').submit();
+    }
+}
 // Load notifications saat halaman dimuat
 document.addEventListener('DOMContentLoaded', function() {
     loadNotifications();
@@ -205,10 +229,76 @@ document.getElementById('markAllReadX2024').addEventListener('click', function(e
         loadNotifications();
     });
 });
+
+function handleLogout(e) {
+    e.preventDefault();
+    
+    fetch('{{ route("logout") }}', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        }
+    })
+    .then(() => window.location.href = '{{ route("login") }}')
+    .catch(() => window.location.href = '{{ route("login") }}');
+}
 </script>
 
 <style>
-/* ===== TOPBAR NOTIFICATION STYLES X2024 ===== */
+/* ===== TOPBAR NOTIFICATION STYLES X2024 (MODERN) ===== */
+
+/* Notification Icon Wrapper */
+.notif-icon-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modern SVG Icon */
+.notif-icon-modern {
+    width: 22px;
+    height: 22px;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.notif-btn-x2024:hover .notif-icon-modern {
+    transform: scale(1.1);
+}
+
+.notif-btn-x2024:active .notif-icon-modern {
+    transform: scale(0.95);
+}
+
+/* Simple Badge */
+.notif-badge-modern {
+    position: absolute !important;
+    top: -2px !important;
+    right: 0px !important;
+    background: #dc3545 !important;
+    color: white !important;
+    border-radius: 50% !important;
+    width: 20px !important;
+    height: 20px !important;
+    padding: 0 !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    line-height: 20px !important;
+    border: 2px solid #4e73df !important;
+    box-shadow: 0 2px 6px rgba(220, 53, 69, 0.4) !important;
+    animation: simplePulseBadge 2s ease-in-out infinite !important;
+}
+
+@keyframes simplePulseBadge {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+}
 
 /* Dropdown Container Fix */
 .topbar-right .dropdown.dropdown-notif-x2024 {
@@ -225,31 +315,32 @@ document.getElementById('markAllReadX2024').addEventListener('click', function(e
     max-width: 90vw !important;
     max-height: 500px !important;
     overflow-y: auto !important;
-    margin-top: 0.5rem !important;
+    margin-top: 0.8rem !important;
     opacity: 0 !important;
-    transform: translateY(-15px) scale(0.95) !important;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    transform: translateY(-20px) scale(0.9) !important;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
     display: none !important;
     border: none !important;
-    border-radius: 12px !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024.show {
     opacity: 1 !important;
     transform: translateY(0) scale(1) !important;
     display: block !important;
-    animation: slideDownX2024 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    animation: slideDownX2024Modern 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-@keyframes slideDownX2024 {
+@keyframes slideDownX2024Modern {
     0% {
         opacity: 0;
-        transform: translateY(-20px) scale(0.9);
+        transform: translateY(-25px) scale(0.85);
     }
-    50% {
-        opacity: 0.8;
-        transform: translateY(5px) scale(1.02);
+    60% {
+        opacity: 1;
+        transform: translateY(8px) scale(1.02);
     }
     100% {
         opacity: 1;
@@ -257,77 +348,86 @@ document.getElementById('markAllReadX2024').addEventListener('click', function(e
     }
 }
 
+/* User Dropdown Menu Animation */
+.topbar-right .dropdown.dropdown-user-x2024 .dropdown-menu.user-dropdown-menu-x2024 {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    opacity: 0 !important;
+    transform: translateY(-20px) scale(0.9) !important;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    display: none !important;
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    margin-top: 0.8rem !important;
+}
+
+.topbar-right .dropdown.dropdown-user-x2024 .dropdown-menu.user-dropdown-menu-x2024.show {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    display: block !important;
+    animation: slideDownX2024Modern 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
 /* Header */
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .notif-header-x2024 {
-    background: linear-gradient(135deg, #f8f9fc 0%, #e7eaf3 100%) !important;
-    animation: fadeInHeaderX2024 0.5s ease-in !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafb 100%) !important;
+    animation: fadeInHeaderX2024Modern 0.6s ease-in-out !important;
 }
 
-@keyframes fadeInHeaderX2024 {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Badge with Pulse */
-.topbar-right .dropdown.dropdown-notif-x2024 .notif-btn-x2024 .notif-badge-x2024 {
-    position: absolute !important;
-    top: -5px !important;
-    right: -5px !important;
-    background: linear-gradient(135deg, #e74a3b 0%, #c0392b 100%) !important;
-    color: white !important;
-    border-radius: 10px !important;
-    padding: 2px 6px !important;
-    font-size: 0.7rem !important;
-    font-weight: bold !important;
-    min-width: 18px !important;
-    text-align: center !important;
-    animation: pulseBadgeX2024 2s ease-in-out infinite !important;
-    box-shadow: 0 2px 8px rgba(231, 74, 59, 0.4) !important;
-}
-
-@keyframes pulseBadgeX2024 {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 2px 8px rgba(231, 74, 59, 0.4);
+@keyframes fadeInHeaderX2024Modern {
+    from { 
+        opacity: 0;
+        transform: translateY(-10px);
     }
-    50% {
-        transform: scale(1.1);
-        box-shadow: 0 4px 12px rgba(231, 74, 59, 0.6);
+    to { 
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 /* Button Hover */
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-btn-x2024 {
     position: relative !important;
-    transition: all 0.3s ease !important;
+    transition: all 0.2s ease !important;
+    padding: 0 8px !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 40px !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-btn-x2024:hover {
-    transform: scale(1.1) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-btn-x2024:active {
-    transform: scale(0.95) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Notification Items */
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024 {
     position: relative !important;
     overflow: hidden !important;
-    transition: all 0.3s ease !important;
-    animation: slideInItemX2024 0.4s ease-out backwards !important;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    animation: slideInItemX2024Modern 0.5s ease-out backwards !important;
+    border-left: 4px solid transparent !important;
 }
 
-.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(1) { animation-delay: 0.1s !important; }
-.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(2) { animation-delay: 0.15s !important; }
-.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(3) { animation-delay: 0.2s !important; }
-.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(4) { animation-delay: 0.25s !important; }
-.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(5) { animation-delay: 0.3s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(1) { animation-delay: 0.05s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(2) { animation-delay: 0.1s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(3) { animation-delay: 0.15s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(4) { animation-delay: 0.2s !important; }
+.topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:nth-child(5) { animation-delay: 0.25s !important; }
 
-@keyframes slideInItemX2024 {
+@keyframes slideInItemX2024Modern {
     from {
         opacity: 0;
-        transform: translateX(-20px);
+        transform: translateX(-30px);
     }
     to {
         opacity: 1;
@@ -342,8 +442,8 @@ document.getElementById('markAllReadX2024').addEventListener('click', function(e
     top: 0 !important;
     width: 0 !important;
     height: 100% !important;
-    background: linear-gradient(90deg, rgba(78, 115, 223, 0.1) 0%, transparent 100%) !important;
-    transition: width 0.4s ease !important;
+    background: linear-gradient(90deg, rgba(78, 115, 223, 0.08) 0%, transparent 100%) !important;
+    transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
     z-index: 0 !important;
 }
 
@@ -352,22 +452,24 @@ document.getElementById('markAllReadX2024').addEventListener('click', function(e
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:hover {
-    background-color: #f8f9fc !important;
-    transform: translateX(5px) !important;
-    box-shadow: inset 3px 0 0 #4e73df !important;
+    background-color: #f5f7fb !important;
+    transform: translateX(6px) !important;
+    border-left-color: #4e73df !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024 i {
-    width: 30px !important;
+    width: 32px !important;
     text-align: center !important;
-    transition: all 0.3s ease !important;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
     position: relative !important;
     z-index: 1 !important;
+    font-size: 1.3rem !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024:hover i {
-    transform: scale(1.2) rotate(5deg) !important;
+    transform: scale(1.25) rotate(8deg) !important;
     color: #4e73df !important;
+    filter: drop-shadow(0 2px 4px rgba(78, 115, 223, 0.3)) !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .dropdown-item.notif-item-x2024 .flex-grow-1 {
@@ -382,43 +484,38 @@ document.getElementById('markAllReadX2024').addEventListener('click', function(e
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024::-webkit-scrollbar-track {
-    background: #f1f1f1 !important;
-    border-radius: 10px !important;
+    background: transparent !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #4e73df 0%, #224abe 100%) !important;
-    border-radius: 10px !important;
-    transition: background 0.3s ease !important;
-}
-
-.topbar-right .dropdown.dropdown-notif-x2024 .dropdown-menu.notif-dropdown-x2024::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #224abe 0%, #1a3a9e 100%) !important;
+    background: transparent !important;
 }
 
 /* Mark All Button */
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 #markAllReadX2024 {
-    transition: all 0.3s ease !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 #markAllReadX2024:hover {
-    transform: scale(1.05) !important;
+    transform: scale(1.06) !important;
     text-decoration: underline !important;
+    color: #224abe !important;
 }
 
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 #markAllReadX2024:active {
-    transform: scale(0.95) !important;
+    transform: scale(0.94) !important;
 }
 
 /* Empty State */
 .topbar-right .dropdown.dropdown-notif-x2024 .notif-dropdown-x2024 .fa-bell-slash {
-    animation: swingBellX2024 2s ease-in-out infinite !important;
+    animation: swingBellX2024Modern 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+    color: #ccc !important;
 }
 
-@keyframes swingBellX2024 {
+@keyframes swingBellX2024Modern {
     0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(10deg); }
-    75% { transform: rotate(-10deg); }
+    25% { transform: rotate(12deg); }
+    75% { transform: rotate(-12deg); }
 }
 
 /* ===== EXISTING TOPBAR STYLES ===== */
@@ -530,7 +627,7 @@ document.getElementById('markAllReadX2024').addEventListener('click', function(e
 }
 
 .notif-btn-x2024:hover {
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
 /* User Dropdown */

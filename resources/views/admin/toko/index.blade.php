@@ -4,7 +4,7 @@
            MODERN STORE HEADER & FILTER - SCOPED
         =========================== */
         .toko-management-page .tokos-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #224abe 0%, #224abe 100%);
             border-radius: 16px;
             padding: 30px;
             margin-bottom: 30px;
@@ -55,7 +55,7 @@
 
         .toko-management-page .filter-label i {
             margin-right: 8px;
-            color: #667eea;
+            color: #224abe;
         }
 
         .toko-management-page .filter-input {
@@ -68,7 +68,7 @@
 
         .toko-management-page .filter-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #224abe;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
@@ -87,7 +87,7 @@
         }
 
         .toko-management-page .filter-result strong {
-            color: #667eea;
+            color: #224abe;
             font-size: 18px;
         }
 
@@ -104,13 +104,13 @@
         }
 
         .toko-management-page .btn-reset-filter:hover {
-            background: #667eea;
-            border-color: #667eea;
+            background: #224abe;
+            border-color: #224abe;
             color: white;
         }
 
         .toko-management-page .btn-add-toko {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #224abe 0%, #224abe 100%);
             color: white;
             padding: 14px 28px;
             border-radius: 12px;

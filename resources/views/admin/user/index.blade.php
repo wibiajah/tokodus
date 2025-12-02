@@ -4,12 +4,12 @@
            MODERN USER CARD STYLES - SCOPED
         =========================== */
         .user-management-page .users-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #224abe;
             border-radius: 16px;
             padding: 30px;
             margin-bottom: 30px;
             color: white;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 30px rgba(34, 74, 190, 0.3);
         }
 
         .user-management-page .users-header h1 {
@@ -55,7 +55,7 @@
 
         .user-management-page .filter-label i {
             margin-right: 8px;
-            color: #667eea;
+            color: #224abe;
         }
 
         .user-management-page .filter-input {
@@ -68,8 +68,8 @@
 
         .user-management-page .filter-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #224abe;
+            box-shadow: 0 0 0 3px rgba(34, 74, 190, 0.1);
         }
 
         .user-management-page .filter-stats {
@@ -87,7 +87,7 @@
         }
 
         .user-management-page .filter-result strong {
-            color: #667eea;
+            color: #224abe;
             font-size: 18px;
         }
 
@@ -104,207 +104,13 @@
         }
 
         .user-management-page .btn-reset-filter:hover {
-            background: #667eea;
-            border-color: #667eea;
-            color: white;
-        }
-
-        /* User Cards Grid */
-        .user-management-page .user-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .user-management-page .user-card {
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .user-management-page .user-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .user-management-page .user-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
-        }
-
-        .user-management-page .user-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .user-management-page .user-avatar-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .user-management-page .user-avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 42px;
-            border: 4px solid #f0f0f0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .user-management-page .user-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1a1a1a !important;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .user-management-page .user-role-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: capitalize;
-            margin: 0 auto 20px;
-            display: block;
-            text-align: center;
-            width: fit-content;
-        }
-
-        .user-management-page .badge-super-admin {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            color: white;
-        }
-
-        .user-management-page .badge-admin {
-            background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
-            color: white;
-        }
-
-        .user-management-page .badge-kepala-toko {
-            background: linear-gradient(135deg, #339af0 0%, #228be6 100%);
-            color: white;
-        }
-
-        .user-management-page .badge-staff-admin {
-            background: linear-gradient(135deg, #ffd43b 0%, #fab005 100%);
-            color: white;
-        }
-
-        .user-management-page .user-info-box {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-
-        .user-management-page .user-info-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .user-management-page .user-info-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .user-management-page .user-info-icon {
-            font-size: 16px;
-            color: #667eea;
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .user-management-page .user-info-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #666;
-            margin-right: 6px;
-        }
-
-        .user-management-page .user-info-value {
-            font-size: 13px;
-            color: #333;
-            word-break: break-word;
-        }
-
-        .user-management-page .user-actions {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-        }
-
-        .user-management-page .btn-action {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .user-management-page .btn-action i {
-            font-size: 14px;
-        }
-
-        .user-management-page .btn-view {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .user-management-page .btn-view:hover {
-            background: #1976d2;
-            color: white;
-        }
-
-        .user-management-page .btn-edit {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-
-        .user-management-page .btn-edit:hover {
-            background: #f57c00;
-            color: white;
-        }
-
-        .user-management-page .btn-delete {
-            background: #ffebee;
-            color: #d32f2f;
-        }
-
-        .user-management-page .btn-delete:hover {
-            background: #d32f2f;
+            background: #224abe;
+            border-color: #224abe;
             color: white;
         }
 
         .user-management-page .btn-add-user {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #224abe;
             color: white;
             padding: 14px 28px;
             border-radius: 12px;
@@ -316,12 +122,15 @@
             gap: 10px;
             transition: all 0.3s;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(34, 74, 190, 0.4);
+            text-decoration: none;
         }
 
         .user-management-page .btn-add-user:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 6px 20px rgba(34, 74, 190, 0.5);
+            color: white;
+            text-decoration: none;
         }
 
         .user-management-page .no-results {
@@ -348,13 +157,277 @@
             color: #999;
         }
 
+        /* Modern User Card Design */
+        .modern-user-card {
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px -15px rgba(34, 74, 190, 0.15);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            height: 400px;
+        }
+
+        .modern-user-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -15px rgba(34, 74, 190, 0.3);
+        }
+
+        /* Image Container with Curved Bottom-Right Corner */
+        .card-image-wrapper {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #E9D5FF;
+            border-bottom-right-radius: 100px;
+            overflow: hidden;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            user-select: none;
+        }
+
+        .card-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(34, 74, 190, 0.1);
+            mix-blend-mode: overlay;
+            z-index: 1;
+        }
+
+        .card-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #224abe;
+        }
+
+        .card-image-placeholder i {
+            font-size: 64px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Role Badge Overlay */
+        .card-role-overlay {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+
+        .role-super-admin {
+            background: rgba(220, 53, 69, 0.95);
+        }
+
+        .role-admin {
+            background: rgba(40, 167, 69, 0.95);
+        }
+
+        .role-kepala-toko {
+            background: rgba(0, 123, 255, 0.95);
+        }
+
+        .role-staff-admin {
+            background: rgba(255, 193, 7, 0.95);
+        }
+
+        /* Sliding White Panel */
+        .card-slide-panel {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 30px;
+            padding: 20px 24px 24px;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 15;
+            transform: translateY(calc(100% - 120px));
+        }
+
+        .modern-user-card:hover .card-slide-panel {
+            transform: translateY(calc(100% - 200px));
+        }
+
+        /* Title Section - Always Visible */
+        .card-title-section {
+            margin-bottom: 0;
+        }
+
+        .card-user-title {
+            color: #2d3748;
+            font-weight: 800;
+            font-size: 17px;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            margin: 0 0 8px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Divider Line */
+        .card-divider {
+            width: 100%;
+            height: 1px;
+            background: #e2e8f0;
+            margin-bottom: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modern-user-card:hover .card-divider {
+            opacity: 1;
+        }
+
+        /* Hidden Info Section */
+        .card-hidden-info {
+            margin-bottom: 0;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease 0.2s, max-height 0.4s ease;
+        }
+
+        .modern-user-card:hover .card-hidden-info {
+            opacity: 1;
+            max-height: 150px;
+        }
+
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: #4A5568;
+            line-height: 1.4;
+        }
+
+        /* Quick Actions Icons */
+        .card-quick-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding-top: 0;
+            border-top: none;
+            margin-bottom: 16px;
+        }
+
+        .quick-action-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 50%;
+            color: #224abe;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quick-action-icon:hover {
+            background: #224abe;
+            color: white;
+            transform: scale(1.1);
+            text-decoration: none;
+        }
+
+        .quick-action-icon.whatsapp-icon:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        .quick-action-icon.delete-icon:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .quick-action-icon i {
+            font-size: 1.1rem;
+        }
+
         @media (max-width: 768px) {
-            .user-management-page .user-cards-grid {
+            .user-management-page .filter-grid {
                 grid-template-columns: 1fr;
             }
 
-            .user-management-page .filter-grid {
-                grid-template-columns: 1fr;
+            .modern-user-card {
+                height: 300px;
+            }
+            
+            .card-slide-panel {
+                transform: translateY(calc(100% - 110px));
+            }
+
+            .modern-user-card:hover .card-slide-panel {
+                transform: translateY(calc(100% - 220px));
+            }
+            
+            .card-user-title {
+                font-size: 15px;
+            }
+            
+            .info-value {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .modern-user-card {
+                border-radius: 25px;
+                height: 280px;
+            }
+            
+            .card-image-wrapper {
+                border-bottom-right-radius: 80px;
+            }
+            
+            .card-slide-panel {
+                border-radius: 25px;
+                padding: 16px 20px 20px;
+                transform: translateY(calc(100% - 100px));
+            }
+
+            .modern-user-card:hover .card-slide-panel {
+                transform: translateY(calc(100% - 200px));
             }
         }
     </style>
@@ -420,6 +493,19 @@
 
                 <div class="filter-item">
                     <label class="filter-label">
+                        <i class="fas fa-store"></i>
+                        Filter Toko
+                    </label>
+                    <select id="filterToko" class="filter-input">
+                        <option value="">Semua Toko</option>
+                        @foreach($users->pluck('toko')->filter()->unique('id') as $toko)
+                            <option value="{{ strtolower($toko->nama_toko) }}">{{ $toko->nama_toko }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="filter-item">
+                    <label class="filter-label">
                         <i class="fas fa-sort"></i>
                         Urutkan Tanggal
                     </label>
@@ -440,89 +526,119 @@
             </div>
         </div>
 
-        <!-- User Cards Grid -->
-        <div class="user-cards-grid" id="userCardsContainer">
+        <!-- Cards Grid -->
+        <div class="row" id="userCardsContainer">
             @forelse($users as $user)
-                <div class="user-card" 
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 user-card-item" 
                      data-name="{{ strtolower($user->name) }}" 
                      data-role="{{ $user->role }}"
+                     data-toko="{{ strtolower($user->toko?->nama_toko ?? '') }}"
                      data-created="{{ $user->created_at->timestamp }}">
-                    
-                    <!-- Avatar -->
-                    <div class="user-avatar-wrapper">
-                        <div class="user-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-
-                    <!-- Name -->
-                    <h3 class="user-name">{{ $user->name }}</h3>
-
-                    <!-- Role Badge -->
-                    @if($user->role === 'super_admin')
-                        <span class="user-role-badge badge-super-admin">Super Admin</span>
-                    @elseif($user->role === 'admin')
-                        <span class="user-role-badge badge-admin">Admin</span>
-                    @elseif($user->role === 'kepala_toko')
-                        <span class="user-role-badge badge-kepala-toko">Kepala Toko</span>
-                    @else
-                        <span class="user-role-badge badge-staff-admin">Staff Admin</span>
-                    @endif
-
-                    <!-- Info Box -->
-                    <div class="user-info-box">
-                        <div class="user-info-row">
-                            <i class="fas fa-store user-info-icon"></i>
-                            <span class="user-info-label">Toko:</span>
-                            <span class="user-info-value">{{ $user->toko->nama_toko ?? '-' }}</span>
-                        </div>
-
-                        <div class="user-info-row">
-                            <i class="fas fa-envelope user-info-icon"></i>
-                            <span class="user-info-label">Email:</span>
-                            <span class="user-info-value">{{ $user->email }}</span>
-                        </div>
-
-                        <div class="user-info-row">
-                            <i class="fas fa-calendar user-info-icon"></i>
-                            <span class="user-info-label">Dibuat:</span>
-                            <span class="user-info-value">{{ $user->created_at->format('d M Y') }}</span>
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="user-actions">
-                        <a href="{{ route('user.show', $user) }}" class="btn-action btn-view" title="Detail">
-                            <i class="fas fa-eye"></i>
-                            <span>Detail</span>
-                        </a>
-                        
-                        @if(auth()->user()->role === 'super_admin' || $user->role !== 'super_admin')
-                            <a href="{{ route('user.edit', $user) }}" class="btn-action btn-edit" title="Edit">
-                                <i class="fas fa-edit"></i>
-                                <span>Edit</span>
-                            </a>
-                            
-                            @if($user->id !== auth()->id())
-                                <button type="button" class="btn-action btn-delete" title="Hapus" 
-                                    onclick="confirmDelete({{ $user->id }})">
-                                    <i class="fas fa-trash"></i>
-                                    <span>Hapus</span>
-                                </button>
-
-                                <form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy', $user) }}" method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
+                    <div class="modern-user-card" onclick="openUserDetailModal({{ $user->id }})">
+                        <!-- Image Container with Curved Corner -->
+                        <div class="card-image-wrapper">
+                            @if($user->foto_profil)
+                                <img src="{{ asset('storage/' . $user->foto_profil) }}" alt="{{ $user->name }}">
+                            @else
+                                <div class="card-image-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
                             @endif
-                        @endif
+                            
+                            <!-- Role Badge Overlay -->
+                            <div class="card-role-overlay role-{{ str_replace('_', '-', $user->role) }}">
+                                @if($user->role === 'super_admin')
+                                    ● Super Admin
+                                @elseif($user->role === 'admin')
+                                    ● Admin
+                                @elseif($user->role === 'kepala_toko')
+                                    ● Kepala Toko
+                                @else
+                                    ● Staff Admin
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <!-- Sliding White Content Panel -->
+                        <div class="card-slide-panel">
+                            <!-- Title Section - Always Visible -->
+                            <div class="card-title-section">
+                                <h6 class="card-user-title">{{ Str::upper($user->name) }}</h6>
+                            </div>
+                            
+                            <!-- Divider Line -->
+                            <div class="card-divider"></div>
+                            
+                            <!-- Hidden Info - Shows on Hover -->
+                            <div class="card-hidden-info">
+                                <div class="info-row">
+                                    <span class="info-label">Toko</span>
+                                    <span class="info-value">{{ $user->toko?->nama_toko ?? 'Head Office' }}</span>
+                                </div>
+
+                                <div class="info-row">
+                                    <span class="info-label">No. Telepon</span>
+                                    <span class="info-value">{{ $user->no_telepon ? $user->formatted_no_telepon : 'Tidak tersedia' }}</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Actions Icons -->
+                            <div class="card-quick-actions">
+                                <!-- Email Icon -->
+                                <a href="mailto:{{ $user->email }}" 
+                                   class="quick-action-icon"
+                                   onclick="event.stopPropagation()"
+                                   title="Kirim Email">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                                
+                                <!-- WhatsApp Icon -->
+                                @if($user->no_telepon)
+                                    @php
+                                        $cleanPhone = preg_replace('/[^0-9]/', '', $user->no_telepon);
+                                        $waPhone = (strpos($cleanPhone, '0') === 0) ? '62' . substr($cleanPhone, 1) : $cleanPhone;
+                                    @endphp
+                                    <a href="https://wa.me/{{ $waPhone }}" 
+                                       target="_blank"
+                                       class="quick-action-icon whatsapp-icon"
+                                       onclick="event.stopPropagation()"
+                                       title="Chat WhatsApp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                @else
+                                    <span class="quick-action-icon" 
+                                          style="opacity: 0.3; cursor: not-allowed;"
+                                          title="No. Telepon tidak tersedia">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </span>
+                                @endif
+                                
+                                <!-- Delete Icon -->
+                                @if($user->id !== auth()->id())
+                                    <button type="button"
+                                       class="quick-action-icon delete-icon"
+                                       onclick="event.stopPropagation(); confirmDeleteQuick({{ $user->id }})"
+                                       title="Hapus User">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                @else
+                                    <span class="quick-action-icon" 
+                                          style="opacity: 0.3; cursor: not-allowed;"
+                                          title="Tidak bisa hapus akun sendiri">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
             @empty
-                <div class="no-results" style="grid-column: 1 / -1;">
-                    <i class="fas fa-users-slash"></i>
-                    <h4>Belum Ada User</h4>
-                    <p>Mulai tambahkan user baru untuk sistem Anda</p>
+                <div class="col-12">
+                    <div class="no-results">
+                        <i class="fas fa-users-slash"></i>
+                        <h4>Belum Ada Data User</h4>
+                        <p>Silakan tambah user baru dengan klik tombol di atas</p>
+                    </div>
                 </div>
             @endforelse
         </div>
@@ -535,21 +651,22 @@
         </div>
     </div>
 
+    <!-- Include Modal -->
+    @include('admin.user.detailmodal', ['users' => $users])
+
+    <!-- Pass data to JavaScript -->
     <script>
-        // Confirm Delete Function
-        function confirmDelete(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus user ini?')) {
-                document.getElementById('delete-form-' + id).submit();
-            }
-        }
+        window.usersData = @json($users);
+        window.csrfToken = '{{ csrf_token() }}';
 
         // Filter Function
         function filterUsers() {
             const nameFilter = document.getElementById('filterName').value.toLowerCase();
             const roleFilter = document.getElementById('filterRole').value;
+            const tokoFilter = document.getElementById('filterToko').value.toLowerCase();
             const dateFilter = document.getElementById('filterDate').value;
             
-            const cards = Array.from(document.querySelectorAll('.user-card'));
+            const cards = Array.from(document.querySelectorAll('.user-card-item'));
             const container = document.getElementById('userCardsContainer');
             const noResults = document.getElementById('noResults');
             
@@ -559,11 +676,13 @@
             cards.forEach(card => {
                 const name = card.getAttribute('data-name');
                 const role = card.getAttribute('data-role');
+                const toko = card.getAttribute('data-toko');
                 
                 const matchName = !nameFilter || name.includes(nameFilter);
                 const matchRole = !roleFilter || role === roleFilter;
+                const matchToko = !tokoFilter || toko.includes(tokoFilter);
                 
-                if (matchName && matchRole) {
+                if (matchName && matchRole && matchToko) {
                     card.style.display = 'block';
                     visibleCount++;
                 } else {
@@ -594,7 +713,8 @@
                 container.style.display = 'none';
                 noResults.style.display = 'block';
             } else {
-                container.style.display = 'grid';
+                container.style.display = 'flex';
+                container.style.flexWrap = 'wrap';
                 noResults.style.display = 'none';
             }
         }
@@ -603,6 +723,7 @@
         function resetFilters() {
             document.getElementById('filterName').value = '';
             document.getElementById('filterRole').value = '';
+            document.getElementById('filterToko').value = '';
             document.getElementById('filterDate').value = 'newest';
             filterUsers();
         }
@@ -610,12 +731,42 @@
         // Add event listeners
         document.getElementById('filterName').addEventListener('input', filterUsers);
         document.getElementById('filterRole').addEventListener('change', filterUsers);
+        document.getElementById('filterToko').addEventListener('change', filterUsers);
         document.getElementById('filterDate').addEventListener('change', filterUsers);
 
         // Initial sort on page load
         document.addEventListener('DOMContentLoaded', function() {
             filterUsers();
         });
-    </script>
 
+        // Function to open detail modal
+        function openUserDetailModal(userId) {
+            console.log('Opening modal for user ID:', userId);
+            showUserDetail(userId);
+        }
+
+        // Quick delete confirmation
+        function confirmDeleteQuick(userId) {
+            if (confirm('⚠️ Apakah Anda yakin ingin menghapus user ini?\n\nData yang terhapus tidak dapat dikembalikan!')) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/superadmin/user/${userId}`;
+                
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = '_token';
+                csrfInput.value = window.csrfToken;
+                
+                const methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+                
+                form.appendChild(csrfInput);
+                form.appendChild(methodInput);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
 </x-admin-layout>

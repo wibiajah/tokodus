@@ -2,7 +2,7 @@
 
      <nav class="navbar navbar-expand-lg bg-body-tertiary px-3">
          <div class="container-fluid">
-             <a class="navbar-brand fs-4 fw-bold" href="{{ route('home') }}">TEMPLATE</a>
+             <a class="navbar-brand fs-4 fw-bold" href="{{ route('home') }}">BILBILAL</a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarItems"
                  aria-controls="navbarItems" aria-expanded="false" aria-label="Toggle navigation">
                  <span class="navbar-toggler-icon"></span>

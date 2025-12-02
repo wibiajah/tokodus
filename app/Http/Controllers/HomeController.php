@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 class HomeController extends Controller
 {
     public function __invoke()
     {
-        return view('home');
+        return view('frontend.index');
     }
 }

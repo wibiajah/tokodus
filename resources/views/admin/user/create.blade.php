@@ -1,6 +1,5 @@
 <x-admin-layout title="Tambah User">
     <div class="container-fluid">
-        <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Tambah User Baru</h1>
             <a href="{{ route('user.index') }}" class="btn btn-secondary btn-icon-split">
@@ -11,14 +10,38 @@
             </a>
         </div>
 
-        <!-- Form Card -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Form Tambah User</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('user.store') }}" method="POST" id="createUserForm">
+                <form action="{{ route('user.store') }}" method="POST" id="createUserForm" enctype="multipart/form-data">
                     @csrf
+
+                    <!-- Foto Profil -->
+                    <div class="form-group">
+                        <label for="foto_profil">Foto Profil</label>
+                        <div class="custom-file">
+                            <input type="file" 
+                                class="custom-file-input @error('foto_profil') is-invalid @enderror" 
+                                id="foto_profil" 
+                                name="foto_profil"
+                                accept="image/jpeg,image/png,image/jpg">
+                            <label class="custom-file-label" for="foto_profil">Pilih foto...</label>
+                            @error('foto_profil')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <small class="form-text text-muted">
+                            Format: JPG, JPEG, PNG. Maksimal 2MB
+                        </small>
+                        <!-- Preview -->
+                        <div class="mt-2">
+                            <img id="preview" src="#" alt="Preview" style="display: none; max-width: 150px; border-radius: 8px;">
+                        </div>
+                    </div>
+
+                    <hr>
 
                     <div class="row">
                         <div class="col-md-6">
@@ -52,6 +75,24 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+    <div class="form-group">
+        <label for="no_telepon">No. Telepon</label>
+        <input type="text" 
+            class="form-control @error('no_telepon') is-invalid @enderror" 
+            id="no_telepon" 
+            name="no_telepon" 
+            value="{{ old('no_telepon') }}"
+            placeholder="08123456789">
+        @error('no_telepon')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+        <small class="form-text text-muted">
+            Format: 08123456789 atau +628123456789
+        </small>
+    </div>
+</div>
                     </div>
 
                     <div class="row">
@@ -133,7 +174,6 @@
                                 <small class="form-text text-muted">
                                     💡 Kosongkan untuk menempatkan di <strong>Head Office</strong>
                                 </small>
-                                <!-- 🔥 Warning jika toko sudah punya kepala -->
                                 <div id="kepalaTokoWarning" class="alert alert-warning mt-2" style="display: none;">
                                     <i class="fas fa-exclamation-triangle"></i>
                                     <span id="warningText"></span>
@@ -158,7 +198,27 @@
     </div>
 
     <script>
-        // 🔥 Validasi jika role = kepala_toko dan toko sudah punya kepala
+        // Preview foto profil
+        document.getElementById('foto_profil').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('preview');
+            const label = document.querySelector('.custom-file-label');
+            
+            if (file) {
+                label.textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+                label.textContent = 'Pilih foto...';
+            }
+        });
+
+        // Validasi Kepala Toko
         const roleSelect = document.getElementById('role');
         const tokoSelect = document.getElementById('toko_id');
         const warningDiv = document.getElementById('kepalaTokoWarning');
@@ -169,7 +229,6 @@
             const role = roleSelect.value;
             const selectedOption = tokoSelect.options[tokoSelect.selectedIndex];
             
-            // Hanya cek jika role = kepala_toko DAN memilih toko cabang (bukan Head Office/kosong)
             if (role === 'kepala_toko' && tokoSelect.value) {
                 const hasKepala = selectedOption.getAttribute('data-has-kepala') === 'true';
                 const kepalaName = selectedOption.getAttribute('data-kepala-name');
