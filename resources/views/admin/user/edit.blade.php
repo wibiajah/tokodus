@@ -51,7 +51,7 @@
                         <!-- Current Photo -->
                         @if($user->foto_profil)
                             <div class="mb-2">
-                                <img src="{{ $user->foto_profil_url }}" alt="Foto Profil" style="max-width: 150px; border-radius: 8px;" id="currentPhoto">
+                                <img src="{{ asset('storage/' . $user->foto_profil) }}" alt="Foto Profil" style="max-width: 150px; border-radius: 8px;" id="currentPhoto">
                                 <div class="custom-control custom-checkbox mt-2">
                                     <input type="checkbox" class="custom-control-input" id="remove_foto" name="remove_foto" value="1">
                                     <label class="custom-control-label text-danger" for="remove_foto">
