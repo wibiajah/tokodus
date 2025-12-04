@@ -43,6 +43,12 @@ class Toko extends Model
         return $this->hasMany(User::class)->where('role', 'staff_admin');
     }
 
+    // 🔥 TAMBAHKAN INI SAJA - 1 RELASI
+    public function productStocks()
+    {
+        return $this->hasMany(ProductStock::class);
+    }
+
     // Accessor: Nama Pemilik (dari Kepala Toko)
     public function getPemilikAttribute()
     {

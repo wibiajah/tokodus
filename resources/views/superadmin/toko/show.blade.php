@@ -6,13 +6,13 @@
                 <i class="fas fa-store text-primary"></i> Detail Toko
             </h1>
             <div style="display: flex; gap: 8px;">
-                <a href="{{ route('toko.edit', $toko) }}" class="btn btn-warning btn-icon-split shadow-sm" style="border-radius: 8px;">
+                <a href="{{ route('superadmin.toko.edit', $toko) }}" class="btn btn-warning btn-icon-split shadow-sm" style="border-radius: 8px;">
                     <span class="icon text-white-50">
                         <i class="fas fa-edit"></i>
                     </span>
                     <span class="text">Edit</span>
                 </a>
-                <a href="{{ route('toko.index') }}" class="btn btn-secondary btn-icon-split shadow-sm" style="border-radius: 8px;">
+                <a href="{{ route('superadmin.toko.index') }}" class="btn btn-secondary btn-icon-split shadow-sm" style="border-radius: 8px;">
                     <span class="icon text-white-50">
                         <i class="fas fa-arrow-left"></i>
                     </span>

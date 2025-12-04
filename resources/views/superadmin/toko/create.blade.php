@@ -5,7 +5,7 @@
             <h1 class="h3 mb-0 text-gray-800">
                 <i class="fas fa-store text-primary"></i> Tambah Toko Baru
             </h1>
-            <a href="{{ route('toko.index') }}" class="btn btn-secondary btn-icon-split shadow-sm" style="border-radius: 8px;">
+            <a href="{{ route('.superadmin.toko.index') }}" class="btn btn-secondary btn-icon-split shadow-sm" style="border-radius: 8px;">
                 <span class="icon text-white-50">
                     <i class="fas fa-arrow-left"></i>
                 </span>
@@ -21,7 +21,7 @@
                 </h6>
             </div>
             <div class="card-body p-4">
-                <form id="tokoForm" action="{{ route('toko.store') }}" method="POST" enctype="multipart/form-data">
+                <form id="tokoForm" action="{{ route('superadmin.toko.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Nama Toko -->
@@ -240,7 +240,7 @@
                         <button type="button" class="btn btn-primary shadow-sm" id="btnPreview" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
                             <i class="fas fa-eye"></i> Preview Data
                         </button>
-                        <a href="{{ route('toko.index') }}" class="btn btn-secondary shadow-sm" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
+                        <a href="{{ route('superadmin.toko.index') }}" class="btn btn-secondary shadow-sm" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
                             <i class="fas fa-times"></i> Batal
                         </a>
                     </div>
@@ -347,7 +347,7 @@
                     <button type="button" class="btn btn-warning shadow-sm" id="btnEdit" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
                         <i class="fas fa-edit"></i> Edit Data
                     </button>
-                    <a href="{{ route('toko.index') }}" class="btn btn-secondary shadow-sm" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
+                    <a href="{{ route('superadmin.toko.index') }}" class="btn btn-secondary shadow-sm" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
                         <i class="fas fa-times"></i> Batal
                     </a>
                 </div>

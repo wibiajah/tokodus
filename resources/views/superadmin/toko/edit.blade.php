@@ -5,7 +5,7 @@
             <h1 class="h3 mb-0 text-gray-800">
                 <i class="fas fa-store text-primary"></i> Edit Toko
             </h1>
-            <a href="{{ route('toko.index') }}" class="btn btn-secondary btn-icon-split shadow-sm" style="border-radius: 8px;">
+            <a href="{{ route('superadmin.toko.index') }}" class="btn btn-secondary btn-icon-split shadow-sm" style="border-radius: 8px;">
                 <span class="icon text-white-50">
                     <i class="fas fa-arrow-left"></i>
                 </span>
@@ -21,7 +21,7 @@
                 </h6>
             </div>
             <div class="card-body p-4">
-                <form action="{{ route('toko.update', $toko) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('superadmin.toko.update', $toko) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -242,7 +242,7 @@
                         <button type="submit" class="btn btn-primary shadow-sm" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
                             <i class="fas fa-save"></i> Perbarui
                         </button>
-                        <a href="{{ route('toko.index') }}" class="btn btn-secondary shadow-sm" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
+                        <a href="{{ route('superadmin.toko.index') }}" class="btn btn-secondary shadow-sm" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 0.9rem;">
                             <i class="fas fa-times"></i> Batal
                         </a>
                     </div>

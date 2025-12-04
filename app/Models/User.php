@@ -20,8 +20,9 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'username',
         'email',
-        'no_telepon', // TAMBAHKAN INI
+        'no_telepon',
         'password',
         'role',
         'toko_id',
@@ -33,35 +34,34 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // Relasi: User milik satu Toko
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
     public function toko()
     {
         return $this->belongsTo(Toko::class);
     }
 
-    // Helper: Get foto profil URL
     public function getFotoProfilUrlAttribute()
     {
         if ($this->foto_profil) {
             return Storage::url($this->foto_profil);
         }
         
-        // Default avatar jika tidak ada foto
         return asset('img/default-avatar.png');
     }
 
-    // Helper: Format nomor telepon
     public function getFormattedNoTeleponAttribute()
     {
         if (!$this->no_telepon) {
             return '-';
         }
         
-        // Format: 0812-3456-7890
         return preg_replace('/(\d{4})(\d{4})(\d+)/', '$1-$2-$3', $this->no_telepon);
     }
 
-    // Helper: Cek role
     public function isSuperAdmin()
     {
         return $this->role === 'super_admin';
@@ -82,7 +82,6 @@ class User extends Authenticatable
         return $this->role === 'staff_admin';
     }
 
-    // Scope: Filter by role
     public function scopeByRole($query, $role)
     {
         return $query->where('role', $role);

@@ -4,15 +4,36 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\ProfilController;
-use App\Http\Controllers\Admin\TokoController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\SuperAdmin\SuperAdminController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\KepalaToko\KepalaTokController;
-use App\Http\Controllers\Staff\StaffController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Product3DController;
+
+// 🔥 SUPER ADMIN Controllers (SEMUA DI FOLDER SuperAdmin)
+use App\Http\Controllers\SuperAdmin\SuperAdminController;
+use App\Http\Controllers\SuperAdmin\TokoController;
+use App\Http\Controllers\SuperAdmin\UserController;
+use App\Http\Controllers\SuperAdmin\ProductController as SuperAdminProductController;
+use App\Http\Controllers\SuperAdmin\CategoryController as SuperAdminCategoryController;
+use App\Http\Controllers\SuperAdmin\StockController as SuperAdminStockController;
+use App\Http\Controllers\SuperAdmin\VoucherController as SuperAdminVoucherController;
+
+// 🔥 ADMIN Controllers (HANYA Product, Category, Stock, Voucher)
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\StockController as AdminStockController;
+use App\Http\Controllers\Admin\VoucherController as AdminVoucherController;
+
+// 🔥 KEPALA TOKO & STAFF Controllers
+use App\Http\Controllers\KepalaToko\KepalaTokController;
+use App\Http\Controllers\KepalaToko\StockController as KepalaTokStockController;
+use App\Http\Controllers\Staff\StaffController;
+use App\Http\Controllers\Staff\StockController as StaffStockController;
+
+/*
+|--------------------------------------------------------------------------
+| PUBLIC ROUTES
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -28,6 +49,12 @@ Route::prefix('products-3d')->group(function () {
     Route::get('{product3d}', [Product3DController::class, 'show'])->name('products-3d.show');
     Route::get('{product3d}/data', [Product3DController::class, 'getProductData'])->name('products-3d.data');
 });
+
+/*
+|--------------------------------------------------------------------------
+| AUTHENTICATED ROUTES
+|--------------------------------------------------------------------------
+*/
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -49,31 +76,112 @@ Route::middleware('auth')->group(function () {
         Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('password.update');
     });
 
-    // 🔥 Super Admin routes (HANYA Super Admin)
-    Route::prefix('superadmin')->middleware('role:super_admin')->group(function () {
-        Route::get('dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
+    /*
+    |--------------------------------------------------------------------------
+    | SUPER ADMIN ROUTES (SEMUA MANAGEMENT)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('superadmin')->name('superadmin.')->middleware('role:super_admin')->group(function () {
+        Route::get('dashboard', [SuperAdminController::class, 'index'])->name('dashboard');
         
-        // 🔥 Manajemen Toko (HANYA Super Admin)
+        // ✅ TOKO MANAGEMENT (DIPINDAH KE SuperAdmin namespace)
         Route::resource('toko', TokoController::class);
         Route::post('toko/{toko}/toggle-status', [TokoController::class, 'toggleStatus'])->name('toko.toggleStatus');
         Route::post('toko/{toko}/update-kepala-toko', [TokoController::class, 'updateKepalaToko'])->name('toko.updateKepalaToko');
 
-        // 🔥 Manajemen User (HANYA Super Admin)
+        // ✅ USER MANAGEMENT (DIPINDAH KE SuperAdmin namespace)
         Route::resource('user', UserController::class);
+        
+        // 🆕 PRODUK MANAGEMENT (Full CRUD)
+        Route::resource('products', SuperAdminProductController::class);
+        
+        // 🆕 KATEGORI MANAGEMENT (Full CRUD)
+        Route::resource('categories', SuperAdminCategoryController::class);
+        
+        // 🆕 STOK MANAGEMENT (Real Time)
+         Route::prefix('stocks')->name('stocks.')->group(function () {
+        // List semua stok
+        Route::get('/', [SuperAdminStockController::class, 'index'])->name('index');
+        
+        // Detail stok per produk
+        Route::get('/{product}', [SuperAdminStockController::class, 'show'])->name('show');
+        
+        // 🔥 Update stok awal produk (initial stock)
+        Route::patch('/{product}/initial', [SuperAdminStockController::class, 'updateInitialStock'])->name('update-initial');
+        
+        // 🔥 TAMBAHAN: Set stok ke toko tertentu
+        Route::get('/{product}/create', [SuperAdminStockController::class, 'create'])->name('create');
+        Route::post('/{product}', [SuperAdminStockController::class, 'store'])->name('store');
+        
+        // 🔥 TAMBAHAN: Edit stok toko tertentu
+        Route::get('/{product}/stocks/{stock}/edit', [SuperAdminStockController::class, 'edit'])->name('edit');
+        Route::patch('/{product}/stocks/{stock}', [SuperAdminStockController::class, 'update'])->name('update');
+    });
+        
+        // 🆕 VOUCHER MANAGEMENT (dengan Quantity Discount)
+        Route::resource('vouchers', SuperAdminVoucherController::class);
+        Route::post('vouchers/apply/{product}', [SuperAdminVoucherController::class, 'applyToProduct'])->name('vouchers.apply');
     });
 
-    // Admin routes (TIDAK ADA akses Toko & User)
-    Route::prefix('admin')->middleware('role:admin')->group(function () {
-        Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    /*
+    |--------------------------------------------------------------------------
+    | ADMIN ROUTES (TIDAK ADA TOKO & USER)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+        Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+        
+        // 🆕 PRODUK MANAGEMENT (Full CRUD)
+        Route::resource('products', AdminProductController::class);
+        
+        // 🆕 KATEGORI MANAGEMENT (Full CRUD)
+        Route::resource('categories', AdminCategoryController::class);
+        
+        // 🆕 STOK MANAGEMENT (Real Time)
+        Route::prefix('stocks')->name('stocks.')->group(function () {
+            Route::get('/', [AdminStockController::class, 'index'])->name('index');
+            Route::get('/{product}', [AdminStockController::class, 'show'])->name('show');
+            Route::put('/{product}/initial', [AdminStockController::class, 'updateInitialStock'])->name('updateInitial');
+        });
+        
+        // 🆕 VOUCHER MANAGEMENT (dengan Quantity Discount)
+        Route::resource('vouchers', AdminVoucherController::class);
+        Route::post('vouchers/apply/{product}', [AdminVoucherController::class, 'applyToProduct'])->name('vouchers.apply');
     });
 
-    // Kepala Toko routes
-    Route::prefix('kepala-toko')->middleware('role:kepala_toko')->group(function () {
-        Route::get('dashboard', [KepalaTokController::class, 'index'])->name('kepala-toko.dashboard');
+    /*
+    |--------------------------------------------------------------------------
+    | KEPALA TOKO ROUTES (Edit Stok Saja)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('kepala-toko')->name('kepala-toko.')->middleware('role:kepala_toko')->group(function () {
+        Route::get('dashboard', [KepalaTokController::class, 'index'])->name('dashboard');
+        
+        // 🆕 STOK MANAGEMENT (Set & Edit Stok dari Stok Awal)
+        Route::prefix('stocks')->name('stocks.')->group(function () {
+            Route::get('/', [KepalaTokStockController::class, 'index'])->name('index');
+            Route::get('/{product}/create', [KepalaTokStockController::class, 'create'])->name('create');
+            Route::post('/{product}', [KepalaTokStockController::class, 'store'])->name('store');
+            Route::get('/{product}/edit', [KepalaTokStockController::class, 'edit'])->name('edit');
+            Route::put('/{product}', [KepalaTokStockController::class, 'update'])->name('update');
+        });
     });
 
-    // Staff Admin routes
-    Route::prefix('staff')->middleware('role:staff_admin')->group(function () {
-        Route::get('dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
+    /*
+    |--------------------------------------------------------------------------
+    | STAFF ROUTES (Edit Stok Saja)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('staff')->name('staff.')->middleware('role:staff_admin')->group(function () {
+        Route::get('dashboard', [StaffController::class, 'index'])->name('dashboard');
+        
+        // 🆕 STOK MANAGEMENT (Set & Edit Stok dari Stok Awal)
+        Route::prefix('stocks')->name('stocks.')->group(function () {
+            Route::get('/', [StaffStockController::class, 'index'])->name('index');
+            Route::get('/{product}/create', [StaffStockController::class, 'create'])->name('create');
+            Route::post('/{product}', [StaffStockController::class, 'store'])->name('store');
+            Route::get('/{product}/edit', [StaffStockController::class, 'edit'])->name('edit');
+            Route::put('/{product}', [StaffStockController::class, 'update'])->name('update');
+        });
     });
 });

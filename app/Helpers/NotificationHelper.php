@@ -42,7 +42,7 @@ class NotificationHelper
             'message' => "User baru '{$user->name}' ({$roleName}) ditambahkan{$tokoInfo}",
             'actor_name' => $creator->name,
             'icon' => 'fas fa-user-plus text-success',
-            'url' => route('user.show', $user->id),
+            'url' => route('superadmin.user.index'), // ✅ Fixed route
         ];
     }
 
@@ -58,7 +58,7 @@ class NotificationHelper
             'message' => "Data user '{$user->name}' ({$roleName}) diperbarui",
             'actor_name' => $updater->name,
             'icon' => 'fas fa-user-edit text-warning',
-            'url' => route('user.show', $user->id),
+            'url' => route('superadmin.user.index'), // ✅ Fixed route
         ];
     }
 
@@ -72,7 +72,7 @@ class NotificationHelper
             'message' => "User '{$userName}' telah dihapus dari sistem",
             'actor_name' => $deleter->name,
             'icon' => 'fas fa-user-times text-danger',
-            'url' => route('user.index'),
+            'url' => route('superadmin.user.index'), // ✅ Fixed route
         ];
     }
 
@@ -88,7 +88,7 @@ class NotificationHelper
             'message' => "Toko '{$toko->nama_toko}' berhasil ditambahkan{$statusInfo}",
             'actor_name' => $creator->name,
             'icon' => 'fas fa-store text-success',
-            'url' => route('toko.show', $toko->id),
+            'url' => route('superadmin.toko.index'),
         ];
     }
 
@@ -102,7 +102,7 @@ class NotificationHelper
             'message' => "Data toko '{$toko->nama_toko}' telah diperbarui",
             'actor_name' => $updater->name,
             'icon' => 'fas fa-store text-warning',
-            'url' => route('toko.show', $toko->id),
+            'url' => route('superadmin.toko.index'),
         ];
     }
 
@@ -116,7 +116,7 @@ class NotificationHelper
             'message' => "Toko '{$namaToko}' telah dihapus dari sistem",
             'actor_name' => $deleter->name,
             'icon' => 'fas fa-trash-alt text-danger',
-            'url' => route('toko.index'),
+            'url' => route('superadmin.toko.index'),
         ];
     }
 
@@ -130,7 +130,7 @@ class NotificationHelper
             'message' => "Kepala Toko '{$toko->nama_toko}' diganti menjadi {$newKepala->name}",
             'actor_name' => $changer->name,
             'icon' => 'fas fa-user-tie text-info',
-            'url' => route('toko.show', $toko->id),
+            'url' => route('superadmin.toko.index'),
         ];
     }
 
@@ -144,7 +144,7 @@ class NotificationHelper
             'message' => "Kepala Toko dari '{$toko->nama_toko}' telah dihapus (Status: Tidak Aktif)",
             'actor_name' => $remover->name,
             'icon' => 'fas fa-user-minus text-warning',
-            'url' => route('toko.show', $toko->id),
+            'url' => route('superadmin.toko.index'),
         ];
     }
 
@@ -161,7 +161,7 @@ class NotificationHelper
             'message' => "Toko '{$toko->nama_toko}' berhasil {$statusText}",
             'actor_name' => $changer->name,
             'icon' => "fas fa-toggle-" . ($toko->status === 'aktif' ? 'on' : 'off') . " {$iconClass}",
-            'url' => route('toko.show', $toko->id),
+            'url' => route('superadmin.toko.index'),
         ];
     }
 
@@ -175,7 +175,55 @@ class NotificationHelper
             'message' => "Kepala Toko '{$toko->nama_toko}' diganti dari {$oldKepala->name} ke {$newKepala->name}",
             'actor_name' => $changer->name,
             'icon' => 'fas fa-exchange-alt text-warning',
-            'url' => route('toko.show', $toko->id),
+            'url' => route('superadmin.toko.index'),
+        ];
+    }
+
+    // ========================================
+    // 🔥 CATEGORY NOTIFICATION TEMPLATES
+    // ========================================
+
+    /**
+     * Template notifikasi Category Created
+     */
+    public static function categoryCreated($category, $creator)
+    {
+        $statusInfo = $category->is_active ? ' (Status: Aktif)' : ' (Status: Tidak Aktif)';
+        
+        return [
+            'type' => 'category_created',
+            'message' => "Kategori '{$category->name}' berhasil ditambahkan{$statusInfo}",
+            'actor_name' => $creator->name,
+            'icon' => 'fas fa-tags text-success',
+            'url' => route('superadmin.categories.index'),
+        ];
+    }
+
+    /**
+     * Template notifikasi Category Updated
+     */
+    public static function categoryUpdated($category, $updater)
+    {
+        return [
+            'type' => 'category_updated',
+            'message' => "Kategori '{$category->name}' telah diperbarui",
+            'actor_name' => $updater->name,
+            'icon' => 'fas fa-tag text-warning',
+            'url' => route('superadmin.categories.index'),
+        ];
+    }
+
+    /**
+     * Template notifikasi Category Deleted
+     */
+    public static function categoryDeleted($categoryName, $deleter)
+    {
+        return [
+            'type' => 'category_deleted',
+            'message' => "Kategori '{$categoryName}' telah dihapus dari sistem",
+            'actor_name' => $deleter->name,
+            'icon' => 'fas fa-trash-alt text-danger',
+            'url' => route('superadmin.categories.index'),
         ];
     }
 }

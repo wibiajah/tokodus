@@ -1,145 +1,141 @@
 <x-guest-layout title="Login">
-    @auth
-        @if (auth()->user()->role === \App\Models\User::ROLES['Admin'])
-            <script>
-                window.location.href = "{{ route('admin.dashboard') }}";
-            </script>
-        @endif
-        @if (auth()->user()->role === \App\Models\User::ROLES['User'])
-            <script>
-                window.location.href = "{{ route('user.dashboard') }}";
-            </script>
-        @endif
-    @else
-        <div class="auth-overlay">
-            <div class="container" id="authContainer">
-                <button type="button" class="close-icon" onclick="window.history.back()">
-                    <i class="fas fa-times"></i>
-                </button>
+    <div class="auth-overlay">
+        <div class="container" id="authContainer">
+            <button type="button" class="close-icon" onclick="window.history.back()">
+                <i class="fas fa-times"></i>
+            </button>
 
-                <!-- FORM REGISTER -->
-                <div class="form-container sign-up-container">
-                    <form action="{{ route('register') }}" method="POST" novalidate>
-                        @csrf
-                        <h1>Buat Akun</h1>
+            <!-- FORM REGISTER -->
+            <div class="form-container sign-up-container">
+                <form action="{{ route('register') }}" method="POST" novalidate>
+                    @csrf
+                    <h1>Buat Akun</h1>
 
-                        <div class="social-login">
-                            <button type="button" class="social-btn google" aria-label="Login with Google">
-                                <i class="fab fa-google"></i>
-                            </button>
-                            <button type="button" class="social-btn facebook" aria-label="Login with Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </button>
+                    <div class="social-login">
+                        <button type="button" class="social-btn google" aria-label="Login with Google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="social-btn facebook" aria-label="Login with Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                    </div>
+
+                    <div class="name-fields">
+                        <input type="text" name="firstname" placeholder="Nama Depan" 
+                               value="{{ old('firstname') }}" />
+                        <input type="text" name="lastname" placeholder="Nama Belakang" 
+                               value="{{ old('lastname') }}" />
+                    </div>
+
+                    <input type="text" name="username" placeholder="Username" 
+                           value="{{ old('username') }}" required />
+
+                    <input type="email" name="email" placeholder="Email" 
+                           value="{{ old('email') }}" required />
+
+                    <div class="password-field">
+                        <input type="password" name="password" id="regPassword" 
+                               placeholder="Kata Sandi" required />
+                        <span class="toggle-password" onclick="togglePassword('regPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+
+                    <div class="password-field">
+                        <input type="password" name="password_confirmation" id="regConfirmPassword" 
+                               placeholder="Konfirmasi Kata Sandi" required />
+                        <span class="toggle-password" onclick="togglePassword('regConfirmPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+
+                    @if ($errors->any() && (old('username') || old('firstname') || old('lastname')))
+                        <div class="auth-error">
+                            @foreach ($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
                         </div>
+                    @endif
 
-                        <div class="name-fields">
-                            <input type="text" name="firstname" placeholder="Nama Depan" 
-                                   value="{{ old('firstname') }}" />
-                            <input type="text" name="lastname" placeholder="Nama Belakang" 
-                                   value="{{ old('lastname') }}" />
+                    <button type="submit">Daftar</button>
+                </form>
+            </div>
+
+            <!-- FORM LOGIN -->
+            <div class="form-container sign-in-container">
+                <form action="{{ route('login') }}" method="POST" novalidate id="loginForm">
+                    @csrf
+                    <h1>Masuk</h1>
+
+                    <div class="social-login">
+                        <button type="button" class="social-btn google" aria-label="Login with Google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="social-btn facebook" aria-label="Login with Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                    </div>
+
+                    <input type="email" name="email" placeholder="Email" 
+                           value="{{ old('email') }}" required id="emailInput" />
+
+                    <div class="password-field">
+                        <input type="password" name="password" id="loginPassword" 
+                               placeholder="Kata Sandi" required />
+                        <span class="toggle-password" onclick="togglePassword('loginPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+
+                    <div class="login-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} />
+                            Tetap masuk
+                        </label>
+                        <a href="#" class="forgot-password" onclick="event.preventDefault()">
+                            Lupa kata sandi?
+                        </a>
+                    </div>
+
+                    @if ($errors->has('email') && !old('username'))
+                        <div class="auth-error" id="errorMessage">
+                            {{ $errors->first('email') }}
+                            
+                            {{-- ✅ COUNTDOWN TIMER --}}
+                                  @if (session('throttle_seconds'))
+                                    <div class="countdown-wrapper">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Silakan tunggu <strong id="countdown">{{ session('throttle_seconds') }}</strong> detik</span>
+                                    </div>
+                                @endif
                         </div>
+                    @endif
 
-                        <input type="text" name="username" placeholder="Username" 
-                               value="{{ old('username') }}" required />
+                    <button type="submit" id="loginButton">Masuk</button>
+                </form>
+            </div>
 
-                        <input type="email" name="email" placeholder="Email" 
-                               value="{{ old('email') }}" required />
-
-                        <div class="password-field">
-                            <input type="password" name="password" id="regPassword" 
-                                   placeholder="Kata Sandi" required />
-                            <span class="toggle-password" onclick="togglePassword('regPassword', this)">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-
-                        <div class="password-field">
-                            <input type="password" name="password_confirmation" id="regConfirmPassword" 
-                                   placeholder="Konfirmasi Kata Sandi" required />
-                            <span class="toggle-password" onclick="togglePassword('regConfirmPassword', this)">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-
-                        @if ($errors->any())
-                            <div class="auth-error">
-                                @foreach ($errors->all() as $error)
-                                    <div>{{ $error }}</div>
-                                @endforeach
-                            </div>
-                        @endif
-
-                        <button type="submit">Daftar</button>
-                    </form>
-                </div>
-
-                <!-- FORM LOGIN -->
-                <div class="form-container sign-in-container">
-                    <form action="{{ route('login') }}" method="POST" novalidate>
-                        @csrf
-                        <h1>Masuk</h1>
-
-                        <div class="social-login">
-                            <button type="button" class="social-btn google" aria-label="Login with Google">
-                                <i class="fab fa-google"></i>
-                            </button>
-                            <button type="button" class="social-btn facebook" aria-label="Login with Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </button>
-                        </div>
-
-                        <input type="email" name="email" placeholder="Email" 
-                               value="{{ old('email') }}" required />
-
-                        <div class="password-field">
-                            <input type="password" name="password" id="loginPassword" 
-                                   placeholder="Kata Sandi" required />
-                            <span class="toggle-password" onclick="togglePassword('loginPassword', this)">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-
-                        <div class="login-options">
-                            <label class="remember-me">
-                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} />
-                                Tetap masuk
-                            </label>
-                            <a href="#" class="forgot-password" onclick="event.preventDefault()">
-                                Lupa kata sandi?
-                            </a>
-                        </div>
-
-                        @if ($errors->has('email') || $errors->has('password'))
-                            <div class="auth-error">
-                                {{ $errors->first('email') ?: $errors->first('password') }}
-                            </div>
-                        @endif
-
-                        <button type="submit">Masuk</button>
-                    </form>
-                </div>
-
-                <!-- OVERLAY -->
-                <div class="overlay-container">
-                    <div class="overlay">
-                        <div class="overlay-panel overlay-left">
-                            <h1>Selamat Datang Kembali!</h1>
-                            <p>Untuk tetap terhubung, silakan masuk dengan akun Anda</p>
-                            <button type="button" class="ghost" onclick="togglePanel(false)">
-                                Masuk
-                            </button>
-                        </div>
-                        <div class="overlay-panel overlay-right">
-                            <h1>Halo, Teman Baru!</h1>
-                            <p>Masukkan data pribadi Anda dan mulai perjalanan bersama kami</p>
-                            <button type="button" class="ghost" onclick="togglePanel(true)">
-                                Daftar
-                            </button>
-                        </div>
+            <!-- OVERLAY -->
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Selamat Datang Kembali!</h1>
+                        <p>Untuk tetap terhubung, silakan masuk dengan akun Anda</p>
+                        <button type="button" class="ghost" onclick="togglePanel(false)">
+                            Masuk
+                        </button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Halo, Teman Baru!</h1>
+                        <p>Masukkan data pribadi Anda dan mulai perjalanan bersama kami</p>
+                        <button type="button" class="ghost" onclick="togglePanel(true)">
+                            Daftar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
         <style>
             :root {
@@ -149,6 +145,62 @@
                 --edition: #1e293b;
                 --contrast: #ffffff;
             }
+
+            .auth-error {
+                    background-color: #fee2e2;
+                    color: #991b1b;
+                    padding: 12px 15px;
+                    border-radius: 8px;
+                    margin-top: 10px;
+                    font-size: 13px;
+                    width: 100%;
+                    text-align: center;
+                    border: 1px solid #fecaca;
+                }
+
+                .countdown-wrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    margin-top: 8px;
+                    padding-top: 8px;
+                    border-top: 1px solid #fecaca;
+                    font-size: 14px;
+                    color: #991b1b;
+                }
+
+                .countdown-wrapper i {
+                    font-size: 16px;
+                    color: #dc2626;
+                    animation: pulse 1.5s ease-in-out infinite;
+                }
+
+                .countdown-wrapper strong {
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #dc2626;
+                    min-width: 25px;
+                    display: inline-block;
+                    text-align: center;
+                }
+
+                @keyframes pulse {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.5; }
+                }
+
+                /* Style untuk button disabled */
+                button[type="submit"]:disabled {
+                    opacity: 0.5 !important;
+                    cursor: not-allowed !important;
+                    background-color: #94a3b8 !important;
+                }
+
+                button[type="submit"]:disabled:hover {
+                    transform: none !important;
+                    background-color: #94a3b8 !important;
+                }
 
             .auth-overlay {
                 position: fixed;
@@ -513,37 +565,89 @@
             }
         </style>
 
-        <script>
-            function togglePanel(showRegister) {
-                const container = document.getElementById('authContainer');
-                if (showRegister) {
-                    container.classList.add('right-panel-active');
-                } else {
-                    container.classList.remove('right-panel-active');
-                }
-            }
+   <script>
+        function togglePanel(showRegister) {
+        const container = document.getElementById('authContainer');
+        if (showRegister) {
+            container.classList.add('right-panel-active');
+        } else {
+            container.classList.remove('right-panel-active');
+        }
+    }
 
-            function togglePassword(inputId, toggleElement) {
-                const passwordInput = document.getElementById(inputId);
-                const icon = toggleElement.querySelector('i');
+    function togglePassword(inputId, toggleElement) {
+        const passwordInput = document.getElementById(inputId);
+        const icon = toggleElement.querySelector('i');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+
+    // ✅ COUNTDOWN TIMER LOGIC - DIPERBAIKI
+    @if (session('throttle_seconds'))
+        document.addEventListener('DOMContentLoaded', function() {
+            let seconds = {{ session('throttle_seconds') }};
+            const countdownEl = document.getElementById('countdown');
+            const loginButton = document.getElementById('loginButton');
+            const loginPasswordInput = document.getElementById('loginPassword');
+            const emailInput = document.getElementById('emailInput');
+            
+            // Disable form saat countdown
+            if (loginButton) {
+                loginButton.disabled = true;
+            }
+            if (emailInput) {
+                emailInput.disabled = true;
+            }
+            if (loginPasswordInput) {
+                loginPasswordInput.disabled = true;
+            }
+            
+            const interval = setInterval(() => {
+                seconds--;
                 
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    passwordInput.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
+                if (countdownEl) {
+                    countdownEl.textContent = seconds;
                 }
-            }
 
-            // Jika ada error validasi pada register, tampilkan form register
-            @if (old('username') || old('firstname') || old('lastname') || ($errors->any() && !$errors->has('email')))
-                document.addEventListener('DOMContentLoaded', function() {
-                    togglePanel(true);
-                });
-            @endif
-        </script>
-    @endauth
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    
+                    // Enable form kembali
+                    if (loginButton) {
+                        loginButton.disabled = false;
+                    }
+                    if (emailInput) {
+                        emailInput.disabled = false;
+                    }
+                    if (loginPasswordInput) {
+                        loginPasswordInput.disabled = false;
+                    }
+                    
+                    // Hapus error message
+                    const errorMessage = document.getElementById('errorMessage');
+                    if (errorMessage) {
+                        errorMessage.style.transition = 'opacity 0.3s ease';
+                        errorMessage.style.opacity = '0';
+                        setTimeout(() => errorMessage.remove(), 300);
+                    }
+                }
+            }, 1000);
+        });
+    @endif
+
+    // Jika ada error validasi pada register, tampilkan form register
+    @if (old('username') || old('firstname') || old('lastname'))
+        document.addEventListener('DOMContentLoaded', function() {
+            togglePanel(true);
+        });
+    @endif
+    </script>
 </x-guest-layout>

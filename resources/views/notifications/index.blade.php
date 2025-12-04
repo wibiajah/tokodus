@@ -43,7 +43,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <!-- @if(isset($data['url']) && $data['url'] !== route('user.index') && $data['url'] !== route('toko.index') && $data['url'] !== '#')
+                                    <!-- @if(isset($data['url']) && $data['url'] !== route('superadmin.user.index') && $data['url'] !== route('superadmin.toko.index') && $data['url'] !== '#')
                                         <a href="{{ $data['url'] }}" class="btn btn-sm btn-outline-primary mt-2">
                                             <i class="fas fa-eye"></i> Lihat Detail
                                         </a>

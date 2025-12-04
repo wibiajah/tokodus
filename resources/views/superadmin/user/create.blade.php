@@ -1,8 +1,8 @@
-<x-admin-layout title="Edit User">
+<x-admin-layout title="Tambah User">
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Edit User</h1>
-            <a href="{{ route('user.index') }}" class="btn btn-secondary btn-icon-split">
+            <h1 class="h3 mb-0 text-gray-800">Tambah User Baru</h1>
+            <a href="{{ route('superadmin.user.index') }}" class="btn btn-secondary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-arrow-left"></i>
                 </span>
@@ -10,65 +10,24 @@
             </a>
         </div>
 
-        @if(session('confirm_replace'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <h5 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Konfirmasi Penggantian Kepala Toko</h5>
-                <p>{!! session('confirm_replace')['message'] !!}</p>
-                <hr>
-                <form action="{{ route('user.update', $user) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('PUT')
-                    
-                    <input type="hidden" name="name" value="{{ old('name') }}">
-                    <input type="hidden" name="email" value="{{ old('email') }}">
-                    <input type="hidden" name="role" value="{{ old('role') }}">
-                    <input type="hidden" name="toko_id" value="{{ old('toko_id') }}">
-                    <input type="hidden" name="confirm_replace" value="1">
-                    
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-check"></i> Ya, Ganti Kepala Toko
-                    </button>
-                </form>
-                <a href="{{ route('user.edit', $user) }}" class="btn btn-secondary">
-                    <i class="fas fa-times"></i> Batal
-                </a>
-            </div>
-        @endif
-
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Form Edit User</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Form Tambah User</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('user.update', $user) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('superadmin.user.store') }}" method="POST" id="createUserForm" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
 
                     <!-- Foto Profil -->
                     <div class="form-group">
                         <label for="foto_profil">Foto Profil</label>
-                        
-                        <!-- Current Photo -->
-                        @if($user->foto_profil)
-                            <div class="mb-2">
-                                <img src="{{ asset('storage/' . $user->foto_profil) }}" alt="Foto Profil" style="max-width: 150px; border-radius: 8px;" id="currentPhoto">
-                                <div class="custom-control custom-checkbox mt-2">
-                                    <input type="checkbox" class="custom-control-input" id="remove_foto" name="remove_foto" value="1">
-                                    <label class="custom-control-label text-danger" for="remove_foto">
-                                        <i class="fas fa-trash"></i> Hapus foto profil
-                                    </label>
-                                </div>
-                            </div>
-                        @endif
-
-                        <!-- Upload New Photo -->
                         <div class="custom-file">
                             <input type="file" 
                                 class="custom-file-input @error('foto_profil') is-invalid @enderror" 
                                 id="foto_profil" 
                                 name="foto_profil"
                                 accept="image/jpeg,image/png,image/jpg">
-                            <label class="custom-file-label" for="foto_profil">{{ $user->foto_profil ? 'Ganti foto...' : 'Pilih foto...' }}</label>
+                            <label class="custom-file-label" for="foto_profil">Pilih foto...</label>
                             @error('foto_profil')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -76,8 +35,7 @@
                         <small class="form-text text-muted">
                             Format: JPG, JPEG, PNG. Maksimal 2MB
                         </small>
-                        
-                        <!-- Preview New Photo -->
+                        <!-- Preview -->
                         <div class="mt-2">
                             <img id="preview" src="#" alt="Preview" style="display: none; max-width: 150px; border-radius: 8px;">
                         </div>
@@ -93,7 +51,8 @@
                                     class="form-control @error('name') is-invalid @enderror" 
                                     id="name" 
                                     name="name" 
-                                    value="{{ old('name', $user->name) }}"
+                                    value="{{ old('name') }}"
+                                    placeholder="Masukkan nama lengkap"
                                     required>
                                 @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -108,7 +67,8 @@
                                     class="form-control @error('email') is-invalid @enderror" 
                                     id="email" 
                                     name="email" 
-                                    value="{{ old('email', $user->email) }}"
+                                    value="{{ old('email') }}"
+                                    placeholder="email@example.com"
                                     required>
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -123,7 +83,7 @@
             class="form-control @error('no_telepon') is-invalid @enderror" 
             id="no_telepon" 
             name="no_telepon" 
-            value="{{ old('no_telepon', $user->no_telepon) }}"
+            value="{{ old('no_telepon') }}"
             placeholder="08123456789">
         @error('no_telepon')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -138,27 +98,28 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="password">Password Baru</label>
+                                <label for="password">Password <span class="text-danger">*</span></label>
                                 <input type="password" 
                                     class="form-control @error('password') is-invalid @enderror" 
                                     id="password" 
                                     name="password" 
-                                    placeholder="Kosongkan jika tidak ingin mengubah">
+                                    placeholder="Minimal 8 karakter"
+                                    required>
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <small class="form-text text-muted">Minimal 8 karakter</small>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="password_confirmation">Konfirmasi Password Baru</label>
+                                <label for="password_confirmation">Konfirmasi Password <span class="text-danger">*</span></label>
                                 <input type="password" 
                                     class="form-control" 
                                     id="password_confirmation" 
                                     name="password_confirmation" 
-                                    placeholder="Ulangi password baru">
+                                    placeholder="Ulangi password"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -173,7 +134,7 @@
                                     required>
                                     <option value="">-- Pilih Role --</option>
                                     @foreach($availableRoles as $key => $value)
-                                        <option value="{{ $key }}" {{ old('role', $user->role) === $key ? 'selected' : '' }}>
+                                        <option value="{{ $key }}" {{ old('role') === $key ? 'selected' : '' }}>
                                             {{ $value }}
                                         </option>
                                     @endforeach
@@ -195,17 +156,14 @@
                                         @php
                                             $kepalaToko = $toko->kepalaToko;
                                             $hasKepala = $kepalaToko !== null;
-                                            $isCurrentUser = $kepalaToko && $kepalaToko->id === $user->id;
                                         @endphp
                                         <option value="{{ $toko->id }}" 
-                                            {{ old('toko_id', $user->toko_id) == $toko->id ? 'selected' : '' }}
-                                            data-has-kepala="{{ ($hasKepala && !$isCurrentUser) ? 'true' : 'false' }}"
-                                            data-kepala-name="{{ $hasKepala && !$isCurrentUser ? $kepalaToko->name : '' }}">
+                                            {{ old('toko_id') == $toko->id ? 'selected' : '' }}
+                                            data-has-kepala="{{ $hasKepala ? 'true' : 'false' }}"
+                                            data-kepala-name="{{ $hasKepala ? $kepalaToko->name : '' }}">
                                             {{ $toko->nama_toko }}
-                                            @if($hasKepala && !$isCurrentUser)
+                                            @if($hasKepala)
                                                 (Kepala: {{ $kepalaToko->name }})
-                                            @elseif($isCurrentUser)
-                                                (Kepala Toko Saat Ini)
                                             @endif
                                         </option>
                                     @endforeach
@@ -216,8 +174,8 @@
                                 <small class="form-text text-muted">
                                     💡 Kosongkan untuk menempatkan di <strong>Head Office</strong>
                                 </small>
-                                <div id="kepalaTokoWarning" class="alert alert-info mt-2" style="display: none;">
-                                    <i class="fas fa-info-circle"></i>
+                                <div id="kepalaTokoWarning" class="alert alert-warning mt-2" style="display: none;">
+                                    <i class="fas fa-exclamation-triangle"></i>
                                     <span id="warningText"></span>
                                 </div>
                             </div>
@@ -228,9 +186,9 @@
 
                     <div class="form-group mb-0">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Update
+                            <i class="fas fa-save"></i> Simpan
                         </button>
-                        <a href="{{ route('user.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('superadmin.user.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times"></i> Batal
                         </a>
                     </div>
@@ -240,15 +198,11 @@
     </div>
 
     <script>
-        // Preview foto profil baru
-        const fotoInput = document.getElementById('foto_profil');
-        const preview = document.getElementById('preview');
-        const currentPhoto = document.getElementById('currentPhoto');
-        const removeFoto = document.getElementById('remove_foto');
-        const label = document.querySelector('.custom-file-label');
-
-        fotoInput.addEventListener('change', function(e) {
+        // Preview foto profil
+        document.getElementById('foto_profil').addEventListener('change', function(e) {
             const file = e.target.files[0];
+            const preview = document.getElementById('preview');
+            const label = document.querySelector('.custom-file-label');
             
             if (file) {
                 label.textContent = file.name;
@@ -256,34 +210,20 @@
                 reader.onload = function(e) {
                     preview.src = e.target.result;
                     preview.style.display = 'block';
-                    if (currentPhoto) currentPhoto.style.display = 'none';
                 }
                 reader.readAsDataURL(file);
             } else {
                 preview.style.display = 'none';
-                if (currentPhoto) currentPhoto.style.display = 'block';
-                label.textContent = '{{ $user->foto_profil ? "Ganti foto..." : "Pilih foto..." }}';
+                label.textContent = 'Pilih foto...';
             }
         });
-
-        // Handle remove foto checkbox
-        if (removeFoto) {
-            removeFoto.addEventListener('change', function() {
-                if (this.checked) {
-                    if (currentPhoto) currentPhoto.style.opacity = '0.3';
-                    fotoInput.disabled = true;
-                } else {
-                    if (currentPhoto) currentPhoto.style.opacity = '1';
-                    fotoInput.disabled = false;
-                }
-            });
-        }
 
         // Validasi Kepala Toko
         const roleSelect = document.getElementById('role');
         const tokoSelect = document.getElementById('toko_id');
         const warningDiv = document.getElementById('kepalaTokoWarning');
         const warningText = document.getElementById('warningText');
+        const form = document.getElementById('createUserForm');
 
         function checkKepalaToko() {
             const role = roleSelect.value;
@@ -294,18 +234,27 @@
                 const kepalaName = selectedOption.getAttribute('data-kepala-name');
                 
                 if (hasKepala) {
-                    warningText.textContent = `Toko ini sudah memiliki Kepala Toko: ${kepalaName}. Jika Anda melanjutkan, user tersebut akan dipindahkan ke Head Office.`;
+                    warningText.textContent = `Toko ini sudah memiliki Kepala Toko: ${kepalaName}. Pilih toko lain atau kosongkan untuk Head Office!`;
                     warningDiv.style.display = 'block';
+                    return false;
                 } else {
                     warningDiv.style.display = 'none';
+                    return true;
                 }
             } else {
                 warningDiv.style.display = 'none';
+                return true;
             }
         }
 
         roleSelect.addEventListener('change', checkKepalaToko);
         tokoSelect.addEventListener('change', checkKepalaToko);
-        checkKepalaToko();
+
+        form.addEventListener('submit', function(e) {
+            if (!checkKepalaToko()) {
+                e.preventDefault();
+                alert('Tidak dapat menambahkan Kepala Toko! Toko yang dipilih sudah memiliki Kepala Toko.');
+            }
+        });
     </script>
 </x-admin-layout>
