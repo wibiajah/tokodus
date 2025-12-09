@@ -1,0 +1,50 @@
+#catalog-section {
+  padding: 5rem;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 20rem);
+  gap: 70px;
+}
+#filter-bar {
+  margin-bottom: 1.5rem;
+}
+.filter-btn {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #eee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.filter-btn.active {
+  background-color: #333;
+  color: white;
+}
+#catalog-controls {
+  margin-bottom: 1rem;
+}
+#searchInput {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#pagination-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+.page-btn {
+  margin: 0 5px;
+  padding: 8px 14px;
+  background: #eee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.page-btn.active {
+  background: #1f4390;
+  color: white;
+}

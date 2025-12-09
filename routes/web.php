@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Product3DController;
+use App\Http\Controllers\FrontendController;
 
 // 🔥 SUPER ADMIN Controllers (SEMUA DI FOLDER SuperAdmin)
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
@@ -35,7 +36,20 @@ use App\Http\Controllers\Staff\StockController as StaffStockController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', HomeController::class)->name('home');
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+
+// Catalog
+Route::get('/catalog', [FrontendController::class, 'catalog'])->name('catalog');
+
+// Product Detail (untuk kedepannya)
+Route::get('/product/{id}', [FrontendController::class, 'productDetail'])->name('product.detail');
+
+// Search (untuk kedepannya)
+Route::get('/search', [FrontendController::class, 'search'])->name('search');
+
+// Category (untuk kedepannya)
+Route::get('/category/{slug}', [FrontendController::class, 'category'])->name('category');
+
 
 Route::middleware('guest')->group(function () {
     Route::view('/login', 'login')->name('login');
@@ -102,6 +116,8 @@ Route::middleware('auth')->group(function () {
          Route::prefix('stocks')->name('stocks.')->group(function () {
         // List semua stok
         Route::get('/', [SuperAdminStockController::class, 'index'])->name('index');
+
+           Route::get('{product}/detail', [SuperAdminStockController::class, 'getDetail'])->name('detail');
         
         // Detail stok per produk
         Route::get('/{product}', [SuperAdminStockController::class, 'show'])->name('show');

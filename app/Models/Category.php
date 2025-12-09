@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
@@ -14,6 +15,7 @@ class Category extends Model
         'name',
         'slug',
         'description',
+        'photo',
         'is_active',
     ];
 
@@ -35,6 +37,13 @@ class Category extends Model
         static::updating(function ($category) {
             if ($category->isDirty('name')) {
                 $category->slug = Str::slug($category->name);
+            }
+        });
+
+        // Hapus foto saat kategori dihapus
+        static::deleting(function ($category) {
+            if ($category->photo && Storage::disk('public')->exists($category->photo)) {
+                Storage::disk('public')->delete($category->photo);
             }
         });
     }

@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Solusi Packaging Anda",
+    "subtitle": "High Quality Reasonable Price",
+    "image": "assets/img/banner/hero-bg.png",
+    "cta": "Beli Sekarang",
+    "ctaLink": "/stores",
+    "variant": "benner1"
+  },
+  {
+    "title": "Solusi Ideal",
+    "subtitle": "untuk Mengemas Produk Anda dengan Elegan dan Aman!",
+    "image": "assets/img/banner/hero-bg1.png",
+    "cta": "Beli Sekarang",
+    "ctaLink": "/stores",
+    "variant": "benner2"
+  },
+  {
+    "title": "Belanja Lebih Hemat dengan Diskon 5%",
+    "subtitle": "untuk Semua Produk Kami!",
+    "labels": ["High Quality", "Reasonable Price", "Eco Friendly"],
+    "terms": "*Syarat & ketentuan berlaku",
+    "image": "assets/img/banner/hero-bg2.png",
+    "cta": "Beli Sekarang",
+    "ctaLink": "/stores",
+    "variant": "benner3"
+  }
+]

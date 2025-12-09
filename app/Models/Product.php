@@ -34,6 +34,7 @@ class Product extends Model
         'discount_price' => 'decimal:2',
         'rating' => 'decimal:2',
         'is_active' => 'boolean',
+        'initial_stock' => 'integer',
     ];
 
     // Relasi ke kategori (many to many)
@@ -54,11 +55,12 @@ class Product extends Model
         return $this->stocks()->where('toko_id', $tokoId)->first();
     }
 
-    // Sisa stok awal (yang belum diambil toko)
+    // Sisa stok awal (yang belum didistribusikan ke toko)
     public function getRemainingInitialStockAttribute()
     {
         $allocatedStock = $this->stocks()->sum('stock');
-        return $this->initial_stock - $allocatedStock;
+        $remaining = ($this->initial_stock ?? 0) - $allocatedStock;
+        return max(0, $remaining);
     }
 
     // Relasi ke review
@@ -77,5 +79,96 @@ class Product extends Model
     public function getFinalPriceAttribute()
     {
         return $this->discount_price ?? $this->price;
+    }
+
+    // Total stok yang sudah didistribusikan
+    public function getTotalDistributedStockAttribute()
+    {
+        return $this->stocks()->sum('stock');
+    }
+
+    // ✅ ACCESSOR UNTUK REALTIME (Pastikan ini ada)
+    
+    /**
+     * Get thumbnail (foto pertama)
+     */
+    public function getThumbnailAttribute()
+    {
+        if (is_array($this->photos) && count($this->photos) > 0) {
+            return asset('storage/' . $this->photos[0]);
+        }
+        return asset('frontend/assets/img/placeholder-product.png');
+    }
+
+    /**
+     * Get semua foto sebagai URL
+     */
+    public function getPhotoUrlsAttribute()
+    {
+        if (is_array($this->photos)) {
+            return array_map(function($photo) {
+                return asset('storage/' . $photo);
+            }, $this->photos);
+        }
+        return [asset('frontend/assets/img/placeholder-product.png')];
+    }
+
+    /**
+     * Cek apakah produk available (ada stok)
+     */
+    public function getIsAvailableAttribute()
+    {
+        return $this->stocks->sum('stock') > 0;
+    }
+
+    /**
+     * Get total stok dari semua toko
+     */
+    public function getTotalStockAttribute()
+    {
+        return $this->stocks->sum('stock');
+    }
+
+    /**
+     * Format harga final dengan Rupiah
+     */
+    public function getFormattedPriceAttribute()
+    {
+        return 'Rp ' . number_format($this->final_price, 0, ',', '.');
+    }
+
+    /**
+     * Format harga asli (sebelum diskon)
+     */
+    public function getFormattedOriginalPriceAttribute()
+    {
+        return 'Rp ' . number_format($this->price, 0, ',', '.');
+    }
+
+    /**
+     * Cek apakah produk sedang diskon
+     */
+    public function getHasDiscountAttribute()
+    {
+        return $this->discount_price !== null && $this->discount_price < $this->price;
+    }
+
+    /**
+     * Hitung persentase diskon
+     */
+    public function getDiscountPercentageAttribute()
+    {
+        if ($this->has_discount) {
+            return round((($this->price - $this->discount_price) / $this->price) * 100);
+        }
+        return 0;
+    }
+
+    /**
+     * Get kategori pertama (untuk display)
+     */
+    public function getPrimaryCategoryAttribute()
+    {
+        return $this->categories->first();
     }
 }

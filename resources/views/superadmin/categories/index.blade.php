@@ -36,74 +36,83 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($categories as $index => $category)
-                                <tr>
-                                    <td class="text-center text-muted">
-                                        {{ $categories->firstItem() + $index }}
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                                
-                                            <span class="font-weight-bold">{{ $category->name }}</span>
-                                        </div>
-                                    </td>
-                                   
-                                    <td>
-                                        <div class="text-truncate" style="max-width: 250px;" title="{{ $category->description }}">
-                                            {{ $category->description ?? '-' }}
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="badge badge-info badge-pill">
-                                            <i class="fas fa-box"></i> {{ $category->products_count }}
-                                        </span>
-                                    </td>
-                                    <td class="text-center">
-                                        @if($category->is_active)
-                                            <span class="badge badge-success">
-                                                <i class="fas fa-check-circle"></i> Aktif
-                                            </span>
-                                        @else
-                                            <span class="badge badge-danger">
-                                                <i class="fas fa-times-circle"></i> Nonaktif
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('superadmin.categories.edit', $category) }}" 
-                                           class="btn btn-sm btn-warning btn-circle" 
-                                           title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('superadmin.categories.destroy', $category) }}" 
-                                              method="POST" 
-                                              class="d-inline"
-                                              onsubmit="return confirm('Yakin hapus kategori ini?\n\nProduk yang terhubung tidak akan terhapus.')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" 
-                                                    class="btn btn-sm btn-danger btn-circle" 
-                                                    title="Hapus">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center py-5">
-                                        <div class="py-4">
-                                            <i class="fas fa-folder-open fa-4x text-gray-400 mb-3"></i>
-                                            <h5 class="text-gray-600">Belum ada kategori</h5>
-                                            <p class="text-gray-500 mb-3">Mulai dengan menambahkan kategori pertama Anda</p>
-                                            <a href="{{ route('superadmin.categories.create') }}" class="btn btn-primary">
-                                                <i class="fas fa-plus-circle"></i> Tambah Kategori Pertama
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
+    @forelse($categories as $index => $category)
+        <tr>
+            <td class="text-center text-muted">
+                {{ $categories->firstItem() + $index }}
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                    @if($category->photo)
+                        <img src="{{ asset('storage/' . $category->photo) }}" 
+                            alt="{{ $category->name }}"
+                            class="rounded mr-3"
+                            style="width: 50px; height: 50px; object-fit: cover;">
+                    @else
+                        <div class="rounded mr-3 d-flex align-items-center justify-content-center bg-light" 
+                             style="width: 50px; height: 50px;">
+                            <i class="fas fa-folder text-muted"></i>
+                        </div>
+                    @endif
+                    <span class="font-weight-bold">{{ $category->name }}</span>
+                </div>
+            </td>
+            <td>
+                <div class="text-truncate" style="max-width: 250px;" title="{{ $category->description }}">
+                    {{ $category->description ?? '-' }}
+                </div>
+            </td>
+            <td class="text-center">
+                <span class="badge badge-info badge-pill">
+                    <i class="fas fa-box"></i> {{ $category->products_count }}
+                </span>
+            </td>
+            <td class="text-center">
+                @if($category->is_active)
+                    <span class="badge badge-success">
+                        <i class="fas fa-check-circle"></i> Aktif
+                    </span>
+                @else
+                    <span class="badge badge-danger">
+                        <i class="fas fa-times-circle"></i> Nonaktif
+                    </span>
+                @endif
+            </td>
+            <td class="text-center">
+                <a href="{{ route('superadmin.categories.edit', $category) }}" 
+                   class="btn btn-sm btn-warning btn-circle" 
+                   title="Edit">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form action="{{ route('superadmin.categories.destroy', $category) }}" 
+                      method="POST" 
+                      class="d-inline"
+                      onsubmit="return confirm('Yakin hapus kategori ini?\n\nProduk yang terhubung tidak akan terhapus.')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" 
+                            class="btn btn-sm btn-danger btn-circle" 
+                            title="Hapus">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="6" class="text-center py-5">
+                <div class="py-4">
+                    <i class="fas fa-folder-open fa-4x text-gray-400 mb-3"></i>
+                    <h5 class="text-gray-600">Belum ada kategori</h5>
+                    <p class="text-gray-500 mb-3">Mulai dengan menambahkan kategori pertama Anda</p>
+                    <a href="{{ route('superadmin.categories.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i> Tambah Kategori Pertama
+                    </a>
+                </div>
+            </td>
+        </tr>
+    @endforelse
+</tbody>
                     </table>
                 </div>
 

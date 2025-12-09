@@ -226,4 +226,53 @@ class NotificationHelper
             'url' => route('superadmin.categories.index'),
         ];
     }
+
+      // ========================================
+    // 🔥 PRODUCT NOTIFICATION TEMPLATES
+    // ========================================
+
+    /**
+     * Template notifikasi Product Created
+     */
+    public static function productCreated($product, $creator)
+    {
+        $categoryNames = $product->categories->pluck('name')->join(', ');
+        $categoryInfo = $categoryNames ? " (Kategori: {$categoryNames})" : '';
+        
+        return [
+            'type' => 'product_created',
+            'message' => "Produk '{$product->title}' berhasil ditambahkan{$categoryInfo}",
+            'actor_name' => $creator->name,
+            'icon' => 'fas fa-box text-success',
+            'url' => route('superadmin.products.index'),
+        ];
+    }
+
+    /**
+     * Template notifikasi Product Updated
+     */
+    public static function productUpdated($product, $updater)
+    {
+        return [
+            'type' => 'product_updated',
+            'message' => "Produk '{$product->title}' telah diperbarui",
+            'actor_name' => $updater->name,
+            'icon' => 'fas fa-box-open text-warning',
+            'url' => route('superadmin.products.index'),
+        ];
+    }
+
+    /**
+     * Template notifikasi Product Deleted
+     */
+    public static function productDeleted($productTitle, $deleter)
+    {
+        return [
+            'type' => 'product_deleted',
+            'message' => "Produk '{$productTitle}' telah dihapus dari sistem",
+            'actor_name' => $deleter->name,
+            'icon' => 'fas fa-trash-alt text-danger',
+            'url' => route('superadmin.products.index'),
+        ];
+    }
 }

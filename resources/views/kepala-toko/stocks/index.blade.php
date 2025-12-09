@@ -78,7 +78,7 @@
                                     <tr>
                                         <td>
                                             @if($product->photos && count($product->photos) > 0)
-                                                <img src="{{ Storage::url($product->photos[0]) }}" 
+                                                <img src="{{ asset('storage/' . $product->photos[0]) }}" 
                                                     alt="{{ $product->title }}"
                                                     class="rounded" style="width: 60px; height: 60px; object-fit: cover;">
                                             @else
@@ -105,7 +105,7 @@
                                                 $remaining = $product->remaining_initial_stock;
                                                 $badgeClass = $remaining > 50 ? 'success' : ($remaining > 0 ? 'warning' : 'danger');
                                             @endphp
-                                            <span class="badge bg-{{ $badgeClass }} fs-6">{{ $remaining }}</span>
+                                            <span class="badge bg text-white-{{ $badgeClass }} fs-6">{{ $remaining }}</span>
                                             <div><small class="text-muted">dari {{ $product->initial_stock }}</small></div>
                                         </td>
                                         <td class="text-center">
@@ -113,7 +113,7 @@
                                                 @php
                                                     $myBadgeClass = $stockValue > 10 ? 'primary' : ($stockValue > 0 ? 'warning' : 'secondary');
                                                 @endphp
-                                                <span class="badge bg-{{ $myBadgeClass }} fs-5">{{ $stockValue }}</span>
+                                                <span class="badge bg text-white-{{ $myBadgeClass }} fs-5">{{ $stockValue }}</span>
                                             @else
                                                 <span class="text-muted">-</span>
                                             @endif

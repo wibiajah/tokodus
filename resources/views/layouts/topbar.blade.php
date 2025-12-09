@@ -5,23 +5,14 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="brand-section">
-            <img src="{{ asset('Logo.svg') }}" alt="Logo" class="brand-logo">
-            <a href="{{ route('home') }}" class="brand-text">TokoDus</a>
+            <img href="{{ route('home') }}" src="{{ asset('Logo.svg') }}" alt="Logo" class="brand-logo">
+           
         </div>
         
         <!-- Dashboard Label -->
         <div class="dashboard-label">
             <span class="dashboard-text">
                 Dashboard 
-                @if(auth()->user()->isSuperAdmin())
-                    (Super Admin)
-                @elseif(auth()->user()->isAdmin())
-                    (Admin)
-                @elseif(auth()->user()->isKepalaToko())
-                    (Kepala Toko)
-                @elseif(auth()->user()->isStaffAdmin())
-                    (Staff Admin)
-                @endif
             </span>
         </div>
     </div>

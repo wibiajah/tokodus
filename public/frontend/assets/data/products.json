@@ -1,0 +1,242 @@
+[
+  {
+    "kode": "MB0013",
+    "tipe": "Masterbox",
+    "kategori": "dus-packing",
+    "image_default": "assets/img/product/MB001/MB001-1.png",
+    "image_hover": "assets/img/product/MB001/MB001-2.png",
+    "dimensi": "20 x 10 x 8 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "TD044",
+    "tipe": "Innerbox",
+    "kategori": "dus-pizza",
+    "image_default": "assets/img/product/TD044/TD044-1.png",
+    "image_hover": "assets/img/product/TD044/TD044-2.png",
+    "dimensi": "30 x 30 x 5 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "MB035",
+    "tipe": "Masterbox",
+    "kategori": "dus-packing",
+    "image_default": "assets/img/product/MB035/MB035-1.png",
+    "image_hover": "assets/img/product/MB035/MB035-2.png",
+    "dimensi": "20 x 20 x 15 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "TD015",
+    "tipe": "Innerbox",
+    "kategori": "dus-sepatu",
+    "image_default": "assets/img/product/TD015/TD015-1.png",
+    "image_hover": "assets/img/product/TD015/TD015-2.png",
+    "dimensi": "31 x 18 x 11 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "MB011",
+    "tipe": "Masterbox",
+    "kategori": "dus-packing",
+    "image_default": "assets/img/product/MB011/MB011-1.png",
+    "image_hover": "assets/img/product/MB011/MB011-2.png",
+    "dimensi": "15 x 7 x 7 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "TD005",
+    "tipe": "Innerbox",
+    "kategori": "dus-sepatu",
+    "image_default": "assets/img/product/TD005/TD005-1.png",
+    "image_hover": "assets/img/product/TD005/TD005-2.png",
+    "dimensi": "34 x 19 x 11,3 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "MB002",
+    "tipe": "Masterbox",
+    "kategori": "dus-packing",
+    "image_default": "assets/img/product/MB002/MB002-1.png",
+    "image_hover": "assets/img/product/MB002/MB002-2.png",
+    "dimensi": "22 x 12 x 11 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "TD007",
+    "tipe": "Innerbox",
+    "kategori": "dus-sepatu",
+    "image_default": "assets/img/product/TD007/TD007-1.png",
+    "image_hover": "assets/img/product/TD007/TD007-2.png",
+    "dimensi": "29 x 16 x 10 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "MB008",
+    "tipe": "Masterbox",
+    "kategori": "dus-packing",
+    "image_default": "assets/img/product/MB008/MB008-1.png",
+    "image_hover": "assets/img/product/MB008/MB008-2.png",
+    "dimensi": "17 x 9 x 6 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "MB004",
+    "tipe": "Masterbox",
+    "kategori": "dus-packing",
+    "image_default": "assets/img/product/MB004/MB004-1.png",
+    "image_hover": "assets/img/product/MB004/MB004-2.png",
+    "dimensi": "27 x 20 x 14,5 cm",
+    "rating": 5,
+    "tag": ["bestseller"]
+  },
+  {
+    "kode": "TD002",
+    "tipe": "Innerbox",
+    "kategori": "dus-pizza",
+    "image_default": "assets/img/product/TD002/TD002-1.png",
+    "image_hover": "assets/img/product/TD002/TD002-2.png",
+    "dimensi": "14 x 10 x 4 cm",
+    "rating": 5,
+    "tag": ["newrelease"]
+  },
+  {
+    "kode": "SN001",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN001/SN001-1.png",
+    "image_hover": "assets/img/product/SN001/SN001-2.png",
+    "dimensi": "18.5 x 9.5 x 11 cm",
+    "rating": 5,
+    "tag": ["christmas"]
+  },
+  {
+    "kode": "SN004",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN004/SN004-1.png",
+    "image_hover": "assets/img/product/SN004/SN004-2.png",
+    "dimensi": "14 x 14 x 15 cm",
+    "rating": 5,
+    "tag": ["christmas"]
+  },
+  {
+    "kode": "SN005",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN005/SN005-1.png",
+    "image_hover": "assets/img/product/SN005/SN005-2.png",
+    "dimensi": "14 x 14 x 15 cm",
+    "rating": 5,
+    "tag": ["christmas"]
+  },
+  {
+    "kode": "SN006",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN006/SN006-1.png",
+    "image_hover": "assets/img/product/SN006/SN006-2.png",
+    "dimensi": "27.5 x 9.2 x 14.5 cm",
+    "rating": 5,
+    "tag": ["christmas"]
+  },
+  {
+    "kode": "SN007",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN007/SN007-1.png",
+    "image_hover": "assets/img/product/SN007/SN007-2.png",
+    "dimensi": "18.5 x 10 x 14 cm",
+    "rating": 5,
+    "tag": ["christmas"]
+  },
+  {
+    "kode": "SN008",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN008/SN008-1.png",
+    "image_hover": "assets/img/product/SN008/SN008-2.png",
+    "dimensi": "30.5 x 15 x 9 cm",
+    "rating": 5,
+    "tag": ["christmas"]
+  },
+  {
+    "kode": "SN009",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN009/SN009-1.png",
+    "image_hover": "assets/img/product/SN009/SN009-2.png",
+    "dimensi": "14 x 14 x 20 cm",
+    "rating": 5,
+    "tag": ["christmas"]
+  },
+  {
+    "kode": "SN010",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN010/SN010-1.png",
+    "image_hover": "assets/img/product/SN010/SN010-2.png",
+    "dimensi": "15 x 12.9 x 15 cm",
+    "rating": 5,
+    "tag": ["christmas"]
+  },
+  {
+    "kode": "SN011",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN011/SN011-1.png",
+    "image_hover": "assets/img/product/SN011/SN011-2.png",
+    "dimensi": "28 x 10 x 12 cm",
+    "rating": 5,
+    "tag": ["christmas", "newrelease"]
+  },
+  {
+    "kode": "SN012",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN012/SN012-1.png",
+    "image_hover": "assets/img/product/SN012/SN012-2.png",
+    "dimensi": "28 x 10 x 12 cm",
+    "rating": 5,
+    "tag": ["christmas", "newrelease"]
+  },
+  {
+    "kode": "SN013",
+    "tipe": "Natal",
+    "kategori": "christmas",
+    "image_default": "assets/img/product/SN013/SN013-1.png",
+    "image_hover": "assets/img/product/SN013/SN013-2.png",
+    "dimensi": "35 x 12 x 6.5 cm",
+    "rating": 4,
+    "tag": ["christmas", "newrelease"]
+  },
+  {
+    "kode": "SL001",
+    "tipe": "Lebaran",
+    "kategori": "lebaran",
+    "image_default": "assets/img/product/SL001/SL001-1.png",
+    "image_hover": "assets/img/product/SL001/SL001-2.png",
+    "dimensi": "14 x 14 x 20 cm",
+    "rating": 5,
+    "tag": ["lebaran", "newrelease"]
+  },
+  {
+    "kode": "TD001",
+    "tipe": "Innerbox",
+    "kategori": "dus-sepatu",
+    "image_default": "assets/img/product/TD001/TD001-1.png",
+    "image_hover": "assets/img/product/TD001/TD001-2.png",
+    "dimensi": "29 x 16 x 10 cm",
+    "rating": 4,
+    "tag": ["bestseller"]
+  }
+]

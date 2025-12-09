@@ -1,0 +1,174 @@
+.product-card {
+  flex: 0 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  width: 335px;
+  height: 335px;
+  border-radius: 20px;
+  background-color: #fff;
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: 0.3s ease-in-out;
+}
+.product-masterbox,
+.product-innerbox,
+.product-lebaran,
+.product-christmas,
+.product-imlek {
+  position: absolute;
+  left: -25%;
+  top: 0;
+  width: 3.5rem;
+  font-size: 30px;
+  height: 100%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  align-content: center;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  user-select: none;
+  transition: 0.5s;
+}
+.product-masterbox {
+  background-color: var(--secondary);
+}
+.product-innerbox {
+  background-color: var(--subprimary);
+}
+.product-lebaran {
+  background-color: var(--Lebaran);
+}
+.product-christmas {
+  background-color: var(--Christmas);
+}
+.product-imlek {
+  background-color: var(--Imlek);
+}
+.product-masterbox a,
+.product-innerbox a,
+.product-lebaran a,
+.product-christmas a,
+.product-imlek a {
+  color: #fff;
+}
+
+.product-image {
+  height: 75%;
+  transition: 1s;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+.product-image img {
+  position: relative;
+  width: 80%;
+  height: auto;
+  left: 10%;
+  object-fit: cover;
+  filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.3));
+  transition: 0.2s ease-in-out;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+.product-image img.hover-image {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  opacity: 0;
+  user-select: none;
+}
+.product-detail {
+  width: 100%;
+  position: relative;
+  top: 0%;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+  user-select: none;
+}
+.ratings {
+  position: relative;
+  top: -20%;
+  left: 60%;
+  color: var(--primary);
+  font-size: 18px;
+  transition: 0.5s;
+  user-select: none;
+}
+.product-title {
+  position: relative;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #888;
+  left: 10%;
+  user-select: none;
+}
+.product-chart {
+  position: relative;
+  top: -10%;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--edition);
+  text-align: center;
+  margin: 0;
+  user-select: none;
+}
+.product-deskripsi {
+  position: relative;
+  top: -10%;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--edition);
+  text-align: center;
+  margin: 0;
+  user-select: none;
+}
+.card-icon {
+  position: relative;
+  top: 30%;
+  left: 10%;
+  transition: 0.5s;
+  color: #888;
+}
+.shopping-cart-icon {
+  position: relative;
+  top: 30%;
+  left: 55%;
+  transition: 0.5s;
+  color: #888;
+}
+/* Interaksi saat hover */
+.product-card:hover {
+  transform: scale(1.05, 1.2);
+  box-shadow: 0.5rem 1rem 1rem #d6d6d6;
+}
+.product-card:hover .product-masterbox,
+.product-card:hover .product-innerbox,
+.product-card:hover .product-lebaran,
+.product-card:hover .product-christmas,
+.product-card:hover .product-imlek {
+  left: 0;
+}
+.product-card:hover .product-detail {
+  transform: translate(10%, -25%);
+}
+.product-card:hover .product-detail .ratings {
+  transform: translatex(-5%);
+}
+.product-card:hover .product-detail .card-icon {
+  top: 5%;
+}
+.product-card:hover .product-detail .shopping-cart-icon {
+  top: 5%;
+}
+.product-card:hover .product-image img.default-image {
+  opacity: 0; /* This transitions the image */
+}
+.product-card:hover .product-image img.hover-image {
+  opacity: 1;
+  transform: translate(10%, -10%);
+}

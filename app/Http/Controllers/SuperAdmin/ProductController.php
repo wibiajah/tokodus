@@ -7,19 +7,37 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\NotificationHelper;
 
 class ProductController extends Controller
 {
     // List semua produk
     public function index()
-    {
-        $products = Product::with(['categories', 'stocks'])
-            ->withCount('reviews')
-            ->latest()
-            ->paginate(20);
+{
+    $products = Product::with([
+        'categories:id,name',
+        'stocks.toko' => function($query) {
+            $query->where('id', '!=', 999)->where('status', 'aktif');
+        }
+    ])
+    ->withCount('reviews')
+    ->latest()
+    ->paginate(20);
 
-        return view('superadmin.products.index', compact('products'));
-    }
+    // ✅ Hitung remaining stock SETELAH eager loading selesai
+    $products->getCollection()->transform(function($product) {
+        // Hitung total yang sudah didistribusikan ke toko
+        $totalDistributed = $product->stocks->sum('stock');
+        
+        // Simpan ke attribute baru (bukan query lagi)
+        $product->remaining_stock_cached = max(0, $product->initial_stock - $totalDistributed);
+        $product->total_distributed_cached = $totalDistributed;
+        
+        return $product;
+    });
+
+    return view('superadmin.products.index', compact('products'));
+}
 
     // Form tambah produk
     public function create()
@@ -37,8 +55,8 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'initial_stock' => 'required|integer|min:0',
-            'photos.*' => 'nullable|image|max:2048', // Max 2MB per foto
-            'video' => 'nullable|file|mimetypes:video/mp4,video/mpeg,video/quicktime,video/x-msvideo|max:10240', // Max 10MB
+            'photos.*' => 'nullable|image|max:2048',
+            'video' => 'nullable|file|mimetypes:video/mp4,video/mpeg,video/quicktime,video/x-msvideo|max:10240',
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
             'variants' => 'nullable|string',
@@ -80,6 +98,12 @@ class ProductController extends Controller
             $product->categories()->attach($validated['categories']);
         }
 
+        // 🔥 KIRIM NOTIFIKASI
+        NotificationHelper::notifyRoles(
+            ['super_admin', 'admin'],
+            NotificationHelper::productCreated($product, auth()->user())
+        );
+
         return redirect()
             ->route('superadmin.products.index')
             ->with('success', 'Produk berhasil ditambahkan!');
@@ -88,7 +112,13 @@ class ProductController extends Controller
     // Detail produk
     public function show(Product $product)
     {
-        $product->load(['categories', 'stocks.toko', 'reviews.user']);
+        $product->load([
+            'categories', 
+            'stocks.toko' => function($query) {
+                $query->where('id', '!=', 999);
+            }, 
+            'reviews.user'
+        ]);
         
         return view('superadmin.products.show', compact('product'));
     }
@@ -115,35 +145,46 @@ class ProductController extends Controller
             'categories.*' => 'exists:categories,id',
             'variants' => 'nullable|string',
             'tags' => 'nullable|string',
-            'remove_video' => 'nullable|boolean', // Untuk hapus video existing
+            'keep_photos' => 'nullable|array',
+            'keep_photos.*' => 'integer',
+            'keep_video' => 'nullable|boolean',
         ]);
 
-        // Upload foto baru (tetap simpan foto lama)
-        $photos = $product->photos ?? [];
+        // Handle foto yang dipertahankan
+        $oldPhotos = $product->photos ?? [];
+        $keepPhotos = $request->input('keep_photos', []);
+        $photosToKeep = [];
+        
+        foreach ($oldPhotos as $index => $photoPath) {
+            if (in_array($index, $keepPhotos)) {
+                $photosToKeep[] = $photoPath;
+            } else {
+                Storage::disk('public')->delete($photoPath);
+            }
+        }
+        
+        // Tambahkan foto baru
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
-                $photos[] = $photo->store('products/photos', 'public');
+                $photosToKeep[] = $photo->store('products/photos', 'public');
             }
         }
 
         // Handle video
-        $videoPath = $product->video;
+        $videoPath = null;
         
-        // Jika user minta hapus video
-        if ($request->has('remove_video') && $request->remove_video) {
+        if ($request->has('keep_video') && $request->keep_video) {
+            $videoPath = $product->video;
+        } else {
             if ($product->video) {
                 Storage::disk('public')->delete($product->video);
             }
-            $videoPath = null;
         }
         
-        // Jika ada video baru di-upload
         if ($request->hasFile('video')) {
-            // Hapus video lama
             if ($product->video) {
                 Storage::disk('public')->delete($product->video);
             }
-            // Upload video baru
             $videoPath = $request->file('video')->store('products/videos', 'public');
         }
 
@@ -157,7 +198,7 @@ class ProductController extends Controller
             'description' => $validated['description'] ?? null,
             'price' => $validated['price'],
             'initial_stock' => $validated['initial_stock'],
-            'photos' => $photos,
+            'photos' => $photosToKeep,
             'video' => $videoPath,
             'variants' => $variants,
             'tags' => $tags,
@@ -168,6 +209,12 @@ class ProductController extends Controller
             $product->categories()->sync($validated['categories']);
         }
 
+        // 🔥 KIRIM NOTIFIKASI
+        NotificationHelper::notifyRoles(
+            ['super_admin', 'admin'],
+            NotificationHelper::productUpdated($product, auth()->user())
+        );
+
         return redirect()
             ->route('superadmin.products.index')
             ->with('success', 'Produk berhasil diupdate!');
@@ -176,6 +223,9 @@ class ProductController extends Controller
     // Hapus produk
     public function destroy(Product $product)
     {
+        // Simpan nama produk sebelum dihapus
+        $productTitle = $product->title;
+
         // Hapus semua foto
         if ($product->photos) {
             foreach ($product->photos as $photo) {
@@ -190,32 +240,14 @@ class ProductController extends Controller
 
         $product->delete();
 
+        // 🔥 KIRIM NOTIFIKASI
+        NotificationHelper::notifyRoles(
+            ['super_admin', 'admin'],
+            NotificationHelper::productDeleted($productTitle, auth()->user())
+        );
+
         return redirect()
             ->route('superadmin.products.index')
             ->with('success', 'Produk berhasil dihapus!');
-    }
-
-    // Method tambahan untuk hapus foto individual (opsional)
-    public function deletePhoto(Product $product, $index)
-    {
-        $photos = $product->photos ?? [];
-        
-        if (isset($photos[$index])) {
-            // Hapus file dari storage
-            Storage::disk('public')->delete($photos[$index]);
-            
-            // Hapus dari array
-            unset($photos[$index]);
-            
-            // Re-index array
-            $photos = array_values($photos);
-            
-            // Update product
-            $product->update(['photos' => $photos]);
-            
-            return response()->json(['success' => true]);
-        }
-        
-        return response()->json(['success' => false], 404);
     }
 }
