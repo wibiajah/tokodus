@@ -171,4 +171,13 @@ class Product extends Model
     {
         return $this->categories->first();
     }
+
+    // Relasi ke Toko (melalui stocks)
+    public function tokos()
+    {
+        return $this->belongsToMany(Toko::class, 'product_stocks', 'product_id', 'toko_id')
+            ->withPivot('stock')
+            ->where('stock', '>', 0); // hanya toko yang punya stok
+    }
 }
+

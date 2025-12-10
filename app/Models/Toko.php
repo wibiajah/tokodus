@@ -43,7 +43,6 @@ class Toko extends Model
         return $this->hasMany(User::class)->where('role', 'staff_admin');
     }
 
-    // 🔥 TAMBAHKAN INI SAJA - 1 RELASI
     public function productStocks()
     {
         return $this->hasMany(ProductStock::class);
@@ -71,5 +70,46 @@ class Toko extends Model
         } elseif (!$hasKepalaToko && $this->status === 'aktif') {
             // Bisa diubah manual, jadi hanya log saja
         }
+    }
+
+    /**
+     * ✅ TAMBAHAN: Extract src dari iframe HTML
+     * Mengubah: <iframe src="URL" ...></iframe>
+     * Menjadi: URL saja
+     */
+    public function extractIframeSrc()
+    {
+        if (!$this->googlemap_iframe) {
+            return '';
+        }
+
+        // Pattern untuk mencari src="..." atau src='...'
+        if (preg_match('/src=["\']([^"\']+)["\']/', $this->googlemap_iframe, $matches)) {
+            return $matches[1];
+        }
+
+        // Jika sudah berupa URL langsung (tidak ada tag iframe)
+        if (filter_var($this->googlemap_iframe, FILTER_VALIDATE_URL)) {
+            return $this->googlemap_iframe;
+        }
+
+        return '';
+    }
+
+    /**
+     * ✅ TAMBAHAN: Get clean iframe embed URL
+     * Untuk digunakan langsung di blade
+     */
+    public function getCleanMapEmbedAttribute()
+    {
+        return $this->extractIframeSrc();
+    }
+
+    // Relasi ke Product (melalui stocks)
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_stocks', 'toko_id', 'product_id')
+            ->withPivot('stock')
+            ->where('stock', '>', 0);
     }
 }

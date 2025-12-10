@@ -212,6 +212,109 @@
         font-size: 1.5rem !important;
     }
 }
+
+/* Recommended Product Slider Styles */
+/* Recommended Product Slider Styles */
+.recommended-slider-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+}
+
+.recommended-slider-container.grabbing {
+    cursor: grabbing;
+}
+
+.recommended-slider {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+    padding: 10px 0;
+}
+
+.recommended-slider .product-card-1 {
+    flex: 0 0 220px;
+    width: 220px;
+    height: 310px;
+    min-width: 220px;
+}
+
+.recommended-slider .product-card-1:hover {
+    height: 340px;
+}
+
+.promo-product {
+    /* Hapus width/max-width jika ada di .promo-product */
+    padding-top: 50px; /* Contoh padding atas */
+    padding-bottom: 50px; /* Contoh padding bawah */
+}
+
+.promo-wrapper { /* Wrapper baru untuk centering semua konten di section ini */
+    max-width: 1400px; /* Samakan dengan max-width slider container */
+    margin: 0 auto;
+    padding: 0 40px; /* Samakan dengan padding slider container */
+}
+
+.promo-content {
+    text-align: center; /* Pusatkan teks di dalam container */
+    margin-bottom: 20px;
+}
+
+.promo-title-container {
+    display: inline-block; /* Agar teks tidak melebar 100% dan tetap bisa di-center */
+    text-align: center; /* Pusatkan teks di dalam promo-title-container */
+}
+
+.countdown {
+    text-align: center; /* Pusatkan countdown */
+    margin-bottom: 30px;
+}
+
+/* Media Query untuk Mobile */
+@media screen and (max-width: 768px) {
+    .promo-wrapper {
+        padding: 0 10px; /* Kurangi padding di mobile */
+    }
+}
+
+/* Mobile Responsive untuk Recommended Slider */
+@media screen and (max-width: 768px) {
+    .recommended-slider-container {
+        padding: 0 10px;
+    }
+    
+    .recommended-slider {
+        gap: 12px;
+    }
+    
+    .recommended-slider .product-card-1 {
+        flex: 0 0 170px;
+        width: 170px;
+        max-width: 170px;
+        min-width: 170px;
+        height: auto;
+        min-height: 280px;
+    }
+    
+    .recommended-slider .product-card-1:hover {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .recommended-slider .product-card-1 {
+        flex: 0 0 160px;
+        width: 160px;
+        min-width: 160px;
+    }
+}
+
+
     </style>
     
     <div id="content">
@@ -314,7 +417,7 @@
 
        <!-- Our Recomended Product -->
 <section class="promo-product">
-    <div class="promo-content">
+<div class="promo-wrapper"> <div class="promo-content">
         <div class="promo-title-container">
             <h1 class="promo-title">Our <span>Recomended</span> Product</h1>
             <p class="promo-deskripsi">Don't wait. The time will never be just right.</p>
@@ -328,65 +431,66 @@
     </div>
     <br>
     <br>
-    <br>
-    <br>
-    <!-- Dynamic Product Cards -->
-    <div class="product-card-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
-        @forelse($recommendedProducts as $product)
-            <div class="product-card-1">
-                <div class="label-1">{{ $product->sku }}</div>
-                
-                <div class="product-image-1">
-                    @if($product->photos && count($product->photos) > 0)
-                        <img src="{{ asset('storage/' . $product->photos[0]) }}" 
-                             class="default-img-1" 
-                             alt="{{ $product->title }}"
-                             onerror="this.src='{{ asset('frontend/assets/img/placeholder.png') }}'">
-                        @if(count($product->photos) > 1)
-                            <img src="{{ asset('storage/' . $product->photos[1]) }}" 
-                                 class="hover-img-1" 
+    
+    <!-- Recommended Product Slider -->
+    <div class="recommended-slider-container">
+        <div class="recommended-slider" id="recommendedSlider">
+            @forelse($recommendedProducts as $product)
+                <div class="product-card-1">
+                    <div class="label-1">{{ $product->sku }}</div>
+                    
+                    <div class="product-image-1">
+                        @if($product->photos && count($product->photos) > 0)
+                            <img src="{{ asset('storage/' . $product->photos[0]) }}" 
+                                 class="default-img-1" 
                                  alt="{{ $product->title }}"
-                                 onerror="this.style.display='none'">
+                                 onerror="this.src='{{ asset('frontend/assets/img/placeholder.png') }}'">
+                            @if(count($product->photos) > 1)
+                                <img src="{{ asset('storage/' . $product->photos[1]) }}" 
+                                     class="hover-img-1" 
+                                     alt="{{ $product->title }}"
+                                     onerror="this.style.display='none'">
+                            @endif
+                        @else
+                            <img src="{{ asset('frontend/assets/img/placeholder.png') }}" 
+                                 class="default-img-1" 
+                                 alt="{{ $product->title }}">
                         @endif
-                    @else
-                        <img src="{{ asset('frontend/assets/img/placeholder.png') }}" 
-                             class="default-img-1" 
-                             alt="{{ $product->title }}">
-                    @endif
-                </div>
+                    </div>
 
-                <div class="product-detail-1">
-                    <div class="product-header-1">
-                        <div class="product-title-1">
-                            {{ $product->categories->first()->name ?? 'Produk' }}
+                    <div class="product-detail-1">
+                        <div class="product-header-1">
+                            <div class="product-title-1">
+                                {{ $product->categories->first()->name ?? 'Produk' }}
+                            </div>
+                            <div class="ratings-1">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= floor($product->rating))
+                                        ★
+                                    @else
+                                        ☆
+                                    @endif
+                                @endfor
+                            </div>
                         </div>
-                        <div class="ratings-1">
-                            @for($i = 1; $i <= 5; $i++)
-                                @if($i <= floor($product->rating))
-                                    ★
-                                @else
-                                    ☆
-                                @endif
-                            @endfor
+                        
+                        <div class="product-deskripsi-1">{{ $product->title }}</div>
+                        
+                        <div class="icons-1">
+                            <div style="display: flex; gap: 12px;">
+                                <span class="icon-1">❤</span>
+                                <span class="icon-1">📤</span>
+                            </div>
+                            <span class="icon-1">🛒</span>
                         </div>
-                    </div>
-                    
-                    <div class="product-deskripsi-1">{{ $product->title }}</div>
-                    
-                    <div class="icons-1">
-                        <div style="display: flex; gap: 12px;">
-                            <span class="icon-1">❤</span>
-                            <span class="icon-1">📤</span>
-                        </div>
-                        <span class="icon-1">🛒</span>
                     </div>
                 </div>
-            </div>
-        @empty
-            <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">
-                <p>Belum ada produk yang direkomendasikan</p>
-            </div>
-        @endforelse
+            @empty
+                <div style="text-align: center; padding: 40px; color: #999; width: 100%;">
+                    <p>Belum ada produk yang direkomendasikan</p>
+                </div>
+            @endforelse
+        </div>
     </div>
 </section>
 
@@ -555,37 +659,50 @@
 </div>
         
         <!-- Store Section -->
-        <section id="stores">
-            <div class="stores">
-                <div class="container">
-                    <div class="map-dropdown-container">
-                        <div class="map-container">
-                            <iframe id="storeMap" width="400" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
+        <!-- Store Section -->
+<section id="stores">
+    <div class="stores">
+        <div class="container">
+            <div class="map-dropdown-container">
+                <div class="map-container">
+                    <iframe id="storeMap" width="400" height="450" style="border: 0" 
+                            allowfullscreen="" loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
 
-                        <div class="dropdown-store-info">
-                            <div class="dropdown-container">
-                                <button class="dropdown-btn">Pilih Cabang Toko</button>
-                                <div class="dropdown-content" id="dropdownContent">
-                                    <ul>
-                                        <li data-store="tki">Tokodus Taman Kopo Indah</li>
-                                        <li data-store="cimahi">Tokodus Cimahi</li>
-                                        <li data-store="cibaduyut">Tokodus Cibaduyut</li>
-                                        <li data-store="pagarsih">Tokodus Pagarsih</li>
-                                        <li data-store="buahbatu">Tokodus Buahbatu</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="store-info" id="storeInfo">
-                                <h3>Bandung, Jawa Barat</h3>
-                                <p><strong>Silakan pilih cabang toko untuk melihat informasi lebih lanjut.</strong></p>
-                            </div>
+                <div class="dropdown-store-info">
+                    <div class="dropdown-container">
+                        <button class="dropdown-btn">Pilih Cabang Toko</button>
+                        <div class="dropdown-content" id="dropdownContent">
+                            <ul>
+                                @forelse($tokos as $toko)
+                                    <li data-store-id="{{ $toko->id }}" 
+                                        data-store-name="{{ $toko->nama_toko }}"
+                                        data-store-address="{{ $toko->alamat ?? 'Alamat tidak tersedia' }}"
+                                        data-store-phone="{{ $toko->telepon ?? '' }}"
+                                        data-store-email="{{ $toko->email ?? '' }}"
+                                        data-store-map="{{ $toko->googlemap_iframe ? $toko->extractIframeSrc() : '' }}">
+                                        {{ $toko->nama_toko }}
+                                    </li>
+                                @empty
+                                    <li style="padding: 12px; color: #999; cursor: default;">
+                                        Belum ada toko tersedia
+                                    </li>
+                                @endforelse
+                            </ul>
                         </div>
+                    </div>
+
+                    <div class="store-info" id="storeInfo">
+                        <h3>Bandung, Jawa Barat</h3>
+                        <p><strong>Silakan pilih cabang toko untuk melihat informasi lebih lanjut.</strong></p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
     </div>
 
   <script src="{{ asset('frontend/assets/js/tokodus-scripts.js') }}"></script>

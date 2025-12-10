@@ -1,514 +1,328 @@
 // ====================================
-// UTILITY FUNCTIONS
+// OPTIMIZED TOKODUS SCRIPTS
+// Performance & Production Ready
 // ====================================
-const Utils = {
-    $(selector, parent = document) {
-        try {
-            return parent.querySelector(selector);
-        } catch (error) {
-            console.error(`Error selecting ${selector}:`, error);
-            return null;
-        }
-    },
 
-    $$(selector, parent = document) {
-        try {
-            return parent.querySelectorAll(selector);
-        } catch (error) {
-            console.error(`Error selecting ${selector}:`, error);
-            return [];
-        }
-    },
-
-    escapeHtml(text) {
-        if (!text) return '';
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
+// Utility Functions - Simplified
+const $ = (s, p = document) => p.querySelector(s);
+const $$ = (s, p = document) => p.querySelectorAll(s);
+const esc = text => {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 };
 
 // ====================================
-// SLIDER BANNER
+// 1. BANNER SLIDER - Optimized
 // ====================================
-let currentSlide = 1;
-let slideInterval;
-let autoSlide = true;
-let isTransitioning = false;
+const BannerSlider = (() => {
+    let current = 1;
+    let interval;
+    let transitioning = false;
 
-function initializeSlider() {
-    const slidesBennerContainer = Utils.$('.benner-slides');
-    const dots = Array.from(Utils.$$('.dots .dot'));
-    const prevBtn = Utils.$('.prev');
-    const nextBtn = Utils.$('.next');
+    const init = () => {
+        const container = $('.benner-slides');
+        const dots = $$('.dots .dot');
+        const prev = $('.prev');
+        const next = $('.next');
 
-    if (!slidesBennerContainer) {
-        console.warn('Banner slider container not found');
-        return;
-    }
+        if (!container || !dots.length) return;
 
-    if (dots.length === 0) {
-        console.warn('Banner dots not found');
-        return;
-    }
+        const slides = Array.from(container.children);
+        if (!slides.length) return;
 
-    try {
-        let bennerSlides = Array.from(slidesBennerContainer.children);
-        let totalBennerSlides = bennerSlides.length;
+        // Clone slides
+        container.appendChild(slides[0].cloneNode(true));
+        container.insertBefore(slides[slides.length - 1].cloneNode(true), slides[0]);
 
-        if (totalBennerSlides === 0) {
-            console.warn('No banner slides found');
-            return;
-        }
+        const total = container.children.length;
+        container.style.transform = 'translateX(-100%)';
 
-        const firstClone = bennerSlides[0].cloneNode(true);
-        const lastClone = bennerSlides[totalBennerSlides - 1].cloneNode(true);
-        slidesBennerContainer.appendChild(firstClone);
-        slidesBennerContainer.insertBefore(lastClone, bennerSlides[0]);
-
-        let updatedSlides = Array.from(slidesBennerContainer.children);
-        let totalSlides = updatedSlides.length;
-
-        slidesBennerContainer.style.transform = 'translateX(-100%)';
-
-        function updateDots() {
-            let dotIndex = currentSlide - 1;
-            if (currentSlide === 0) dotIndex = totalBennerSlides - 1;
-            if (currentSlide === totalSlides - 1) dotIndex = 0;
-
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === dotIndex);
-            });
-        }
-
-        function goToSlide(index) {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            currentSlide = index;
-
-            slidesBennerContainer.style.transition = 'transform 0.5s ease-in-out';
-            slidesBennerContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            const handleTransitionEnd = () => {
-                isTransitioning = false;
-
-                if (currentSlide === totalSlides - 1) {
-                    slidesBennerContainer.style.transition = 'none';
-                    currentSlide = 1;
-                    slidesBennerContainer.style.transform = 'translateX(-100%)';
-                }
-
-                if (currentSlide === 0) {
-                    slidesBennerContainer.style.transition = 'none';
-                    currentSlide = totalBennerSlides;
-                    slidesBennerContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-                }
-
-                updateDots();
-                slidesBennerContainer.removeEventListener('transitionend', handleTransitionEnd);
-            };
-
-            slidesBennerContainer.addEventListener('transitionend', handleTransitionEnd);
-        }
-
-        function nextSlide() {
-            goToSlide(currentSlide + 1);
-        }
-
-        function prevSlide() {
-            goToSlide(currentSlide - 1);
-        }
-
-        function startAutoSlide() {
-            if (slideInterval) clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 5000);
-            autoSlide = true;
-        }
-
-        function stopAutoSlide() {
-            clearInterval(slideInterval);
-            autoSlide = false;
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                stopAutoSlide();
-                nextSlide();
-            });
-        }
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                stopAutoSlide();
-                prevSlide();
-            });
-        }
-
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                stopAutoSlide();
-                goToSlide(index + 1);
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('prev') && 
-                !e.target.classList.contains('next') && 
-                !autoSlide) {
-                startAutoSlide();
-            }
-        });
-
-        startAutoSlide();
-        updateDots();
-
-    } catch (error) {
-        console.error('Error initializing slider:', error);
-    }
-}
-
-// ====================================
-// CATEGORY SLIDER
-// ====================================
-function initCategorySlider() {
-    const categorySliderContainer = document.querySelector('.category-slider-container');
-    const categorySlider = document.querySelector('.category-slider');
-
-    if (!categorySliderContainer || !categorySlider) {
-        console.warn('Category slider elements not found');
-        return;
-    }
-
-    try {
-        const cards = Array.from(categorySlider.children);
-        
-        if (cards.length === 0) {
-            console.log('No categories to display');
-            return;
-        }
-
-        cards.forEach(card => {
-            let clone = card.cloneNode(true);
-            categorySlider.appendChild(clone);
-        });
-
-        let isDragging = false;
-        let startX = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let autoScroll;
-        let isAutoScrolling = true;
-        const cardWidth = 230;
-
-        const minTranslate = -cardWidth * cards.length;
-        const maxTranslate = 0;
-
-        function startAutoScroll() {
-            if (!isAutoScrolling) return;
-            stopAutoScroll();
-            
-            autoScroll = setInterval(() => {
-                currentTranslate -= cardWidth;
-                
-                if (currentTranslate <= minTranslate) {
-                    categorySlider.style.transition = 'none';
-                    currentTranslate = 0;
-                    categorySlider.style.transform = `translateX(0px)`;
-                    
-                    categorySlider.offsetHeight;
-                    
-                    setTimeout(() => {
-                        categorySlider.style.transition = 'transform 0.5s ease-in-out';
-                    }, 50);
-                } else {
-                    categorySlider.style.transition = 'transform 0.5s ease-in-out';
-                    categorySlider.style.transform = `translateX(${currentTranslate}px)`;
-                }
-                
-                prevTranslate = currentTranslate;
-            }, 2500);
-        }
-
-        function stopAutoScroll() {
-            if (autoScroll) {
-                clearInterval(autoScroll);
-            }
-        }
-
-        categorySliderContainer.addEventListener('mouseenter', () => {
-            stopAutoScroll();
-        });
-
-        categorySliderContainer.addEventListener('mouseleave', () => {
-            if (!isDragging) {
-                isAutoScrolling = true;
-                startAutoScroll();
-            }
-        });
-
-        categorySliderContainer.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            isAutoScrolling = false;
-            startX = e.pageX;
-            stopAutoScroll();
-            categorySliderContainer.classList.add('grabbing');
-            categorySlider.style.transition = 'none';
-        });
-
-        document.addEventListener('mouseup', () => {
-            if (isDragging) {
-                isDragging = false;
-                categorySliderContainer.classList.remove('grabbing');
-                snapToNearest();
-            }
-        });
-
-        categorySliderContainer.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            
-            const x = e.pageX;
-            const walk = (x - startX);
-            currentTranslate = prevTranslate + walk;
-            
-            currentTranslate = Math.max(minTranslate, Math.min(maxTranslate, currentTranslate));
-            
-            categorySlider.style.transform = `translateX(${currentTranslate}px)`;
-        });
-
-        function snapToNearest() {
-            let snapPoint = Math.round(currentTranslate / cardWidth) * cardWidth;
-            snapPoint = Math.max(minTranslate, Math.min(maxTranslate, snapPoint));
-            
-            categorySlider.style.transition = 'transform 0.3s ease-out';
-            categorySlider.style.transform = `translateX(${snapPoint}px)`;
-            currentTranslate = snapPoint;
-            prevTranslate = snapPoint;
-
-            setTimeout(() => {
-                if (!isDragging) {
-                    isAutoScrolling = true;
-                    startAutoScroll();
-                }
-            }, 300);
-        }
-
-        startAutoScroll();
-
-    } catch (error) {
-        console.error('Error initializing category slider:', error);
-    }
-}
-
-// ====================================
-// PARTNER LOGO SCROLL
-// ====================================
-function initPartnerLogoScroll() {
-    const logoSliderContainer = Utils.$('.logo-slider-container');
-    const logoSlide = Utils.$('.logo-slide');
-
-    if (!logoSliderContainer || !logoSlide) {
-        console.warn('Partner logo elements not found');
-        return;
-    }
-
-    try {
-        logoSlide.innerHTML += logoSlide.innerHTML;
-
-        let scrollSpeed = 1;
-        let isPaused = false;
-
-        function scrollLogos() {
-            if (!isPaused) {
-                if (logoSliderContainer.scrollLeft >= logoSlide.scrollWidth / 2) {
-                    logoSliderContainer.scrollLeft = 0;
-                }
-                logoSliderContainer.scrollLeft += scrollSpeed;
-            }
-            requestAnimationFrame(scrollLogos);
-        }
-
-        scrollLogos();
-
-        logoSliderContainer.addEventListener('mouseenter', () => isPaused = true);
-        logoSliderContainer.addEventListener('mouseleave', () => isPaused = false);
-
-    } catch (error) {
-        console.error('Error initializing partner logo scroll:', error);
-    }
-}
-
-// ====================================
-// STORE SECTION
-// ====================================
-function initStoreSection() {
-    const dropdownBtn = Utils.$('.dropdown-btn');
-    const dropdownContent = Utils.$('#dropdownContent');
-    const storeInfo = Utils.$('#storeInfo');
-    const storeMap = Utils.$('#storeMap');
-
-    if (!dropdownBtn || !dropdownContent || !storeInfo || !storeMap) {
-        console.warn('Store section elements not found');
-        return;
-    }
-
-    try {
-        const defaultMapEmbed = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63387.67678038912!2d107.5731161675113!3d-6.914864054387586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6421e57f7a3%3A0x1f9c85fd11fc66b2!2sBandung%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1726500000000";
-
-        const stores = {
-            tki: {
-                name: "Tokodus Taman Kopo Indah",
-                address: "Jl. Taman Kopo Indah 3 Blok F30, Mekar Rahayu, Kec. Margaasih, Kabupaten Bandung, Jawa Barat",
-                phone: "+6281317255959",
-                hours: "Senin - Jumat: 08:00 - 17:00, Sabtu - Minggu: 08:00 - 16:00",
-                whatsapp: "http://wa.me/6281317255959",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.348766866562!2d107.55030747360861!3d-6.968118468225218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68efafefc76823%3A0x9e7c5cfafb88025a!2sTokodus%20Bandung!5e0!3m2!1sen!2sid!4v1726413067498!5m2!1sen!2sid"
-            },
-            cimahi: {
-                name: "Tokodus Cimahi",
-                address: "Jl. Jend. H. Amir Machmud No.481, Karangmekar, Kec. Cimahi Tengah, Kota Cimahi, Jawa Barat 40523",
-                phone: "+628112013738",
-                hours: "Senin - Jumat: 08:00 - 17:00, Sabtu - Minggu: 08:00 - 16:00",
-                whatsapp: "https://wa.me/628112013738",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.1128934737585!2d107.54500487360697!3d-6.877075667287033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e54221ce2c2d%3A0xf7e21e4afb4389c5!2sTokodus%20Cimahi!5e0!3m2!1sen!2sid!4v1726414230361!5m2!1sen!2sid"
-            },
-            cibaduyut: {
-                name: "Tokodus Cibaduyut",
-                address: "Jl. Terusan Cibaduyut No.78, Cangkuang Kulon, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40239",
-                phone: "+6281290778668",
-                hours: "Senin - Jumat: 08:00 - 17:00, Sabtu - Minggu: 08:00 - 16:00",
-                whatsapp: "https://wa.me/6281290778668",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15841.4512792536!2d107.591762!3d-6.9664548!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e949836027e1%3A0xc85f2813c7f31e63!2sTokodus%20Cibaduyut!5e0!3m2!1sid!2sid!4v1726450983495!5m2!1sid!2sid"
-            },
-            pagarsih: {
-                name: "Tokodus Pagarsih",
-                address: "Jl. Pagarsih No.166a, Babakan Tarogong, Kec. Bojongloa Kaler, Kota Bandung, Jawa Barat 40231",
-                phone: "+6282130138789",
-                hours: "Senin - Jumat: 08:00 - 17:00, Sabtu - Minggu: 08:00 - 16:00",
-                whatsapp: "https://wa.me/6282130138789",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.718491350924!2d107.58839082499657!3d-6.924215943075507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e700255a16b9%3A0x712448cb7e00f584!2sTokodus%20Pagarsih!5e0!3m2!1sid!2sid!4v1726451633860!5m2!1sid!2sid"
-            },
-            buahbatu: {
-                name: "Tokodus Buahbatu",
-                address: "Jl. Margacinta No.44A, Cijaura, Kec. Buahbatu, Kota Bandung, Jawa Barat 40287",
-                phone: "+6281323187789",
-                hours: "Senin - Jumat: 08:00 - 17:00, Sabtu - Minggu: 08:00 - 16:00",
-                whatsapp: "https://wa.me/6281323187789",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.4634734701035!2d107.6396499761799!3d-6.9545272680895645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e9c31c4bebc5%3A0x54a6e360467a916f!2sTokodus%20Buahbatu!5e0!3m2!1sid!2sid!4v1730085683776!5m2!1sid!2sid"
-            }
+        const updateDots = () => {
+            let idx = current - 1;
+            if (current === 0) idx = slides.length - 1;
+            if (current === total - 1) idx = 0;
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
         };
 
-        const esc = Utils.escapeHtml;
+        const goTo = idx => {
+            if (transitioning) return;
+            transitioning = true;
+            current = idx;
 
-        dropdownBtn.addEventListener('mouseenter', () => {
-            dropdownContent.style.display = 'block';
-        });
+            container.style.transition = 'transform 0.5s ease-in-out';
+            container.style.transform = `translateX(-${current * 100}%)`;
 
-        dropdownBtn.addEventListener('mouseleave', () => {
-            setTimeout(() => {
-                if (!dropdownContent.matches(':hover')) {
-                    dropdownContent.style.display = 'none';
+            const onEnd = () => {
+                transitioning = false;
+                if (current === total - 1) {
+                    container.style.transition = 'none';
+                    current = 1;
+                    container.style.transform = 'translateX(-100%)';
+                } else if (current === 0) {
+                    container.style.transition = 'none';
+                    current = slides.length;
+                    container.style.transform = `translateX(-${current * 100}%)`;
                 }
-            }, 200);
+                updateDots();
+                container.removeEventListener('transitionend', onEnd);
+            };
+
+            container.addEventListener('transitionend', onEnd);
+        };
+
+        const start = () => {
+            if (interval) clearInterval(interval);
+            interval = setInterval(() => goTo(current + 1), 5000);
+        };
+
+        const stop = () => clearInterval(interval);
+
+        next?.addEventListener('click', () => { stop(); goTo(current + 1); });
+        prev?.addEventListener('click', () => { stop(); goTo(current - 1); });
+        dots.forEach((dot, i) => dot.addEventListener('click', () => { stop(); goTo(i + 1); }));
+
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.prev') && !e.target.closest('.next')) start();
         });
 
-        dropdownContent.addEventListener('mouseenter', () => {
-            dropdownContent.style.display = 'block';
-        });
+        start();
+        updateDots();
+    };
 
-        dropdownContent.addEventListener('mouseleave', () => {
-            dropdownContent.style.display = 'none';
-        });
-
-        const storeItems = dropdownContent.querySelectorAll('li');
-        let storeSelected = false;
-
-        storeItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const storeKey = item.getAttribute('data-store');
-                const storeData = stores[storeKey];
-
-                if (!storeData) {
-                    console.error('Store data not found for:', storeKey);
-                    return;
-                }
-
-                storeInfo.innerHTML = `
-                    <h3>${esc(storeData.name)}</h3>
-                    <p><strong>Alamat:</strong> ${esc(storeData.address)}</p>
-                    <p><strong>No. Telp:</strong> 
-                        <a href="${esc(storeData.whatsapp)}" target="_blank" rel="noopener noreferrer">
-                            ${esc(storeData.phone)}
-                        </a>
-                    </p>
-                    <p><strong>Jam Operasional:</strong> ${esc(storeData.hours)}</p>
-                `;
-
-                storeMap.src = esc(storeData.mapEmbed);
-
-                dropdownContent.style.display = 'none';
-                storeSelected = true;
-            });
-        });
-
-        document.addEventListener('click', (event) => {
-            const isDropdownClick = dropdownContent.contains(event.target) || dropdownBtn.contains(event.target);
-
-            if (!isDropdownClick && !storeSelected) {
-                storeMap.src = defaultMapEmbed;
-                storeInfo.innerHTML = `
-                    <h3>Bandung, Jawa Barat</h3>
-                    <p><strong>Silakan pilih cabang toko untuk melihat informasi lebih lanjut.</strong></p>
-                `;
-            }
-
-            if (!dropdownContent.contains(event.target) && !dropdownBtn.contains(event.target)) {
-                dropdownContent.style.display = 'none';
-            }
-        });
-
-        storeMap.src = defaultMapEmbed;
-        storeSelected = false;
-
-    } catch (error) {
-        console.error('Error initializing store section:', error);
-    }
-}
+    return { init };
+})();
 
 // ====================================
-// MAIN INITIALIZATION
+// 2. GENERIC SLIDER - Reusable for Category & Recommended
 // ====================================
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Initializing Tokodus website...');
-    
-    const initFunctions = [
-        { name: 'Banner Slider', fn: initializeSlider },
-        { name: 'Category Slider', fn: initCategorySlider },
-        { name: 'Partner Logo Scroll', fn: initPartnerLogoScroll },
-        { name: 'Store Section', fn: initStoreSection }
-    ];
+const GenericSlider = (containerSel, sliderSel, config = {}) => {
+    const {
+        cardWidth = 230,
+        autoScrollInterval = 2500,
+        snapOnDrag = true
+    } = config;
 
-    let successCount = 0;
-    let failCount = 0;
+    const container = $(containerSel);
+    const slider = $(sliderSel);
 
-    initFunctions.forEach(({ name, fn }) => {
-        try {
-            fn();
-            console.log(`✅ ${name} initialized`);
-            successCount++;
-        } catch (error) {
-            console.error(`❌ ${name} failed:`, error);
-            failCount++;
+    if (!container || !slider) return;
+
+    const cards = Array.from(slider.children);
+    if (!cards.length) return;
+
+    // Clone for infinite scroll
+    cards.forEach(card => slider.appendChild(card.cloneNode(true)));
+
+    let dragging = false;
+    let startX = 0;
+    let translate = 0;
+    let prevTranslate = 0;
+    let autoInterval;
+    let autoEnabled = true;
+
+    const min = -cardWidth * cards.length;
+    const max = 0;
+
+    const startAuto = () => {
+        if (!autoEnabled) return;
+        stopAuto();
+        autoInterval = setInterval(() => {
+            translate -= cardWidth;
+            if (translate <= min) {
+                slider.style.transition = 'none';
+                translate = 0;
+                slider.style.transform = `translateX(0)`;
+                slider.offsetHeight; // Force reflow
+                setTimeout(() => slider.style.transition = 'transform 0.5s ease-in-out', 50);
+            } else {
+                slider.style.transition = 'transform 0.5s ease-in-out';
+                slider.style.transform = `translateX(${translate}px)`;
+            }
+            prevTranslate = translate;
+        }, autoScrollInterval);
+    };
+
+    const stopAuto = () => clearInterval(autoInterval);
+
+    const snap = () => {
+        const snapPoint = Math.max(min, Math.min(max, Math.round(translate / cardWidth) * cardWidth));
+        slider.style.transition = 'transform 0.3s ease-out';
+        slider.style.transform = `translateX(${snapPoint}px)`;
+        translate = prevTranslate = snapPoint;
+        setTimeout(() => { if (!dragging) { autoEnabled = true; startAuto(); } }, 300);
+    };
+
+    // Event Listeners
+    container.addEventListener('mouseenter', stopAuto);
+    container.addEventListener('mouseleave', () => { if (!dragging) { autoEnabled = true; startAuto(); } });
+
+    container.addEventListener('mousedown', e => {
+        dragging = true;
+        autoEnabled = false;
+        startX = e.pageX;
+        stopAuto();
+        container.classList.add('grabbing');
+        slider.style.transition = 'none';
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (dragging) {
+            dragging = false;
+            container.classList.remove('grabbing');
+            if (snapOnDrag) snap();
         }
     });
 
-    console.log(`\n📊 Initialization Summary:`);
-    console.log(`   Success: ${successCount}/${initFunctions.length}`);
-    console.log(`   Failed: ${failCount}/${initFunctions.length}`);
-    
-    if (failCount === 0) {
-        console.log('✨ All components initialized successfully!');
-    } else {
-        console.warn('⚠️ Some components failed to initialize. Check errors above.');
-    }
-});
+    container.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        e.preventDefault();
+        const walk = e.pageX - startX;
+        translate = Math.max(min, Math.min(max, prevTranslate + walk));
+        slider.style.transform = `translateX(${translate}px)`;
+    });
+
+    startAuto();
+};
+
+// ====================================
+// 3. PARTNER LOGO SCROLL - Optimized with RAF
+// ====================================
+const PartnerLogo = (() => {
+    const init = () => {
+        const container = $('.logo-slider-container');
+        const slider = $('.logo-slide');
+
+        if (!container || !slider) return;
+
+        slider.innerHTML += slider.innerHTML;
+
+        let speed = 1;
+        let paused = false;
+
+        const scroll = () => {
+            if (!paused) {
+                if (container.scrollLeft >= slider.scrollWidth / 2) {
+                    container.scrollLeft = 0;
+                }
+                container.scrollLeft += speed;
+            }
+            requestAnimationFrame(scroll);
+        };
+
+        scroll();
+
+        container.addEventListener('mouseenter', () => paused = true);
+        container.addEventListener('mouseleave', () => paused = false);
+    };
+
+    return { init };
+})();
+
+// ====================================
+// 4. STORE SECTION - Optimized with Event Delegation
+// ====================================
+const StoreSection = (() => {
+    const init = () => {
+        const btn = $('.dropdown-btn');
+        const dropdown = $('#dropdownContent');
+        const info = $('#storeInfo');
+        const map = $('#storeMap');
+
+        if (!btn || !dropdown || !info || !map) return;
+
+        const defaultMap = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63387.67678038912!2d107.5731161675113!3d-6.914864054387586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6421e57f7a3%3A0x1f9c85fd11fc66b2!2sBandung%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1726500000000";
+
+        let selected = false;
+        let hideTimeout;
+
+        // Toggle dropdown
+        const show = () => {
+            clearTimeout(hideTimeout);
+            dropdown.style.display = 'block';
+        };
+
+        const hide = () => {
+            hideTimeout = setTimeout(() => dropdown.style.display = 'none', 200);
+        };
+
+        btn.addEventListener('mouseenter', show);
+        btn.addEventListener('mouseleave', hide);
+        dropdown.addEventListener('mouseenter', show);
+        dropdown.addEventListener('mouseleave', hide);
+
+        // Event delegation for store items
+        dropdown.addEventListener('click', e => {
+            const item = e.target.closest('li[data-store-id]');
+            if (!item) return;
+
+            const name = item.dataset.storeName;
+            const addr = item.dataset.storeAddress;
+            const phone = item.dataset.storePhone;
+            const email = item.dataset.storeEmail;
+            const mapUrl = item.dataset.storeMap;
+
+            const cleanPhone = phone ? phone.replace(/\D/g, '') : '';
+            const waLink = cleanPhone ? `https://wa.me/${cleanPhone}` : '#';
+
+            let html = `<h3>${esc(name)}</h3>`;
+            if (addr && addr !== 'null') html += `<p><strong>Alamat:</strong> ${esc(addr)}</p>`;
+            if (phone && phone !== 'null') html += `<p><strong>No. Telp:</strong> <a href="${waLink}" target="_blank" rel="noopener">${esc(phone)}</a></p>`;
+            if (email && email !== 'null') html += `<p><strong>Email:</strong> ${esc(email)}</p>`;
+
+            info.innerHTML = html;
+            map.src = (mapUrl && mapUrl !== 'null' && mapUrl.trim()) ? mapUrl : defaultMap;
+            dropdown.style.display = 'none';
+            selected = true;
+        });
+
+        // Reset on outside click
+        document.addEventListener('click', e => {
+            if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+                dropdown.style.display = 'none';
+                if (!selected) {
+                    map.src = defaultMap;
+                    info.innerHTML = '<h3>Bandung, Jawa Barat</h3><p><strong>Silakan pilih cabang toko untuk melihat informasi lebih lanjut.</strong></p>';
+                }
+            }
+        });
+
+        map.src = defaultMap;
+    };
+
+    return { init };
+})();
+
+// ====================================
+// MAIN INITIALIZATION - Optimized
+// ====================================
+const init = () => {
+    const components = [
+        { name: 'Banner Slider', fn: () => BannerSlider.init() },
+        { name: 'Category Slider', fn: () => GenericSlider('.category-slider-container', '.category-slider', { cardWidth: 230, autoScrollInterval: 2500 }) },
+        { name: 'Recommended Slider', fn: () => GenericSlider('.recommended-slider-container', '.recommended-slider', { cardWidth: 240, autoScrollInterval: 3000 }) },
+        { name: 'Partner Logo', fn: () => PartnerLogo.init() },
+        { name: 'Store Section', fn: () => StoreSection.init() }
+    ];
+
+    let success = 0;
+    components.forEach(({ name, fn }) => {
+        try {
+            fn();
+            console.log(`✅ ${name}`);
+            success++;
+        } catch (err) {
+            console.error(`❌ ${name}:`, err);
+        }
+    });
+
+    console.log(`📊 ${success}/${components.length} initialized`);
+};
+
+// Run on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}

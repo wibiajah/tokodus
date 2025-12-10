@@ -6,11 +6,12 @@
 
 <!-- Floating Sidebar (Hanya untuk Home) -->
 <div class="floating-sidebar-home" id="floatingSidebarHome">
-    @auth
-        <!-- Sidebar Content -->
-        <div class="sidebar-content-home">
-            <ul class="sidebar-menu-home">
+    <!-- Sidebar Content -->
+    <div class="sidebar-content-home">
+        <ul class="sidebar-menu-home">
+            @auth
                 @if(in_array(auth()->user()->role, ['super_admin', 'admin', 'kepala_toko', 'staff_admin']))
+                    {{-- Sidebar untuk Super Admin, Admin, Kepala Toko, Staff Admin --}}
                     @php
                         $dashboardRoute = match(auth()->user()->role) {
                             'super_admin' => route('superadmin.dashboard'),
@@ -26,47 +27,89 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                @endif
+                @elseif(auth()->user()->role == 'customer')
+                    {{-- Sidebar untuk Customer (Role: customer) --}}
+                    <li class="sidebar-menu-item-home">
+                        <a href="#" class="sidebar-menu-link-home">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
 
+                    <li class="sidebar-menu-item-home">
+                        <a href="#" class="sidebar-menu-link-home">
+                            <div class="icon-wrapper-home">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="badge-home">3</span>
+                            </div>
+                            <span>Keranjang</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-menu-item-home">
+                        <a href="#" class="sidebar-menu-link-home">
+                            <i class="fas fa-box"></i>
+                            <span>Pesanan Saya</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-menu-item-home">
+                        <a href="#" class="sidebar-menu-link-home">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                        </a>
+                    </li>
+                @endif
+            @else
+                {{-- Sidebar untuk Guest (Belum Login) --}}
                 <li class="sidebar-menu-item-home">
-                    <a href="#" class="sidebar-menu-link-home">
+                    <a href="#" onclick="showLoginAlert(event)" class="sidebar-menu-link-home">
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
                 </li>
 
                 <li class="sidebar-menu-item-home">
-                    <a href="#" class="sidebar-menu-link-home">
+                    <a href="#" onclick="showLoginAlert(event)" class="sidebar-menu-link-home">
                         <div class="icon-wrapper-home">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="badge-home">3</span>
                         </div>
                         <span>Keranjang</span>
                     </a>
                 </li>
 
                 <li class="sidebar-menu-item-home">
-                    <a href="#" class="sidebar-menu-link-home">
+                    <a href="#" onclick="showLoginAlert(event)" class="sidebar-menu-link-home">
                         <i class="fas fa-box"></i>
                         <span>Pesanan Saya</span>
                     </a>
                 </li>
 
                 <li class="sidebar-menu-item-home">
-                    <a href="#" class="sidebar-menu-link-home">
+                    <a href="#" onclick="showLoginAlert(event)" class="sidebar-menu-link-home">
                         <i class="fas fa-heart"></i>
                         <span>Wishlist</span>
                     </a>
                 </li>
-            </ul>
-        </div>
+            @endauth
+        </ul>
+    </div>
 
-        <!-- Logout Button -->
+    <!-- Logout Button (Hanya untuk user yang sudah login) -->
+    @auth
         <div class="sidebar-logout-home">
             <button class="logout-btn-home" onclick="handleLogoutHome(event)">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Keluar</span>
             </button>
+        </div>
+    @else
+        <!-- Login Button untuk Guest -->
+        <div class="sidebar-logout-home">
+            <a href="{{ route('login') }}" class="login-btn-home">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login</span>
+            </a>
         </div>
     @endauth
 </div>
@@ -97,10 +140,10 @@
     /* Floating Sidebar */
     .floating-sidebar-home {
         position: fixed;
-        top: 85px; /* Turunkan posisi top agar tidak nyembul */
+        top: 85px;
         right: -90px;
         width: 90px;
-        height: calc(100vh - 155px); /* Sesuaikan height: 75px (top) + 80px (bottom WA) = 155px */
+        height: calc(100vh - 155px);
         background: linear-gradient(180deg, #ffffff 0%, #f8f9fc 100%);
         box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
         transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -230,6 +273,139 @@
         font-size: 1.3rem;
     }
 
+    /* Login Button untuk Guest */
+    .login-btn-home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        padding: 12px 8px;
+        background: linear-gradient(135deg, #1f4390 0%, #163264 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.65rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(31, 67, 144, 0.3);
+        text-decoration: none;
+    }
+
+    .login-btn-home:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(31, 67, 144, 0.4);
+    }
+
+    .login-btn-home i {
+        font-size: 1.3rem;
+    }
+
+    /* Custom Alert Modal */
+    .custom-alert-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .custom-alert-overlay.show {
+        display: flex;
+    }
+
+    .custom-alert-box {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        animation: slideUp 0.3s ease;
+    }
+
+    .custom-alert-icon {
+        font-size: 3rem;
+        color: #1f4390;
+        margin-bottom: 15px;
+    }
+
+    .custom-alert-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 10px;
+    }
+
+    .custom-alert-message {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+
+    .custom-alert-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .custom-alert-btn {
+        padding: 10px 25px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .custom-alert-btn-primary {
+        background: linear-gradient(135deg, #1f4390 0%, #163264 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(31, 67, 144, 0.3);
+    }
+
+    .custom-alert-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(31, 67, 144, 0.4);
+    }
+
+    .custom-alert-btn-secondary {
+        background: #f0f0f0;
+        color: #666;
+    }
+
+    .custom-alert-btn-secondary:hover {
+        background: #e0e0e0;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
         .floating-sidebar-home {
@@ -270,16 +446,51 @@
             padding: 10px 8px 15px 8px;
         }
 
-        .logout-btn-home {
+        .logout-btn-home,
+        .login-btn-home {
             padding: 10px 6px;
             font-size: 0.6rem;
         }
 
-        .logout-btn-home i {
+        .logout-btn-home i,
+        .login-btn-home i {
             font-size: 1.1rem;
+        }
+
+        .custom-alert-box {
+            padding: 25px 20px;
+        }
+
+        .custom-alert-title {
+            font-size: 1.1rem;
+        }
+
+        .custom-alert-message {
+            font-size: 0.85rem;
         }
     }
 </style>
+
+<!-- Custom Alert Modal -->
+<div class="custom-alert-overlay" id="loginAlertModal">
+    <div class="custom-alert-box">
+        <div class="custom-alert-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        <div class="custom-alert-title">Login Diperlukan</div>
+        <div class="custom-alert-message">
+            Anda harus login terlebih dahulu untuk mengakses menu ini!
+        </div>
+        <div class="custom-alert-buttons">
+            <button class="custom-alert-btn custom-alert-btn-primary" onclick="redirectToLogin()">
+                Login Sekarang
+            </button>
+            <button class="custom-alert-btn custom-alert-btn-secondary" onclick="closeLoginAlert()">
+                Nanti Saja
+            </button>
+        </div>
+    </div>
+</div>
 
 <script>
     // Toggle Floating Sidebar (Hanya untuk Home)
@@ -316,6 +527,39 @@
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             closeSidebarHome();
+            closeLoginAlert();
+        }
+    });
+    
+    // Show Login Alert untuk Guest
+    function showLoginAlert(event) {
+        event.preventDefault();
+        const modal = document.getElementById('loginAlertModal');
+        if (modal) {
+            modal.classList.add('show');
+            // Close sidebar jika terbuka
+            closeSidebarHome();
+        }
+    }
+    
+    // Close Login Alert
+    function closeLoginAlert() {
+        const modal = document.getElementById('loginAlertModal');
+        if (modal) {
+            modal.classList.remove('show');
+        }
+    }
+    
+    // Redirect to Login
+    function redirectToLogin() {
+        window.location.href = '{{ route("login") }}';
+    }
+    
+    // Close alert when clicking outside
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('loginAlertModal');
+        if (modal && event.target === modal) {
+            closeLoginAlert();
         }
     });
     

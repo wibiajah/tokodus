@@ -189,6 +189,65 @@
                 font-size: 0.9rem !important;
             }
         }
+        /* Notification Toast Styles ikon, hapus bisa */
+.notification-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.notification-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification-toast.hide {
+    opacity: 0;
+    transform: translateX(400px);
+}
+
+.notification-toast i {
+    font-size: 1.2rem;
+}
+
+.notification-toast .notification-message {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.notification-toast.success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.notification-toast.error {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .notification-toast {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        padding: 12px 16px;
+    }
+    
+    .notification-toast .notification-message {
+        font-size: 0.85rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -281,7 +340,7 @@
                         </div>
                     </li>
                 @else
-                    <li><a href="{{ route('login') }}" id="nav-get-in-touch">Login</a></li>
+                    <li><a href="#" onclick="openLoginModal()" id="nav-get-in-touch">Login</a></li>
                 @endauth
                 
                 <li><a href="#" id="hamburger-menu"><i data-feather="menu"></i></a></li>
@@ -294,6 +353,9 @@
         @include('components.sidebarhome')
     @endif
     
+       @guest
+        @include('components.login-modal')
+    @endguest
     <!-- Main Content -->
     {{ $slot }}
     
@@ -440,6 +502,93 @@
             }
             // Jika user klik Cancel, tidak terjadi apa-apa
         }
+
+        //ini dia buat jalanin notifkasi Function untuk menampilkan notifikasi toast
+function showNotification(message, type = 'success') {
+    // Hapus notifikasi yang ada jika ada
+    const existingToast = document.querySelector('.notification-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    // Buat elemen notifikasi
+    const toast = document.createElement('div');
+    toast.className = `notification-toast ${type}`;
+    
+    // Icon berdasarkan tipe
+    const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+    
+    toast.innerHTML = `
+        <i class="fas ${icon}"></i>
+        <span class="notification-message">${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Trigger animasi muncul
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // Auto hide setelah 3 detik
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+        
+        // Hapus dari DOM setelah animasi selesai
+        setTimeout(() => {
+            toast.remove();
+        }, 400);
+    }, 3000);
+}
+
+// Cek session flash message saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    @if(session('success'))
+        showNotification('{{ session('success') }}', 'success');
+    @endif
+    
+    @if(session('error'))
+        showNotification('{{ session('error') }}', 'error');
+    @endif
+});
+
+// Update fungsi logout untuk menampilkan notifikasi
+function handleLogout(event) {
+    event.preventDefault();
+    
+    // Konfirmasi sebelum logout
+    if (confirm('Anda yakin untuk logout?')) {
+        // Submit logout jika user klik OK
+        fetch('{{ route("logout") }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Simpan flag logout success di localStorage
+                localStorage.setItem('logoutSuccess', 'true');
+                // Redirect ke home
+                window.location.href = '{{ route("home") }}';
+            } else {
+                showNotification('Terjadi kesalahan saat logout', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showNotification('Terjadi kesalahan saat logout', 'error');
+        });
+    }
+}
+
+// Cek localStorage untuk notifikasi logout success
+if (localStorage.getItem('logoutSuccess') === 'true') {
+    localStorage.removeItem('logoutSuccess');
+    showNotification('Berhasil logout!', 'success');
+}
     </script>
     
 </body>

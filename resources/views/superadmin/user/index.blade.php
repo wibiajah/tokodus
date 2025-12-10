@@ -556,7 +556,7 @@
                             <!-- Hidden Info - Shows on Hover -->
                             <div class="card-hidden-info">
                                 <div class="info-row">
-                                    <span class="info-label">Toko</span>
+                                    <span class="info-label">Penempatan</span>
                                     <span class="info-value">{{ $user->toko?->nama_toko ?? 'Head Office' }}</span>
                                 </div>
 

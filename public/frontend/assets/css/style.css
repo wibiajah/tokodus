@@ -4,7 +4,6 @@ Christmas : #C7322F;
 Lebaran :#16a34a;
 Imlek : #FFD700;
 */
-
 :root {
   --primary: #f9ef21;
   --subprimary: #f7b963;
@@ -483,7 +482,7 @@ img {
   font-size: 16px;
 }
 .content-1 .scta-1:hover {
-  background-color: var(--primary);
+background-color: #e9078f;
 }
 .background-benner1-1 {
   display: inline;
@@ -578,7 +577,7 @@ img {
   font-size: 16px;
 }
 .content-2 .scta-2:hover {
-  background-color: var(--secondary);
+background-color: #e9078f;
 }
 .background-benner2-1 {
   display: inline;
@@ -736,7 +735,7 @@ img {
   padding: 10px 20px;
 }
 .pcta:hover {
-  background-color: var(--primary);
+  background-color: #e9078f;
 }
 /* ---- Title Promo Ends---- */
 /* ----- Product Spesial Editon ---- */

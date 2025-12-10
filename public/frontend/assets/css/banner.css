@@ -49,7 +49,7 @@
   z-index: 4;
 }
 .content1 .cta-1:hover {
-  background-color: var(--primary);
+  background-color: #e9078f; 
 }
 .image-1 {
   position: relative;
@@ -124,7 +124,7 @@
 }
 
 .content2 .cta-2:hover {
-  background-color: var(--primary);
+  background-color: #e9078f;
 }
 
 .image-2 {
@@ -221,7 +221,7 @@
   z-index: 4;
 }
 .content3 .cta-3:hover {
-  background-color: var(--primary);
+  background-color: #e9078f;
 }
 .image-3 {
   position: relative;
