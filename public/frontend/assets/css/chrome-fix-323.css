@@ -1,0 +1,433 @@
+/* ===================================
+   CHROME FIX - Dynamic & Responsive
+   BASE untuk semua zoom (75-90% AMAN)
+   =================================== */
+
+/* Chrome Detection - Most Reliable */
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+       and (min-resolution:.001dpcm) {
+    
+    /* ==========================================
+       DESKTOP - HD (1366px - 1919px)
+       BASE untuk zoom 75-90%
+       ========================================== */
+    @media (min-width: 1366px) and (max-width: 1919px) {
+        
+        .category-slide-323 {
+            padding-top: clamp(45px, 7.5vh, 85px) !important;
+        }
+        
+        .category-container-323 {
+            height: clamp(370px, 54vh, 540px) !important;
+        }
+        
+        /* TITLE - Adjust clamp values untuk Chrome */
+        .category-title-323 {
+            font-size: clamp(3rem, 5.2vw, 5.8rem) !important;
+            top: clamp(17%, 20.5vh, 24%) !important;
+            right: clamp(7.5%, 9.8vw, 11.5%) !important;
+            -webkit-text-stroke-width: clamp(2.6px, 0.36vw, 4.8px) !important;
+        }
+        
+        /* IMAGE CONTAINER - Lebih kecil untuk Chrome */
+        .image-container-323 {
+            width: clamp(330px, 36vw, 490px) !important;
+            bottom: clamp(-21%, -17.5vh, -14.5%) !important;
+            left: clamp(1.8%, 2.8vw, 3.8%) !important;
+        }
+        
+        /* IMAGE SCALE - Lebih kecil */
+        .category-image-323 {
+            transform: scale(clamp(0.74, 0.77, 0.80)) !important;
+        }
+        
+        /* SLIDER CONTAINER - Adjust width & position */
+        .category-slider-container-323 {
+            width: clamp(48%, 53vw, 56%) !important;
+            max-width: 830px !important;
+            bottom: clamp(72px, 9.2vh, 92px) !important;
+            right: clamp(7.5%, 9.8vw, 11.5%) !important;
+        }
+        
+        /* CARDS - Adjust size */
+        .category-card-323 {
+            width: clamp(148px, 12.5vw, 178px) !important;
+            height: clamp(113px, 9.6vw, 138px) !important;
+        }
+    }
+}
+
+/* ==========================================
+   CHROME 1366x768 - JARAK BANNER KE EXPLORE
+   ========================================== */
+
+/* Tambah Margin Top untuk #explore di Chrome 1366x768 */
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+       and (min-resolution:.001dpcm) {
+    @media (width: 1366px) and (height: 768px) {
+        
+        #explore {
+            margin-top: -120px !important;
+            padding-top: 30px !important;
+        }
+        
+        .category-slide-323 {
+            padding-top: 60px !important;
+        }
+    }
+}
+
+/* Alternative Detection */
+@supports (-webkit-appearance:none) and (not (-moz-appearance:none)) {
+    @media screen and (width: 1366px) and (height: 768px) {
+        
+        #explore {
+            margin-top: -120px !important;
+            padding-top: 30px !important;
+        }
+        
+        .category-slide-323 {
+            padding-top: 60px !important;
+        }
+    }
+}
+
+/* ==========================================
+   ZOOM 100% ONLY - NILAI LEBIH KECIL
+   ========================================== */
+
+/* Detection Zoom 100% - Method 1 */
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+       and (min-resolution:.001dpcm) {
+    @media (min-width: 1366px) and (max-width: 1919px) 
+           and (resolution: 96dpi) {
+        
+        .category-slide-323 {
+            padding-top: clamp(42px, 7vh, 80px) !important;
+        }
+        
+        .category-container-323 {
+            height: clamp(360px, 52vh, 530px) !important;
+        }
+        
+        .category-title-323 {
+            font-size: clamp(2.85rem, 5vw, 5.6rem) !important;
+            top: clamp(16.5%, 20vh, 23.5%) !important;
+            right: clamp(7.2%, 9.5vw, 11.2%) !important;
+            -webkit-text-stroke-width: clamp(2.4px, 0.34vw, 4.6px) !important;
+        }
+        
+        .image-container-323 {
+            width: clamp(320px, 35vw, 480px) !important;
+            bottom: clamp(-21.5%, -18vh, -15%) !important;
+            left: clamp(1.6%, 2.6vw, 3.6%) !important;
+        }
+        
+        .category-image-323 {
+            transform: scale(clamp(0.72, 0.75, 0.78)) !important;
+        }
+        
+        .category-slider-container-323 {
+            width: clamp(46%, 51vw, 54%) !important;
+            max-width: 810px !important;
+            bottom: clamp(70px, 9vh, 90px) !important;
+            right: clamp(7.2%, 9.5vw, 11.2%) !important;
+        }
+        
+        .category-card-323 {
+            width: clamp(145px, 12.2vw, 175px) !important;
+            height: clamp(110px, 9.4vw, 135px) !important;
+        }
+    }
+}
+
+/* Detection Zoom 100% - Method 2 (Exact Screen) */
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+       and (min-resolution:.001dpcm) {
+    @media (width: 1366px) and (height: 768px) and (resolution: 96dpi) {
+        
+        .category-slide-323 {
+            padding-top: clamp(42px, 7vh, 80px) !important;
+        }
+        
+        .category-container-323 {
+            height: clamp(360px, 52vh, 530px) !important;
+        }
+        
+        .category-title-323 {
+            font-size: clamp(2.85rem, 5vw, 5.6rem) !important;
+            top: clamp(16.5%, 20vh, 23.5%) !important;
+            right: clamp(7.2%, 9.5vw, 11.2%) !important;
+        }
+        
+        .image-container-323 {
+            width: clamp(320px, 35vw, 480px) !important;
+            bottom: clamp(-21.5%, -18vh, -15%) !important;
+            left: clamp(1.6%, 2.6vw, 3.6%) !important;
+        }
+        
+        .category-image-323 {
+            transform: scale(clamp(0.72, 0.75, 0.78)) !important;
+        }
+        
+        .category-slider-container-323 {
+            width: clamp(46%, 51vw, 54%) !important;
+            max-width: 810px !important;
+            bottom: clamp(70px, 9vh, 90px) !important;
+            right: clamp(7.2%, 9.5vw, 11.2%) !important;
+        }
+        
+        .category-card-323 {
+            width: clamp(145px, 12.2vw, 175px) !important;
+            height: clamp(110px, 9.4vw, 135px) !important;
+        }
+    }
+}
+
+/* Zoom 80-89% (TETAP AMAN) */
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+       and (min-resolution:.001dpcm) {
+    @media (min-width: 1366px) and (max-width: 1919px) 
+           and (min-resolution: 0.8dppx) and (max-resolution: 0.89dppx) {
+        
+        .category-title-323 {
+            font-size: clamp(3.2rem, 5.4vw, 6rem) !important;
+            top: clamp(17.5%, 21vh, 24.5%) !important;
+        }
+        
+        .image-container-323 {
+            width: clamp(340px, 37vw, 500px) !important;
+            bottom: clamp(-20.5%, -17vh, -14%) !important;
+        }
+    }
+}
+
+/* Zoom 75-79% (TETAP AMAN) */
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+       and (min-resolution:.001dpcm) {
+    @media (min-width: 1366px) and (max-width: 1919px) 
+           and (min-resolution: 0.75dppx) and (max-resolution: 0.79dppx) {
+        
+        .category-title-323 {
+            font-size: clamp(3.3rem, 5.5vw, 6.1rem) !important;
+            top: clamp(18%, 21.5vh, 25%) !important;
+        }
+        
+        .image-container-323 {
+            width: clamp(345px, 37.5vw, 505px) !important;
+            bottom: clamp(-20%, -16.5vh, -13.5%) !important;
+        }
+        
+        .category-slider-container-323 {
+            width: clamp(49%, 53.5vw, 56.5%) !important;
+        }
+    }
+}
+
+/* Performance Optimization */
+@supports (-webkit-appearance:none) {
+    .category-slider-323,
+    .category-card-323,
+    .category-image-323 {
+        -webkit-transform: translateZ(0) !important;
+        -webkit-backface-visibility: hidden !important;
+        will-change: transform !important;
+    }
+    
+    .category-slider-container-323 {
+        -webkit-overflow-scrolling: touch !important;
+    }
+}
+
+/* ==========================================
+   CHROME FIX 323 - HANYA MENAMBAH JARAK
+   TIDAK MENGUBAH DESAIN ASLI
+   ========================================== */
+
+/* ===================================
+   FIX: Hapus negative margin yang bikin tumpuk
+   =================================== */
+.small-benner-327 {
+    padding-top: 100px !important; /* Tambah jarak atas */
+    margin-top: 0 !important; /* Hapus negative margin */
+}
+
+/* ===================================
+   FIX: Pastikan small banner tetap center
+   =================================== */
+.small-benner-container-327 {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* ===================================
+   RESPONSIVE - HANYA JARAK
+   =================================== */
+
+/* Desktop besar */
+@media screen and (min-width: 1920px) {
+    .small-benner-327 {
+        padding-top: 120px !important;
+    }
+}
+
+/* Desktop standard */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+    .small-benner-327 {
+        padding-top: 100px !important;
+    }
+}
+
+/* Laptop */
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+    .small-benner-327 {
+        padding-top: 90px !important;
+    }
+}
+
+/* Tablet landscape */
+@media screen and (max-width: 1023px) and (min-width: 885px) {
+    .small-benner-327 {
+        padding-top: 80px !important;
+    }
+}
+
+/* Tablet portrait */
+@media screen and (max-width: 884px) and (min-width: 768px) {
+    .small-benner-327 {
+        padding-top: 70px !important;
+    }
+}
+
+/* Mobile besar */
+@media screen and (max-width: 767px) and (min-width: 441px) {
+    .small-benner-327 {
+        padding-top: 120px !important;
+    }
+}
+
+/* Mobile standard */
+@media screen and (max-width: 440px) and (min-width: 391px) {
+    .small-benner-327 {
+        padding-top: 110px !important;
+    }
+}
+
+/* Mobile kecil */
+@media screen and (max-width: 390px) and (min-width: 361px) {
+    .small-benner-327 {
+        padding-top: 110px !important;
+    }
+}
+
+/* Mobile extra kecil */
+@media screen and (max-width: 360px) {
+    .small-benner-327 {
+        padding-top: 100px !important;
+    }
+}
+
+/* ===================================
+   CHROME ZOOM FIX - 50% to 100%
+   =================================== */
+
+/* Zoom 50% */
+@media screen and (min-width: 2560px) {
+    .small-benner-327 {
+        padding-top: 140px !important;
+    }
+}
+
+/* Zoom 67% */
+@media screen and (min-width: 1920px) and (max-width: 2559px) {
+    .small-benner-327 {
+        padding-top: 120px !important;
+    }
+}
+
+/* Zoom 75% */
+@media screen and (min-width: 1680px) and (max-width: 1919px) {
+    .small-benner-327 {
+        padding-top: 110px !important;
+    }
+}
+
+/* Zoom 80% */
+@media screen and (min-width: 1440px) and (max-width: 1679px) {
+    .small-benner-327 {
+        padding-top: 100px !important;
+    }
+}
+
+/* Zoom 90% */
+@media screen and (min-width: 1280px) and (max-width: 1439px) {
+    .small-benner-327 {
+        padding-top: 95px !important;
+    }
+}
+
+/* Zoom 100% */
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+    .small-benner-327 {
+        padding-top: 90px !important;
+    }
+}
+
+/* ===================================
+   EDGE BROWSER COMPATIBILITY
+   =================================== */
+@supports (-ms-ime-align: auto) {
+    .small-benner-327 {
+        padding-top: 100px !important;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .small-benner-327 {
+            padding-top: 70px !important;
+        }
+    }
+    
+    @media screen and (max-width: 440px) {
+        .small-benner-327 {
+            padding-top: 50px !important;
+        }
+    }
+}
+
+/* ===================================
+   SAFARI iOS COMPATIBILITY
+   =================================== */
+@supports (-webkit-touch-callout: none) {
+    .small-benner-327 {
+        padding-top: 100px !important;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .small-benner-327 {
+            padding-top: 120px !important;
+        }
+    }
+    
+    @media screen and (max-width: 440px) {
+        .small-benner-327 {
+            padding-top: 110px !important;
+        }
+    }
+    
+    @media screen and (max-width: 390px) {
+        .small-benner-327 {
+            padding-top: 110px !important;
+        }
+    }
+}
+
+/* ===================================
+   PREVENT BANNER OVERLAP
+   =================================== */
+.banner-322-section {
+    margin-bottom: 0 !important;
+}
+
+.banner-322-section + * {
+    margin-top: 0 !important;
+}

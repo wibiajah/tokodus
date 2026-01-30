@@ -1,81 +1,114 @@
 <x-admin-layout>
     <x-slot name="header">
-        <h2 class="fw-semibold fs-4 text-dark">Manajemen Stok Toko</h2>
+        <h2 class="font-weight-bold h4 text-dark">Kelola Stok - Semua Produk Warehouse</h2>
     </x-slot>
 
     <div class="py-4">
         <div class="container-fluid">
             @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show">
-                    <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill mr-2"></i>{{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             @endif
 
-            @if(session('info'))
-                <div class="alert alert-info alert-dismissible fade show">
-                    <i class="bi bi-info-circle-fill me-2"></i>{{ session('info') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            @if($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul class="mb-0">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             @endif
 
             {{-- Info Toko --}}
             @if(auth()->user()->toko)
-                <div class="card bg-primary text-white mb-4">
+                <div class="card bg-primary text-white mb-4 shadow-sm">
                     <div class="card-body">
                         <div class="row align-items-center">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <h4 class="mb-1">
-                                    <i class="bi bi-shop me-2"></i>{{ auth()->user()->toko->nama_toko }}
+                                    <i class="bi bi-shop mr-2"></i>{{ auth()->user()->toko->nama_toko }}
                                 </h4>
                                 <p class="mb-0">
-                                    <i class="bi bi-geo-alt me-2"></i>{{ auth()->user()->toko->alamat ?? '-' }}
+                                    <i class="bi bi-geo-alt mr-2"></i>{{ auth()->user()->toko->alamat ?? '-' }}
                                 </p>
                             </div>
-                            <div class="col-md-4 text-md-end">
-                                <div class="display-6 fw-bold">
-                                    {{ auth()->user()->toko->productStocks->sum('stock') ?? 0 }}
+                            <div class="col-md-6 text-md-right">
+                                <div class="display-4 font-weight-bold">
+                                    {{ $products->where('is_in_my_toko', true)->where('is_active_in_toko', true)->where('is_active', true)->count() }}
                                 </div>
-                                <small>Total Stok Toko</small>
+                                <small>Produk Aktif di Toko</small>
                             </div>
                         </div>
                     </div>
                 </div>
-            @else
-                <div class="alert alert-warning">
-                    <i class="bi bi-exclamation-triangle me-2"></i>
-                    Anda belum terdaftar di toko manapun. Hubungi administrator.
-                </div>
             @endif
 
-            {{-- Products List --}}
-            <div class="card shadow-sm">
+            {{-- Search & Filter --}}
+            <div class="card shadow-sm mb-4">
                 <div class="card-body">
-                    <h5 class="card-title mb-4">
-                        <i class="bi bi-box-seam me-2"></i>Daftar Produk
-                    </h5>
+                    <form method="GET" action="{{ route('kepala-toko.stocks.index') }}">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label class="font-weight-bold">🔍 Cari Produk</label>
+                                <input type="text" name="search" class="form-control" 
+                                    placeholder="Cari berdasarkan nama atau SKU..." 
+                                    value="{{ $search }}">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="font-weight-bold">🎯 Filter Status</label>
+                                <select name="filter" class="form-control">
+                                    <option value="all" {{ $filter === 'all' ? 'selected' : '' }}>Semua Produk</option>
+                                    <option value="in_toko" {{ $filter === 'in_toko' ? 'selected' : '' }}>Produk di Toko Saya</option>
+                                    <option value="not_in_toko" {{ $filter === 'not_in_toko' ? 'selected' : '' }}>Belum di Toko</option>
+                                    <option value="inactive" {{ $filter === 'inactive' ? 'selected' : '' }}>Produk Nonaktif (Saya)</option>
+                                    <option value="inactive_by_admin" {{ $filter === 'inactive_by_admin' ? 'selected' : '' }}>🚫 Dinonaktifkan Pusat</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label class="font-weight-bold d-block">&nbsp;</label>
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <i class="bi bi-search"></i> Cari
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
+            {{-- Product List --}}
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-box-seam mr-2"></i>Daftar Produk 
+                        <span class="badge badge-secondary">{{ $products->count() }} produk</span>
+                    </h5>
+                </div>
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-light">
+                        <table class="table table-hover table-borderless mb-0">
+                            <thead class="bg-light">
                                 <tr>
-                                    <th>Foto</th>
+                                    <th style="width: 80px;">Foto</th>
                                     <th>Produk</th>
-                                    <th>SKU</th>
+                                    <th>Kategori</th>
                                     <th class="text-center">Harga</th>
-                                    <th class="text-center">Stok Awal Tersedia</th>
+                                    <th class="text-center">Stok Warehouse</th>
                                     <th class="text-center">Stok Toko Saya</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Aksi</th>
+                                    <th class="text-center" style="width: 220px;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($products as $product)
-                                    @php
-                                        $myStock = $product->stockInToko(auth()->user()->toko_id);
-                                        $stockValue = $myStock ? $myStock->stock : 0;
-                                    @endphp
-                                    <tr>
+                                    <tr class="{{ !$product->is_active ? 'table-secondary' : '' }}">
                                         <td>
                                             @if($product->photos && count($product->photos) > 0)
                                                 <img src="{{ asset('storage/' . $product->photos[0]) }}" 
@@ -89,65 +122,84 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div class="fw-bold">{{ $product->title }}</div>
+                                            <div class="font-weight-bold">{{ $product->title }}</div>
+                                            <code class="small">{{ $product->sku }}</code>
+                                            @if(!$product->is_active)
+                                                <br><span class="badge badge-danger mt-1">🚫 Dinonaktifkan Pusat</span>
+                                            @endif
+                                        </td>
+                                        <td>
                                             @if($product->categories->count() > 0)
                                                 <small class="text-muted">
                                                     {{ $product->categories->pluck('name')->join(', ') }}
                                                 </small>
+                                            @else
+                                                <small class="text-muted">-</small>
                                             @endif
                                         </td>
-                                        <td><code>{{ $product->sku }}</code></td>
                                         <td class="text-center">
-                                            <div class="fw-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
+                                            <div class="font-weight-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
                                         </td>
                                         <td class="text-center">
-                                            @php
-                                                $remaining = $product->remaining_initial_stock;
-                                                $badgeClass = $remaining > 50 ? 'success' : ($remaining > 0 ? 'warning' : 'danger');
-                                            @endphp
-                                            <span class="badge bg text-white-{{ $badgeClass }} fs-6">{{ $remaining }}</span>
-                                            <div><small class="text-muted">dari {{ $product->initial_stock }}</small></div>
+                                            <span class="badge badge-info badge-pill h6 mb-0">{{ $product->warehouse_stock }}</span>
                                         </td>
                                         <td class="text-center">
-                                            @if($stockValue > 0)
-                                                @php
-                                                    $myBadgeClass = $stockValue > 10 ? 'primary' : ($stockValue > 0 ? 'warning' : 'secondary');
-                                                @endphp
-                                                <span class="badge bg text-white-{{ $myBadgeClass }} fs-5">{{ $stockValue }}</span>
+                                            @if($product->is_in_my_toko)
+                                                <span class="badge badge-primary badge-pill h6 mb-0">{{ $product->my_stock }}</span>
                                             @else
                                                 <span class="text-muted">-</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if($myStock)
-                                                @if($stockValue > 10)
-                                                    <span class="badge bg-success">✅ Cukup</span>
-                                                @elseif($stockValue > 0)
-                                                    <span class="badge bg-warning">⚠️ Terbatas</span>
-                                                @else
-                                                    <span class="badge bg-danger">❌ Habis</span>
-                                                @endif
+                                            @if(!$product->is_active)
+                                                <span class="badge badge-danger">🚫 Nonaktif (Admin)</span>
+                                            @elseif(!$product->is_in_my_toko)
+                                                <span class="badge badge-secondary">Belum Ditambahkan</span>
+                                            @elseif($product->is_active_in_toko)
+                                                <span class="badge badge-success">✅ Aktif</span>
                                             @else
-                                                <span class="badge bg-secondary">Belum Set</span>
+                                                <span class="badge badge-warning">🔒 Nonaktif (Saya)</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if($myStock)
-                                                <a href="{{ route('kepala-toko.stocks.edit', $product) }}" 
-                                                    class="btn btn-sm btn-warning">
-                                                    <i class="bi bi-pencil"></i> Edit Stok
-                                                </a>
-                                            @else
-                                                @if($remaining > 0)
-                                                    <a href="{{ route('kepala-toko.stocks.create', $product) }}" 
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="bi bi-plus-circle"></i> Set Stok
-                                                    </a>
-                                                @else
-                                                    <button class="btn btn-sm btn-secondary" disabled>
-                                                        Stok Habis
+                                            @if(!$product->is_active)
+                                                {{-- Produk dinonaktifkan superadmin - tidak ada aksi --}}
+                                                <button class="btn btn-sm btn-secondary" disabled>
+                                                    <i class="bi bi-lock"></i> Tidak Tersedia
+                                                </button>
+                                            @elseif(!$product->is_in_my_toko)
+                                                {{-- Belum ditambahkan --}}
+                                                <form action="{{ route('kepala-toko.stocks.add-to-toko', $product) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-success" 
+                                                        onclick="return confirm('Tambahkan produk ini ke toko Anda?')">
+                                                        <i class="bi bi-plus-circle"></i> Tambah ke Toko
                                                     </button>
-                                                @endif
+                                                </form>
+                                            @elseif($product->is_active_in_toko)
+                                                {{-- Sudah aktif --}}
+                                                <div class="btn-group" role="group">
+                                                    <a href="{{ route('kepala-toko.stocks.edit', $product) }}" 
+                                                        class="btn btn-sm btn-warning">
+                                                        <i class="bi bi-pencil"></i> Edit Stok
+                                                    </a>
+                                                    <form action="{{ route('kepala-toko.stocks.toggle-status', $product) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                            onclick="return confirm('Nonaktifkan produk ini di toko Anda?')">
+                                                            <i class="bi bi-x-circle"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            @else
+                                                {{-- Nonaktif --}}
+                                                <form action="{{ route('kepala-toko.stocks.toggle-status', $product) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-success" 
+                                                        onclick="return confirm('Aktifkan kembali produk ini?')">
+                                                        <i class="bi bi-check-circle"></i> Aktifkan
+                                                    </button>
+                                                </form>
                                             @endif
                                         </td>
                                     </tr>
@@ -155,8 +207,12 @@
                                     <tr>
                                         <td colspan="8" class="text-center py-5">
                                             <div class="display-1 mb-3">📦</div>
-                                            <h5>Belum ada produk</h5>
-                                            <p class="text-muted">Produk akan muncul setelah ditambahkan oleh admin</p>
+                                            <h5>Tidak ada produk ditemukan</h5>
+                                            @if($search || $filter !== 'all')
+                                                <a href="{{ route('kepala-toko.stocks.index') }}" class="btn btn-primary mt-3">
+                                                    Reset Filter
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforelse
@@ -167,4 +223,23 @@
             </div>
         </div>
     </div>
+
+  
+    <style>
+        /* Highlight row untuk produk nonaktif dari admin */
+        .table-secondary {
+            opacity: 0.7;
+        }
+        
+        .badge-pill {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.95rem;
+        }
+        
+        /* Icon spacing */
+        .bi {
+            vertical-align: middle;
+        }
+    </style>
+
 </x-admin-layout>

@@ -13,7 +13,9 @@
         "guzzlehttp/guzzle": "^7.8.1",
         "laravel/framework": "^11.0.3",
         "laravel/sanctum": "^4.0",
+        "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.9.0",
+        "midtrans/midtrans-php": "^2.6",
         "spatie/laravel-backup": "^9.2"
     },
     "require-dev": {
@@ -34,7 +36,9 @@
         },
         "files": [
             "app/Helpers/TerbilangHelper.php",
-            "app/Helpers/NotificationHelper.php" 
+            "app/Helpers/NotificationHelper.php",
+            "app/Helpers/LocationHelper.php",
+            "app/Helpers/ShippingHelper.php"
         ]
     },
     "autoload-dev": {

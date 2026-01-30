@@ -1,0 +1,275 @@
+/* ===================================
+   SECTION SPACING FIX - HOME PAGE
+   Responsive & Consistent Spacing
+   =================================== */
+
+/* ===================================
+   1. BANNER SECTION BASE
+   =================================== */
+.banner-322-section {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* ===================================
+   2. EXPLORE CATEGORY SECTION
+   DESKTOP: Overlap dengan Banner
+   MOBILE: Normal spacing
+   =================================== */
+
+/* DESKTOP - Overlap Effect */
+@media screen and (min-width: 769px) {
+    #explore {
+        margin-top: clamp(-180px, -12vw, -120px) !important;
+        position: relative;
+        z-index: 10;
+        padding-top: 0 !important;
+        margin-bottom: clamp(40px, 5vh, 80px) !important;
+    }
+    
+    .category-slide-323 {
+        padding-top: clamp(80px, 10vh, 120px) !important;
+        padding-bottom: clamp(40px, 5vh, 60px) !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+/* MOBILE - Normal spacing, no overlap */
+@media screen and (max-width: 768px) {
+    #explore {
+        margin-top: clamp(20px, 4vh, 40px) !important;
+        padding-top: 0 !important;
+        margin-bottom: 0 !important; /* ✅ HAPUS MARGIN BAWAH */
+        z-index: 10;
+    }
+    
+    .category-slide-323-mobile {
+        padding: clamp(30px, 6vw, 40px) clamp(15px, 4vw, 20px) clamp(20px, 3vh, 25px) !important; /* ✅ KURANGI PADDING BAWAH LAGI */
+        margin-bottom: 0 !important;
+    }
+}
+
+/* ===================================
+   3. RECOMMENDED PRODUCT SECTION
+   Consistent spacing dari Explore Category
+   =================================== */
+
+/* DESKTOP */
+@media screen and (min-width: 769px) {
+    .promo-product-325 {
+        margin-top: clamp(-60px, -4vw, -40px) !important;
+        padding-top: clamp(40px, 5vh, 60px) !important;
+        padding-bottom: clamp(60px, 8vh, 100px) !important;
+        position: relative;
+        z-index: 5;
+    }
+    
+    .promo-title-container-325 {
+        margin-bottom: clamp(20px, 3vh, 30px) !important;
+        padding: clamp(1rem, 2vh, 1.5rem) 8% !important;
+    }
+    
+    .countdown-325 {
+        margin: 0 8% clamp(30px, 4vh, 50px) auto !important;
+    }
+    
+    .promo-product-slider-container-325 {
+        margin-bottom: clamp(40px, 5vh, 60px) !important;
+        margin-top: 0 !important;
+    }
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+    .promo-product-325 {
+        margin-top: clamp(-35px, -4vh, -25px) !important; /* ✅ OVERLAP LEBIH BANYAK */
+        padding-top: clamp(15px, 2vh, 20px) !important; /* ✅ KURANGI PADDING TOP */
+        padding-bottom: clamp(50px, 8vh, 80px) !important;
+    }
+    
+    .promo-title-container-325 {
+        margin-bottom: clamp(15px, 2.5vh, 25px) !important;
+        padding: clamp(1rem, 2vh, 1.5rem) 4% !important;
+    }
+    
+    .countdown-325 {
+        margin: 0 4% clamp(25px, 4vh, 35px) auto !important;
+    }
+    
+    .promo-product-slider-container-325 {
+        margin-bottom: clamp(30px, 5vh, 40px) !important;
+        padding: 0 4% !important;
+    }
+}
+
+/* ===================================
+   RESPONSIVE BREAKPOINTS
+   =================================== */
+
+/* Large Desktop - 2K & 4K */
+@media screen and (min-width: 1920px) {
+    #explore {
+        margin-top: -150px !important;
+        margin-bottom: 80px !important;
+    }
+    
+    .promo-product-325 {
+        margin-top: -50px !important;
+        padding-top: 60px !important;
+        padding-bottom: 100px !important;
+    }
+}
+
+/* Standard Desktop - Full HD */
+@media screen and (min-width: 1366px) and (max-width: 1919px) {
+    #explore {
+        margin-top: clamp(-160px, -11vw, -130px) !important;
+        margin-bottom: clamp(50px, 6vh, 70px) !important;
+    }
+    
+    .promo-product-325 {
+        margin-top: clamp(-55px, -4vw, -45px) !important;
+        padding-top: clamp(45px, 5vh, 55px) !important;
+        padding-bottom: clamp(70px, 8vh, 90px) !important;
+    }
+}
+
+/* Small Desktop / Laptop */
+@media screen and (min-width: 1025px) and (max-width: 1365px) {
+    #explore {
+        margin-top: clamp(-140px, -10vw, -120px) !important;
+        margin-bottom: clamp(40px, 5vh, 60px) !important;
+    }
+    
+    .promo-product-325 {
+        margin-top: clamp(-50px, -4vw, -40px) !important;
+        padding-top: clamp(40px, 5vh, 50px) !important;
+        padding-bottom: clamp(60px, 7vh, 80px) !important;
+    }
+}
+
+/* Tablet Landscape */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #explore {
+        margin-top: clamp(-120px, -9vw, -100px) !important;
+        margin-bottom: clamp(35px, 4vh, 50px) !important;
+    }
+    
+    .promo-product-325 {
+        margin-top: clamp(-45px, -3.5vw, -35px) !important;
+        padding-top: clamp(35px, 4vh, 45px) !important;
+        padding-bottom: clamp(50px, 6vh, 70px) !important;
+    }
+}
+
+/* Tablet Portrait */
+@media screen and (max-width: 768px) and (min-width: 481px) {
+    #explore {
+        margin-top: clamp(25px, 4.5vh, 35px) !important;
+        margin-bottom: 0 !important; /* ✅ HAPUS */
+    }
+    
+    .promo-product-325 {
+        margin-top: clamp(-30px, -3vh, -20px) !important; /* ✅ OVERLAP LEBIH */
+        padding-top: clamp(15px, 2vh, 20px) !important; /* ✅ KURANGI */
+        padding-bottom: clamp(60px, 8vh, 70px) !important;
+    }
+}
+
+/* Mobile - Small */
+@media screen and (max-width: 480px) {
+    #explore {
+        margin-top: clamp(20px, 4vh, 30px) !important;
+        margin-bottom: 0 !important; /* ✅ HAPUS */
+    }
+    
+    .promo-product-325 {
+        margin-top: clamp(-40px, -4vh, -30px) !important; /* ✅ OVERLAP LEBIH BANYAK */
+        padding-top: clamp(12px, 2vh, 18px) !important; /* ✅ KURANGI */
+        padding-bottom: clamp(50px, 7vh, 60px) !important;
+    }
+}
+
+/* Mobile - Extra Small */
+@media screen and (max-width: 360px) {
+    #explore {
+        margin-top: clamp(15px, 3vh, 25px) !important;
+        margin-bottom: 0 !important; /* ✅ HAPUS */
+    }
+    
+    .promo-product-325 {
+        margin-top: clamp(-35px, -3.5vh, -28px) !important; /* ✅ OVERLAP LEBIH */
+        padding-top: clamp(10px, 1.5vh, 15px) !important; /* ✅ KURANGI */
+        padding-bottom: clamp(40px, 6vh, 50px) !important;
+    }
+}
+
+/* ===================================
+   CHROME SPECIFIC FIX
+   Untuk 1366x768 yang bermasalah
+   =================================== */
+@supports (-webkit-appearance:none) {
+    @media screen and (width: 1366px) and (height: 768px) {
+        #explore {
+            margin-top: -130px !important;
+            padding-top: 0 !important;
+            margin-bottom: 60px !important;
+        }
+        
+        .category-slide-323 {
+            padding-top: 90px !important;
+            padding-bottom: 50px !important;
+        }
+        
+        .promo-product-325 {
+            margin-top: -45px !important;
+            padding-top: 50px !important;
+            padding-bottom: 80px !important;
+        }
+    }
+}
+
+/* ===================================
+   ZOOM COMPENSATION
+   Untuk browser zoom 75% - 150%
+   =================================== */
+@media screen and (min-resolution: 1.25dppx) and (max-resolution: 1.5dppx) {
+    @media (min-width: 769px) {
+        #explore {
+            margin-top: clamp(-170px, -11.5vw, -125px) !important;
+        }
+        
+        .promo-product-325 {
+            margin-top: clamp(-58px, -4.2vw, -42px) !important;
+        }
+    }
+}
+
+@media screen and (min-resolution: 1.5dppx) {
+    @media (min-width: 769px) {
+        #explore {
+            margin-top: clamp(-190px, -13vw, -140px) !important;
+        }
+        
+        .promo-product-325 {
+            margin-top: clamp(-65px, -4.5vw, -48px) !important;
+        }
+    }
+}
+
+/* ===================================
+   ❌ HAPUS SAFE AREA - INI PENYEBAB SPACE PUTIH!
+   =================================== */
+
+/* ===================================
+   PERFORMANCE OPTIMIZATION
+   =================================== */
+.banner-322-section,
+#explore,
+.category-slide-323,
+.category-slide-323-mobile,
+.promo-product-325 {
+    will-change: margin, padding;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}

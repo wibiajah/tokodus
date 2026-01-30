@@ -43,6 +43,7 @@ const FilterManager = (() => {
 
         attachEvents();
         attachClearAllEvent();
+        initCategoryClicks();
         return true;
     };
 
@@ -53,7 +54,7 @@ const FilterManager = (() => {
         elements.productsGrid.style.pointerEvents = show ? 'none' : 'auto';
     };
 
-    // Collect Filter Data
+    // Collect Filter Data - UPDATED FOR DROPDOWNS
     const getFilterData = () => {
         const data = {};
 
@@ -62,11 +63,19 @@ const FilterManager = (() => {
             data.search = elements.searchInput.value.trim();
         }
 
-        // Categories
+        // Tipe (dari dropdown select, bukan radio)
+        const tipeSelect = $('select[name="tipe"]');
+        if (tipeSelect?.value) data.tipe = tipeSelect.value;
+
+        // Jenis Bahan (dari dropdown select, bukan radio)
+        const bahanSelect = $('select[name="jenis_bahan"]');
+        if (bahanSelect?.value) data.jenis_bahan = bahanSelect.value;
+
+        // Categories (dari checkboxes)
         const categories = Array.from($$('input[name="category"]:checked')).map(cb => cb.value);
         if (categories.length) data.categories = categories;
 
-        // Tokos
+        // Tokos (jika ada)
         const tokos = Array.from($$('input[name="toko"]:checked')).map(cb => cb.value);
         if (tokos.length) data.tokos = tokos;
 
@@ -74,13 +83,17 @@ const FilterManager = (() => {
         if (elements.minPrice?.value) data.min_price = elements.minPrice.value;
         if (elements.maxPrice?.value) data.max_price = elements.maxPrice.value;
 
-        // Availability
-        const availability = $('input[name="availability"]:checked');
-        if (availability?.value !== 'all') data.availability = availability.value;
+        // Availability (dari dropdown select)
+        const availabilitySelect = $('select[name="availability"]');
+        if (availabilitySelect?.value && availabilitySelect.value !== 'all') {
+            data.availability = availabilitySelect.value;
+        }
 
-        // Stock Range
-        const stockRange = $('input[name="stock-range"]:checked');
-        if (stockRange?.value !== 'all') data.stock_range = stockRange.value;
+        // Stock Range (dari dropdown select)
+        const stockSelect = $('select[name="stock-range"]');
+        if (stockSelect?.value && stockSelect.value !== 'all') {
+            data.stock_range = stockSelect.value;
+        }
 
         // Discount
         if ($('input[name="discount"]')?.checked) data.discount = 'true';
@@ -119,13 +132,13 @@ const FilterManager = (() => {
         }
         
         // Update pagination
-        const newPagination = doc.querySelector('.pagination');
-        const currentPagination = $('.pagination');
+        const newPagination = doc.querySelector('.pagination-323');
+        const currentPagination = $('.pagination-323');
         
         if (newPagination && currentPagination) {
             currentPagination.innerHTML = newPagination.innerHTML;
         } else if (newPagination) {
-            $('.products-container')?.appendChild(newPagination);
+            $('.products-container-323')?.appendChild(newPagination);
         } else if (currentPagination) {
             currentPagination.remove();
         }
@@ -146,7 +159,7 @@ const FilterManager = (() => {
         }
         
         // Refresh icons
-        feather?.replace();
+        if (typeof feather !== 'undefined') feather.replace();
     };
 
     // Apply Filters (AJAX)
@@ -190,25 +203,57 @@ const FilterManager = (() => {
         debounceTimer = setTimeout(applyFilters, 500);
     };
 
-    // Reset All Filters
+    // Reset All Filters - UPDATED FOR DROPDOWNS
     const resetFilters = () => {
         if (elements.searchInput) elements.searchInput.value = '';
+        
+        // Reset dropdown ke nilai default
+        const tipeSelect = $('select[name="tipe"]');
+        if (tipeSelect) tipeSelect.value = '';
+        
+        const bahanSelect = $('select[name="jenis_bahan"]');
+        if (bahanSelect) bahanSelect.value = '';
+        
+        const availSelect = $('select[name="availability"]');
+        if (availSelect) availSelect.value = 'all';
+        
+        const stockSelect = $('select[name="stock-range"]');
+        if (stockSelect) stockSelect.value = 'all';
+        
+        // Reset checkboxes
         $$('input[name="category"]').forEach(cb => cb.checked = false);
         $$('input[name="toko"]').forEach(cb => cb.checked = false);
+        
+        // Reset visual category items
+        $$('.category-item-323').forEach(item => item.classList.remove('active'));
+        
         if (elements.minPrice) elements.minPrice.value = '';
         if (elements.maxPrice) elements.maxPrice.value = '';
-        const availAll = $('input[name="availability"][value="all"]');
-        if (availAll) availAll.checked = true;
-        const stockAll = $('input[name="stock-range"][value="all"]');
-        if (stockAll) stockAll.checked = true;
+        
         const discount = $('input[name="discount"]');
         if (discount) discount.checked = false;
+        
         if (elements.sortSelect) elements.sortSelect.value = 'newest';
         
         applyFilters();
     };
 
-    // Attach Events
+    // Initialize Category Clicks - NEW
+    const initCategoryClicks = () => {
+        $$('.category-item-323').forEach(item => {
+            item.addEventListener('click', function() {
+                const checkbox = this.querySelector('input[name="category"]');
+                
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    this.classList.toggle('active', checkbox.checked);
+                    applyFilters();
+                }
+            });
+        });
+    };
+
+    // Attach Events - UPDATED FOR DROPDOWNS
     const attachEvents = () => {
         // Mobile Toggle
         elements.toggleBtn?.addEventListener('click', () => {
@@ -222,14 +267,14 @@ const FilterManager = (() => {
         // Search (debounced)
         elements.searchInput?.addEventListener('input', debouncedFilter);
 
+        // Dropdown selects (bukan radio buttons lagi)
+        $$('select[name="tipe"], select[name="jenis_bahan"], select[name="availability"], select[name="stock-range"]').forEach(select => {
+            select.addEventListener('change', applyFilters);
+        });
+
         // Category/Toko checkboxes
         $$('input[name="category"], input[name="toko"]').forEach(cb => {
             cb.addEventListener('change', applyFilters);
-        });
-
-        // Radio buttons
-        $$('input[name="availability"], input[name="stock-range"]').forEach(radio => {
-            radio.addEventListener('change', applyFilters);
         });
 
         // Discount
@@ -237,6 +282,8 @@ const FilterManager = (() => {
 
         // Price Range
         elements.applyPriceBtn?.addEventListener('click', applyFilters);
+        elements.minPrice?.addEventListener('change', applyFilters);
+        elements.maxPrice?.addEventListener('change', applyFilters);
 
         // Sort
         elements.sortSelect?.addEventListener('change', applyFilters);
@@ -255,7 +302,7 @@ const FilterManager = (() => {
 
     // Pagination Handler
     const handlePaginationClick = (e) => {
-        const link = e.target.closest('.pagination a');
+        const link = e.target.closest('.pagination-323 a');
         if (!link) return;
         
         e.preventDefault();
@@ -270,7 +317,7 @@ const FilterManager = (() => {
         .then(html => {
             updateDOM(html);
             history.pushState({}, '', url);
-            elements.productsGrid?.scrollIntoView({ behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setLoading(false);
         })
         .catch(err => {
@@ -287,7 +334,7 @@ const FilterManager = (() => {
 // ===================================
 const initCatalog = () => {
     try {
-        feather?.replace();
+        if (typeof feather !== 'undefined') feather.replace();
         
         if (FilterManager.init()) {
             console.log('✅ Catalog Filter initialized');

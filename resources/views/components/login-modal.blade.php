@@ -5,26 +5,17 @@
             <i class="fas fa-times"></i>
         </button>
 
-        <!-- FORM REGISTER -->
+        <!-- FORM REGISTER CUSTOMER -->
         <div class="form-container-2 sign-up-container-2">
-            <form action="{{ route('register') }}" method="POST" novalidate>
+            <form action="{{ route('customer.register') }}" method="POST" novalidate>
                 @csrf
-                <h1>Buat Akun</h1>
-
-                <div class="social-login-2">
-                    <button type="button" class="social-btn-2 google-2" aria-label="Login with Google">
-                        <i class="fab fa-google"></i>
-                    </button>
-                    <button type="button" class="social-btn-2 facebook-2" aria-label="Login with Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </button>
-                </div>
+                <h1>Daftar Sekarang</h1>
 
                 <div class="name-fields-2">
                     <input type="text" name="firstname" placeholder="Nama Depan" 
-                           value="{{ old('firstname') }}" />
+                           value="{{ old('firstname') }}" required />
                     <input type="text" name="lastname" placeholder="Nama Belakang" 
-                           value="{{ old('lastname') }}" />
+                           value="{{ old('lastname') }}" required />
                 </div>
 
                 <input type="text" name="username" placeholder="Username" 
@@ -34,22 +25,22 @@
                        value="{{ old('email') }}" required />
 
                 <div class="password-field-2">
-                    <input type="password" name="password" id="regPassword2" 
+                    <input type="password" name="password" id="custRegPassword" 
                            placeholder="Kata Sandi" required />
-                    <span class="toggle-password-2" onclick="togglePassword2('regPassword2', this)">
+                    <span class="toggle-password-2" onclick="togglePassword2('custRegPassword', this)">
                         <i class="fas fa-eye"></i>
                     </span>
                 </div>
 
                 <div class="password-field-2">
-                    <input type="password" name="password_confirmation" id="regConfirmPassword2" 
+                    <input type="password" name="password_confirmation" id="custRegConfirmPassword" 
                            placeholder="Konfirmasi Kata Sandi" required />
-                    <span class="toggle-password-2" onclick="togglePassword2('regConfirmPassword2', this)">
+                    <span class="toggle-password-2" onclick="togglePassword2('custRegConfirmPassword', this)">
                         <i class="fas fa-eye"></i>
                     </span>
                 </div>
 
-                @if ($errors->any() && (old('username') || old('firstname') || old('lastname')))
+                @if ($errors->any() && (old('firstname') || old('username')))
                     <div class="auth-error-2">
                         @foreach ($errors->all() as $error)
                             <div>{{ $error }}</div>
@@ -58,19 +49,30 @@
                 @endif
 
                 <button type="submit">Daftar</button>
+                
+                <p class="register-note-2">
+                    <i class="fas fa-info-circle"></i> 
+                    Lengkapi profil Anda setelah mendaftar
+                </p>
+                <p class="mobile-login-link-2">
+    Sudah punya akun? 
+    <button type="button" class="mobile-login-btn-2" onclick="togglePanel2(false)">
+        Masuk
+    </button>
+</p>
             </form>
         </div>
 
-        <!-- FORM LOGIN -->
+        <!-- FORM LOGIN (CUSTOMER & ADMIN) -->
         <div class="form-container-2 sign-in-container-2">
             <form action="{{ route('login') }}" method="POST" novalidate id="loginForm2">
                 @csrf
                 <h1>Masuk</h1>
 
                 <div class="social-login-2">
-                    <button type="button" class="social-btn-2 google-2" aria-label="Login with Google">
-                        <i class="fab fa-google"></i>
-                    </button>
+<a href="{{ route('customer.auth.google') }}" class="social-btn-2 google-2" aria-label="Login with Google">
+    <img src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg" alt="Google" width="20" height="20">
+</a>
                     <button type="button" class="social-btn-2 facebook-2" aria-label="Login with Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </button>
@@ -97,7 +99,7 @@
                     </a>
                 </div>
 
-                @if ($errors->has('email') && !old('username'))
+                @if ($errors->has('email') && !old('username') && !old('firstname'))
                     <div class="auth-error-2" id="errorMessage2">
                         {{ $errors->first('email') }}
                         
@@ -111,6 +113,12 @@
                 @endif
 
                 <button type="submit" id="loginButton2">Masuk</button>
+                <p class="mobile-register-link-2">
+    Belum punya akun? 
+    <button type="button" class="mobile-register-btn-2" onclick="togglePanel2(true)">
+        Daftar Sekarang
+    </button>
+</p>
             </form>
         </div>
 
@@ -139,10 +147,26 @@
 <style>
 :root {
     --primary-2: #ffffff;
-    --secondary-2: #048bd4;
-    --thirdary-2: #0442d4;
-    --edition-2: #1e293b;
+    --secondary-2: #1f4390;
+    --thirdary-2: #2c5aa0;
+    --edition-2: #1f4390;
+    --accent-2: #ffd700;
+    --accent-pink-2: #e9078f;
     --contrast-2: #ffffff;
+}
+
+.register-note-2 {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.95s both;
+}
+
+.register-note-2 i {
+    color: var(--thirdary-2);
 }
 
 .auth-overlay-2 {
@@ -156,6 +180,7 @@
     z-index: 99999;
     opacity: 0;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px;
 }
 
 .auth-overlay-2.active {
@@ -178,6 +203,7 @@
     display: flex;
     transform: scale(0.7) translateY(50px) rotateX(10deg);
     opacity: 0;
+    margin: auto;
 }
 
 .auth-overlay-2.active .container-2 {
@@ -191,7 +217,7 @@
     right: 24px;
     font-size: 22px;
     font-weight: 700;
-    color: var(--thirdary-2);
+    color: var(--secondary-2);
     cursor: pointer;
     z-index: 101;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -329,7 +355,7 @@
 
 .form-container-2 form input:focus {
     border-color: var(--secondary-2);
-    box-shadow: 0 0 0 4px rgba(4, 139, 212, 0.12);
+    box-shadow: 0 0 0 4px rgba(31, 67, 144, 0.15);
     transform: translateY(-1px);
 }
 
@@ -345,7 +371,7 @@
     letter-spacing: 0.8px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(4, 139, 212, 0.3);
+    box-shadow: 0 4px 15px rgba(31, 67, 144, 0.4);
     position: relative;
     overflow: hidden;
     animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s both;
@@ -385,7 +411,7 @@
 
 .form-container-2 form button[type="submit"]:hover {
     transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 8px 25px rgba(4, 139, 212, 0.45);
+    box-shadow: 0 8px 25px rgba(31, 67, 144, 0.55);
 }
 
 .form-container-2 form button[type="submit"]:active {
@@ -416,7 +442,7 @@
 }
 
 .overlay-2 {
-    background: linear-gradient(135deg, var(--edition-2) 0%, var(--secondary-2) 100%);
+    background: linear-gradient(135deg, #d4a839 0%, var(--accent-2) 15%, var(--secondary-2) 30%, var(--thirdary-2) 45%, #3d6bb3 60%, #5a7bbf 75%, #d4a839 90%, var(--accent-2) 100%);
     background-size: cover;
     color: var(--contrast-2);
     position: relative;
@@ -522,7 +548,7 @@
 
 .ghost-2:hover {
     background-color: #fff;
-    color: var(--thirdary-2);
+    color: var(--secondary-2);
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
 }
@@ -554,7 +580,7 @@
 }
 
 .toggle-password-2:hover {
-    color: var(--thirdary-2);
+    color: var(--secondary-2);
     transform: translateY(-50%) scale(1.15);
 }
 
@@ -572,18 +598,18 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--secondary-2);
+    color: var(--thirdary-2);
     user-select: none;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .remember-me-2:hover {
-    color: var(--thirdary-2);
+    color: var(--secondary-2);
 }
 
 .remember-me-2 input[type="checkbox"] {
-    accent-color: var(--thirdary-2);
+    accent-color: var(--secondary-2);
     width: 18px;
     height: 18px;
     cursor: pointer;
@@ -592,7 +618,7 @@
 }
 
 .forgot-password-2 {
-    color: var(--thirdary-2);
+    color: var(--secondary-2);
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -666,6 +692,19 @@
     color: #4267B2;
 }
 
+
+.social-btn-2 img {
+    display: block;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+.social-btn-2 i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .name-fields-2 {
     display: flex;
     gap: 12px;
@@ -724,6 +763,66 @@
     animation: countPulse 1s ease infinite;
 }
 
+.mobile-register-link-2 {
+    display: none;
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.mobile-register-btn-2 {
+    background: none;
+    border: none;
+    color: var(--secondary-2);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.mobile-register-btn-2:hover {
+    color: var(--thirdary-2);
+}
+
+.mobile-login-link-2 {
+    display: none;
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 16px;
+    text-align: center;
+}
+
+.mobile-login-btn-2 {
+    background: none;
+    border: none;
+    color: var(--secondary-2);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.mobile-login-btn-2:hover {
+    color: var(--thirdary-2);
+}
+
+@media (max-width: 768px) {
+    .mobile-login-link-2 {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-register-link-2 {
+        display: block;
+    }
+}
+
 @keyframes pulseIcon {
     0%, 100% { 
         opacity: 1; 
@@ -746,10 +845,24 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .container-2 {
+      .container-2 {
         width: 95%;
         min-height: 600px;
         border-radius: 12px;
+    }
+
+    .overlay-container-2 {
+        display: none;
+    }
+
+    .form-container-2 {
+        position: relative !important;
+        width: 100% !important;
+        left: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        padding-top: 40px; /* TAMBAHKAN INI */
     }
 
     .overlay-container-2 {
@@ -800,42 +913,26 @@
     }
 }
 </style>
-
 <script>
-// Open Modal dengan Animasi Spektakuler
 function openLoginModal() {
     const modal = document.getElementById('loginModal');
-    const container = document.getElementById('authContainer2');
-    
-    // Set display first
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    
-    // Force reflow
     void modal.offsetWidth;
-    
-    // Trigger animation
     requestAnimationFrame(() => {
         modal.classList.add('active');
     });
 }
 
-// Close Modal dengan Animasi Smooth
 function closeLoginModal() {
     const modal = document.getElementById('loginModal');
-    const container = document.getElementById('authContainer2');
-    
-    // Trigger exit animation
     modal.classList.remove('active');
-    
-    // Wait for animation to complete
     setTimeout(() => {
         modal.style.display = 'none';
         document.body.style.overflow = '';
     }, 500);
 }
 
-// Toggle Panel
 function togglePanel2(showRegister) {
     const container = document.getElementById('authContainer2');
     if (showRegister) {
@@ -845,7 +942,6 @@ function togglePanel2(showRegister) {
     }
 }
 
-// Toggle Password Visibility
 function togglePassword2(inputId, toggleElement) {
     const passwordInput = document.getElementById(inputId);
     const icon = toggleElement.querySelector('i');
@@ -865,7 +961,7 @@ function togglePassword2(inputId, toggleElement) {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         const modal = document.getElementById('loginModal');
-        if (modal.classList.contains('active')) {
+        if (modal && modal.classList.contains('active')) {
             closeLoginModal();
         }
     }
@@ -887,7 +983,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginPasswordInput = document.getElementById('loginPassword2');
     const emailInput = document.getElementById('emailInput2');
     
-    // Disable form saat countdown
     if (loginButton) loginButton.disabled = true;
     if (emailInput) emailInput.disabled = true;
     if (loginPasswordInput) loginPasswordInput.disabled = true;
@@ -902,12 +997,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (seconds <= 0) {
             clearInterval(interval);
             
-            // Enable form kembali
             if (loginButton) loginButton.disabled = false;
             if (emailInput) emailInput.disabled = false;
             if (loginPasswordInput) loginPasswordInput.disabled = false;
             
-            // Hapus error message dengan animasi
             const errorMessage = document.getElementById('errorMessage2');
             if (errorMessage) {
                 errorMessage.style.transition = 'all 0.4s ease';
@@ -931,7 +1024,7 @@ document.addEventListener('DOMContentLoaded', function() {
 @endif
 
 // Auto show login modal if login error exists
-@if ($errors->has('email') && !old('username'))
+@if ($errors->has('email') && !old('username') && !old('firstname'))
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => openLoginModal(), 100);
 });

@@ -29,24 +29,20 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
             'description' => 'nullable|string',
-            'photo' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048', // ✅ Tambahkan validasi foto
             'is_active' => 'boolean',
         ]);
 
         $validated['is_active'] = $request->has('is_active');
 
-        // Upload foto
+        // ✅ Handle upload foto
         if ($request->hasFile('photo')) {
             $validated['photo'] = $request->file('photo')->store('categories', 'public');
         }
 
         $category = Category::create($validated);
 
-        // ✅ KIRIM NOTIFIKASI KE SEMUA ROLE
-        NotificationHelper::notifyRoles(
-            ['super_admin', 'admin', 'kepala_toko', 'staff_admin'],
-            NotificationHelper::categoryCreated($category->fresh(), auth()->user())
-        );
+        NotificationHelper::categoryCreated($category, auth()->user());
 
         return redirect()
             ->route('superadmin.categories.index')
@@ -59,42 +55,35 @@ class CategoryController extends Controller
     }
 
     public function update(Request $request, Category $category)
-{
-    $validated = $request->validate([
-        'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
-        'description' => 'nullable|string',
-        'photo' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
-        'is_active' => 'boolean',
-    ]);
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+            'description' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048', // ✅ Tambahkan validasi foto
+            'is_active' => 'boolean',
+        ]);
 
-    $validated['is_active'] = $request->has('is_active');
+        $validated['is_active'] = $request->has('is_active');
 
-    // Handle foto
-    if ($request->hasFile('photo')) {
-        // Hapus foto lama jika ada
-        if ($category->photo && Storage::disk('public')->exists($category->photo)) {
-            Storage::disk('public')->delete($category->photo);
+        // ✅ Handle upload foto baru
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada
+            if ($category->photo && Storage::disk('public')->exists($category->photo)) {
+                Storage::disk('public')->delete($category->photo);
+            }
+            
+            // Upload foto baru
+            $validated['photo'] = $request->file('photo')->store('categories', 'public');
         }
-        $validated['photo'] = $request->file('photo')->store('categories', 'public');
-    } elseif (!$request->has('keep_photo') && $category->photo) {
-        // User menghapus foto lama tanpa upload baru
-        if (Storage::disk('public')->exists($category->photo)) {
-            Storage::disk('public')->delete($category->photo);
-        }
-        $validated['photo'] = null;
+
+        $category->update($validated);
+
+        NotificationHelper::categoryUpdated($category, auth()->user());
+
+        return redirect()
+            ->route('superadmin.categories.index')
+            ->with('success', 'Kategori berhasil diupdate!');
     }
-
-    $category->update($validated);
-
-    NotificationHelper::notifyRoles(
-        ['super_admin', 'admin', 'kepala_toko', 'staff_admin'],
-        NotificationHelper::categoryUpdated($category->fresh(), auth()->user())
-    );
-
-    return redirect()
-        ->route('superadmin.categories.index')
-        ->with('success', 'Kategori berhasil diupdate!');
-}
 
     public function destroy(Category $category)
     {
@@ -106,18 +95,9 @@ class CategoryController extends Controller
 
         $categoryName = $category->name;
 
-        // Hapus foto
-        if ($category->photo && Storage::disk('public')->exists($category->photo)) {
-            Storage::disk('public')->delete($category->photo);
-        }
-
         $category->delete();
 
-        // ✅ KIRIM NOTIFIKASI KE SEMUA ROLE
-        NotificationHelper::notifyRoles(
-            ['super_admin', 'admin', 'kepala_toko', 'staff_admin'],
-            NotificationHelper::categoryDeleted($categoryName, auth()->user())
-        );
+        NotificationHelper::categoryDeleted($categoryName, auth()->user());
 
         return redirect()
             ->route('superadmin.categories.index')

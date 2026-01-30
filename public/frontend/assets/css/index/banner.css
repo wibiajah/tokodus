@@ -1,0 +1,676 @@
+:root {
+    --banner-322-orange: #f7b963;
+    --banner-322-blue: #1f4390;
+    --banner-322-gray: #eeeeef;
+    --banner-322-white: #fff;
+    --banner-322-black: #000;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ===================================
+   BANNER SECTION CONTAINER - FULL SCREEN (100vh)
+   =================================== */
+.banner-322-section {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.banner-322-container {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* ===================================
+   SLIDE WRAPPER - FULL SCREEN
+   =================================== */
+.banner-322-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+}
+
+.banner-322-slide.banner-322-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+/* ===================================
+   CONTENT LAYOUT - FULL SCREEN
+   =================================== */
+.banner-322-content {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* ===================================
+   LAYOUT 1 - Blue Left, Gray Right (FULL SCREEN)
+   =================================== */
+.banner-322-layout-1 {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: clamp(20px, 3vw, 60px);
+}
+
+/* Background strip biru di kiri - FLUID */
+.banner-322-layout-1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: min(40%, 600px);
+    height: 100%;
+    background-color: var(--banner-322-blue);
+    z-index: 1;
+}
+
+/* Background abu-abu di kanan - FLUID */
+.banner-322-layout-1::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: max(60%, calc(100% - 600px));
+    height: 100%;
+    background-color: var(--banner-322-gray);
+    z-index: 1;
+}
+
+/* IMAGE WRAPPER DESKTOP - DYNAMIC POSITIONING */
+.banner-322-layout-1 .banner-322-desktop-only {
+    position: absolute;
+    left: clamp(2%, 5vw, 8%);
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(280px, 45vw, 700px);
+    max-width: min(700px, 50vw);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-322-layout-1 .banner-322-desktop-only .banner-322-image {
+    width: 100%;
+    height: auto;
+    max-height: min(80vh, 800px);
+    object-fit: contain;
+    filter: drop-shadow(clamp(15px, 3vw, 30px) clamp(15px, 3vw, 30px) clamp(25px, 5vw, 50px) rgba(0,0,0,0.3));
+}
+
+/* IMAGE WRAPPER MOBILE - Hidden by default */
+.banner-322-layout-1 .banner-322-mobile-only {
+    display: none;
+}
+
+/* TEXT WRAPPER - ADAPTIVE WIDTH */
+.banner-322-layout-1 .banner-322-text-wrapper {
+    position: relative;
+    width: max(55%, calc(100% - 650px));
+    margin-left: auto;
+    padding: clamp(20px, 5vw, 8%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 20;
+}
+
+.banner-322-layout-1 .banner-322-title {
+    font-size: clamp(2rem, 5vw, 5rem);
+    color: var(--banner-322-orange);
+    font-weight: 700;
+    margin-bottom: clamp(12px, 2vh, 20px);
+    line-height: 1.1;
+}
+
+.banner-322-layout-1 .banner-322-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 2.5rem);
+    color: var(--banner-322-blue);
+    font-weight: 700;
+    max-width: min(600px, 90%);
+    margin-bottom: clamp(24px, 4vh, 40px);
+    line-height: 1.3;
+}
+
+.banner-322-layout-1 .banner-322-cta {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    padding: clamp(10px, 1.5vh, 14px) clamp(24px, 4vw, 40px);
+}
+
+/* ===================================
+   LAYOUT 2 - Full Gray Background (FULL SCREEN)
+   =================================== */
+.banner-322-layout-2 {
+    background: var(--banner-322-gray);
+    padding: clamp(20px, 4vw, 60px);
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.banner-322-layout-2 .banner-322-image-wrapper {
+    flex: 0 0 clamp(30%, 35vw, 40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: clamp(20px, 3vw, 5%);
+}
+
+.banner-322-layout-2 .banner-322-text-wrapper {
+    flex: 0 0 clamp(60%, 65vw, 70%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-right: clamp(20px, 5vw, 8%);
+    padding-left: clamp(20px, 3vw, 5%);
+}
+
+/* ===================================
+   LAYOUT 3 - Full Blue Background (FULL SCREEN)
+   =================================== */
+.banner-322-layout-3 {
+    background: var(--banner-322-blue);
+    padding: clamp(20px, 4vw, 60px);
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.banner-322-layout-3 .banner-322-text-wrapper {
+    flex: 0 0 clamp(45%, 50vw, 55%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: clamp(20px, 5vw, 8%);
+}
+
+.banner-322-layout-3 .banner-322-image-wrapper {
+    flex: 0 0 clamp(45%, 50vw, 55%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: clamp(20px, 3vw, 5%);
+}
+
+/* Layout 3 - CTA Button Control */
+.banner-322-layout-3 .banner-322-cta-mobile {
+    display: none;
+}
+
+.banner-322-layout-3 .banner-322-cta-desktop {
+    display: inline-block;
+}
+
+/* ===================================
+   IMAGE STYLING (Layout 2 & 3) - FLUID
+   =================================== */
+.banner-322-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.banner-322-layout-2 .banner-322-image,
+.banner-322-layout-3 .banner-322-image {
+    max-height: min(60vh, 500px);
+    width: 100%;
+}
+
+/* ===================================
+   TEXT STYLING (Layout 2 & 3) - FLUID
+   =================================== */
+.banner-322-title {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: clamp(12px, 2vh, 24px);
+}
+
+.banner-322-title.banner-322-orange {
+    color: var(--banner-322-orange);
+}
+
+.banner-322-title.banner-322-black {
+    color: var(--banner-322-black);
+}
+
+.banner-322-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: clamp(24px, 4vh, 48px);
+    max-width: min(700px, 90%);
+}
+
+.banner-322-subtitle.banner-322-blue {
+    color: var(--banner-322-blue);
+}
+
+.banner-322-subtitle.banner-322-white {
+    color: var(--banner-322-white);
+}
+
+.banner-322-subtitle.banner-322-black {
+    color: var(--banner-322-black);
+}
+
+/* ===================================
+   FEATURES (only layout-2) - ADAPTIVE
+   =================================== */
+.banner-322-features {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2vw, 18px);
+    margin-bottom: clamp(20px, 3vh, 40px);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.banner-322-feature {
+    font-size: clamp(1rem, 1.5vw, 1.375rem);
+    font-weight: 400;
+    color: var(--banner-322-black);
+}
+
+.banner-322-divider {
+    color: var(--banner-322-black);
+    font-weight: 300;
+    font-size: clamp(1rem, 1.5vw, 1.375rem);
+}
+
+/* ===================================
+   CTA BUTTON - FLUID
+   =================================== */
+.banner-322-cta {
+    display: inline-block;
+    padding: clamp(10px, 1.5vh, 14px) clamp(24px, 4vw, 40px);
+    background-color: var(--banner-322-orange);
+    color: var(--banner-322-white);
+    text-decoration: none;
+    border-radius: clamp(8px, 1vw, 10px);
+    font-size: clamp(1rem, 1.5vw, 1.375rem);
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.banner-322-cta:hover {
+    background-color: #e1a153;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.banner-322-terms {
+    font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+    color: #666;
+    margin-top: clamp(12px, 2vh, 24px);
+    font-style: italic;
+}
+
+/* ===================================
+   NAVIGATION ARROWS - ADAPTIVE
+   =================================== */
+.banner-322-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(32px, 4.5vw, 42px);
+    height: clamp(32px, 4.5vw, 42px);
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: clamp(4px, 0.5vw, 6px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #ffffff;
+}
+
+.banner-322-nav svg {
+    width: clamp(18px, 2.8vw, 22px);
+    height: clamp(18px, 2.8vw, 22px);
+}
+
+.banner-322-nav:hover {
+    background-color: rgba(0, 0, 0, 0.3 );
+    transform: translateY(-50%) scale(1.1);
+}
+
+.banner-322-prev {
+    left: clamp(10px, 2vw, 20px);
+}
+
+.banner-322-next {
+    right: clamp(10px, 2vw, 20px);
+}
+
+/* ===================================
+   DOTS INDICATOR - ADAPTIVE
+   =================================== */
+.banner-322-dots {
+    position: absolute;
+    bottom: clamp(20px, 4vh, 40px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: clamp(8px, 1.5vw, 12px);
+    z-index: 100;
+}
+
+.banner-322-dot {
+    width: clamp(30px, 5vw, 40px);
+    height: clamp(3px, 0.5vh, 4px);
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+.banner-322-dot.banner-322-dot-active {
+    background-color: var(--banner-322-orange);
+    width: clamp(40px, 6vw, 50px);
+}
+
+.banner-322-dot:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================
+   FLICKITY INTEGRATION
+   =================================== */
+.banner-322-container {
+    position: relative;
+}
+
+.banner-322-container.flickity-enabled {
+    position: relative;
+}
+
+.banner-322-container .flickity-viewport {
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.banner-322-container .flickity-slider {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.banner-322-container .banner-322-slide {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.banner-322-container .flickity-button {
+    display: none !important;
+}
+
+.banner-322-container.flickity-enabled.is-draggable {
+    -webkit-tap-highlight-color: transparent;
+    cursor: move;
+    cursor: grab;
+}
+
+.banner-322-container.flickity-enabled.is-draggable:active {
+    cursor: grabbing;
+}
+
+/* ===================================
+   RESPONSIVE BREAKPOINTS - MOBILE FIRST
+   =================================== */
+
+/* Tablet Landscape - 1024px (FULL SCREEN) */
+@media screen and (max-width: 1024px) {
+    .banner-322-section {
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+    }
+    
+    .banner-322-layout-1::before {
+        width: min(38%, 550px);
+    }
+    
+    .banner-322-layout-1 .banner-322-desktop-only {
+        width: clamp(250px, 40vw, 600px);
+    }
+}
+
+/* Tablet Portrait - 768px (FULL SCREEN) */
+@media screen and (max-width: 768px) {
+    .banner-322-section {
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+    }
+    
+    /* LAYOUT 1 - MOBILE MODE (FULL SCREEN) */
+    .banner-322-layout-1 {
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(40px, 8vw, 60px) clamp(20px, 4vw, 5%) clamp(80px, 12vh, 100px);
+        height: 100vh;
+        min-height: 100vh;
+    }
+    
+    .banner-322-layout-1::before {
+        width: 100%;
+    }
+    
+    .banner-322-layout-1::after {
+        display: none;
+    }
+    
+    /* Hide Desktop Image, Show Mobile Image */
+    .banner-322-layout-1 .banner-322-desktop-only {
+        display: none;
+    }
+    
+    .banner-322-layout-1 .banner-322-mobile-only {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin-bottom: clamp(20px, 4vh, 30px);
+        z-index: 50;
+    }
+    
+    .banner-322-layout-1 .banner-322-mobile-only .banner-322-image {
+        width: clamp(60%, 70vw, 350px);
+        height: auto;
+        max-height: 50vh;
+        display: block;
+        margin: 0 auto;
+        object-fit: contain;
+        filter: drop-shadow(clamp(10px, 2vw, 15px) clamp(10px, 2vw, 15px) clamp(20px, 4vw, 30px) rgba(0,0,0,0.25));
+    }
+    
+    .banner-322-layout-1 .banner-322-text-wrapper {
+        width: 100%;
+        margin-left: 0;
+        padding: 0;
+    }
+    
+    .banner-322-layout-1 .banner-322-title {
+        color: var(--banner-322-orange);
+    }
+    
+    .banner-322-layout-1 .banner-322-subtitle {
+        color: var(--banner-322-white);
+    }
+    
+    /* Layout 2 & 3 (FULL SCREEN MOBILE) */
+    .banner-322-content {
+        flex-direction: column;
+        padding: clamp(40px, 8vw, 60px) clamp(20px, 4vw, 5%) clamp(80px, 12vh, 100px);
+        justify-content: center;
+        height: 100vh;
+        min-height: 100vh;
+    }
+    
+    .banner-322-layout-2 .banner-322-image-wrapper,
+    .banner-322-layout-3 .banner-322-image-wrapper {
+        flex: 0 0 auto;
+        padding: 0;
+        margin-bottom: clamp(20px, 4vh, 30px);
+        width: 100%;
+    }
+    
+    .banner-322-layout-2 .banner-322-image,
+    .banner-322-layout-3 .banner-322-image {
+        max-height: min(45vh, 380px);
+        width: clamp(70%, 85vw, 90%);
+        margin: 0 auto;
+        display: block;
+    }
+    
+    .banner-322-layout-2 .banner-322-text-wrapper,
+    .banner-322-layout-3 .banner-322-text-wrapper {
+        flex: 0 0 auto;
+        padding: 0;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+    }
+    
+    /* Layout 3 - Mobile CTA Button Below Image */
+    .banner-322-layout-3 .banner-322-cta-desktop {
+        display: none;
+    }
+    
+    .banner-322-layout-3 .banner-322-cta-mobile {
+        display: inline-block;
+        width: auto;
+        margin: clamp(15px, 3vh, 20px) auto 0;
+    }
+}
+
+/* Mobile - 480px (FULL SCREEN) */
+@media screen and (max-width: 480px) {
+    .banner-322-section {
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+    }
+    
+    .banner-322-layout-1 {
+        padding: clamp(30px, 6vw, 50px) clamp(15px, 4vw, 4%) clamp(60px, 10vh, 80px);
+        height: 100vh;
+        min-height: 100vh;
+    }
+    
+    .banner-322-layout-1 .banner-322-mobile-only .banner-322-image {
+        width: clamp(55%, 60vw, 280px);
+        max-height: 45vh;
+    }
+    
+    .banner-322-content {
+        padding: clamp(30px, 6vw, 50px) clamp(15px, 4vw, 4%) clamp(60px, 10vh, 80px);
+        height: 100vh;
+        min-height: 100vh;
+    }
+    
+    .banner-322-layout-2 .banner-322-image,
+    .banner-322-layout-3 .banner-322-image {
+        max-height: min(40vh, 280px);
+        width: clamp(65%, 75vw, 85%);
+    }
+}
+
+/* Extra Small Mobile - 360px (FULL SCREEN) */
+@media screen and (max-width: 360px) {
+    .banner-322-section {
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+    }
+    
+    .banner-322-layout-1 .banner-322-mobile-only .banner-322-image {
+        width: clamp(50%, 55vw, 240px);
+        max-height: 40vh;
+    }
+    
+    .banner-322-layout-2 .banner-322-image,
+    .banner-322-layout-3 .banner-322-image {
+        max-height: min(35vh, 220px);
+        width: clamp(60%, 65vw, 75%);
+    }
+}
+
+/* High Resolution Displays (FULL SCREEN) */
+@media screen and (min-width: 1920px) {
+    .banner-322-section {
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+    }
+    
+    .banner-322-layout-1 .banner-322-desktop-only {
+        max-width: 800px;
+    }
+    
+    .banner-322-title {
+        font-size: clamp(3rem, 4vw, 5.5rem);
+    }
+    
+    .banner-322-subtitle {
+        font-size: clamp(1.5rem, 2vw, 3rem);
+    }
+}
+
+/* Safe Area for Notched Devices */
+@supports (padding: max(0px)) {
+    .banner-322-section {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+}

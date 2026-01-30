@@ -1,0 +1,282 @@
+/* ============================================
+   TOKODUS HOME - DESKTOP STYLES (224)
+   File: public/frontend/assets/css/home-desktop.css
+   ============================================ */
+
+/* Product Card Styles - Desktop 224 */
+.product-card-container-224 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.product-card-224 {
+    position: relative;
+    width: 260px;
+    height: 310px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card-224:hover {
+    height: 360px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.label-224 {
+    position: absolute;
+    left: -60px;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    background: #1f4390;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.4s ease;
+    z-index: 5;
+}
+
+.product-card-224:hover .label-224 {
+    left: 0;
+}
+
+.product-image-224 {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    margin-bottom: 10px;
+    transition: all 0.4s ease;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.product-card-224:hover .product-image-224 {
+    margin-left: 45px; 
+    width: calc(100% - 45px);
+}
+
+.product-image-224 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+}
+
+.hover-img-224 { 
+    opacity: 0; 
+}
+
+.product-card-224:hover .default-img-224 { 
+    opacity: 0; 
+}
+
+.product-card-224:hover .hover-img-224 { 
+    opacity: 1; 
+}
+
+.product-detail-224 {
+    flex-grow: 1;
+    transition: all 0.4s ease;
+    text-align: left;
+}
+
+.product-card-224:hover .product-detail-224 {
+    padding-left: 45px;
+}
+
+.product-header-224 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-title-224 { 
+    font-size: 0.85rem; 
+    color: #888; 
+}
+
+.ratings-224 { 
+    color: #ffcc00; 
+    font-size: 12px; 
+}
+
+.product-deskripsi-224 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1f4390;
+    margin: 8px 0;
+    text-align: center;
+}
+
+.icons-224 {
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: all 0.4s ease;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.product-card-224:hover .icons-224 {
+    opacity: 1;
+}
+
+.icon-224 { 
+    font-size: 16px; 
+    color: #888; 
+    cursor: pointer; 
+}
+
+.icon-224:hover { 
+    color: #1f4390; 
+}
+
+/* Recommended Product Slider - Desktop 224 */
+.recommended-slider-container-224 {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+}
+
+.recommended-slider-container-224.grabbing {
+    cursor: grabbing;
+}
+
+.recommended-slider-224 {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+    padding: 10px 0;
+}
+
+.recommended-slider-224 .product-card-224 {
+    flex: 0 0 220px;
+    width: 220px;
+    height: 310px;
+    min-width: 220px;
+}
+
+.recommended-slider-224 .product-card-224:hover {
+    height: 340px;
+}
+
+/* Promo Product Section - Desktop 224 */
+.promo-product-224 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.promo-wrapper-224 {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.promo-content-224 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.promo-title-container-224 {
+    display: inline-block;
+    text-align: center;
+}
+
+.countdown-224 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Special Edition Product Grid - Desktop 224 */
+.spesial-edition-container-224 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.product-grid-224 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Small Banner Container - Desktop 224 */
+.small-benner-container-224 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.small-benner1-224,
+.small-benner2-224 {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Service Section - Desktop 224 */
+.service-container-224 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Store Map Section - Desktop 224 */
+.map-dropdown-container-224 {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.map-container-224 {
+    flex: 1;
+    min-width: 400px;
+}
+
+.dropdown-store-info-224 {
+    flex: 1;
+    min-width: 300px;
+}
+
+#storeMap-224 {
+    width: 400px;
+    height: 450px;
+    border: 0;
+}
+
+/* Hide mobile-only elements on desktop */
+@media screen and (min-width: 769px) {
+    .mobile-only-223 {
+        display: none !important;
+    }
+}

@@ -1,0 +1,401 @@
+/* ==========================================================================
+   SECTION 440: OUR RECOMMENDED PRODUCT TITLE & COUNTDOWN - 440 PREFIX
+   ========================================================================== */
+
+/* Wrapper untuk alignment konsisten */
+.promo-product-440 > * {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.promo-product-440 {
+    position: relative;
+    width: 100%;
+    padding: clamp(40px, 8vw, 100px) 0 40px 0;
+    background-color: #eeeeef;
+}
+
+.promo-content-440 {
+    width: 100%;
+    margin-bottom: clamp(20px, 3vw, 30px);
+    box-sizing: border-box;
+    padding: 0;
+    position: absolute;
+    left: 10%;
+    top: 0;
+}
+
+.promo-title-container-440 {
+    display: block;
+    position: relative;
+    padding: 1rem 0;
+    box-sizing: border-box;
+    text-align: left;
+    width: 100%;
+}
+
+.promo-title-container-440 .promo-title-440 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #f7b963;
+    margin: 0;
+    text-align: left;
+}
+
+.promo-title-container-440 .promo-deskripsi-440 {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 400;
+    color: #000;
+    margin: 0;
+    text-align: left;
+}
+
+.promo-title-container-440 span {
+    font-weight: 700;
+    color: #1f4390;
+}
+
+/* ------- Countdown Section - FIXED POSITIONING ----- */
+.countdown-440 {
+    width: clamp(12rem, 20vw, 15rem);
+    background-color: #f7b963;
+    border-radius: 15px;
+    padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 15px);
+    font-size: clamp(13px, 1.5vw, 15px);
+    font-weight: bold;
+    color: #1f4390;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    position: absolute;
+    right: calc(10% + 20px) !important;
+    bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1px, 0.5vw, 1px);
+}
+
+.countdown-440 .days-440,
+.countdown-440 .time-440 {
+    color: #fff;
+    font-size: clamp(13px, 1.5vw, 15px);
+}
+
+.countdown-440 span:not(.days-440) {
+    font-size: clamp(13px, 1.5vw, 15px);
+    color: #fff;
+}
+
+/* ROOT VARIABLES */
+:root {
+    --container-margin-440: 10%;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS - SECTION 440
+   ========================================================================== */
+
+/* Extra Large Desktop - 1920px+ */
+@media (min-width: 1920px) {
+    :root {
+        --container-margin-440: 10%;
+    }
+}
+
+/* Laptop - 1024px to 1199px */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    :root {
+        --container-margin-440: 10%;
+    }
+}
+
+/* Tablet Large - 900px to 1023px */
+@media (min-width: 900px) and (max-width: 1023px) {
+    .promo-content-440 {
+        left: 11%;
+    }
+    
+    .promo-title-container-440 {
+        padding: 1rem 0;
+    }
+    
+    .countdown-440 {
+        right: calc(11% + 20px) !important;
+    }
+}
+
+/* Tablet - 768px to 899px */
+@media (min-width: 768px) and (max-width: 899px) {
+    .promo-content-440 {
+        left: 8%;
+    }
+    
+    .promo-title-container-440 {
+        padding: 1rem 0;
+    }
+    
+    .promo-title-container-440 .promo-title-440 {
+        font-size: clamp(1.5rem, 5vw, 2.5rem);
+    }
+
+    .promo-title-container-440 .promo-deskripsi-440 {
+        font-size: clamp(0.875rem, 2.5vw, 1.25rem);
+    }
+
+    .countdown-440 {
+        width: clamp(11rem, 25vw, 13rem);
+        padding: clamp(6px, 2vw, 8px) clamp(10px, 2.5vw, 12px);
+        font-size: clamp(11px, 2vw, 13px);
+        right: calc(8% + 20px) !important;
+    }
+
+    .countdown-440 .days-440,
+    .countdown-440 .time-440,
+    .countdown-440 span:not(.days-440) {
+        font-size: clamp(11px, 2vw, 13px);
+    }
+}
+
+/* Mobile Large - 600px to 767px */
+@media (min-width: 600px) and (max-width: 767px) {
+    :root {
+        --container-margin-440: 5%;
+    }
+    
+    .promo-product-440 {
+        padding: 20px 0 !important;
+    }
+    
+    .promo-content-440 {
+        position: relative !important;
+        left: 0 !important;
+        width: 100% !important;
+        padding: 12px 5% !important;
+    }
+    
+    .promo-title-container-440 {
+        padding: 12px 0 !important;
+        text-align: center !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .promo-title-container-440 .promo-title-440 {
+        font-size: 32px !important;
+        text-align: center !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .promo-title-container-440 .promo-deskripsi-440 {
+        font-size: 16px !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .countdown-440 {
+        position: relative !important;
+        width: 240px !important;
+        max-width: 90% !important;
+        font-size: 13px !important;
+        margin: 20px auto 0 auto !important;
+        padding: 10px 15px !important;
+        left: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        display: flex !important;
+    }
+    
+    .countdown-440 .days-440,
+    .countdown-440 .time-440,
+    .countdown-440 span:not(.days-440) {
+        font-size: 13px !important;
+    }
+}
+
+/* Mobile - 440px to 599px */
+@media (min-width: 440px) and (max-width: 599px) {
+    :root {
+        --container-margin-440: 5%;
+    }
+    
+    .promo-product-440 {
+        padding: 15px 0 !important;
+    }
+    
+    .promo-content-440 {
+        position: relative !important;
+        left: 0 !important;
+        width: 100% !important;
+        padding: 12px 5% !important;
+    }
+    
+    .promo-title-container-440 {
+        padding: 12px 0 !important;
+        text-align: center !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .promo-title-container-440 .promo-title-440 {
+        font-size: 30px !important;
+        text-align: center !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .promo-title-container-440 .promo-deskripsi-440 {
+        font-size: 15px !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .countdown-440 {
+        position: relative !important;
+        width: 240px !important;
+        max-width: 90% !important;
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+        margin: 20px auto 0 auto !important;
+        left: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        gap: 1px !important;
+        display: flex !important;
+    }
+    
+    .countdown-440 .days-440,
+    .countdown-440 .time-440,
+    .countdown-440 span:not(.days-440) {
+        font-size: 13px !important;
+    }
+}
+
+/* Mobile Small - 380px to 439px */
+@media (min-width: 380px) and (max-width: 439px) {
+    :root {
+        --container-margin-440: 5%;
+    }
+    
+    .promo-product-440 {
+        padding: 10px 0 !important;
+    }
+    
+    .promo-content-440 {
+        position: relative !important;
+        left: 0 !important;
+        width: 100% !important;
+        padding: 12px 5% !important;
+    }
+    
+    .promo-title-container-440 {
+        padding: 12px 0 !important;
+        text-align: center !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .promo-title-container-440 .promo-title-440 {
+        font-size: 28px !important;
+        text-align: center !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .promo-title-container-440 .promo-deskripsi-440 {
+        font-size: 14px !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .countdown-440 {
+        position: relative !important;
+        width: 260px !important;
+        max-width: 85% !important;
+        font-size: 12px !important;
+        margin: 18px auto 0 auto !important;
+        left: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        gap: 1px !important;
+        display: flex !important;
+    }
+
+    .countdown-440 .days-440,
+    .countdown-440 .time-440,
+    .countdown-440 span:not(.days-440) {
+        font-size: 12px !important;
+    }
+}
+
+/* Mobile Extra Small - below 380px */
+@media (max-width: 379px) {
+    :root {
+        --container-margin-440: 4%;
+    }
+    
+    .promo-product-440 {
+        padding: 5px 0 !important;
+    }
+    
+    .promo-content-440 {
+        position: relative !important;
+        left: 0 !important;
+        width: 100% !important;
+        padding: 8px 4% !important;
+    }
+    
+    .promo-title-container-440 {
+        padding: 8px 0 !important;
+        text-align: center !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .promo-title-container-440 .promo-title-440 {
+        font-size: 26px !important;
+        text-align: center !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .promo-title-container-440 .promo-deskripsi-440 {
+        font-size: 13px !important;
+        text-align: center !important;
+        margin-top: 6px !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .countdown-440 {
+        position: relative !important;
+        width: 270px !important;
+        max-width: 85% !important;
+        font-size: 11px !important;
+        margin: 15px auto 0 auto !important;
+        left: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        display: flex !important;
+    }
+
+    .countdown-440 .days-440,
+    .countdown-440 .time-440,
+    .countdown-440 span:not(.days-440) {
+        font-size: 11px !important;
+    }
+}

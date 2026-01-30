@@ -1,0 +1,173 @@
+/* ========================================
+   SECTION 7: SERVICE SECTION CSS
+   ======================================== */
+
+/* Service Container */
+.service {
+  width: 100%;
+  background-color: #1f4390;
+  padding: 20px 0;
+}
+
+.service-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Service Items */
+.produsen,
+.stanby,
+.cs,
+.ongkir,
+.garansi,
+.return {
+  flex: 1;
+  max-width: 150px;
+  min-width: 120px;
+  margin: 0 10px;
+  text-align: center;
+  color: #eeeeef;
+  transition: transform 0.3s ease;
+}
+
+.produsen:hover,
+.stanby:hover,
+.cs:hover,
+.ongkir:hover,
+.garansi:hover,
+.return:hover {
+  transform: translateY(-5px);
+}
+
+/* Service Images */
+.produsen img,
+.stanby img,
+.cs img,
+.ongkir img,
+.garansi img,
+.return img {
+  width: 50%;
+  height: auto;
+  margin-bottom: 10px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+.produsen:hover img,
+.stanby:hover img,
+.cs:hover img,
+.ongkir:hover img,
+.garansi:hover img,
+.return:hover img {
+  transform: scale(1.1);
+}
+
+/* Service Text */
+.produsen p,
+.stanby p,
+.cs p,
+.ongkir p,
+.garansi p,
+.return p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media screen and (max-width: 1024px) {
+  .service-container {
+    gap: 15px;
+  }
+
+  .produsen,
+  .stanby,
+  .cs,
+  .ongkir,
+  .garansi,
+  .return {
+    max-width: 140px;
+  }
+
+  .produsen p,
+  .stanby p,
+  .cs p,
+  .ongkir p,
+  .garansi p,
+  .return p {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .service-container {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .produsen,
+  .stanby,
+  .cs,
+  .ongkir,
+  .garansi,
+  .return {
+    max-width: 130px;
+  }
+
+  .produsen p,
+  .stanby p,
+  .cs p,
+  .ongkir p,
+  .garansi p,
+  .return p {
+    font-size: 12px;
+  }
+}
+
+/* Mobile Resolution */
+@media only screen and (max-width: 440px) {
+  .service-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .produsen,
+  .stanby,
+  .cs,
+  .ongkir,
+  .garansi,
+  .return {
+    max-width: 100%;
+    margin: 10%;
+    text-align: center;
+  }
+
+  .produsen img,
+  .stanby img,
+  .cs img,
+  .ongkir img,
+  .garansi img,
+  .return img {
+    width: 30%;
+  }
+
+  .produsen p,
+  .stanby p,
+  .cs p,
+  .ongkir p,
+  .garansi p,
+  .return p {
+    font-size: 12px;
+  }
+}

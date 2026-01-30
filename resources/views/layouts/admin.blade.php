@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? 'TokoDus Admin' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('Logo.svg') }}">
@@ -31,6 +32,42 @@
             background-color: #f8f9fc;
         }
 
+/* Force all text to be solid black */
+.text-muted,
+.text-gray-600,
+.text-gray-700,
+.text-secondary {
+    color: #212529 !important; /* Solid black */
+}
+
+/* Khusus untuk small text */
+small.text-muted {
+    color: #212529 !important;
+    font-weight: 500;
+}
+
+/* Badge text */
+.badge {
+    font-weight: 600;
+}
+
+/* Card body text */
+.card-body small,
+.card-body span:not(.badge) {
+    color: #212529 !important;
+}
+
+/* Table text */
+table td,
+table th {
+    color: #212529 !important;
+}
+
+/* Khusus untuk info tambahan tetap abu tapi lebih gelap */
+.text-muted.keep-gray {
+    color: #495057 !important; /* Dark gray instead of light gray */
+}
+        
         /* ============================================
            TOPBAR STYLES
            ============================================ */

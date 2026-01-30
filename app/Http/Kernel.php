@@ -68,5 +68,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\IsAdmin::class,
         'user' => \App\Http\Middleware\IsUser::class,
         'role' => \App\Http\Middleware\CheckRole::class,
+        'customer.auth' => \App\Http\Middleware\CustomerAuth::class, // NEW
+        'verified.customer' => \App\Http\Middleware\EnsureCustomerEmailIsVerified::class,  // ✅ TAMBAH INI
     ];
 }

@@ -1,0 +1,1290 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 428976 bytes. Error detail: Chunk::new
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (arena.cpp:150), pid=3744, tid=2288
+#
+# JRE version: Java(TM) SE Runtime Environment (22.0+36) (build 22+36-2370)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (22+36-2370, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dlog4j2.configurationFile=file:\\\c:/Users/ACEL/Downloads/sebelumpecahvariant/.rmv/config/log4j2.properties c:\Users\ACEL\.vscode\extensions\rocketsoftware.rocket-mvbasic-2.8.1\server\ls4b.jar offline system UniVerse
+
+Host: Intel(R) Core(TM) i3-7100U CPU @ 2.40GHz, 4 cores, 5G,  Windows 10 , 64 bit Build 19041 (10.0.19041.5915)
+Time: Wed Jan  7 01:03:41 2026 SE Asia Standard Time elapsed time: 47.056381 seconds (0d 0h 0m 47s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001ac9ebd07a0):  JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=2288, stack(0x0000003187f00000,0x0000003188000000) (1024K)]
+
+
+Current CompileTask:
+C2:47056 3100       4       java.lang.String::split (242 bytes)
+
+Stack: [0x0000003187f00000,0x0000003188000000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6e2349]  (no source info available)
+V  [jvm.dll+0x874ed3]  (no source info available)
+V  [jvm.dll+0x8772fe]  (no source info available)
+V  [jvm.dll+0x8779d3]  (no source info available)
+V  [jvm.dll+0x27fcb6]  (no source info available)
+V  [jvm.dll+0xc3d0f]  (no source info available)
+V  [jvm.dll+0xc3f6b]  (no source info available)
+V  [jvm.dll+0x3bb022]  (no source info available)
+V  [jvm.dll+0x387abb]  (no source info available)
+V  [jvm.dll+0x386f2a]  (no source info available)
+V  [jvm.dll+0x247908]  (no source info available)
+V  [jvm.dll+0x246faf]  (no source info available)
+V  [jvm.dll+0x1c4e90]  (no source info available)
+V  [jvm.dll+0x25699e]  (no source info available)
+V  [jvm.dll+0x254c5a]  (no source info available)
+V  [jvm.dll+0x3f5426]  (no source info available)
+V  [jvm.dll+0x81d50b]  (no source info available)
+V  [jvm.dll+0x6e09e5]  (no source info available)
+C  [ucrtbase.dll+0x21bb2]  (no source info available)
+C  [KERNEL32.DLL+0x17374]  (no source info available)
+C  [ntdll.dll+0x4cc91]  (no source info available)
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001ace4297890, length=532, elements={
+0x000001ac815c0eb0, 0x000001ac9ebc8d10, 0x000001ac9ebc9be0, 0x000001ac9ebcbc20,
+0x000001ac9ebcce20, 0x000001ac9ebce230, 0x000001ac9ebcef10, 0x000001ac9ebd07a0,
+0x000001ac9ebdb3f0, 0x000001ace40d9390, 0x000001ace40dc220, 0x000001ace44ac8b0,
+0x000001ace48029d0, 0x000001ace57a6890, 0x000001ace5596710, 0x000001ace5e9d000,
+0x000001ace5a2a010, 0x000001ace5a2a680, 0x000001ace4bfd130, 0x000001ace45cf060,
+0x000001ace45d1e50, 0x000001ace45d0410, 0x000001ace45d17c0, 0x000001ace45d0aa0,
+0x000001ace45cf6f0, 0x000001ace45cfd80, 0x000001ace45d1130, 0x000001ace45d24e0,
+0x000001ace408a6f0, 0x000001ace4088cb0, 0x000001ace4086550, 0x000001ace4085ec0,
+0x000001ace4086be0, 0x000001ace4087270, 0x000001ace408b410, 0x000001ace4087900,
+0x000001ace4087f90, 0x000001ace4088620, 0x000001ace40899d0, 0x000001ace408baa0,
+0x000001ace408c130, 0x000001ace4089340, 0x000001ace408a060, 0x000001ace408ad80,
+0x000001ace408c7c0, 0x000001ace4085830, 0x000001ace408ce50, 0x000001ace4210540,
+0x000001ace4212610, 0x000001ace4215400, 0x000001ace4211260, 0x000001ace42146e0,
+0x000001ace4210bd0, 0x000001ace42167b0, 0x000001ace42139c0, 0x000001ace420feb0,
+0x000001ace42118f0, 0x000001ace4211f80, 0x000001ace4212ca0, 0x000001ace4216120,
+0x000001ace4215a90, 0x000001ace4214050, 0x000001ace4214d70, 0x000001ace420f820,
+0x000001ace4213330, 0x000001ace4216e40, 0x000001ace462c440, 0x000001ace4628930,
+0x000001ace462bdb0, 0x000001ace462de80, 0x000001ace462e510, 0x000001ace462b720,
+0x000001ace4627580, 0x000001ace462eba0, 0x000001ace4627c10, 0x000001ace462cad0,
+0x000001ace462d160, 0x000001ace4629ce0, 0x000001ace46282a0, 0x000001ace4628fc0,
+0x000001ace4629650, 0x000001ace462d7f0, 0x000001ace462aa00, 0x000001ace462a370,
+0x000001ace462b090, 0x000001ace450b950, 0x000001ace4506400, 0x000001ace4508b60,
+0x000001ace45077b0, 0x000001ace4509880, 0x000001ace4509f10, 0x000001ace450a5a0,
+0x000001ace450bfe0, 0x000001ace4505050, 0x000001ace45056e0, 0x000001ace4507e40,
+0x000001ace450ac30, 0x000001ace450c670, 0x000001ace45091f0, 0x000001ace4505d70,
+0x000001ace4506a90, 0x000001ace4507120, 0x000001ace45084d0, 0x000001ace450b2c0,
+0x000001ace404bf30, 0x000001ace40497d0, 0x000001ace404c5c0, 0x000001ace4047070,
+0x000001ace404b8a0, 0x000001ace404cc50, 0x000001ace404e690, 0x000001ace4049140,
+0x000001ace4047700, 0x000001ace4047d90, 0x000001ace404a4f0, 0x000001ace404d2e0,
+0x000001ace4048ab0, 0x000001ace404ab80, 0x000001ace4049e60, 0x000001ace404d970,
+0x000001ace404b210, 0x000001ace404e000, 0x000001ace4048420, 0x000001ace4050430,
+0x000001ace40517e0, 0x000001ace4053220, 0x000001ace40552f0, 0x000001ace404f080,
+0x000001ace40538b0, 0x000001ace4052500, 0x000001ace4053f40, 0x000001ace40545d0,
+0x000001ace4056010, 0x000001ace4052b90, 0x000001ace4051e70, 0x000001ace40566a0,
+0x000001ace404f710, 0x000001ace404fda0, 0x000001ace4050ac0, 0x000001ace4054c60,
+0x000001ace4055980, 0x000001ace4051150, 0x000001ace483ea40, 0x000001ace483d000,
+0x000001ace483a8a0, 0x000001ace483c2e0, 0x000001ace483f0d0, 0x000001ace483af30,
+0x000001ace483f760, 0x000001ace483fdf0, 0x000001ace483d690, 0x000001ace4840480,
+0x000001ace4841830, 0x000001ace483dd20, 0x000001ace48411a0, 0x000001ace4840b10,
+0x000001ace4841ec0, 0x000001ace483b5c0, 0x000001ace483bc50, 0x000001ace483e3b0,
+0x000001ace483c970, 0x000001ace4727e70, 0x000001ace4723640, 0x000001ace4724360,
+0x000001ace4725da0, 0x000001ace4725710, 0x000001ace4723cd0, 0x000001ace4725080,
+0x000001ace4728500, 0x000001ace4722920, 0x000001ace4721570, 0x000001ace47249f0,
+0x000001ace4726430, 0x000001ace4727150, 0x000001ace4726ac0, 0x000001ace4721c00,
+0x000001ace47277e0, 0x000001ace4728b90, 0x000001ace4722290, 0x000001ace4722fb0,
+0x000001ace48463c0, 0x000001ace4844980, 0x000001ace48442f0, 0x000001ace4846a50,
+0x000001ace48470e0, 0x000001ace4847770, 0x000001ace4847e00, 0x000001ace4848b20,
+0x000001ace4848490, 0x000001ace48435d0, 0x000001ace48491b0, 0x000001ace4849840,
+0x000001ace48428b0, 0x000001ace4849ed0, 0x000001ace4842f40, 0x000001ace4843c60,
+0x000001ace484a560, 0x000001ace484abf0, 0x000001ace484b280, 0x000001ace484b910,
+0x000001ace484bfa0, 0x000001ace4845010, 0x000001ace484c630, 0x000001ace484ccc0,
+0x000001ace48456a0, 0x000001ace4845d30, 0x000001ace484f420, 0x000001ace484d350,
+0x000001ace4850140, 0x000001ace484d9e0, 0x000001ace484e070, 0x000001ace484e700,
+0x000001ace48507d0, 0x000001ace484ed90, 0x000001ace484fab0, 0x000001ace4850e60,
+0x000001ace48514f0, 0x000001ace4851b80, 0x000001ace5201ff0, 0x000001ace51fbd80,
+0x000001ace5202680, 0x000001ace5202d10, 0x000001ace5200c40, 0x000001ace52012d0,
+0x000001ace52033a0, 0x000001ace51fcaa0, 0x000001ace51fc410, 0x000001ace51fd130,
+0x000001ace52040c0, 0x000001ace5203a30, 0x000001ace51ff200, 0x000001ace5204750,
+0x000001ace5201960, 0x000001ace51fff20, 0x000001ace51feb70, 0x000001ace51ff890,
+0x000001ace52005b0, 0x000001ace51fd7c0, 0x000001ace5204de0, 0x000001ace51fde50,
+0x000001ace5205470, 0x000001ace51fe4e0, 0x000001ace5207bd0, 0x000001ace5208260,
+0x000001ace52088f0, 0x000001ace5206820, 0x000001ace5205b00, 0x000001ace5206190,
+0x000001ace5208f80, 0x000001ace5206eb0, 0x000001ace5209610, 0x000001ace5209ca0,
+0x000001ace5207540, 0x000001ace520a330, 0x000001ace520a9c0, 0x000001ace520b050,
+0x000001ace423f320, 0x000001ace423d8e0, 0x000001ace423d250, 0x000001ace423c530,
+0x000001ace423e600, 0x000001ace423df70, 0x000001ace423bea0, 0x000001ace423f9b0,
+0x000001ace4240040, 0x000001ace423ec90, 0x000001ace42406d0, 0x000001ace4242110,
+0x000001ace4240d60, 0x000001ace42413f0, 0x000001ace4241a80, 0x000001ace423cbc0,
+0x000001ace42427a0, 0x000001ace423b810, 0x000001ace4248a10, 0x000001ace4247cf0,
+0x000001ace4248380, 0x000001ace4246fd0, 0x000001ace4246940, 0x000001ace42441e0,
+0x000001ace4242e30, 0x000001ace4245590, 0x000001ace4249dc0, 0x000001ace42490a0,
+0x000001ace4249730, 0x000001ace4244f00, 0x000001ace42434c0, 0x000001ace4243b50,
+0x000001ace424a450, 0x000001ace424aae0, 0x000001ace4247660, 0x000001ace4244870,
+0x000001ace4245c20, 0x000001ace42462b0, 0x000001ace5d394f0, 0x000001ace5d3a210,
+0x000001ace5d3c970, 0x000001ace5d39b80, 0x000001ace5d38e60, 0x000001ace5d37420,
+0x000001ace5d3a8a0, 0x000001ace5d3af30, 0x000001ace5d38140, 0x000001ace5d3b5c0,
+0x000001ace5d3bc50, 0x000001ace5d36070, 0x000001ace5d3d000, 0x000001ace5d3d690,
+0x000001ace5d3c2e0, 0x000001ace5d36700, 0x000001ace5d3dd20, 0x000001ace5d387d0,
+0x000001ace5d37ab0, 0x000001ace5d36d90, 0x000001ace5d3f760, 0x000001ace5d43f90,
+0x000001ace5d43900, 0x000001ace5d3fdf0, 0x000001ace5d40b10, 0x000001ace5d44cb0,
+0x000001ace5d40480, 0x000001ace5d411a0, 0x000001ace5d41830, 0x000001ace5d42550,
+0x000001ace5d41ec0, 0x000001ace5d42be0, 0x000001ace5d43270, 0x000001ace5d44620,
+0x000001ace5d45340, 0x000001ace5d3e3b0, 0x000001ace5d3ea40, 0x000001ace5d3f0d0,
+0x000001ace575c530, 0x000001ace575ec90, 0x000001ace575f320, 0x000001ace575b810,
+0x000001ace575a460, 0x000001ace575b180, 0x000001ace575bea0, 0x000001ace575d250,
+0x000001ace575df70, 0x000001ace575d8e0, 0x000001ace575e600, 0x000001ace575aaf0,
+0x000001ace575cbc0, 0x000001ace5746960, 0x000001ace5746ff0, 0x000001ace5740060,
+0x000001ace5742130, 0x000001ace57406f0, 0x000001ace57427c0, 0x000001ace5741410,
+0x000001ace5740d80, 0x000001ace5741aa0, 0x000001ace5744890, 0x000001ace5748a30,
+0x000001ace57434e0, 0x000001ace57483a0, 0x000001ace5744f20, 0x000001ace5744200,
+0x000001ace57455b0, 0x000001ace5745c40, 0x000001ace5749750, 0x000001ace5742e50,
+0x000001ace57462d0, 0x000001ace5747680, 0x000001ace5743b70, 0x000001ace574df80,
+0x000001ace574d260, 0x000001ace574a470, 0x000001ace574e610, 0x000001ace574eca0,
+0x000001ace574b190, 0x000001ace57490c0, 0x000001ace5749de0, 0x000001ace574ab00,
+0x000001ace5747d10, 0x000001ace57527b0, 0x000001ace574beb0, 0x000001ace574f330,
+0x000001ace574b820, 0x000001ace5752120, 0x000001ace574f9c0, 0x000001ace5751400,
+0x000001ace5750050, 0x000001ace57506e0, 0x000001ace5751a90, 0x000001ace574cbd0,
+0x000001ace5752e40, 0x000001ace57534d0, 0x000001ace5750d70, 0x000001ace574c540,
+0x000001ace57541f0, 0x000001ace5753b60, 0x000001ace5754880, 0x000001ace574d8f0,
+0x000001ace5758a20, 0x000001ace5754f10, 0x000001ace5756fe0, 0x000001ace5757670,
+0x000001ace5759740, 0x000001ace5759dd0, 0x000001ace57555a0, 0x000001ace5755c30,
+0x000001ace5757d00, 0x000001ace57562c0, 0x000001ace5756950, 0x000001ace5758390,
+0x000001ace57590b0, 0x000001ace56eaf60, 0x000001ace56e9520, 0x000001ace56ec310,
+0x000001ace56eb5f0, 0x000001ace56e9bb0, 0x000001ace56ea240, 0x000001ace56e8800,
+0x000001ace56ed6c0, 0x000001ace56e6730, 0x000001ace56e6dc0, 0x000001ace56ea8d0,
+0x000001ace56e7ae0, 0x000001ace56e8170, 0x000001ace56ebc80, 0x000001ace56ed030,
+0x000001ace56ec9a0, 0x000001ace56e7450, 0x000001ace56edd50, 0x000001ace56ee3e0,
+0x000001ace56eea70, 0x000001ace56efe20, 0x000001ace56ef100, 0x000001ace56ef790,
+0x000001ace56e8e90, 0x000001ace56f4650, 0x000001ace56f2c10, 0x000001ace56f1ef0,
+0x000001ace56f1860, 0x000001ace56f4ce0, 0x000001ace56f04b0, 0x000001ace56f2580,
+0x000001ace56f32a0, 0x000001ace56f3930, 0x000001ace56f3fc0, 0x000001ace56f7ad0,
+0x000001ace56f6090, 0x000001ace56f6db0, 0x000001ace56f6720, 0x000001ace56f5a00,
+0x000001ace56f0b40, 0x000001ace56f5370, 0x000001ace56f7440, 0x000001ace56f8160,
+0x000001ace56f11d0, 0x000001ace56ff780, 0x000001ace56fdd40, 0x000001ace56fd020,
+0x000001ace56fd6b0, 0x000001ace56fe3d0, 0x000001ace56f8e80, 0x000001ace56f9510,
+0x000001ace56fc990, 0x000001ace56fea60, 0x000001ace56fa8c0, 0x000001ace56fc300,
+0x000001ace56f9ba0, 0x000001ace56faf50, 0x000001ace56fa230, 0x000001ace56fb5e0,
+0x000001ace56ff0f0, 0x000001ace56fbc70, 0x000001ace56f87f0, 0x000001ace56ffe10,
+0x000001ace57004a0, 0x000001ace5705360, 0x000001ace57059f0, 0x000001ace5704cd0,
+0x000001ace5700b30, 0x000001ace5702c00, 0x000001ace5703920, 0x000001ace57011c0,
+0x000001ace5701850, 0x000001ace5703290, 0x000001ace5703fb0, 0x000001ace5701ee0,
+0x000001ace5702570, 0x000001ace5704640, 0x000001ace5ab4640, 0x000001ace5ab8150,
+0x000001ace5ab6710, 0x000001ace5ab4cd0, 0x000001ace5ab6da0, 0x000001ace5ab9b90,
+0x000001ace5ab7ac0, 0x000001ace5ab5360, 0x000001ace5ab59f0, 0x000001ace5ab9500,
+0x000001ace5aba220, 0x000001ace5ab7430, 0x000001ace5ab6080, 0x000001ace5ab3290,
+0x000001ace5ab87e0, 0x000001ace5ab3920, 0x000001ace5aba8b0, 0x000001ace5ab8e70,
+0x000001ace5abaf40, 0x000001ace5ab3fb0, 0x000001ace5abc980, 0x000001ace5ac0b20,
+0x000001ace5abe3c0, 0x000001ace5abf770, 0x000001ace5abdd30, 0x000001ace5abb5d0,
+0x000001ace5abf0e0, 0x000001ace5abea50, 0x000001ace5ac11b0, 0x000001ace5abbc60,
+0x000001ace5ac2bf0, 0x000001ace5ac1840, 0x000001ace5abfe00, 0x000001ace5ac0490,
+0x000001ace5ac1ed0, 0x000001ace5ac2560, 0x000001ace5abd010, 0x000001ace5ac3280,
+0x000001ace5abc2f0, 0x000001ace5ac3910, 0x000001ace5ac3fa0, 0x000001ace5ac4630,
+0x000001ace5abd6a0, 0x000001ace5ac8e60, 0x000001ace5ac59e0, 0x000001ace5ac8140
+}
+
+Java Threads: ( => current thread )
+  0x000001ac815c0eb0 JavaThread "main"                              [_thread_blocked, id=10036, stack(0x0000003187100000,0x0000003187200000) (1024K)]
+  0x000001ac9ebc8d10 JavaThread "Reference Handler"          daemon [_thread_blocked, id=6964, stack(0x0000003187900000,0x0000003187a00000) (1024K)]
+  0x000001ac9ebc9be0 JavaThread "Finalizer"                  daemon [_thread_blocked, id=1712, stack(0x0000003187a00000,0x0000003187b00000) (1024K)]
+  0x000001ac9ebcbc20 JavaThread "Signal Dispatcher"          daemon [_thread_blocked, id=2100, stack(0x0000003187b00000,0x0000003187c00000) (1024K)]
+  0x000001ac9ebcce20 JavaThread "Attach Listener"            daemon [_thread_blocked, id=2344, stack(0x0000003187c00000,0x0000003187d00000) (1024K)]
+  0x000001ac9ebce230 JavaThread "Service Thread"             daemon [_thread_blocked, id=2348, stack(0x0000003187d00000,0x0000003187e00000) (1024K)]
+  0x000001ac9ebcef10 JavaThread "Monitor Deflation Thread"   daemon [_thread_blocked, id=2848, stack(0x0000003187e00000,0x0000003187f00000) (1024K)]
+=>0x000001ac9ebd07a0 JavaThread "C2 CompilerThread0"         daemon [_thread_in_native, id=2288, stack(0x0000003187f00000,0x0000003188000000) (1024K)]
+  0x000001ac9ebdb3f0 JavaThread "C1 CompilerThread0"         daemon [_thread_blocked, id=6384, stack(0x0000003188000000,0x0000003188100000) (1024K)]
+  0x000001ace40d9390 JavaThread "Notification Thread"        daemon [_thread_blocked, id=2536, stack(0x0000003188100000,0x0000003188200000) (1024K)]
+  0x000001ace40dc220 JavaThread "Common-Cleaner"             daemon [_thread_blocked, id=5992, stack(0x0000003188200000,0x0000003188300000) (1024K)]
+  0x000001ace44ac8b0 JavaThread "Log4j2-TF-3-Scheduled-1"    daemon [_thread_blocked, id=2924, stack(0x0000003188600000,0x0000003188700000) (1024K)]
+  0x000001ace48029d0 JavaThread "pool-3-thread-1"                   [_thread_in_native, id=5920, stack(0x0000003188700000,0x0000003188800000) (1024K)]
+  0x000001ace57a6890 JavaThread "Timer-0"                           [_thread_blocked, id=9344, stack(0x0000003186f00000,0x0000003187000000) (1024K)]
+  0x000001ace5596710 JavaThread "Timer-1"                           [_thread_blocked, id=3576, stack(0x0000003188800000,0x0000003188900000) (1024K)]
+  0x000001ace5e9d000 JavaThread "Timer-2"                           [_thread_blocked, id=14244, stack(0x0000003188900000,0x0000003188a00000) (1024K)]
+  0x000001ace5a2a010 JavaThread "Timer-3"                           [_thread_blocked, id=6512, stack(0x0000003188a00000,0x0000003188b00000) (1024K)]
+  0x000001ace5a2a680 JavaThread "Timer-4"                           [_thread_blocked, id=8568, stack(0x0000003188c00000,0x0000003188d00000) (1024K)]
+  0x000001ace4bfd130 JavaThread "Timer-5"                           [_thread_blocked, id=9680, stack(0x0000003188d00000,0x0000003188e00000) (1024K)]
+  0x000001ace45cf060 JavaThread "Timer-6"                           [_thread_blocked, id=8572, stack(0x0000003188e00000,0x0000003188f00000) (1024K)]
+  0x000001ace45d1e50 JavaThread "Timer-7"                           [_thread_blocked, id=2384, stack(0x0000003188f00000,0x0000003189000000) (1024K)]
+  0x000001ace45d0410 JavaThread "Timer-8"                           [_thread_blocked, id=3788, stack(0x0000003189000000,0x0000003189100000) (1024K)]
+  0x000001ace45d17c0 JavaThread "Timer-9"                           [_thread_blocked, id=8460, stack(0x0000003189100000,0x0000003189200000) (1024K)]
+  0x000001ace45d0aa0 JavaThread "Timer-10"                          [_thread_blocked, id=3580, stack(0x0000003189200000,0x0000003189300000) (1024K)]
+  0x000001ace45cf6f0 JavaThread "Timer-11"                          [_thread_blocked, id=7548, stack(0x0000003189300000,0x0000003189400000) (1024K)]
+  0x000001ace45cfd80 JavaThread "Timer-12"                          [_thread_blocked, id=13556, stack(0x0000003189500000,0x0000003189600000) (1024K)]
+  0x000001ace45d1130 JavaThread "Timer-13"                          [_thread_blocked, id=2016, stack(0x0000003189600000,0x0000003189700000) (1024K)]
+  0x000001ace45d24e0 JavaThread "Timer-14"                          [_thread_blocked, id=1696, stack(0x0000003189700000,0x0000003189800000) (1024K)]
+  0x000001ace408a6f0 JavaThread "Timer-15"                          [_thread_blocked, id=1640, stack(0x0000003189800000,0x0000003189900000) (1024K)]
+  0x000001ace4088cb0 JavaThread "Timer-16"                          [_thread_blocked, id=3364, stack(0x0000003189900000,0x0000003189a00000) (1024K)]
+  0x000001ace4086550 JavaThread "Timer-17"                          [_thread_blocked, id=4420, stack(0x0000003189a00000,0x0000003189b00000) (1024K)]
+  0x000001ace4085ec0 JavaThread "Timer-18"                          [_thread_blocked, id=13224, stack(0x0000003189b00000,0x0000003189c00000) (1024K)]
+  0x000001ace4086be0 JavaThread "Timer-19"                          [_thread_blocked, id=3012, stack(0x0000003189c00000,0x0000003189d00000) (1024K)]
+  0x000001ace4087270 JavaThread "Timer-20"                          [_thread_blocked, id=3696, stack(0x0000003189d00000,0x0000003189e00000) (1024K)]
+  0x000001ace408b410 JavaThread "Timer-21"                          [_thread_blocked, id=13888, stack(0x0000003189e00000,0x0000003189f00000) (1024K)]
+  0x000001ace4087900 JavaThread "Timer-22"                          [_thread_blocked, id=9460, stack(0x0000003189f00000,0x000000318a000000) (1024K)]
+  0x000001ace4087f90 JavaThread "Timer-23"                          [_thread_blocked, id=8632, stack(0x000000318a000000,0x000000318a100000) (1024K)]
+  0x000001ace4088620 JavaThread "Timer-24"                          [_thread_blocked, id=10588, stack(0x000000318a100000,0x000000318a200000) (1024K)]
+  0x000001ace40899d0 JavaThread "Timer-25"                          [_thread_blocked, id=10576, stack(0x000000318a200000,0x000000318a300000) (1024K)]
+  0x000001ace408baa0 JavaThread "Timer-26"                          [_thread_blocked, id=10496, stack(0x000000318a300000,0x000000318a400000) (1024K)]
+  0x000001ace408c130 JavaThread "Timer-27"                          [_thread_blocked, id=10456, stack(0x000000318a400000,0x000000318a500000) (1024K)]
+  0x000001ace4089340 JavaThread "Timer-28"                          [_thread_blocked, id=12772, stack(0x000000318a500000,0x000000318a600000) (1024K)]
+  0x000001ace408a060 JavaThread "Timer-29"                          [_thread_blocked, id=14340, stack(0x000000318a600000,0x000000318a700000) (1024K)]
+  0x000001ace408ad80 JavaThread "Timer-30"                          [_thread_blocked, id=14348, stack(0x000000318a700000,0x000000318a800000) (1024K)]
+  0x000001ace408c7c0 JavaThread "Timer-31"                          [_thread_blocked, id=14352, stack(0x000000318a800000,0x000000318a900000) (1024K)]
+  0x000001ace4085830 JavaThread "Timer-32"                          [_thread_blocked, id=14356, stack(0x000000318a900000,0x000000318aa00000) (1024K)]
+  0x000001ace408ce50 JavaThread "Timer-33"                          [_thread_blocked, id=14360, stack(0x000000318aa00000,0x000000318ab00000) (1024K)]
+  0x000001ace4210540 JavaThread "Timer-34"                          [_thread_blocked, id=14364, stack(0x000000318ab00000,0x000000318ac00000) (1024K)]
+  0x000001ace4212610 JavaThread "Timer-35"                          [_thread_blocked, id=14368, stack(0x000000318ac00000,0x000000318ad00000) (1024K)]
+  0x000001ace4215400 JavaThread "Timer-36"                          [_thread_blocked, id=14416, stack(0x000000318ad00000,0x000000318ae00000) (1024K)]
+  0x000001ace4211260 JavaThread "Timer-37"                          [_thread_blocked, id=14420, stack(0x000000318ae00000,0x000000318af00000) (1024K)]
+  0x000001ace42146e0 JavaThread "Timer-38"                          [_thread_blocked, id=14424, stack(0x000000318af00000,0x000000318b000000) (1024K)]
+  0x000001ace4210bd0 JavaThread "Timer-39"                          [_thread_blocked, id=14428, stack(0x000000318b000000,0x000000318b100000) (1024K)]
+  0x000001ace42167b0 JavaThread "Timer-40"                          [_thread_blocked, id=14432, stack(0x000000318b100000,0x000000318b200000) (1024K)]
+  0x000001ace42139c0 JavaThread "Timer-41"                          [_thread_blocked, id=14440, stack(0x000000318b200000,0x000000318b300000) (1024K)]
+  0x000001ace420feb0 JavaThread "Timer-42"                          [_thread_blocked, id=14444, stack(0x000000318b300000,0x000000318b400000) (1024K)]
+  0x000001ace42118f0 JavaThread "Timer-43"                          [_thread_blocked, id=14452, stack(0x000000318b400000,0x000000318b500000) (1024K)]
+  0x000001ace4211f80 JavaThread "Timer-44"                          [_thread_blocked, id=14460, stack(0x000000318b500000,0x000000318b600000) (1024K)]
+  0x000001ace4212ca0 JavaThread "Timer-45"                          [_thread_blocked, id=14464, stack(0x000000318b600000,0x000000318b700000) (1024K)]
+  0x000001ace4216120 JavaThread "Timer-46"                          [_thread_blocked, id=14468, stack(0x000000318b700000,0x000000318b800000) (1024K)]
+  0x000001ace4215a90 JavaThread "Timer-47"                          [_thread_blocked, id=14472, stack(0x000000318b800000,0x000000318b900000) (1024K)]
+  0x000001ace4214050 JavaThread "Timer-48"                          [_thread_blocked, id=14476, stack(0x000000318b900000,0x000000318ba00000) (1024K)]
+  0x000001ace4214d70 JavaThread "Timer-49"                          [_thread_blocked, id=14480, stack(0x000000318ba00000,0x000000318bb00000) (1024K)]
+  0x000001ace420f820 JavaThread "Timer-50"                          [_thread_blocked, id=14484, stack(0x000000318bb00000,0x000000318bc00000) (1024K)]
+  0x000001ace4213330 JavaThread "Timer-51"                          [_thread_blocked, id=14488, stack(0x000000318bc00000,0x000000318bd00000) (1024K)]
+  0x000001ace4216e40 JavaThread "Timer-52"                          [_thread_blocked, id=14492, stack(0x000000318bd00000,0x000000318be00000) (1024K)]
+  0x000001ace462c440 JavaThread "Timer-53"                          [_thread_blocked, id=14496, stack(0x000000318be00000,0x000000318bf00000) (1024K)]
+  0x000001ace4628930 JavaThread "Timer-54"                          [_thread_blocked, id=14500, stack(0x000000318bf00000,0x000000318c000000) (1024K)]
+  0x000001ace462bdb0 JavaThread "Timer-55"                          [_thread_blocked, id=2148, stack(0x000000318c000000,0x000000318c100000) (1024K)]
+  0x000001ace462de80 JavaThread "Timer-56"                          [_thread_blocked, id=14504, stack(0x000000318c100000,0x000000318c200000) (1024K)]
+  0x000001ace462e510 JavaThread "Timer-57"                          [_thread_blocked, id=14508, stack(0x000000318c200000,0x000000318c300000) (1024K)]
+  0x000001ace462b720 JavaThread "Timer-58"                          [_thread_blocked, id=14512, stack(0x000000318c300000,0x000000318c400000) (1024K)]
+  0x000001ace4627580 JavaThread "Timer-59"                          [_thread_blocked, id=14516, stack(0x000000318c400000,0x000000318c500000) (1024K)]
+  0x000001ace462eba0 JavaThread "Timer-60"                          [_thread_blocked, id=14520, stack(0x000000318c500000,0x000000318c600000) (1024K)]
+  0x000001ace4627c10 JavaThread "Timer-61"                          [_thread_blocked, id=14532, stack(0x000000318c600000,0x000000318c700000) (1024K)]
+  0x000001ace462cad0 JavaThread "Timer-62"                          [_thread_blocked, id=14536, stack(0x000000318c700000,0x000000318c800000) (1024K)]
+  0x000001ace462d160 JavaThread "Timer-63"                          [_thread_blocked, id=14540, stack(0x000000318c800000,0x000000318c900000) (1024K)]
+  0x000001ace4629ce0 JavaThread "Timer-64"                          [_thread_blocked, id=14544, stack(0x000000318c900000,0x000000318ca00000) (1024K)]
+  0x000001ace46282a0 JavaThread "Timer-65"                          [_thread_blocked, id=14548, stack(0x000000318ca00000,0x000000318cb00000) (1024K)]
+  0x000001ace4628fc0 JavaThread "Timer-66"                          [_thread_blocked, id=14552, stack(0x000000318cb00000,0x000000318cc00000) (1024K)]
+  0x000001ace4629650 JavaThread "Timer-67"                          [_thread_blocked, id=14556, stack(0x000000318cc00000,0x000000318cd00000) (1024K)]
+  0x000001ace462d7f0 JavaThread "Timer-68"                          [_thread_blocked, id=14560, stack(0x000000318cd00000,0x000000318ce00000) (1024K)]
+  0x000001ace462aa00 JavaThread "Timer-69"                          [_thread_blocked, id=14564, stack(0x000000318ce00000,0x000000318cf00000) (1024K)]
+  0x000001ace462a370 JavaThread "Timer-70"                          [_thread_blocked, id=14568, stack(0x000000318cf00000,0x000000318d000000) (1024K)]
+  0x000001ace462b090 JavaThread "Timer-71"                          [_thread_blocked, id=14572, stack(0x000000318d000000,0x000000318d100000) (1024K)]
+  0x000001ace450b950 JavaThread "Timer-72"                          [_thread_blocked, id=14576, stack(0x000000318d100000,0x000000318d200000) (1024K)]
+  0x000001ace4506400 JavaThread "Timer-73"                          [_thread_blocked, id=14580, stack(0x000000318d200000,0x000000318d300000) (1024K)]
+  0x000001ace4508b60 JavaThread "Timer-74"                          [_thread_blocked, id=14584, stack(0x000000318d300000,0x000000318d400000) (1024K)]
+  0x000001ace45077b0 JavaThread "Timer-75"                          [_thread_blocked, id=14588, stack(0x000000318d400000,0x000000318d500000) (1024K)]
+  0x000001ace4509880 JavaThread "Timer-76"                          [_thread_blocked, id=14592, stack(0x000000318d500000,0x000000318d600000) (1024K)]
+  0x000001ace4509f10 JavaThread "Timer-77"                          [_thread_blocked, id=12696, stack(0x000000318d600000,0x000000318d700000) (1024K)]
+  0x000001ace450a5a0 JavaThread "Timer-78"                          [_thread_blocked, id=14600, stack(0x000000318d700000,0x000000318d800000) (1024K)]
+  0x000001ace450bfe0 JavaThread "Timer-79"                          [_thread_blocked, id=14604, stack(0x000000318d800000,0x000000318d900000) (1024K)]
+  0x000001ace4505050 JavaThread "Timer-80"                          [_thread_blocked, id=14616, stack(0x000000318d900000,0x000000318da00000) (1024K)]
+  0x000001ace45056e0 JavaThread "Timer-81"                          [_thread_blocked, id=2540, stack(0x000000318da00000,0x000000318db00000) (1024K)]
+  0x000001ace4507e40 JavaThread "Timer-82"                          [_thread_blocked, id=18892, stack(0x000000318db00000,0x000000318dc00000) (1024K)]
+  0x000001ace450ac30 JavaThread "Timer-83"                          [_thread_blocked, id=7104, stack(0x000000318dc00000,0x000000318dd00000) (1024K)]
+  0x000001ace450c670 JavaThread "Timer-84"                          [_thread_blocked, id=9816, stack(0x000000318dd00000,0x000000318de00000) (1024K)]
+  0x000001ace45091f0 JavaThread "Timer-85"                          [_thread_blocked, id=13764, stack(0x000000318de00000,0x000000318df00000) (1024K)]
+  0x000001ace4505d70 JavaThread "Timer-86"                          [_thread_blocked, id=7936, stack(0x000000318df00000,0x000000318e000000) (1024K)]
+  0x000001ace4506a90 JavaThread "Timer-87"                          [_thread_blocked, id=1912, stack(0x000000318e000000,0x000000318e100000) (1024K)]
+  0x000001ace4507120 JavaThread "Timer-88"                          [_thread_blocked, id=10236, stack(0x000000318e100000,0x000000318e200000) (1024K)]
+  0x000001ace45084d0 JavaThread "Timer-89"                          [_thread_blocked, id=17936, stack(0x000000318e200000,0x000000318e300000) (1024K)]
+  0x000001ace450b2c0 JavaThread "Timer-90"                          [_thread_blocked, id=5936, stack(0x000000318e300000,0x000000318e400000) (1024K)]
+  0x000001ace404bf30 JavaThread "Timer-91"                          [_thread_blocked, id=9552, stack(0x000000318e400000,0x000000318e500000) (1024K)]
+  0x000001ace40497d0 JavaThread "Timer-92"                          [_thread_blocked, id=21496, stack(0x000000318e500000,0x000000318e600000) (1024K)]
+  0x000001ace404c5c0 JavaThread "Timer-93"                          [_thread_blocked, id=16944, stack(0x000000318e600000,0x000000318e700000) (1024K)]
+  0x000001ace4047070 JavaThread "Timer-94"                          [_thread_blocked, id=18324, stack(0x000000318e700000,0x000000318e800000) (1024K)]
+  0x000001ace404b8a0 JavaThread "Timer-95"                          [_thread_blocked, id=10488, stack(0x000000318e800000,0x000000318e900000) (1024K)]
+  0x000001ace404cc50 JavaThread "Timer-96"                          [_thread_blocked, id=1220, stack(0x000000318e900000,0x000000318ea00000) (1024K)]
+  0x000001ace404e690 JavaThread "Timer-97"                          [_thread_blocked, id=21392, stack(0x000000318ea00000,0x000000318eb00000) (1024K)]
+  0x000001ace4049140 JavaThread "Timer-98"                          [_thread_blocked, id=18908, stack(0x000000318eb00000,0x000000318ec00000) (1024K)]
+  0x000001ace4047700 JavaThread "Timer-99"                          [_thread_blocked, id=20220, stack(0x000000318ec00000,0x000000318ed00000) (1024K)]
+  0x000001ace4047d90 JavaThread "Timer-100"                         [_thread_blocked, id=5084, stack(0x000000318ed00000,0x000000318ee00000) (1024K)]
+  0x000001ace404a4f0 JavaThread "Timer-101"                         [_thread_blocked, id=20500, stack(0x000000318ee00000,0x000000318ef00000) (1024K)]
+  0x000001ace404d2e0 JavaThread "Timer-102"                         [_thread_blocked, id=11616, stack(0x000000318ef00000,0x000000318f000000) (1024K)]
+  0x000001ace4048ab0 JavaThread "Timer-103"                         [_thread_blocked, id=16532, stack(0x000000318f000000,0x000000318f100000) (1024K)]
+  0x000001ace404ab80 JavaThread "Timer-104"                         [_thread_blocked, id=11000, stack(0x000000318f100000,0x000000318f200000) (1024K)]
+  0x000001ace4049e60 JavaThread "Timer-105"                         [_thread_blocked, id=10448, stack(0x000000318f200000,0x000000318f300000) (1024K)]
+  0x000001ace404d970 JavaThread "Timer-106"                         [_thread_blocked, id=19504, stack(0x000000318f300000,0x000000318f400000) (1024K)]
+  0x000001ace404b210 JavaThread "Timer-107"                         [_thread_blocked, id=19776, stack(0x000000318f400000,0x000000318f500000) (1024K)]
+  0x000001ace404e000 JavaThread "Timer-108"                         [_thread_blocked, id=11524, stack(0x000000318f500000,0x000000318f600000) (1024K)]
+  0x000001ace4048420 JavaThread "Timer-109"                         [_thread_blocked, id=17388, stack(0x000000318f600000,0x000000318f700000) (1024K)]
+  0x000001ace4050430 JavaThread "Timer-110"                         [_thread_blocked, id=20768, stack(0x000000318f700000,0x000000318f800000) (1024K)]
+  0x000001ace40517e0 JavaThread "Timer-111"                         [_thread_blocked, id=18120, stack(0x000000318f800000,0x000000318f900000) (1024K)]
+  0x000001ace4053220 JavaThread "Timer-112"                         [_thread_blocked, id=14896, stack(0x000000318f900000,0x000000318fa00000) (1024K)]
+  0x000001ace40552f0 JavaThread "Timer-113"                         [_thread_blocked, id=18436, stack(0x000000318fa00000,0x000000318fb00000) (1024K)]
+  0x000001ace404f080 JavaThread "Timer-114"                         [_thread_blocked, id=13032, stack(0x000000318fb00000,0x000000318fc00000) (1024K)]
+  0x000001ace40538b0 JavaThread "Timer-115"                         [_thread_blocked, id=3872, stack(0x000000318fc00000,0x000000318fd00000) (1024K)]
+  0x000001ace4052500 JavaThread "Timer-116"                         [_thread_blocked, id=2272, stack(0x000000318fd00000,0x000000318fe00000) (1024K)]
+  0x000001ace4053f40 JavaThread "Timer-117"                         [_thread_blocked, id=17004, stack(0x000000318fe00000,0x000000318ff00000) (1024K)]
+  0x000001ace40545d0 JavaThread "Timer-118"                         [_thread_blocked, id=17284, stack(0x000000318ff00000,0x0000003190000000) (1024K)]
+  0x000001ace4056010 JavaThread "Timer-119"                         [_thread_blocked, id=12804, stack(0x0000003190000000,0x0000003190100000) (1024K)]
+  0x000001ace4052b90 JavaThread "Timer-120"                         [_thread_blocked, id=1948, stack(0x0000003190100000,0x0000003190200000) (1024K)]
+  0x000001ace4051e70 JavaThread "Timer-121"                         [_thread_blocked, id=15608, stack(0x0000003190200000,0x0000003190300000) (1024K)]
+  0x000001ace40566a0 JavaThread "Timer-122"                         [_thread_blocked, id=20504, stack(0x0000003190300000,0x0000003190400000) (1024K)]
+  0x000001ace404f710 JavaThread "Timer-123"                         [_thread_blocked, id=3728, stack(0x0000003190400000,0x0000003190500000) (1024K)]
+  0x000001ace404fda0 JavaThread "Timer-124"                         [_thread_blocked, id=14968, stack(0x0000003190500000,0x0000003190600000) (1024K)]
+  0x000001ace4050ac0 JavaThread "Timer-125"                         [_thread_blocked, id=18596, stack(0x0000003190600000,0x0000003190700000) (1024K)]
+  0x000001ace4054c60 JavaThread "Timer-126"                         [_thread_blocked, id=7176, stack(0x0000003190700000,0x0000003190800000) (1024K)]
+  0x000001ace4055980 JavaThread "Timer-127"                         [_thread_blocked, id=9504, stack(0x0000003190800000,0x0000003190900000) (1024K)]
+  0x000001ace4051150 JavaThread "Timer-128"                         [_thread_blocked, id=5436, stack(0x0000003190900000,0x0000003190a00000) (1024K)]
+  0x000001ace483ea40 JavaThread "Timer-129"                         [_thread_blocked, id=288, stack(0x0000003190a00000,0x0000003190b00000) (1024K)]
+  0x000001ace483d000 JavaThread "Timer-130"                         [_thread_blocked, id=18868, stack(0x0000003190b00000,0x0000003190c00000) (1024K)]
+  0x000001ace483a8a0 JavaThread "Timer-131"                         [_thread_blocked, id=7976, stack(0x0000003190c00000,0x0000003190d00000) (1024K)]
+  0x000001ace483c2e0 JavaThread "Timer-132"                         [_thread_blocked, id=20868, stack(0x0000003190d00000,0x0000003190e00000) (1024K)]
+  0x000001ace483f0d0 JavaThread "Timer-133"                         [_thread_blocked, id=20596, stack(0x0000003190e00000,0x0000003190f00000) (1024K)]
+  0x000001ace483af30 JavaThread "Timer-134"                         [_thread_blocked, id=17280, stack(0x0000003190f00000,0x0000003191000000) (1024K)]
+  0x000001ace483f760 JavaThread "Timer-135"                         [_thread_blocked, id=21332, stack(0x0000003191000000,0x0000003191100000) (1024K)]
+  0x000001ace483fdf0 JavaThread "Timer-136"                         [_thread_blocked, id=10584, stack(0x0000003191100000,0x0000003191200000) (1024K)]
+  0x000001ace483d690 JavaThread "Timer-137"                         [_thread_blocked, id=6824, stack(0x0000003191200000,0x0000003191300000) (1024K)]
+  0x000001ace4840480 JavaThread "Timer-138"                         [_thread_blocked, id=20396, stack(0x0000003191300000,0x0000003191400000) (1024K)]
+  0x000001ace4841830 JavaThread "Timer-139"                         [_thread_blocked, id=17040, stack(0x0000003191400000,0x0000003191500000) (1024K)]
+  0x000001ace483dd20 JavaThread "Timer-140"                         [_thread_blocked, id=3240, stack(0x0000003191500000,0x0000003191600000) (1024K)]
+  0x000001ace48411a0 JavaThread "Timer-141"                         [_thread_blocked, id=15404, stack(0x0000003191600000,0x0000003191700000) (1024K)]
+  0x000001ace4840b10 JavaThread "Timer-142"                         [_thread_blocked, id=16200, stack(0x0000003191700000,0x0000003191800000) (1024K)]
+  0x000001ace4841ec0 JavaThread "Timer-143"                         [_thread_blocked, id=20948, stack(0x0000003191800000,0x0000003191900000) (1024K)]
+  0x000001ace483b5c0 JavaThread "Timer-144"                         [_thread_blocked, id=2720, stack(0x0000003191900000,0x0000003191a00000) (1024K)]
+  0x000001ace483bc50 JavaThread "Timer-145"                         [_thread_blocked, id=20420, stack(0x0000003191a00000,0x0000003191b00000) (1024K)]
+  0x000001ace483e3b0 JavaThread "Timer-146"                         [_thread_blocked, id=17572, stack(0x0000003191b00000,0x0000003191c00000) (1024K)]
+  0x000001ace483c970 JavaThread "Timer-147"                         [_thread_blocked, id=19572, stack(0x0000003191c00000,0x0000003191d00000) (1024K)]
+  0x000001ace4727e70 JavaThread "Timer-148"                         [_thread_blocked, id=21068, stack(0x0000003191d00000,0x0000003191e00000) (1024K)]
+  0x000001ace4723640 JavaThread "Timer-149"                         [_thread_blocked, id=9276, stack(0x0000003191e00000,0x0000003191f00000) (1024K)]
+  0x000001ace4724360 JavaThread "Timer-150"                         [_thread_blocked, id=18348, stack(0x0000003191f00000,0x0000003192000000) (1024K)]
+  0x000001ace4725da0 JavaThread "Timer-151"                         [_thread_blocked, id=5712, stack(0x0000003192000000,0x0000003192100000) (1024K)]
+  0x000001ace4725710 JavaThread "Timer-152"                         [_thread_blocked, id=596, stack(0x0000003192100000,0x0000003192200000) (1024K)]
+  0x000001ace4723cd0 JavaThread "Timer-153"                         [_thread_blocked, id=8584, stack(0x0000003192200000,0x0000003192300000) (1024K)]
+  0x000001ace4725080 JavaThread "Timer-154"                         [_thread_blocked, id=11596, stack(0x0000003192300000,0x0000003192400000) (1024K)]
+  0x000001ace4728500 JavaThread "Timer-155"                         [_thread_blocked, id=12164, stack(0x0000003192400000,0x0000003192500000) (1024K)]
+  0x000001ace4722920 JavaThread "Timer-156"                         [_thread_blocked, id=15780, stack(0x0000003192500000,0x0000003192600000) (1024K)]
+  0x000001ace4721570 JavaThread "Timer-157"                         [_thread_blocked, id=4156, stack(0x0000003192600000,0x0000003192700000) (1024K)]
+  0x000001ace47249f0 JavaThread "Timer-158"                         [_thread_blocked, id=3004, stack(0x0000003192700000,0x0000003192800000) (1024K)]
+  0x000001ace4726430 JavaThread "Timer-159"                         [_thread_blocked, id=18440, stack(0x0000003192800000,0x0000003192900000) (1024K)]
+  0x000001ace4727150 JavaThread "Timer-160"                         [_thread_blocked, id=2620, stack(0x0000003192900000,0x0000003192a00000) (1024K)]
+  0x000001ace4726ac0 JavaThread "Timer-161"                         [_thread_blocked, id=1136, stack(0x0000003192a00000,0x0000003192b00000) (1024K)]
+  0x000001ace4721c00 JavaThread "Timer-162"                         [_thread_blocked, id=20676, stack(0x0000003192b00000,0x0000003192c00000) (1024K)]
+  0x000001ace47277e0 JavaThread "Timer-163"                         [_thread_blocked, id=17432, stack(0x0000003192c00000,0x0000003192d00000) (1024K)]
+  0x000001ace4728b90 JavaThread "Timer-164"                         [_thread_blocked, id=1420, stack(0x0000003192d00000,0x0000003192e00000) (1024K)]
+  0x000001ace4722290 JavaThread "Timer-165"                         [_thread_blocked, id=19248, stack(0x0000003192e00000,0x0000003192f00000) (1024K)]
+  0x000001ace4722fb0 JavaThread "Timer-166"                         [_thread_blocked, id=20060, stack(0x0000003192f00000,0x0000003193000000) (1024K)]
+  0x000001ace48463c0 JavaThread "Timer-167"                         [_thread_blocked, id=21188, stack(0x0000003193000000,0x0000003193100000) (1024K)]
+  0x000001ace4844980 JavaThread "Timer-168"                         [_thread_blocked, id=15956, stack(0x0000003193100000,0x0000003193200000) (1024K)]
+  0x000001ace48442f0 JavaThread "Timer-169"                         [_thread_blocked, id=11536, stack(0x0000003193200000,0x0000003193300000) (1024K)]
+  0x000001ace4846a50 JavaThread "Timer-170"                         [_thread_blocked, id=13608, stack(0x0000003193300000,0x0000003193400000) (1024K)]
+  0x000001ace48470e0 JavaThread "Timer-171"                         [_thread_blocked, id=11012, stack(0x0000003193400000,0x0000003193500000) (1024K)]
+  0x000001ace4847770 JavaThread "Timer-172"                         [_thread_blocked, id=7600, stack(0x0000003193500000,0x0000003193600000) (1024K)]
+  0x000001ace4847e00 JavaThread "Timer-173"                         [_thread_blocked, id=20548, stack(0x0000003193600000,0x0000003193700000) (1024K)]
+  0x000001ace4848b20 JavaThread "Timer-174"                         [_thread_blocked, id=16164, stack(0x0000003193700000,0x0000003193800000) (1024K)]
+  0x000001ace4848490 JavaThread "Timer-175"                         [_thread_blocked, id=1264, stack(0x0000003193800000,0x0000003193900000) (1024K)]
+  0x000001ace48435d0 JavaThread "Timer-176"                         [_thread_blocked, id=7404, stack(0x0000003193900000,0x0000003193a00000) (1024K)]
+  0x000001ace48491b0 JavaThread "Timer-177"                         [_thread_blocked, id=10800, stack(0x0000003193a00000,0x0000003193b00000) (1024K)]
+  0x000001ace4849840 JavaThread "Timer-178"                         [_thread_blocked, id=5040, stack(0x0000003193b00000,0x0000003193c00000) (1024K)]
+  0x000001ace48428b0 JavaThread "Timer-179"                         [_thread_blocked, id=21376, stack(0x0000003193c00000,0x0000003193d00000) (1024K)]
+  0x000001ace4849ed0 JavaThread "Timer-180"                         [_thread_blocked, id=3220, stack(0x0000003193d00000,0x0000003193e00000) (1024K)]
+  0x000001ace4842f40 JavaThread "Timer-181"                         [_thread_blocked, id=17064, stack(0x0000003193e00000,0x0000003193f00000) (1024K)]
+  0x000001ace4843c60 JavaThread "Timer-182"                         [_thread_blocked, id=2036, stack(0x0000003193f00000,0x0000003194000000) (1024K)]
+  0x000001ace484a560 JavaThread "Timer-183"                         [_thread_blocked, id=12516, stack(0x0000003194000000,0x0000003194100000) (1024K)]
+  0x000001ace484abf0 JavaThread "Timer-184"                         [_thread_blocked, id=8692, stack(0x0000003194100000,0x0000003194200000) (1024K)]
+  0x000001ace484b280 JavaThread "Timer-185"                         [_thread_blocked, id=20688, stack(0x0000003194200000,0x0000003194300000) (1024K)]
+  0x000001ace484b910 JavaThread "Timer-186"                         [_thread_blocked, id=20956, stack(0x0000003194300000,0x0000003194400000) (1024K)]
+  0x000001ace484bfa0 JavaThread "Timer-187"                         [_thread_blocked, id=460, stack(0x0000003194400000,0x0000003194500000) (1024K)]
+  0x000001ace4845010 JavaThread "Timer-188"                         [_thread_blocked, id=1484, stack(0x0000003194500000,0x0000003194600000) (1024K)]
+  0x000001ace484c630 JavaThread "Timer-189"                         [_thread_blocked, id=11816, stack(0x0000003194600000,0x0000003194700000) (1024K)]
+  0x000001ace484ccc0 JavaThread "Timer-190"                         [_thread_blocked, id=15700, stack(0x0000003194700000,0x0000003194800000) (1024K)]
+  0x000001ace48456a0 JavaThread "Timer-191"                         [_thread_blocked, id=6828, stack(0x0000003194800000,0x0000003194900000) (1024K)]
+  0x000001ace4845d30 JavaThread "Timer-192"                         [_thread_blocked, id=7764, stack(0x0000003194900000,0x0000003194a00000) (1024K)]
+  0x000001ace484f420 JavaThread "Timer-193"                         [_thread_blocked, id=18180, stack(0x0000003194a00000,0x0000003194b00000) (1024K)]
+  0x000001ace484d350 JavaThread "Timer-194"                         [_thread_blocked, id=20128, stack(0x0000003194b00000,0x0000003194c00000) (1024K)]
+  0x000001ace4850140 JavaThread "Timer-195"                         [_thread_blocked, id=14820, stack(0x0000003194c00000,0x0000003194d00000) (1024K)]
+  0x000001ace484d9e0 JavaThread "Timer-196"                         [_thread_blocked, id=2436, stack(0x0000003194d00000,0x0000003194e00000) (1024K)]
+  0x000001ace484e070 JavaThread "Timer-197"                         [_thread_blocked, id=15112, stack(0x0000003194e00000,0x0000003194f00000) (1024K)]
+  0x000001ace484e700 JavaThread "Timer-198"                         [_thread_blocked, id=3400, stack(0x0000003194f00000,0x0000003195000000) (1024K)]
+  0x000001ace48507d0 JavaThread "Timer-199"                         [_thread_blocked, id=15892, stack(0x0000003195000000,0x0000003195100000) (1024K)]
+  0x000001ace484ed90 JavaThread "Timer-200"                         [_thread_blocked, id=9000, stack(0x0000003195100000,0x0000003195200000) (1024K)]
+  0x000001ace484fab0 JavaThread "Timer-201"                         [_thread_blocked, id=13688, stack(0x0000003195200000,0x0000003195300000) (1024K)]
+  0x000001ace4850e60 JavaThread "Timer-202"                         [_thread_blocked, id=18068, stack(0x0000003195300000,0x0000003195400000) (1024K)]
+  0x000001ace48514f0 JavaThread "Timer-203"                         [_thread_blocked, id=21284, stack(0x0000003195400000,0x0000003195500000) (1024K)]
+  0x000001ace4851b80 JavaThread "Timer-204"                         [_thread_blocked, id=18948, stack(0x0000003195500000,0x0000003195600000) (1024K)]
+  0x000001ace5201ff0 JavaThread "Timer-205"                         [_thread_blocked, id=15704, stack(0x0000003195600000,0x0000003195700000) (1024K)]
+  0x000001ace51fbd80 JavaThread "Timer-206"                         [_thread_blocked, id=6892, stack(0x0000003195700000,0x0000003195800000) (1024K)]
+  0x000001ace5202680 JavaThread "Timer-207"                         [_thread_blocked, id=252, stack(0x0000003195800000,0x0000003195900000) (1024K)]
+  0x000001ace5202d10 JavaThread "Timer-208"                         [_thread_blocked, id=20600, stack(0x0000003195900000,0x0000003195a00000) (1024K)]
+  0x000001ace5200c40 JavaThread "Timer-209"                         [_thread_blocked, id=11812, stack(0x0000003195a00000,0x0000003195b00000) (1024K)]
+  0x000001ace52012d0 JavaThread "Timer-210"                         [_thread_blocked, id=8424, stack(0x0000003195b00000,0x0000003195c00000) (1024K)]
+  0x000001ace52033a0 JavaThread "Timer-211"                         [_thread_blocked, id=16392, stack(0x0000003195c00000,0x0000003195d00000) (1024K)]
+  0x000001ace51fcaa0 JavaThread "Timer-212"                         [_thread_blocked, id=10660, stack(0x0000003195d00000,0x0000003195e00000) (1024K)]
+  0x000001ace51fc410 JavaThread "Timer-213"                         [_thread_blocked, id=9756, stack(0x0000003195e00000,0x0000003195f00000) (1024K)]
+  0x000001ace51fd130 JavaThread "Timer-214"                         [_thread_blocked, id=16668, stack(0x0000003195f00000,0x0000003196000000) (1024K)]
+  0x000001ace52040c0 JavaThread "Timer-215"                         [_thread_blocked, id=20512, stack(0x0000003196000000,0x0000003196100000) (1024K)]
+  0x000001ace5203a30 JavaThread "Timer-216"                         [_thread_blocked, id=10404, stack(0x0000003196100000,0x0000003196200000) (1024K)]
+  0x000001ace51ff200 JavaThread "Timer-217"                         [_thread_blocked, id=3628, stack(0x0000003196200000,0x0000003196300000) (1024K)]
+  0x000001ace5204750 JavaThread "Timer-218"                         [_thread_blocked, id=5300, stack(0x0000003196300000,0x0000003196400000) (1024K)]
+  0x000001ace5201960 JavaThread "Timer-219"                         [_thread_blocked, id=4556, stack(0x0000003196400000,0x0000003196500000) (1024K)]
+  0x000001ace51fff20 JavaThread "Timer-220"                         [_thread_blocked, id=19512, stack(0x0000003196500000,0x0000003196600000) (1024K)]
+  0x000001ace51feb70 JavaThread "Timer-221"                         [_thread_blocked, id=19516, stack(0x0000003196600000,0x0000003196700000) (1024K)]
+  0x000001ace51ff890 JavaThread "Timer-222"                         [_thread_blocked, id=4312, stack(0x0000003196700000,0x0000003196800000) (1024K)]
+  0x000001ace52005b0 JavaThread "Timer-223"                         [_thread_blocked, id=15408, stack(0x0000003196800000,0x0000003196900000) (1024K)]
+  0x000001ace51fd7c0 JavaThread "Timer-224"                         [_thread_blocked, id=13164, stack(0x0000003196900000,0x0000003196a00000) (1024K)]
+  0x000001ace5204de0 JavaThread "Timer-225"                         [_thread_blocked, id=12152, stack(0x0000003196a00000,0x0000003196b00000) (1024K)]
+  0x000001ace51fde50 JavaThread "Timer-226"                         [_thread_blocked, id=13044, stack(0x0000003196b00000,0x0000003196c00000) (1024K)]
+  0x000001ace5205470 JavaThread "Timer-227"                         [_thread_blocked, id=18380, stack(0x0000003196c00000,0x0000003196d00000) (1024K)]
+  0x000001ace51fe4e0 JavaThread "Timer-228"                         [_thread_blocked, id=10640, stack(0x0000003196d00000,0x0000003196e00000) (1024K)]
+  0x000001ace5207bd0 JavaThread "Timer-229"                         [_thread_blocked, id=9236, stack(0x0000003197000000,0x0000003197100000) (1024K)]
+  0x000001ace5208260 JavaThread "Timer-230"                         [_thread_blocked, id=17696, stack(0x0000003197100000,0x0000003197200000) (1024K)]
+  0x000001ace52088f0 JavaThread "Timer-231"                         [_thread_blocked, id=19652, stack(0x0000003197200000,0x0000003197300000) (1024K)]
+  0x000001ace5206820 JavaThread "Timer-232"                         [_thread_blocked, id=19708, stack(0x0000003197300000,0x0000003197400000) (1024K)]
+  0x000001ace5205b00 JavaThread "Timer-233"                         [_thread_blocked, id=10956, stack(0x0000003197400000,0x0000003197500000) (1024K)]
+  0x000001ace5206190 JavaThread "Timer-234"                         [_thread_blocked, id=18772, stack(0x0000003197500000,0x0000003197600000) (1024K)]
+  0x000001ace5208f80 JavaThread "Timer-235"                         [_thread_blocked, id=4308, stack(0x0000003197600000,0x0000003197700000) (1024K)]
+  0x000001ace5206eb0 JavaThread "Timer-236"                         [_thread_blocked, id=20904, stack(0x0000003197700000,0x0000003197800000) (1024K)]
+  0x000001ace5209610 JavaThread "Timer-237"                         [_thread_blocked, id=17024, stack(0x0000003197800000,0x0000003197900000) (1024K)]
+  0x000001ace5209ca0 JavaThread "Timer-238"                         [_thread_blocked, id=18132, stack(0x0000003197900000,0x0000003197a00000) (1024K)]
+  0x000001ace5207540 JavaThread "Timer-239"                         [_thread_blocked, id=13292, stack(0x0000003197a00000,0x0000003197b00000) (1024K)]
+  0x000001ace520a330 JavaThread "Timer-240"                         [_thread_blocked, id=17788, stack(0x0000003197b00000,0x0000003197c00000) (1024K)]
+  0x000001ace520a9c0 JavaThread "Timer-241"                         [_thread_blocked, id=7604, stack(0x0000003197c00000,0x0000003197d00000) (1024K)]
+  0x000001ace520b050 JavaThread "Timer-242"                         [_thread_blocked, id=17904, stack(0x0000003197d00000,0x0000003197e00000) (1024K)]
+  0x000001ace423f320 JavaThread "Timer-243"                         [_thread_blocked, id=16060, stack(0x0000003197e00000,0x0000003197f00000) (1024K)]
+  0x000001ace423d8e0 JavaThread "Timer-244"                         [_thread_blocked, id=20440, stack(0x0000003197f00000,0x0000003198000000) (1024K)]
+  0x000001ace423d250 JavaThread "Timer-245"                         [_thread_blocked, id=12116, stack(0x0000003198000000,0x0000003198100000) (1024K)]
+  0x000001ace423c530 JavaThread "Timer-246"                         [_thread_blocked, id=17620, stack(0x0000003198100000,0x0000003198200000) (1024K)]
+  0x000001ace423e600 JavaThread "Timer-247"                         [_thread_blocked, id=19388, stack(0x0000003198200000,0x0000003198300000) (1024K)]
+  0x000001ace423df70 JavaThread "Timer-248"                         [_thread_blocked, id=9796, stack(0x0000003198300000,0x0000003198400000) (1024K)]
+  0x000001ace423bea0 JavaThread "Timer-249"                         [_thread_blocked, id=10884, stack(0x0000003198400000,0x0000003198500000) (1024K)]
+  0x000001ace423f9b0 JavaThread "Timer-250"                         [_thread_blocked, id=15640, stack(0x0000003198500000,0x0000003198600000) (1024K)]
+  0x000001ace4240040 JavaThread "Timer-251"                         [_thread_blocked, id=14924, stack(0x0000003198600000,0x0000003198700000) (1024K)]
+  0x000001ace423ec90 JavaThread "Timer-252"                         [_thread_blocked, id=1004, stack(0x0000003198700000,0x0000003198800000) (1024K)]
+  0x000001ace42406d0 JavaThread "Timer-253"                         [_thread_blocked, id=14952, stack(0x0000003198800000,0x0000003198900000) (1024K)]
+  0x000001ace4242110 JavaThread "Timer-254"                         [_thread_blocked, id=6164, stack(0x0000003198900000,0x0000003198a00000) (1024K)]
+  0x000001ace4240d60 JavaThread "Timer-255"                         [_thread_blocked, id=9148, stack(0x0000003198a00000,0x0000003198b00000) (1024K)]
+  0x000001ace42413f0 JavaThread "Timer-256"                         [_thread_blocked, id=18492, stack(0x0000003198b00000,0x0000003198c00000) (1024K)]
+  0x000001ace4241a80 JavaThread "Timer-257"                         [_thread_blocked, id=11820, stack(0x0000003198c00000,0x0000003198d00000) (1024K)]
+  0x000001ace423cbc0 JavaThread "Timer-258"                         [_thread_blocked, id=16992, stack(0x0000003198d00000,0x0000003198e00000) (1024K)]
+  0x000001ace42427a0 JavaThread "Timer-259"                         [_thread_blocked, id=13260, stack(0x0000003198e00000,0x0000003198f00000) (1024K)]
+  0x000001ace423b810 JavaThread "Timer-260"                         [_thread_blocked, id=16628, stack(0x0000003198f00000,0x0000003199000000) (1024K)]
+  0x000001ace4248a10 JavaThread "Timer-261"                         [_thread_blocked, id=9888, stack(0x0000003199000000,0x0000003199100000) (1024K)]
+  0x000001ace4247cf0 JavaThread "Timer-262"                         [_thread_blocked, id=14960, stack(0x0000003199100000,0x0000003199200000) (1024K)]
+  0x000001ace4248380 JavaThread "Timer-263"                         [_thread_blocked, id=18608, stack(0x0000003199200000,0x0000003199300000) (1024K)]
+  0x000001ace4246fd0 JavaThread "Timer-264"                         [_thread_blocked, id=12792, stack(0x0000003199300000,0x0000003199400000) (1024K)]
+  0x000001ace4246940 JavaThread "Timer-265"                         [_thread_blocked, id=4396, stack(0x0000003199400000,0x0000003199500000) (1024K)]
+  0x000001ace42441e0 JavaThread "Timer-266"                         [_thread_blocked, id=12104, stack(0x0000003199500000,0x0000003199600000) (1024K)]
+  0x000001ace4242e30 JavaThread "Timer-267"                         [_thread_blocked, id=9628, stack(0x0000003199600000,0x0000003199700000) (1024K)]
+  0x000001ace4245590 JavaThread "Timer-268"                         [_thread_blocked, id=7844, stack(0x0000003199700000,0x0000003199800000) (1024K)]
+  0x000001ace4249dc0 JavaThread "Timer-269"                         [_thread_blocked, id=13700, stack(0x0000003199800000,0x0000003199900000) (1024K)]
+  0x000001ace42490a0 JavaThread "Timer-270"                         [_thread_blocked, id=11632, stack(0x0000003199900000,0x0000003199a00000) (1024K)]
+  0x000001ace4249730 JavaThread "Timer-271"                         [_thread_blocked, id=17228, stack(0x0000003199a00000,0x0000003199b00000) (1024K)]
+  0x000001ace4244f00 JavaThread "Timer-272"                         [_thread_blocked, id=576, stack(0x0000003199b00000,0x0000003199c00000) (1024K)]
+  0x000001ace42434c0 JavaThread "Timer-273"                         [_thread_blocked, id=13076, stack(0x0000003199c00000,0x0000003199d00000) (1024K)]
+  0x000001ace4243b50 JavaThread "Timer-274"                         [_thread_blocked, id=21084, stack(0x0000003199d00000,0x0000003199e00000) (1024K)]
+  0x000001ace424a450 JavaThread "Timer-275"                         [_thread_blocked, id=17532, stack(0x0000003199e00000,0x0000003199f00000) (1024K)]
+  0x000001ace424aae0 JavaThread "Timer-276"                         [_thread_blocked, id=8824, stack(0x0000003199f00000,0x000000319a000000) (1024K)]
+  0x000001ace4247660 JavaThread "Timer-277"                         [_thread_blocked, id=11016, stack(0x000000319a000000,0x000000319a100000) (1024K)]
+  0x000001ace4244870 JavaThread "Timer-278"                         [_thread_blocked, id=15548, stack(0x000000319a100000,0x000000319a200000) (1024K)]
+  0x000001ace4245c20 JavaThread "Timer-279"                         [_thread_blocked, id=4416, stack(0x000000319a200000,0x000000319a300000) (1024K)]
+  0x000001ace42462b0 JavaThread "Timer-280"                         [_thread_blocked, id=19448, stack(0x000000319a300000,0x000000319a400000) (1024K)]
+  0x000001ace5d394f0 JavaThread "Timer-281"                         [_thread_blocked, id=17416, stack(0x000000319a400000,0x000000319a500000) (1024K)]
+  0x000001ace5d3a210 JavaThread "Timer-282"                         [_thread_blocked, id=6752, stack(0x000000319a500000,0x000000319a600000) (1024K)]
+  0x000001ace5d3c970 JavaThread "Timer-283"                         [_thread_blocked, id=16760, stack(0x000000319a600000,0x000000319a700000) (1024K)]
+  0x000001ace5d39b80 JavaThread "Timer-284"                         [_thread_blocked, id=11608, stack(0x000000319a700000,0x000000319a800000) (1024K)]
+  0x000001ace5d38e60 JavaThread "Timer-285"                         [_thread_blocked, id=10920, stack(0x000000319a800000,0x000000319a900000) (1024K)]
+  0x000001ace5d37420 JavaThread "Timer-286"                         [_thread_blocked, id=21336, stack(0x000000319a900000,0x000000319aa00000) (1024K)]
+  0x000001ace5d3a8a0 JavaThread "Timer-287"                         [_thread_blocked, id=1964, stack(0x000000319aa00000,0x000000319ab00000) (1024K)]
+  0x000001ace5d3af30 JavaThread "Timer-288"                         [_thread_blocked, id=18984, stack(0x000000319ab00000,0x000000319ac00000) (1024K)]
+  0x000001ace5d38140 JavaThread "Timer-289"                         [_thread_blocked, id=8640, stack(0x000000319ac00000,0x000000319ad00000) (1024K)]
+  0x000001ace5d3b5c0 JavaThread "Timer-290"                         [_thread_blocked, id=21216, stack(0x000000319ad00000,0x000000319ae00000) (1024K)]
+  0x000001ace5d3bc50 JavaThread "Timer-291"                         [_thread_blocked, id=10436, stack(0x000000319ae00000,0x000000319af00000) (1024K)]
+  0x000001ace5d36070 JavaThread "Timer-292"                         [_thread_blocked, id=19172, stack(0x000000319af00000,0x000000319b000000) (1024K)]
+  0x000001ace5d3d000 JavaThread "Timer-293"                         [_thread_blocked, id=872, stack(0x000000319b000000,0x000000319b100000) (1024K)]
+  0x000001ace5d3d690 JavaThread "Timer-294"                         [_thread_blocked, id=3888, stack(0x000000319b100000,0x000000319b200000) (1024K)]
+  0x000001ace5d3c2e0 JavaThread "Timer-295"                         [_thread_blocked, id=17688, stack(0x000000319b200000,0x000000319b300000) (1024K)]
+  0x000001ace5d36700 JavaThread "Timer-296"                         [_thread_blocked, id=14716, stack(0x000000319b300000,0x000000319b400000) (1024K)]
+  0x000001ace5d3dd20 JavaThread "Timer-297"                         [_thread_blocked, id=2472, stack(0x000000319b400000,0x000000319b500000) (1024K)]
+  0x000001ace5d387d0 JavaThread "Timer-298"                         [_thread_blocked, id=12652, stack(0x000000319b500000,0x000000319b600000) (1024K)]
+  0x000001ace5d37ab0 JavaThread "Timer-299"                         [_thread_blocked, id=8720, stack(0x000000319b600000,0x000000319b700000) (1024K)]
+  0x000001ace5d36d90 JavaThread "Timer-300"                         [_thread_blocked, id=20168, stack(0x000000319b700000,0x000000319b800000) (1024K)]
+  0x000001ace5d3f760 JavaThread "Timer-301"                         [_thread_blocked, id=19368, stack(0x000000319b800000,0x000000319b900000) (1024K)]
+  0x000001ace5d43f90 JavaThread "Timer-302"                         [_thread_blocked, id=18496, stack(0x000000319b900000,0x000000319ba00000) (1024K)]
+  0x000001ace5d43900 JavaThread "Timer-303"                         [_thread_blocked, id=15352, stack(0x000000319ba00000,0x000000319bb00000) (1024K)]
+  0x000001ace5d3fdf0 JavaThread "Timer-304"                         [_thread_blocked, id=1872, stack(0x000000319bb00000,0x000000319bc00000) (1024K)]
+  0x000001ace5d40b10 JavaThread "Timer-305"                         [_thread_blocked, id=21452, stack(0x000000319bc00000,0x000000319bd00000) (1024K)]
+  0x000001ace5d44cb0 JavaThread "Timer-306"                         [_thread_blocked, id=9820, stack(0x000000319bd00000,0x000000319be00000) (1024K)]
+  0x000001ace5d40480 JavaThread "Timer-307"                         [_thread_blocked, id=19440, stack(0x000000319be00000,0x000000319bf00000) (1024K)]
+  0x000001ace5d411a0 JavaThread "Timer-308"                         [_thread_blocked, id=17628, stack(0x000000319bf00000,0x000000319c000000) (1024K)]
+  0x000001ace5d41830 JavaThread "Timer-309"                         [_thread_blocked, id=11928, stack(0x000000319c000000,0x000000319c100000) (1024K)]
+  0x000001ace5d42550 JavaThread "Timer-310"                         [_thread_blocked, id=6324, stack(0x000000319c100000,0x000000319c200000) (1024K)]
+  0x000001ace5d41ec0 JavaThread "Timer-311"                         [_thread_blocked, id=20064, stack(0x000000319c200000,0x000000319c300000) (1024K)]
+  0x000001ace5d42be0 JavaThread "Timer-312"                         [_thread_blocked, id=11892, stack(0x000000319c300000,0x000000319c400000) (1024K)]
+  0x000001ace5d43270 JavaThread "Timer-313"                         [_thread_blocked, id=11640, stack(0x000000319c400000,0x000000319c500000) (1024K)]
+  0x000001ace5d44620 JavaThread "Timer-314"                         [_thread_blocked, id=20180, stack(0x000000319c500000,0x000000319c600000) (1024K)]
+  0x000001ace5d45340 JavaThread "Timer-315"                         [_thread_blocked, id=18580, stack(0x000000319c600000,0x000000319c700000) (1024K)]
+  0x000001ace5d3e3b0 JavaThread "Timer-316"                         [_thread_blocked, id=16776, stack(0x000000319c700000,0x000000319c800000) (1024K)]
+  0x000001ace5d3ea40 JavaThread "Timer-317"                         [_thread_blocked, id=1188, stack(0x000000319c800000,0x000000319c900000) (1024K)]
+  0x000001ace5d3f0d0 JavaThread "Timer-318"                         [_thread_blocked, id=13052, stack(0x000000319c900000,0x000000319ca00000) (1024K)]
+  0x000001ace575c530 JavaThread "Timer-319"                         [_thread_blocked, id=14708, stack(0x000000319ca00000,0x000000319cb00000) (1024K)]
+  0x000001ace575ec90 JavaThread "Timer-320"                         [_thread_blocked, id=12624, stack(0x000000319cb00000,0x000000319cc00000) (1024K)]
+  0x000001ace575f320 JavaThread "Timer-321"                         [_thread_blocked, id=9752, stack(0x000000319cc00000,0x000000319cd00000) (1024K)]
+  0x000001ace575b810 JavaThread "Timer-322"                         [_thread_blocked, id=19656, stack(0x000000319cd00000,0x000000319ce00000) (1024K)]
+  0x000001ace575a460 JavaThread "Timer-323"                         [_thread_blocked, id=14712, stack(0x000000319ce00000,0x000000319cf00000) (1024K)]
+  0x000001ace575b180 JavaThread "Timer-324"                         [_thread_blocked, id=15712, stack(0x000000319cf00000,0x000000319d000000) (1024K)]
+  0x000001ace575bea0 JavaThread "Timer-325"                         [_thread_blocked, id=20528, stack(0x000000319d000000,0x000000319d100000) (1024K)]
+  0x000001ace575d250 JavaThread "Timer-326"                         [_thread_blocked, id=10276, stack(0x000000319d100000,0x000000319d200000) (1024K)]
+  0x000001ace575df70 JavaThread "Timer-327"                         [_thread_blocked, id=21184, stack(0x000000319d200000,0x000000319d300000) (1024K)]
+  0x000001ace575d8e0 JavaThread "Timer-328"                         [_thread_blocked, id=9272, stack(0x000000319d300000,0x000000319d400000) (1024K)]
+  0x000001ace575e600 JavaThread "Timer-329"                         [_thread_blocked, id=9244, stack(0x000000319d400000,0x000000319d500000) (1024K)]
+  0x000001ace575aaf0 JavaThread "Timer-330"                         [_thread_blocked, id=14772, stack(0x000000319d500000,0x000000319d600000) (1024K)]
+  0x000001ace575cbc0 JavaThread "Timer-331"                         [_thread_blocked, id=20720, stack(0x000000319d600000,0x000000319d700000) (1024K)]
+  0x000001ace5746960 JavaThread "Timer-332"                         [_thread_blocked, id=8620, stack(0x000000319d700000,0x000000319d800000) (1024K)]
+  0x000001ace5746ff0 JavaThread "Timer-333"                         [_thread_blocked, id=13432, stack(0x000000319d800000,0x000000319d900000) (1024K)]
+  0x000001ace5740060 JavaThread "Timer-334"                         [_thread_blocked, id=3944, stack(0x000000319d900000,0x000000319da00000) (1024K)]
+  0x000001ace5742130 JavaThread "Timer-335"                         [_thread_blocked, id=16548, stack(0x000000319da00000,0x000000319db00000) (1024K)]
+  0x000001ace57406f0 JavaThread "Timer-336"                         [_thread_blocked, id=19472, stack(0x000000319db00000,0x000000319dc00000) (1024K)]
+  0x000001ace57427c0 JavaThread "Timer-337"                         [_thread_blocked, id=6480, stack(0x000000319dc00000,0x000000319dd00000) (1024K)]
+  0x000001ace5741410 JavaThread "Timer-338"                         [_thread_blocked, id=2968, stack(0x000000319dd00000,0x000000319de00000) (1024K)]
+  0x000001ace5740d80 JavaThread "Timer-339"                         [_thread_blocked, id=18744, stack(0x000000319de00000,0x000000319df00000) (1024K)]
+  0x000001ace5741aa0 JavaThread "Timer-340"                         [_thread_blocked, id=16376, stack(0x000000319df00000,0x000000319e000000) (1024K)]
+  0x000001ace5744890 JavaThread "Timer-341"                         [_thread_blocked, id=15456, stack(0x000000319e000000,0x000000319e100000) (1024K)]
+  0x000001ace5748a30 JavaThread "Timer-342"                         [_thread_blocked, id=20968, stack(0x000000319e100000,0x000000319e200000) (1024K)]
+  0x000001ace57434e0 JavaThread "Timer-343"                         [_thread_blocked, id=20124, stack(0x000000319e200000,0x000000319e300000) (1024K)]
+  0x000001ace57483a0 JavaThread "Timer-344"                         [_thread_blocked, id=4140, stack(0x000000319e300000,0x000000319e400000) (1024K)]
+  0x000001ace5744f20 JavaThread "Timer-345"                         [_thread_blocked, id=17392, stack(0x000000319e400000,0x000000319e500000) (1024K)]
+  0x000001ace5744200 JavaThread "Timer-346"                         [_thread_blocked, id=15052, stack(0x000000319e500000,0x000000319e600000) (1024K)]
+  0x000001ace57455b0 JavaThread "Timer-347"                         [_thread_blocked, id=12028, stack(0x000000319e600000,0x000000319e700000) (1024K)]
+  0x000001ace5745c40 JavaThread "Timer-348"                         [_thread_blocked, id=14800, stack(0x000000319e700000,0x000000319e800000) (1024K)]
+  0x000001ace5749750 JavaThread "Timer-349"                         [_thread_blocked, id=15108, stack(0x000000319e800000,0x000000319e900000) (1024K)]
+  0x000001ace5742e50 JavaThread "Timer-350"                         [_thread_blocked, id=11644, stack(0x000000319e900000,0x000000319ea00000) (1024K)]
+  0x000001ace57462d0 JavaThread "Timer-351"                         [_thread_blocked, id=5792, stack(0x000000319ea00000,0x000000319eb00000) (1024K)]
+  0x000001ace5747680 JavaThread "Timer-352"                         [_thread_blocked, id=14912, stack(0x000000319eb00000,0x000000319ec00000) (1024K)]
+  0x000001ace5743b70 JavaThread "Timer-353"                         [_thread_blocked, id=10476, stack(0x000000319ec00000,0x000000319ed00000) (1024K)]
+  0x000001ace574df80 JavaThread "Timer-354"                         [_thread_blocked, id=6952, stack(0x000000319ed00000,0x000000319ee00000) (1024K)]
+  0x000001ace574d260 JavaThread "Timer-355"                         [_thread_blocked, id=3548, stack(0x000000319ee00000,0x000000319ef00000) (1024K)]
+  0x000001ace574a470 JavaThread "Timer-356"                         [_thread_blocked, id=5568, stack(0x000000319ef00000,0x000000319f000000) (1024K)]
+  0x000001ace574e610 JavaThread "Timer-357"                         [_thread_blocked, id=1756, stack(0x000000319f000000,0x000000319f100000) (1024K)]
+  0x000001ace574eca0 JavaThread "Timer-358"                         [_thread_blocked, id=10264, stack(0x000000319f100000,0x000000319f200000) (1024K)]
+  0x000001ace574b190 JavaThread "Timer-359"                         [_thread_blocked, id=21484, stack(0x000000319f200000,0x000000319f300000) (1024K)]
+  0x000001ace57490c0 JavaThread "Timer-360"                         [_thread_blocked, id=16964, stack(0x000000319f300000,0x000000319f400000) (1024K)]
+  0x000001ace5749de0 JavaThread "Timer-361"                         [_thread_blocked, id=3156, stack(0x000000319f400000,0x000000319f500000) (1024K)]
+  0x000001ace574ab00 JavaThread "Timer-362"                         [_thread_blocked, id=20172, stack(0x000000319f500000,0x000000319f600000) (1024K)]
+  0x000001ace5747d10 JavaThread "Timer-363"                         [_thread_blocked, id=15436, stack(0x000000319f600000,0x000000319f700000) (1024K)]
+  0x000001ace57527b0 JavaThread "Timer-364"                         [_thread_blocked, id=19976, stack(0x000000319f700000,0x000000319f800000) (1024K)]
+  0x000001ace574beb0 JavaThread "Timer-365"                         [_thread_blocked, id=21048, stack(0x000000319f800000,0x000000319f900000) (1024K)]
+  0x000001ace574f330 JavaThread "Timer-366"                         [_thread_blocked, id=19420, stack(0x000000319f900000,0x000000319fa00000) (1024K)]
+  0x000001ace574b820 JavaThread "Timer-367"                         [_thread_blocked, id=14160, stack(0x000000319fa00000,0x000000319fb00000) (1024K)]
+  0x000001ace5752120 JavaThread "Timer-368"                         [_thread_blocked, id=17656, stack(0x000000319fb00000,0x000000319fc00000) (1024K)]
+  0x000001ace574f9c0 JavaThread "Timer-369"                         [_thread_blocked, id=20240, stack(0x000000319fc00000,0x000000319fd00000) (1024K)]
+  0x000001ace5751400 JavaThread "Timer-370"                         [_thread_blocked, id=14904, stack(0x000000319fd00000,0x000000319fe00000) (1024K)]
+  0x000001ace5750050 JavaThread "Timer-371"                         [_thread_blocked, id=2568, stack(0x000000319fe00000,0x000000319ff00000) (1024K)]
+  0x000001ace57506e0 JavaThread "Timer-372"                         [_thread_blocked, id=19980, stack(0x000000319ff00000,0x00000031a0000000) (1024K)]
+  0x000001ace5751a90 JavaThread "Timer-373"                         [_thread_blocked, id=1548, stack(0x00000031a0000000,0x00000031a0100000) (1024K)]
+  0x000001ace574cbd0 JavaThread "Timer-374"                         [_thread_blocked, id=19872, stack(0x00000031a0100000,0x00000031a0200000) (1024K)]
+  0x000001ace5752e40 JavaThread "Timer-375"                         [_thread_blocked, id=11960, stack(0x00000031a0200000,0x00000031a0300000) (1024K)]
+  0x000001ace57534d0 JavaThread "Timer-376"                         [_thread_blocked, id=9812, stack(0x00000031a0300000,0x00000031a0400000) (1024K)]
+  0x000001ace5750d70 JavaThread "Timer-377"                         [_thread_blocked, id=17148, stack(0x00000031a0400000,0x00000031a0500000) (1024K)]
+  0x000001ace574c540 JavaThread "Timer-378"                         [_thread_blocked, id=9480, stack(0x00000031a0500000,0x00000031a0600000) (1024K)]
+  0x000001ace57541f0 JavaThread "Timer-379"                         [_thread_blocked, id=16788, stack(0x00000031a0600000,0x00000031a0700000) (1024K)]
+  0x000001ace5753b60 JavaThread "Timer-380"                         [_thread_blocked, id=10996, stack(0x00000031a0700000,0x00000031a0800000) (1024K)]
+  0x000001ace5754880 JavaThread "Timer-381"                         [_thread_blocked, id=18336, stack(0x00000031a0800000,0x00000031a0900000) (1024K)]
+  0x000001ace574d8f0 JavaThread "Timer-382"                         [_thread_blocked, id=15372, stack(0x00000031a0900000,0x00000031a0a00000) (1024K)]
+  0x000001ace5758a20 JavaThread "Timer-383"                         [_thread_blocked, id=13000, stack(0x00000031a0a00000,0x00000031a0b00000) (1024K)]
+  0x000001ace5754f10 JavaThread "Timer-384"                         [_thread_blocked, id=11508, stack(0x00000031a0b00000,0x00000031a0c00000) (1024K)]
+  0x000001ace5756fe0 JavaThread "Timer-385"                         [_thread_blocked, id=10812, stack(0x00000031a0c00000,0x00000031a0d00000) (1024K)]
+  0x000001ace5757670 JavaThread "Timer-386"                         [_thread_blocked, id=20772, stack(0x00000031a0d00000,0x00000031a0e00000) (1024K)]
+  0x000001ace5759740 JavaThread "Timer-387"                         [_thread_blocked, id=1504, stack(0x00000031a0e00000,0x00000031a0f00000) (1024K)]
+  0x000001ace5759dd0 JavaThread "Timer-388"                         [_thread_blocked, id=19916, stack(0x00000031a0f00000,0x00000031a1000000) (1024K)]
+  0x000001ace57555a0 JavaThread "Timer-389"                         [_thread_blocked, id=1032, stack(0x00000031a1000000,0x00000031a1100000) (1024K)]
+  0x000001ace5755c30 JavaThread "Timer-390"                         [_thread_blocked, id=20492, stack(0x00000031a1100000,0x00000031a1200000) (1024K)]
+  0x000001ace5757d00 JavaThread "Timer-391"                         [_thread_blocked, id=20572, stack(0x00000031a1200000,0x00000031a1300000) (1024K)]
+  0x000001ace57562c0 JavaThread "Timer-392"                         [_thread_blocked, id=13552, stack(0x00000031a1300000,0x00000031a1400000) (1024K)]
+  0x000001ace5756950 JavaThread "Timer-393"                         [_thread_blocked, id=17032, stack(0x00000031a1400000,0x00000031a1500000) (1024K)]
+  0x000001ace5758390 JavaThread "Timer-394"                         [_thread_blocked, id=13472, stack(0x00000031a1500000,0x00000031a1600000) (1024K)]
+  0x000001ace57590b0 JavaThread "Timer-395"                         [_thread_blocked, id=18088, stack(0x00000031a1600000,0x00000031a1700000) (1024K)]
+  0x000001ace56eaf60 JavaThread "Timer-396"                         [_thread_blocked, id=18116, stack(0x00000031a1700000,0x00000031a1800000) (1024K)]
+  0x000001ace56e9520 JavaThread "Timer-397"                         [_thread_blocked, id=4560, stack(0x00000031a1800000,0x00000031a1900000) (1024K)]
+  0x000001ace56ec310 JavaThread "Timer-398"                         [_thread_blocked, id=18660, stack(0x00000031a1900000,0x00000031a1a00000) (1024K)]
+  0x000001ace56eb5f0 JavaThread "Timer-399"                         [_thread_blocked, id=15504, stack(0x00000031a1a00000,0x00000031a1b00000) (1024K)]
+  0x000001ace56e9bb0 JavaThread "Timer-400"                         [_thread_blocked, id=8728, stack(0x00000031a1b00000,0x00000031a1c00000) (1024K)]
+  0x000001ace56ea240 JavaThread "Timer-401"                         [_thread_blocked, id=5056, stack(0x00000031a1c00000,0x00000031a1d00000) (1024K)]
+  0x000001ace56e8800 JavaThread "Timer-402"                         [_thread_blocked, id=5268, stack(0x00000031a1d00000,0x00000031a1e00000) (1024K)]
+  0x000001ace56ed6c0 JavaThread "Timer-403"                         [_thread_blocked, id=10988, stack(0x00000031a1e00000,0x00000031a1f00000) (1024K)]
+  0x000001ace56e6730 JavaThread "Timer-404"                         [_thread_blocked, id=6948, stack(0x00000031a1f00000,0x00000031a2000000) (1024K)]
+  0x000001ace56e6dc0 JavaThread "Timer-405"                         [_thread_blocked, id=12548, stack(0x00000031a2000000,0x00000031a2100000) (1024K)]
+  0x000001ace56ea8d0 JavaThread "Timer-406"                         [_thread_blocked, id=17216, stack(0x00000031a2100000,0x00000031a2200000) (1024K)]
+  0x000001ace56e7ae0 JavaThread "Timer-407"                         [_thread_blocked, id=14032, stack(0x00000031a2200000,0x00000031a2300000) (1024K)]
+  0x000001ace56e8170 JavaThread "Timer-408"                         [_thread_blocked, id=1920, stack(0x00000031a2300000,0x00000031a2400000) (1024K)]
+  0x000001ace56ebc80 JavaThread "Timer-409"                         [_thread_blocked, id=9264, stack(0x00000031a2400000,0x00000031a2500000) (1024K)]
+  0x000001ace56ed030 JavaThread "Timer-410"                         [_thread_blocked, id=21324, stack(0x00000031a2500000,0x00000031a2600000) (1024K)]
+  0x000001ace56ec9a0 JavaThread "Timer-411"                         [_thread_blocked, id=16820, stack(0x00000031a2600000,0x00000031a2700000) (1024K)]
+  0x000001ace56e7450 JavaThread "Timer-412"                         [_thread_blocked, id=8156, stack(0x00000031a2700000,0x00000031a2800000) (1024K)]
+  0x000001ace56edd50 JavaThread "Timer-413"                         [_thread_blocked, id=17544, stack(0x00000031a2800000,0x00000031a2900000) (1024K)]
+  0x000001ace56ee3e0 JavaThread "Timer-414"                         [_thread_blocked, id=13732, stack(0x00000031a2900000,0x00000031a2a00000) (1024K)]
+  0x000001ace56eea70 JavaThread "Timer-415"                         [_thread_blocked, id=19968, stack(0x00000031a2a00000,0x00000031a2b00000) (1024K)]
+  0x000001ace56efe20 JavaThread "Timer-416"                         [_thread_blocked, id=1804, stack(0x00000031a2b00000,0x00000031a2c00000) (1024K)]
+  0x000001ace56ef100 JavaThread "Timer-417"                         [_thread_blocked, id=2804, stack(0x00000031a2c00000,0x00000031a2d00000) (1024K)]
+  0x000001ace56ef790 JavaThread "Timer-418"                         [_thread_blocked, id=10516, stack(0x00000031a2d00000,0x00000031a2e00000) (1024K)]
+  0x000001ace56e8e90 JavaThread "Timer-419"                         [_thread_blocked, id=13296, stack(0x00000031a2e00000,0x00000031a2f00000) (1024K)]
+  0x000001ace56f4650 JavaThread "Timer-420"                         [_thread_blocked, id=19580, stack(0x00000031a2f00000,0x00000031a3000000) (1024K)]
+  0x000001ace56f2c10 JavaThread "Timer-421"                         [_thread_blocked, id=12360, stack(0x00000031a3000000,0x00000031a3100000) (1024K)]
+  0x000001ace56f1ef0 JavaThread "Timer-422"                         [_thread_blocked, id=9892, stack(0x00000031a3100000,0x00000031a3200000) (1024K)]
+  0x000001ace56f1860 JavaThread "Timer-423"                         [_thread_blocked, id=15764, stack(0x00000031a3200000,0x00000031a3300000) (1024K)]
+  0x000001ace56f4ce0 JavaThread "Timer-424"                         [_thread_blocked, id=13584, stack(0x00000031a3300000,0x00000031a3400000) (1024K)]
+  0x000001ace56f04b0 JavaThread "Timer-425"                         [_thread_blocked, id=11756, stack(0x00000031a3400000,0x00000031a3500000) (1024K)]
+  0x000001ace56f2580 JavaThread "Timer-426"                         [_thread_blocked, id=6848, stack(0x00000031a3500000,0x00000031a3600000) (1024K)]
+  0x000001ace56f32a0 JavaThread "Timer-427"                         [_thread_blocked, id=13636, stack(0x00000031a3600000,0x00000031a3700000) (1024K)]
+  0x000001ace56f3930 JavaThread "Timer-428"                         [_thread_blocked, id=10320, stack(0x00000031a3700000,0x00000031a3800000) (1024K)]
+  0x000001ace56f3fc0 JavaThread "Timer-429"                         [_thread_blocked, id=7072, stack(0x00000031a3800000,0x00000031a3900000) (1024K)]
+  0x000001ace56f7ad0 JavaThread "Timer-430"                         [_thread_blocked, id=3284, stack(0x00000031a3900000,0x00000031a3a00000) (1024K)]
+  0x000001ace56f6090 JavaThread "Timer-431"                         [_thread_blocked, id=18720, stack(0x00000031a3a00000,0x00000031a3b00000) (1024K)]
+  0x000001ace56f6db0 JavaThread "Timer-432"                         [_thread_blocked, id=1816, stack(0x00000031a3b00000,0x00000031a3c00000) (1024K)]
+  0x000001ace56f6720 JavaThread "Timer-433"                         [_thread_blocked, id=3612, stack(0x00000031a3c00000,0x00000031a3d00000) (1024K)]
+  0x000001ace56f5a00 JavaThread "Timer-434"                         [_thread_blocked, id=8700, stack(0x00000031a3d00000,0x00000031a3e00000) (1024K)]
+  0x000001ace56f0b40 JavaThread "Timer-435"                         [_thread_blocked, id=10760, stack(0x00000031a3e00000,0x00000031a3f00000) (1024K)]
+  0x000001ace56f5370 JavaThread "Timer-436"                         [_thread_blocked, id=13920, stack(0x00000031a3f00000,0x00000031a4000000) (1024K)]
+  0x000001ace56f7440 JavaThread "Timer-437"                         [_thread_blocked, id=19460, stack(0x00000031a4000000,0x00000031a4100000) (1024K)]
+  0x000001ace56f8160 JavaThread "Timer-438"                         [_thread_blocked, id=10072, stack(0x00000031a4100000,0x00000031a4200000) (1024K)]
+  0x000001ace56f11d0 JavaThread "Timer-439"                         [_thread_blocked, id=16460, stack(0x00000031a4200000,0x00000031a4300000) (1024K)]
+  0x000001ace56ff780 JavaThread "Timer-440"                         [_thread_blocked, id=19816, stack(0x00000031a4300000,0x00000031a4400000) (1024K)]
+  0x000001ace56fdd40 JavaThread "Timer-441"                         [_thread_blocked, id=656, stack(0x00000031a4400000,0x00000031a4500000) (1024K)]
+  0x000001ace56fd020 JavaThread "Timer-442"                         [_thread_blocked, id=5888, stack(0x00000031a4500000,0x00000031a4600000) (1024K)]
+  0x000001ace56fd6b0 JavaThread "Timer-443"                         [_thread_blocked, id=21092, stack(0x00000031a4600000,0x00000031a4700000) (1024K)]
+  0x000001ace56fe3d0 JavaThread "Timer-444"                         [_thread_blocked, id=17356, stack(0x00000031a4700000,0x00000031a4800000) (1024K)]
+  0x000001ace56f8e80 JavaThread "Timer-445"                         [_thread_blocked, id=8368, stack(0x00000031a4800000,0x00000031a4900000) (1024K)]
+  0x000001ace56f9510 JavaThread "Timer-446"                         [_thread_blocked, id=12868, stack(0x00000031a4900000,0x00000031a4a00000) (1024K)]
+  0x000001ace56fc990 JavaThread "Timer-447"                         [_thread_blocked, id=16972, stack(0x00000031a4a00000,0x00000031a4b00000) (1024K)]
+  0x000001ace56fea60 JavaThread "Timer-448"                         [_thread_blocked, id=14836, stack(0x00000031a4b00000,0x00000031a4c00000) (1024K)]
+  0x000001ace56fa8c0 JavaThread "Timer-449"                         [_thread_blocked, id=12892, stack(0x00000031a4c00000,0x00000031a4d00000) (1024K)]
+  0x000001ace56fc300 JavaThread "Timer-450"                         [_thread_blocked, id=20476, stack(0x00000031a4d00000,0x00000031a4e00000) (1024K)]
+  0x000001ace56f9ba0 JavaThread "Timer-451"                         [_thread_blocked, id=8704, stack(0x00000031a4e00000,0x00000031a4f00000) (1024K)]
+  0x000001ace56faf50 JavaThread "Timer-452"                         [_thread_blocked, id=2524, stack(0x00000031a4f00000,0x00000031a5000000) (1024K)]
+  0x000001ace56fa230 JavaThread "Timer-453"                         [_thread_blocked, id=8244, stack(0x00000031a5000000,0x00000031a5100000) (1024K)]
+  0x000001ace56fb5e0 JavaThread "Timer-454"                         [_thread_blocked, id=2312, stack(0x00000031a5100000,0x00000031a5200000) (1024K)]
+  0x000001ace56ff0f0 JavaThread "Timer-455"                         [_thread_blocked, id=20552, stack(0x00000031a5200000,0x00000031a5300000) (1024K)]
+  0x000001ace56fbc70 JavaThread "Timer-456"                         [_thread_blocked, id=10536, stack(0x00000031a5300000,0x00000031a5400000) (1024K)]
+  0x000001ace56f87f0 JavaThread "Timer-457"                         [_thread_blocked, id=11112, stack(0x00000031a5400000,0x00000031a5500000) (1024K)]
+  0x000001ace56ffe10 JavaThread "Timer-458"                         [_thread_blocked, id=19508, stack(0x00000031a5500000,0x00000031a5600000) (1024K)]
+  0x000001ace57004a0 JavaThread "Timer-459"                         [_thread_blocked, id=10272, stack(0x00000031a5600000,0x00000031a5700000) (1024K)]
+  0x000001ace5705360 JavaThread "Timer-460"                         [_thread_blocked, id=18220, stack(0x00000031a5700000,0x00000031a5800000) (1024K)]
+  0x000001ace57059f0 JavaThread "Timer-461"                         [_thread_blocked, id=9516, stack(0x00000031a5800000,0x00000031a5900000) (1024K)]
+  0x000001ace5704cd0 JavaThread "Timer-462"                         [_thread_blocked, id=11292, stack(0x00000031a5900000,0x00000031a5a00000) (1024K)]
+  0x000001ace5700b30 JavaThread "Timer-463"                         [_thread_blocked, id=20724, stack(0x00000031a5a00000,0x00000031a5b00000) (1024K)]
+  0x000001ace5702c00 JavaThread "Timer-464"                         [_thread_blocked, id=14676, stack(0x00000031a5b00000,0x00000031a5c00000) (1024K)]
+  0x000001ace5703920 JavaThread "Timer-465"                         [_thread_blocked, id=12068, stack(0x00000031a5c00000,0x00000031a5d00000) (1024K)]
+  0x000001ace57011c0 JavaThread "Timer-466"                         [_thread_blocked, id=10752, stack(0x00000031a5d00000,0x00000031a5e00000) (1024K)]
+  0x000001ace5701850 JavaThread "Timer-467"                         [_thread_blocked, id=11044, stack(0x00000031a5e00000,0x00000031a5f00000) (1024K)]
+  0x000001ace5703290 JavaThread "Timer-468"                         [_thread_blocked, id=15492, stack(0x00000031a5f00000,0x00000031a6000000) (1024K)]
+  0x000001ace5703fb0 JavaThread "Timer-469"                         [_thread_blocked, id=16436, stack(0x00000031a6000000,0x00000031a6100000) (1024K)]
+  0x000001ace5701ee0 JavaThread "Timer-470"                         [_thread_blocked, id=20732, stack(0x00000031a6100000,0x00000031a6200000) (1024K)]
+  0x000001ace5702570 JavaThread "Timer-471"                         [_thread_blocked, id=17968, stack(0x00000031a6200000,0x00000031a6300000) (1024K)]
+  0x000001ace5704640 JavaThread "Timer-472"                         [_thread_blocked, id=15664, stack(0x00000031a6300000,0x00000031a6400000) (1024K)]
+  0x000001ace5ab4640 JavaThread "Timer-473"                         [_thread_blocked, id=4620, stack(0x00000031a6400000,0x00000031a6500000) (1024K)]
+  0x000001ace5ab8150 JavaThread "Timer-474"                         [_thread_blocked, id=16996, stack(0x00000031a6500000,0x00000031a6600000) (1024K)]
+  0x000001ace5ab6710 JavaThread "Timer-475"                         [_thread_blocked, id=15912, stack(0x00000031a6600000,0x00000031a6700000) (1024K)]
+  0x000001ace5ab4cd0 JavaThread "Timer-476"                         [_thread_blocked, id=20932, stack(0x00000031a6700000,0x00000031a6800000) (1024K)]
+  0x000001ace5ab6da0 JavaThread "Timer-477"                         [_thread_blocked, id=8284, stack(0x00000031a6800000,0x00000031a6900000) (1024K)]
+  0x000001ace5ab9b90 JavaThread "Timer-478"                         [_thread_blocked, id=10512, stack(0x00000031a6900000,0x00000031a6a00000) (1024K)]
+  0x000001ace5ab7ac0 JavaThread "Timer-479"                         [_thread_blocked, id=14116, stack(0x00000031a6a00000,0x00000031a6b00000) (1024K)]
+  0x000001ace5ab5360 JavaThread "Timer-480"                         [_thread_blocked, id=1128, stack(0x00000031a6b00000,0x00000031a6c00000) (1024K)]
+  0x000001ace5ab59f0 JavaThread "Timer-481"                         [_thread_blocked, id=3464, stack(0x00000031a6c00000,0x00000031a6d00000) (1024K)]
+  0x000001ace5ab9500 JavaThread "Timer-482"                         [_thread_blocked, id=9744, stack(0x00000031a6d00000,0x00000031a6e00000) (1024K)]
+  0x000001ace5aba220 JavaThread "Timer-483"                         [_thread_blocked, id=3008, stack(0x00000031a6e00000,0x00000031a6f00000) (1024K)]
+  0x000001ace5ab7430 JavaThread "Timer-484"                         [_thread_blocked, id=4260, stack(0x00000031a6f00000,0x00000031a7000000) (1024K)]
+  0x000001ace5ab6080 JavaThread "Timer-485"                         [_thread_blocked, id=16560, stack(0x00000031a7200000,0x00000031a7300000) (1024K)]
+  0x000001ace5ab3290 JavaThread "Timer-486"                         [_thread_blocked, id=16540, stack(0x00000031a7300000,0x00000031a7400000) (1024K)]
+  0x000001ace5ab87e0 JavaThread "Timer-487"                         [_thread_blocked, id=15148, stack(0x00000031a7400000,0x00000031a7500000) (1024K)]
+  0x000001ace5ab3920 JavaThread "Timer-488"                         [_thread_blocked, id=4944, stack(0x00000031a7500000,0x00000031a7600000) (1024K)]
+  0x000001ace5aba8b0 JavaThread "Timer-489"                         [_thread_blocked, id=20516, stack(0x00000031a7600000,0x00000031a7700000) (1024K)]
+  0x000001ace5ab8e70 JavaThread "Timer-490"                         [_thread_blocked, id=21244, stack(0x00000031a7700000,0x00000031a7800000) (1024K)]
+  0x000001ace5abaf40 JavaThread "Timer-491"                         [_thread_blocked, id=19704, stack(0x00000031a7800000,0x00000031a7900000) (1024K)]
+  0x000001ace5ab3fb0 JavaThread "Timer-492"                         [_thread_blocked, id=16172, stack(0x00000031a7900000,0x00000031a7a00000) (1024K)]
+  0x000001ace5abc980 JavaThread "Timer-493"                         [_thread_blocked, id=12972, stack(0x00000031a7a00000,0x00000031a7b00000) (1024K)]
+  0x000001ace5ac0b20 JavaThread "Timer-494"                         [_thread_blocked, id=8984, stack(0x00000031a7b00000,0x00000031a7c00000) (1024K)]
+  0x000001ace5abe3c0 JavaThread "Timer-495"                         [_thread_blocked, id=9968, stack(0x00000031a7c00000,0x00000031a7d00000) (1024K)]
+  0x000001ace5abf770 JavaThread "Timer-496"                         [_thread_blocked, id=16080, stack(0x00000031a7d00000,0x00000031a7e00000) (1024K)]
+  0x000001ace5abdd30 JavaThread "Timer-497"                         [_thread_blocked, id=6020, stack(0x00000031a7e00000,0x00000031a7f00000) (1024K)]
+  0x000001ace5abb5d0 JavaThread "Timer-498"                         [_thread_blocked, id=12492, stack(0x00000031a7f00000,0x00000031a8000000) (1024K)]
+  0x000001ace5abf0e0 JavaThread "Timer-499"                         [_thread_blocked, id=11092, stack(0x00000031a8000000,0x00000031a8100000) (1024K)]
+  0x000001ace5abea50 JavaThread "Timer-500"                         [_thread_blocked, id=11504, stack(0x00000031a8100000,0x00000031a8200000) (1024K)]
+  0x000001ace5ac11b0 JavaThread "Timer-501"                         [_thread_blocked, id=17720, stack(0x00000031a8200000,0x00000031a8300000) (1024K)]
+  0x000001ace5abbc60 JavaThread "Timer-502"                         [_thread_blocked, id=16432, stack(0x00000031a8300000,0x00000031a8400000) (1024K)]
+  0x000001ace5ac2bf0 JavaThread "Timer-503"                         [_thread_blocked, id=9800, stack(0x00000031a8400000,0x00000031a8500000) (1024K)]
+  0x000001ace5ac1840 JavaThread "Timer-504"                         [_thread_blocked, id=14928, stack(0x00000031a8500000,0x00000031a8600000) (1024K)]
+  0x000001ace5abfe00 JavaThread "Timer-505"                         [_thread_blocked, id=21476, stack(0x00000031a8600000,0x00000031a8700000) (1024K)]
+  0x000001ace5ac0490 JavaThread "Timer-506"                         [_thread_blocked, id=16644, stack(0x00000031a8700000,0x00000031a8800000) (1024K)]
+  0x000001ace5ac1ed0 JavaThread "Timer-507"                         [_thread_blocked, id=19728, stack(0x00000031a8800000,0x00000031a8900000) (1024K)]
+  0x000001ace5ac2560 JavaThread "Timer-508"                         [_thread_blocked, id=17680, stack(0x00000031a8900000,0x00000031a8a00000) (1024K)]
+  0x000001ace5abd010 JavaThread "Timer-509"                         [_thread_blocked, id=20200, stack(0x00000031a8a00000,0x00000031a8b00000) (1024K)]
+  0x000001ace5ac3280 JavaThread "Timer-510"                         [_thread_blocked, id=16328, stack(0x00000031a8b00000,0x00000031a8c00000) (1024K)]
+  0x000001ace5abc2f0 JavaThread "Timer-511"                         [_thread_blocked, id=3572, stack(0x00000031a8c00000,0x00000031a8d00000) (1024K)]
+  0x000001ace5ac3910 JavaThread "Timer-512"                         [_thread_blocked, id=13952, stack(0x00000031a8d00000,0x00000031a8e00000) (1024K)]
+  0x000001ace5ac3fa0 JavaThread "Timer-513"                         [_thread_blocked, id=15684, stack(0x00000031a8e00000,0x00000031a8f00000) (1024K)]
+  0x000001ace5ac4630 JavaThread "Timer-514"                         [_thread_blocked, id=16816, stack(0x00000031a8f00000,0x00000031a9000000) (1024K)]
+  0x000001ace5abd6a0 JavaThread "Timer-515"                         [_thread_blocked, id=21144, stack(0x00000031a9000000,0x00000031a9100000) (1024K)]
+  0x000001ace5ac8e60 JavaThread "Timer-516"                         [_thread_blocked, id=18936, stack(0x00000031a9100000,0x00000031a9200000) (1024K)]
+  0x000001ace5ac59e0 JavaThread "Timer-517"                         [_thread_blocked, id=20940, stack(0x00000031a9200000,0x00000031a9300000) (1024K)]
+  0x000001ace5ac8140 JavaThread "Timer-518"                         [_thread_blocked, id=684, stack(0x00000031a9300000,0x00000031a9400000) (1024K)]
+Total: 532
+
+Other Threads:
+  0x000001ac9ebaeb80 VMThread "VM Thread"                           [id=2144, stack(0x0000003187800000,0x0000003187900000) (1024K)]
+  0x000001ac9eb960b0 WatcherThread "VM Periodic Task Thread"        [id=4412, stack(0x0000003187700000,0x0000003187800000) (1024K)]
+  0x000001ac836a6540 WorkerThread "GC Thread#0"                     [id=4456, stack(0x0000003187200000,0x0000003187300000) (1024K)]
+  0x000001ace46529c0 WorkerThread "GC Thread#1"                     [id=3040, stack(0x0000003188300000,0x0000003188400000) (1024K)]
+  0x000001ace4475190 WorkerThread "GC Thread#2"                     [id=3048, stack(0x0000003188400000,0x0000003188500000) (1024K)]
+  0x000001ace4475540 WorkerThread "GC Thread#3"                     [id=7664, stack(0x0000003188500000,0x0000003188600000) (1024K)]
+  0x000001ac836b30b0 ConcurrentGCThread "G1 Main Marker"            [id=6968, stack(0x0000003187300000,0x0000003187400000) (1024K)]
+  0x000001ac836b3ac0 WorkerThread "G1 Conc#0"                       [id=1844, stack(0x0000003187400000,0x0000003187500000) (1024K)]
+  0x000001ac83725770 ConcurrentGCThread "G1 Refine#0"               [id=1840, stack(0x0000003187500000,0x0000003187600000) (1024K)]
+  0x000001ac837261f0 ConcurrentGCThread "G1 Service"                [id=2096, stack(0x0000003187600000,0x0000003187700000) (1024K)]
+Total: 10
+
+Threads with active compile tasks:
+C2 CompilerThread0  47682 3100       4       java.lang.String::split (242 bytes)
+Total: 1
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+OutOfMemory and StackOverflow Exception counts:
+OutOfMemoryError java_heap_errors=1
+LinkageErrors=37
+
+Heap address: 0x00000000a1c00000, size: 1508 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x000001ac9f000000-0x000001ac9fc60000-0x000001ac9fc60000), size 12976128, SharedBaseAddress: 0x000001ac9f000000, ArchiveRelocationMode: 1.
+Compressed class space mapped at: 0x000001aca0000000-0x000001ace0000000, reserved size: 1073741824
+Narrow klass base: 0x000001ac9f000000, Narrow klass shift: 0, Narrow klass range: 0x41000000
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 5 size 8 Array Of Cards #cards 12 size 40 Howl #buckets 4 coarsen threshold 1843 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 2048
+ CPUs: 4 total, 4 available
+ Memory: 6031M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (32-bit)
+ Heap Region Size: 1M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 96M
+ Heap Max Capacity: 1508M
+ Pre-touch: Disabled
+ Parallel Workers: 4
+ Concurrent Workers: 1
+ Concurrent Refinement Workers: 4
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total reserved 1544192K, committed 98304K, used 60553K [0x00000000a1c00000, 0x0000000100000000)
+  region size 1024K, 57 young (58368K), 3 survivors (3072K)
+ Metaspace       used 16021K, committed 16320K, reserved 1114112K
+  class space    used 2055K, committed 2176K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, TAMS=top-at-mark-start, PB=parsable bottom
+|   0|0x00000000a1c00000, 0x00000000a1d00000, 0x00000000a1d00000|100%| O|  |TAMS 0x00000000a1c00000| PB 0x00000000a1c00000| Untracked |  0
+|   1|0x00000000a1d00000, 0x00000000a1d77cf0, 0x00000000a1e00000| 46%| O|  |TAMS 0x00000000a1d00000| PB 0x00000000a1d00000| Untracked |  0
+|   2|0x00000000a1e00000, 0x00000000a1f00000, 0x00000000a1f00000|100%|HS|  |TAMS 0x00000000a1e00000| PB 0x00000000a1e00000| Complete |  0
+|   3|0x00000000a1f00000, 0x00000000a2000000, 0x00000000a2000000|100%|HC|  |TAMS 0x00000000a1f00000| PB 0x00000000a1f00000| Complete |  0
+|   4|0x00000000a2000000, 0x00000000a2100000, 0x00000000a2100000|100%| O|  |TAMS 0x00000000a2000000| PB 0x00000000a2000000| Untracked |  0
+|   5|0x00000000a2100000, 0x00000000a2100000, 0x00000000a2200000|  0%| F|  |TAMS 0x00000000a2100000| PB 0x00000000a2100000| Untracked |  0
+|   6|0x00000000a2200000, 0x00000000a2200000, 0x00000000a2300000|  0%| F|  |TAMS 0x00000000a2200000| PB 0x00000000a2200000| Untracked |  0
+|   7|0x00000000a2300000, 0x00000000a2300000, 0x00000000a2400000|  0%| F|  |TAMS 0x00000000a2300000| PB 0x00000000a2300000| Untracked |  0
+|   8|0x00000000a2400000, 0x00000000a2400000, 0x00000000a2500000|  0%| F|  |TAMS 0x00000000a2400000| PB 0x00000000a2400000| Untracked |  0
+|   9|0x00000000a2500000, 0x00000000a2500000, 0x00000000a2600000|  0%| F|  |TAMS 0x00000000a2500000| PB 0x00000000a2500000| Untracked |  0
+|  10|0x00000000a2600000, 0x00000000a2600000, 0x00000000a2700000|  0%| F|  |TAMS 0x00000000a2600000| PB 0x00000000a2600000| Untracked |  0
+|  11|0x00000000a2700000, 0x00000000a2700000, 0x00000000a2800000|  0%| F|  |TAMS 0x00000000a2700000| PB 0x00000000a2700000| Untracked |  0
+|  12|0x00000000a2800000, 0x00000000a2800000, 0x00000000a2900000|  0%| F|  |TAMS 0x00000000a2800000| PB 0x00000000a2800000| Untracked |  0
+|  13|0x00000000a2900000, 0x00000000a2900000, 0x00000000a2a00000|  0%| F|  |TAMS 0x00000000a2900000| PB 0x00000000a2900000| Untracked |  0
+|  14|0x00000000a2a00000, 0x00000000a2a00000, 0x00000000a2b00000|  0%| F|  |TAMS 0x00000000a2a00000| PB 0x00000000a2a00000| Untracked |  0
+|  15|0x00000000a2b00000, 0x00000000a2b00000, 0x00000000a2c00000|  0%| F|  |TAMS 0x00000000a2b00000| PB 0x00000000a2b00000| Untracked |  0
+|  16|0x00000000a2c00000, 0x00000000a2c00000, 0x00000000a2d00000|  0%| F|  |TAMS 0x00000000a2c00000| PB 0x00000000a2c00000| Untracked |  0
+|  17|0x00000000a2d00000, 0x00000000a2d00000, 0x00000000a2e00000|  0%| F|  |TAMS 0x00000000a2d00000| PB 0x00000000a2d00000| Untracked |  0
+|  18|0x00000000a2e00000, 0x00000000a2e00000, 0x00000000a2f00000|  0%| F|  |TAMS 0x00000000a2e00000| PB 0x00000000a2e00000| Untracked |  0
+|  19|0x00000000a2f00000, 0x00000000a2f00000, 0x00000000a3000000|  0%| F|  |TAMS 0x00000000a2f00000| PB 0x00000000a2f00000| Untracked |  0
+|  20|0x00000000a3000000, 0x00000000a3000000, 0x00000000a3100000|  0%| F|  |TAMS 0x00000000a3000000| PB 0x00000000a3000000| Untracked |  0
+|  21|0x00000000a3100000, 0x00000000a3100000, 0x00000000a3200000|  0%| F|  |TAMS 0x00000000a3100000| PB 0x00000000a3100000| Untracked |  0
+|  22|0x00000000a3200000, 0x00000000a3200000, 0x00000000a3300000|  0%| F|  |TAMS 0x00000000a3200000| PB 0x00000000a3200000| Untracked |  0
+|  23|0x00000000a3300000, 0x00000000a3300000, 0x00000000a3400000|  0%| F|  |TAMS 0x00000000a3300000| PB 0x00000000a3300000| Untracked |  0
+|  24|0x00000000a3400000, 0x00000000a3400000, 0x00000000a3500000|  0%| F|  |TAMS 0x00000000a3400000| PB 0x00000000a3400000| Untracked |  0
+|  25|0x00000000a3500000, 0x00000000a3500000, 0x00000000a3600000|  0%| F|  |TAMS 0x00000000a3500000| PB 0x00000000a3500000| Untracked |  0
+|  26|0x00000000a3600000, 0x00000000a3600000, 0x00000000a3700000|  0%| F|  |TAMS 0x00000000a3600000| PB 0x00000000a3600000| Untracked |  0
+|  27|0x00000000a3700000, 0x00000000a3700000, 0x00000000a3800000|  0%| F|  |TAMS 0x00000000a3700000| PB 0x00000000a3700000| Untracked |  0
+|  28|0x00000000a3800000, 0x00000000a3800000, 0x00000000a3900000|  0%| F|  |TAMS 0x00000000a3800000| PB 0x00000000a3800000| Untracked |  0
+|  29|0x00000000a3900000, 0x00000000a3900000, 0x00000000a3a00000|  0%| F|  |TAMS 0x00000000a3900000| PB 0x00000000a3900000| Untracked |  0
+|  30|0x00000000a3a00000, 0x00000000a3a00000, 0x00000000a3b00000|  0%| F|  |TAMS 0x00000000a3a00000| PB 0x00000000a3a00000| Untracked |  0
+|  31|0x00000000a3b00000, 0x00000000a3b00000, 0x00000000a3c00000|  0%| F|  |TAMS 0x00000000a3b00000| PB 0x00000000a3b00000| Untracked |  0
+|  32|0x00000000a3c00000, 0x00000000a3c00000, 0x00000000a3d00000|  0%| F|  |TAMS 0x00000000a3c00000| PB 0x00000000a3c00000| Untracked |  0
+|  33|0x00000000a3d00000, 0x00000000a3d00000, 0x00000000a3e00000|  0%| F|  |TAMS 0x00000000a3d00000| PB 0x00000000a3d00000| Untracked |  0
+|  34|0x00000000a3e00000, 0x00000000a3e00000, 0x00000000a3f00000|  0%| F|  |TAMS 0x00000000a3e00000| PB 0x00000000a3e00000| Untracked |  0
+|  35|0x00000000a3f00000, 0x00000000a3f00000, 0x00000000a4000000|  0%| F|  |TAMS 0x00000000a3f00000| PB 0x00000000a3f00000| Untracked |  0
+|  36|0x00000000a4000000, 0x00000000a4000000, 0x00000000a4100000|  0%| F|  |TAMS 0x00000000a4000000| PB 0x00000000a4000000| Untracked |  0
+|  37|0x00000000a4100000, 0x00000000a4100000, 0x00000000a4200000|  0%| F|  |TAMS 0x00000000a4100000| PB 0x00000000a4100000| Untracked |  0
+|  38|0x00000000a4200000, 0x00000000a4200000, 0x00000000a4300000|  0%| F|  |TAMS 0x00000000a4200000| PB 0x00000000a4200000| Untracked |  0
+|  39|0x00000000a4300000, 0x00000000a43a92a8, 0x00000000a4400000| 66%| E|  |TAMS 0x00000000a4300000| PB 0x00000000a4300000| Complete |  0
+|  40|0x00000000a4400000, 0x00000000a4500000, 0x00000000a4500000|100%| E|CS|TAMS 0x00000000a4400000| PB 0x00000000a4400000| Complete |  0
+|  41|0x00000000a4500000, 0x00000000a4600000, 0x00000000a4600000|100%| E|CS|TAMS 0x00000000a4500000| PB 0x00000000a4500000| Complete |  0
+|  42|0x00000000a4600000, 0x00000000a4700000, 0x00000000a4700000|100%| E|CS|TAMS 0x00000000a4600000| PB 0x00000000a4600000| Complete |  0
+|  43|0x00000000a4700000, 0x00000000a4800000, 0x00000000a4800000|100%| E|CS|TAMS 0x00000000a4700000| PB 0x00000000a4700000| Complete |  0
+|  44|0x00000000a4800000, 0x00000000a4900000, 0x00000000a4900000|100%| E|CS|TAMS 0x00000000a4800000| PB 0x00000000a4800000| Complete |  0
+|  45|0x00000000a4900000, 0x00000000a4a00000, 0x00000000a4a00000|100%| E|CS|TAMS 0x00000000a4900000| PB 0x00000000a4900000| Complete |  0
+|  46|0x00000000a4a00000, 0x00000000a4b00000, 0x00000000a4b00000|100%| E|CS|TAMS 0x00000000a4a00000| PB 0x00000000a4a00000| Complete |  0
+|  47|0x00000000a4b00000, 0x00000000a4c00000, 0x00000000a4c00000|100%| E|CS|TAMS 0x00000000a4b00000| PB 0x00000000a4b00000| Complete |  0
+|  48|0x00000000a4c00000, 0x00000000a4d00000, 0x00000000a4d00000|100%| E|CS|TAMS 0x00000000a4c00000| PB 0x00000000a4c00000| Complete |  0
+|  49|0x00000000a4d00000, 0x00000000a4e00000, 0x00000000a4e00000|100%| E|CS|TAMS 0x00000000a4d00000| PB 0x00000000a4d00000| Complete |  0
+|  50|0x00000000a4e00000, 0x00000000a4f00000, 0x00000000a4f00000|100%| E|CS|TAMS 0x00000000a4e00000| PB 0x00000000a4e00000| Complete |  0
+|  51|0x00000000a4f00000, 0x00000000a5000000, 0x00000000a5000000|100%| E|CS|TAMS 0x00000000a4f00000| PB 0x00000000a4f00000| Complete |  0
+|  52|0x00000000a5000000, 0x00000000a5100000, 0x00000000a5100000|100%| E|CS|TAMS 0x00000000a5000000| PB 0x00000000a5000000| Complete |  0
+|  53|0x00000000a5100000, 0x00000000a5200000, 0x00000000a5200000|100%| E|CS|TAMS 0x00000000a5100000| PB 0x00000000a5100000| Complete |  0
+|  54|0x00000000a5200000, 0x00000000a5300000, 0x00000000a5300000|100%| E|CS|TAMS 0x00000000a5200000| PB 0x00000000a5200000| Complete |  0
+|  55|0x00000000a5300000, 0x00000000a5400000, 0x00000000a5400000|100%| E|CS|TAMS 0x00000000a5300000| PB 0x00000000a5300000| Complete |  0
+|  56|0x00000000a5400000, 0x00000000a5500000, 0x00000000a5500000|100%| E|CS|TAMS 0x00000000a5400000| PB 0x00000000a5400000| Complete |  0
+|  57|0x00000000a5500000, 0x00000000a5600000, 0x00000000a5600000|100%| E|CS|TAMS 0x00000000a5500000| PB 0x00000000a5500000| Complete |  0
+|  58|0x00000000a5600000, 0x00000000a5700000, 0x00000000a5700000|100%| E|CS|TAMS 0x00000000a5600000| PB 0x00000000a5600000| Complete |  0
+|  59|0x00000000a5700000, 0x00000000a5800000, 0x00000000a5800000|100%| E|CS|TAMS 0x00000000a5700000| PB 0x00000000a5700000| Complete |  0
+|  60|0x00000000a5800000, 0x00000000a5900000, 0x00000000a5900000|100%| E|CS|TAMS 0x00000000a5800000| PB 0x00000000a5800000| Complete |  0
+|  61|0x00000000a5900000, 0x00000000a5a00000, 0x00000000a5a00000|100%| E|CS|TAMS 0x00000000a5900000| PB 0x00000000a5900000| Complete |  0
+|  62|0x00000000a5a00000, 0x00000000a5b00000, 0x00000000a5b00000|100%| E|CS|TAMS 0x00000000a5a00000| PB 0x00000000a5a00000| Complete |  0
+|  63|0x00000000a5b00000, 0x00000000a5c00000, 0x00000000a5c00000|100%| E|CS|TAMS 0x00000000a5b00000| PB 0x00000000a5b00000| Complete |  0
+|  64|0x00000000a5c00000, 0x00000000a5d00000, 0x00000000a5d00000|100%| E|CS|TAMS 0x00000000a5c00000| PB 0x00000000a5c00000| Complete |  0
+|  65|0x00000000a5d00000, 0x00000000a5e00000, 0x00000000a5e00000|100%| E|CS|TAMS 0x00000000a5d00000| PB 0x00000000a5d00000| Complete |  0
+|  66|0x00000000a5e00000, 0x00000000a5f00000, 0x00000000a5f00000|100%| E|CS|TAMS 0x00000000a5e00000| PB 0x00000000a5e00000| Complete |  0
+|  67|0x00000000a5f00000, 0x00000000a6000000, 0x00000000a6000000|100%| E|CS|TAMS 0x00000000a5f00000| PB 0x00000000a5f00000| Complete |  0
+|  68|0x00000000a6000000, 0x00000000a6100000, 0x00000000a6100000|100%| E|CS|TAMS 0x00000000a6000000| PB 0x00000000a6000000| Complete |  0
+|  69|0x00000000a6100000, 0x00000000a6200000, 0x00000000a6200000|100%| E|CS|TAMS 0x00000000a6100000| PB 0x00000000a6100000| Complete |  0
+|  70|0x00000000a6200000, 0x00000000a6300000, 0x00000000a6300000|100%| E|CS|TAMS 0x00000000a6200000| PB 0x00000000a6200000| Complete |  0
+|  71|0x00000000a6300000, 0x00000000a6400000, 0x00000000a6400000|100%| E|CS|TAMS 0x00000000a6300000| PB 0x00000000a6300000| Complete |  0
+|  72|0x00000000a6400000, 0x00000000a64aaa88, 0x00000000a6500000| 66%| S|CS|TAMS 0x00000000a6400000| PB 0x00000000a6400000| Complete |  0
+|  73|0x00000000a6500000, 0x00000000a6600000, 0x00000000a6600000|100%| S|CS|TAMS 0x00000000a6500000| PB 0x00000000a6500000| Complete |  0
+|  74|0x00000000a6600000, 0x00000000a6700000, 0x00000000a6700000|100%| S|CS|TAMS 0x00000000a6600000| PB 0x00000000a6600000| Complete |  0
+|  75|0x00000000a6700000, 0x00000000a6800000, 0x00000000a6800000|100%| E|CS|TAMS 0x00000000a6700000| PB 0x00000000a6700000| Complete |  0
+|  76|0x00000000a6800000, 0x00000000a6900000, 0x00000000a6900000|100%| E|CS|TAMS 0x00000000a6800000| PB 0x00000000a6800000| Complete |  0
+|  77|0x00000000a6900000, 0x00000000a6a00000, 0x00000000a6a00000|100%| E|CS|TAMS 0x00000000a6900000| PB 0x00000000a6900000| Complete |  0
+|  78|0x00000000a6a00000, 0x00000000a6b00000, 0x00000000a6b00000|100%| E|CS|TAMS 0x00000000a6a00000| PB 0x00000000a6a00000| Complete |  0
+|  79|0x00000000a6b00000, 0x00000000a6c00000, 0x00000000a6c00000|100%| E|CS|TAMS 0x00000000a6b00000| PB 0x00000000a6b00000| Complete |  0
+|  80|0x00000000a6c00000, 0x00000000a6d00000, 0x00000000a6d00000|100%| E|CS|TAMS 0x00000000a6c00000| PB 0x00000000a6c00000| Complete |  0
+|  81|0x00000000a6d00000, 0x00000000a6e00000, 0x00000000a6e00000|100%| E|CS|TAMS 0x00000000a6d00000| PB 0x00000000a6d00000| Complete |  0
+|  82|0x00000000a6e00000, 0x00000000a6f00000, 0x00000000a6f00000|100%| E|CS|TAMS 0x00000000a6e00000| PB 0x00000000a6e00000| Complete |  0
+|  83|0x00000000a6f00000, 0x00000000a7000000, 0x00000000a7000000|100%| E|CS|TAMS 0x00000000a6f00000| PB 0x00000000a6f00000| Complete |  0
+|  84|0x00000000a7000000, 0x00000000a7100000, 0x00000000a7100000|100%| E|CS|TAMS 0x00000000a7000000| PB 0x00000000a7000000| Complete |  0
+|  85|0x00000000a7100000, 0x00000000a7200000, 0x00000000a7200000|100%| E|CS|TAMS 0x00000000a7100000| PB 0x00000000a7100000| Complete |  0
+|  86|0x00000000a7200000, 0x00000000a7300000, 0x00000000a7300000|100%| E|CS|TAMS 0x00000000a7200000| PB 0x00000000a7200000| Complete |  0
+|  87|0x00000000a7300000, 0x00000000a7400000, 0x00000000a7400000|100%| E|CS|TAMS 0x00000000a7300000| PB 0x00000000a7300000| Complete |  0
+|  88|0x00000000a7400000, 0x00000000a7500000, 0x00000000a7500000|100%| E|CS|TAMS 0x00000000a7400000| PB 0x00000000a7400000| Complete |  0
+|  89|0x00000000a7500000, 0x00000000a7600000, 0x00000000a7600000|100%| E|CS|TAMS 0x00000000a7500000| PB 0x00000000a7500000| Complete |  0
+|  90|0x00000000a7600000, 0x00000000a7700000, 0x00000000a7700000|100%| E|CS|TAMS 0x00000000a7600000| PB 0x00000000a7600000| Complete |  0
+|  91|0x00000000a7700000, 0x00000000a7800000, 0x00000000a7800000|100%| E|CS|TAMS 0x00000000a7700000| PB 0x00000000a7700000| Complete |  0
+|  92|0x00000000a7800000, 0x00000000a7900000, 0x00000000a7900000|100%| E|CS|TAMS 0x00000000a7800000| PB 0x00000000a7800000| Complete |  0
+|  93|0x00000000a7900000, 0x00000000a7a00000, 0x00000000a7a00000|100%| E|CS|TAMS 0x00000000a7900000| PB 0x00000000a7900000| Complete |  0
+|  94|0x00000000a7a00000, 0x00000000a7b00000, 0x00000000a7b00000|100%| E|  |TAMS 0x00000000a7a00000| PB 0x00000000a7a00000| Complete |  0
+|  95|0x00000000a7b00000, 0x00000000a7c00000, 0x00000000a7c00000|100%| E|CS|TAMS 0x00000000a7b00000| PB 0x00000000a7b00000| Complete |  0
+
+Card table byte_map: [0x000001ac9acb0000,0x000001ac9afb0000] _byte_map_base: 0x000001ac9a7a2000
+
+Marking Bits: (CMBitMap*) 0x000001ac836a6b50
+ Bits: [0x000001ac9afb0000, 0x000001ac9c740000)
+
+Polling page: 0x000001ac81510000
+
+Metaspace:
+
+Usage:
+  Non-class:     13.64 MB used.
+      Class:      2.01 MB used.
+       Both:     15.65 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,      13.81 MB ( 22%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,       2.12 MB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,      15.94 MB (  1%) committed. 
+
+Chunk freelists:
+   Non-Class:  2.09 MB
+       Class:  13.82 MB
+        Both:  15.91 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 21.00 MB
+CDS: on
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - use_allocation_guard: 0.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 0.
+num_arena_births: 294.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 255.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 0.
+num_chunks_taken_from_freelist: 741.
+num_chunk_merges: 0.
+num_chunk_splits: 507.
+num_chunks_enlarged: 379.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=120000Kb used=1227Kb max_used=1227Kb free=118772Kb
+ bounds [0x000001ac93480000, 0x000001ac936f0000, 0x000001ac9a9b0000]
+CodeHeap 'profiled nmethods': size=120000Kb used=5934Kb max_used=5934Kb free=114065Kb
+ bounds [0x000001ac8b9b0000, 0x000001ac8bf80000, 0x000001ac92ee0000]
+CodeHeap 'non-nmethods': size=5760Kb used=1480Kb max_used=1542Kb free=4279Kb
+ bounds [0x000001ac92ee0000, 0x000001ac93150000, 0x000001ac93480000]
+ total_blobs=3684 nmethods=3131 adapters=457
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 44.745 Thread 0x000001ac9ebdb3f0 nmethod 3089 0x000001ac8bf58010 code [0x000001ac8bf58220, 0x000001ac8bf589c8]
+Event: 44.860 Thread 0x000001ac9ebd07a0 3090       4       java.nio.ByteBuffer::position (8 bytes)
+Event: 44.863 Thread 0x000001ac9ebd07a0 nmethod 3090 0x000001ac935a2310 code [0x000001ac935a24a0, 0x000001ac935a25a0]
+Event: 44.863 Thread 0x000001ac9ebd07a0 3091       4       java.util.concurrent.ConcurrentHashMap$Traverser::<init> (36 bytes)
+Event: 44.868 Thread 0x000001ac9ebd07a0 nmethod 3091 0x000001ac935a2690 code [0x000001ac935a2800, 0x000001ac935a29e0]
+Event: 44.892 Thread 0x000001ac9ebd07a0 3092       4       java.util.Arrays::fill (21 bytes)
+Event: 44.903 Thread 0x000001ac9ebd07a0 nmethod 3092 0x000001ac935a2a90 code [0x000001ac935a2c20, 0x000001ac935a2e48]
+Event: 44.934 Thread 0x000001ac9ebd07a0 3093       4       org.apache.logging.log4j.core.layout.PatternLayout$PatternFormatterPatternSerializer::toSerializable (40 bytes)
+Event: 45.069 Thread 0x000001ac9ebd07a0 nmethod 3093 0x000001ac935a2f10 code [0x000001ac935a3180, 0x000001ac935a47c8]
+Event: 45.327 Thread 0x000001ac9ebd07a0 3094       4       java.lang.String::split (148 bytes)
+Event: 45.558 Thread 0x000001ac9ebd07a0 nmethod 3094 0x000001ac935a5690 code [0x000001ac935a59c0, 0x000001ac935a8478]
+Event: 45.559 Thread 0x000001ac9ebd07a0 3095       4       java.lang.String::split (242 bytes)
+Event: 46.714 Thread 0x000001ac9ebdb3f0 3098       3       java.util.TaskQueue::fixDown (108 bytes)
+Event: 46.715 Thread 0x000001ac9ebdb3f0 nmethod 3098 0x000001ac8bf58c10 code [0x000001ac8bf58de0, 0x000001ac8bf59410]
+Event: 46.716 Thread 0x000001ac9ebdb3f0 3099   !   3       java.util.TimerThread::run (74 bytes)
+Event: 46.718 Thread 0x000001ac9ebdb3f0 nmethod 3099 0x000001ac8bf59690 code [0x000001ac8bf598a0, 0x000001ac8bf5a1b8]
+Event: 46.720 Thread 0x000001ac9ebd07a0 nmethod 3095 0x000001ac935a9f10 code [0x000001ac935aa1e0, 0x000001ac935ac760]
+Event: 46.721 Thread 0x000001ac9ebd07a0 3097       4       java.lang.String::split (148 bytes)
+Event: 46.932 Thread 0x000001ac9ebd07a0 nmethod 3097 0x000001ac935adf10 code [0x000001ac935ae240, 0x000001ac935b0ec0]
+Event: 46.933 Thread 0x000001ac9ebd07a0 3100       4       java.lang.String::split (242 bytes)
+
+GC Heap History (4 events):
+Event: 3.765 GC heap before
+{Heap before GC invocations=0 (full 0):
+ garbage-first heap   total reserved 1544192K, committed 98304K, used 18432K [0x00000000a1c00000, 0x0000000100000000)
+  region size 1024K, 14 young (14336K), 0 survivors (0K)
+ Metaspace       used 4987K, committed 5120K, reserved 1114112K
+  class space    used 593K, committed 640K, reserved 1048576K
+}
+Event: 3.814 GC heap after
+{Heap after GC invocations=1 (full 0):
+ garbage-first heap   total reserved 1544192K, committed 98304K, used 4392K [0x00000000a1c00000, 0x0000000100000000)
+  region size 1024K, 2 young (2048K), 2 survivors (2048K)
+ Metaspace       used 4987K, committed 5120K, reserved 1114112K
+  class space    used 593K, committed 640K, reserved 1048576K
+}
+Event: 9.594 GC heap before
+{Heap before GC invocations=1 (full 0):
+ garbage-first heap   total reserved 1544192K, committed 98304K, used 22824K [0x00000000a1c00000, 0x0000000100000000)
+  region size 1024K, 21 young (21504K), 2 survivors (2048K)
+ Metaspace       used 11612K, committed 11968K, reserved 1114112K
+  class space    used 1389K, committed 1536K, reserved 1048576K
+}
+Event: 9.607 GC heap after
+{Heap after GC invocations=2 (full 0):
+ garbage-first heap   total reserved 1544192K, committed 98304K, used 7305K [0x00000000a1c00000, 0x0000000100000000)
+  region size 1024K, 3 young (3072K), 3 survivors (3072K)
+ Metaspace       used 11612K, committed 11968K, reserved 1114112K
+  class space    used 1389K, committed 1536K, reserved 1048576K
+}
+
+Dll operation events (9 events):
+Event: 0.037 Loaded shared library C:\Program Files\Java\jdk-22\bin\java.dll
+Event: 0.202 Loaded shared library C:\Program Files\Java\jdk-22\bin\jsvml.dll
+Event: 0.312 Loaded shared library C:\Program Files\Java\jdk-22\bin\net.dll
+Event: 0.340 Loaded shared library C:\Program Files\Java\jdk-22\bin\nio.dll
+Event: 0.574 Loaded shared library C:\Program Files\Java\jdk-22\bin\zip.dll
+Event: 0.801 Loaded shared library C:\Program Files\Java\jdk-22\bin\verify.dll
+Event: 0.915 Loaded shared library C:\Program Files\Java\jdk-22\bin\jimage.dll
+Event: 3.183 Loaded shared library C:\Program Files\Java\jdk-22\bin\management.dll
+Event: 3.225 Loaded shared library C:\Program Files\Java\jdk-22\bin\management_ext.dll
+
+Deoptimization events (20 events):
+Event: 34.882 Thread 0x000001ace48029d0 DEOPT PACKING pc=0x000001ac93568c48 sp=0x00000031887fddd0
+Event: 34.882 Thread 0x000001ace48029d0 DEOPT UNPACKING pc=0x000001ac92f346a2 sp=0x00000031887fdd48 mode 2
+Event: 37.975 Thread 0x000001ace48029d0 DEOPT PACKING pc=0x000001ac8be5f3fe sp=0x00000031887fd110
+Event: 37.975 Thread 0x000001ace48029d0 DEOPT UNPACKING pc=0x000001ac92f34e42 sp=0x00000031887fc5a8 mode 0
+Event: 42.431 Thread 0x000001ace48029d0 DEOPT PACKING pc=0x000001ac8be6c3eb sp=0x00000031887fddb0
+Event: 42.431 Thread 0x000001ace48029d0 DEOPT UNPACKING pc=0x000001ac92f34e42 sp=0x00000031887fd280 mode 0
+Event: 42.432 Thread 0x000001ace48029d0 DEOPT PACKING pc=0x000001ac8be57699 sp=0x00000031887fe220
+Event: 42.432 Thread 0x000001ace48029d0 DEOPT UNPACKING pc=0x000001ac92f34e42 sp=0x00000031887fd720 mode 0
+Event: 43.942 Thread 0x000001ace48029d0 DEOPT PACKING pc=0x000001ac8beb5c54 sp=0x00000031887fe440
+Event: 43.942 Thread 0x000001ace48029d0 DEOPT UNPACKING pc=0x000001ac92f34e42 sp=0x00000031887fd8c8 mode 0
+Event: 44.148 Thread 0x000001ace48029d0 DEOPT PACKING pc=0x000001ac8becce3e sp=0x00000031887fe3e0
+Event: 44.148 Thread 0x000001ace48029d0 DEOPT UNPACKING pc=0x000001ac92f34e42 sp=0x00000031887fd8c0 mode 0
+Event: 45.597 Thread 0x000001ace48029d0 Uncommon trap: trap_request=0xffffffcc fr.pc=0x000001ac935a7920 relative=0x0000000000001f60
+Event: 45.597 Thread 0x000001ace48029d0 Uncommon trap: reason=intrinsic_or_type_checked_inlining action=make_not_entrant pc=0x000001ac935a7920 method=java.util.ArrayList$SubList.toArray([Ljava/lang/Object;)[Ljava/lang/Object; @ 58 c2
+Event: 45.597 Thread 0x000001ace48029d0 DEOPT PACKING pc=0x000001ac935a7920 sp=0x00000031887fdcc0
+Event: 45.598 Thread 0x000001ace48029d0 DEOPT UNPACKING pc=0x000001ac92f346a2 sp=0x00000031887fdb70 mode 2
+Event: 46.721 Thread 0x000001ace48029d0 Uncommon trap: trap_request=0xffffffcc fr.pc=0x000001ac935abefc relative=0x0000000000001d1c
+Event: 46.721 Thread 0x000001ace48029d0 Uncommon trap: reason=intrinsic_or_type_checked_inlining action=make_not_entrant pc=0x000001ac935abefc method=java.util.ArrayList$SubList.toArray([Ljava/lang/Object;)[Ljava/lang/Object; @ 58 c2
+Event: 46.721 Thread 0x000001ace48029d0 DEOPT PACKING pc=0x000001ac935abefc sp=0x00000031887fdc10
+Event: 46.721 Thread 0x000001ace48029d0 DEOPT UNPACKING pc=0x000001ac92f346a2 sp=0x00000031887fdb68 mode 2
+
+Classes loaded (20 events):
+Event: 12.894 Loading class java/io/FileFilter
+Event: 12.901 Loading class java/io/FileFilter done
+Event: 12.940 Loading class java/lang/Character$UnicodeBlock
+Event: 12.946 Loading class java/lang/Character$Subset
+Event: 12.946 Loading class java/lang/Character$Subset done
+Event: 12.950 Loading class java/lang/Character$UnicodeBlock done
+Event: 32.637 Loading class java/util/stream/DistinctOps
+Event: 32.640 Loading class java/util/stream/DistinctOps done
+Event: 32.640 Loading class java/util/stream/DistinctOps$1
+Event: 32.641 Loading class java/util/stream/DistinctOps$1 done
+Event: 32.642 Loading class java/util/stream/DistinctOps$1$2
+Event: 32.644 Loading class java/util/stream/DistinctOps$1$2 done
+Event: 33.076 Loading class java/util/Timer
+Event: 33.077 Loading class java/util/Timer done
+Event: 33.079 Loading class java/util/TaskQueue
+Event: 33.081 Loading class java/util/TaskQueue done
+Event: 33.081 Loading class java/util/TimerThread
+Event: 33.082 Loading class java/util/TimerThread done
+Event: 33.082 Loading class java/util/Timer$ThreadReaper
+Event: 33.082 Loading class java/util/Timer$ThreadReaper done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 4.225 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a799d460}: 'int java.lang.invoke.Invokers$Holder.invokeExact_MT(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000000a799d460) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 4.373 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a78eaf78}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000000a78eaf78) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 4.384 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a771cac8}: 'void java.lang.invoke.Invokers$Holder.invokeExact_MT(java.lang.Object, java.lang.Object, int, java.lang.Object)'> (0x00000000a771cac8) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 4.450 Thread 0x000001ac815c0eb0 Exception <a 'sun/nio/fs/WindowsException'{0x00000000a778d378}> (0x00000000a778d378) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 4.560 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a77cbd40}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeInterface(java.lang.Object, java.lang.Object)'> (0x00000000a77cbd40) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 4.561 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/IncompatibleClassChangeError'{0x00000000a77cf000}: Found class java.lang.Object, but interface was expected> (0x00000000a77cf000) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 841]
+Event: 4.563 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a77f4b38}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object)'> (0x00000000a77f4b38) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 5.296 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a718c198}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, long, java.lang.Object)'> (0x00000000a718c198) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 5.297 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a718f848}: 'java.lang.Object java.lang.invoke.Invokers$Holder.linkToTargetMethod(java.lang.Object, long, java.lang.Object, java.lang.Object)'> (0x00000000a718f848) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 5.798 Thread 0x000001ac815c0eb0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a6aca458}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000000a6aca458) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 9.610 Thread 0x000001ace48029d0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a7b02bc8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeInterface(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000000a7b02bc8) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 9.943 Thread 0x000001ace48029d0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a79f93d0}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object)'> (0x00000000a79f93d0) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 10.123 Thread 0x000001ace48029d0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a77a8fb0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000000a77a8fb0) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 10.838 Thread 0x000001ace48029d0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a76faf00}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000000a76faf00) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 10.984 Thread 0x000001ace48029d0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a7552810}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000000a7552810) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 12.789 Thread 0x000001ace48029d0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a6fe8b48}: 'int java.lang.invoke.Invokers$Holder.invokeExact_MT(java.lang.Object, java.lang.Object)'> (0x00000000a6fe8b48) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 12.848 Thread 0x000001ace48029d0 Exception <a 'sun/nio/fs/WindowsException'{0x00000000a6e5ad00}> (0x00000000a6e5ad00) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 12.891 Thread 0x000001ace48029d0 Exception <a 'java/lang/IncompatibleClassChangeError'{0x00000000a6ea6120}: Found class java.lang.Object, but interface was expected> (0x00000000a6ea6120) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 841]
+Event: 32.823 Thread 0x000001ace48029d0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a5eac8d8}: 'long java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object)'> (0x00000000a5eac8d8) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 32.962 Thread 0x000001ace48029d0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000a5eebbe0}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000000a5eebbe0) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (20 events):
+Event: 20.026 Executing VM operation: Cleanup
+Event: 20.026 Executing VM operation: Cleanup done
+Event: 22.037 Executing VM operation: Cleanup
+Event: 22.037 Executing VM operation: Cleanup done
+Event: 24.062 Executing VM operation: Cleanup
+Event: 24.062 Executing VM operation: Cleanup done
+Event: 29.110 Executing VM operation: Cleanup
+Event: 29.110 Executing VM operation: Cleanup done
+Event: 33.138 Executing VM operation: Cleanup
+Event: 34.051 Executing VM operation: Cleanup done
+Event: 35.057 Executing VM operation: Cleanup
+Event: 37.144 Executing VM operation: Cleanup done
+Event: 38.155 Executing VM operation: Cleanup
+Event: 39.625 Executing VM operation: Cleanup done
+Event: 40.628 Executing VM operation: Cleanup
+Event: 41.288 Executing VM operation: Cleanup done
+Event: 43.289 Executing VM operation: Cleanup
+Event: 43.736 Executing VM operation: Cleanup done
+Event: 45.736 Executing VM operation: Cleanup
+Event: 46.714 Executing VM operation: Cleanup done
+
+Events (20 events):
+Event: 46.841 Thread 0x000001ace5ab5360 Thread added: 0x000001ace5ab5360
+Event: 46.847 Thread 0x000001ace5ab59f0 Thread added: 0x000001ace5ab59f0
+Event: 46.852 Thread 0x000001ace5ab9500 Thread added: 0x000001ace5ab9500
+Event: 46.881 Thread 0x000001ace5aba220 Thread added: 0x000001ace5aba220
+Event: 46.896 Thread 0x000001ace5ab7430 Thread added: 0x000001ace5ab7430
+Event: 46.906 Thread 0x000001ace5ab6080 Thread added: 0x000001ace5ab6080
+Event: 46.919 Thread 0x000001ace5ab3290 Thread added: 0x000001ace5ab3290
+Event: 46.926 Thread 0x000001ace5ab87e0 Thread added: 0x000001ace5ab87e0
+Event: 46.935 Thread 0x000001ace5ab3920 Thread added: 0x000001ace5ab3920
+Event: 46.938 Thread 0x000001ace5aba8b0 Thread added: 0x000001ace5aba8b0
+Event: 46.941 Thread 0x000001ace5ab8e70 Thread added: 0x000001ace5ab8e70
+Event: 46.968 Thread 0x000001ace5abaf40 Thread added: 0x000001ace5abaf40
+Event: 46.974 Thread 0x000001ace5ab3fb0 Thread added: 0x000001ace5ab3fb0
+Event: 46.986 Thread 0x000001ace5abc980 Thread added: 0x000001ace5abc980
+Event: 46.999 Thread 0x000001ace5ac0b20 Thread added: 0x000001ace5ac0b20
+Event: 47.002 Thread 0x000001ace5abe3c0 Thread added: 0x000001ace5abe3c0
+Event: 47.006 Thread 0x000001ace5abf770 Thread added: 0x000001ace5abf770
+Event: 47.009 Thread 0x000001ace5abdd30 Thread added: 0x000001ace5abdd30
+Event: 47.014 Thread 0x000001ace5abb5d0 Thread added: 0x000001ace5abb5d0
+Event: 47.018 Thread 0x000001ace5abf0e0 Thread added: 0x000001ace5abf0e0
+
+
+Dynamic libraries:
+0x00007ff758d50000 - 0x00007ff758d60000 	C:\Program Files\Java\jdk-22\bin\java.exe
+0x00007ffc3acb0000 - 0x00007ffc3aea8000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffc39ef0000 - 0x00007ffc39fb2000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffc38450000 - 0x00007ffc38746000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffc38750000 - 0x00007ffc38850000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffc02a00000 - 0x00007ffc02a1b000 	C:\Program Files\Java\jdk-22\bin\VCRUNTIME140.dll
+0x00007ffc35680000 - 0x00007ffc35697000 	C:\Program Files\Java\jdk-22\bin\jli.dll
+0x00007ffc3abb0000 - 0x00007ffc3ac61000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffc39e50000 - 0x00007ffc39eee000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffc38cd0000 - 0x00007ffc38d6f000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffc39ba0000 - 0x00007ffc39cc3000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffc38850000 - 0x00007ffc38877000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ffc3a8b0000 - 0x00007ffc3aa4d000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffc38340000 - 0x00007ffc38362000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffc38d80000 - 0x00007ffc38dab000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffc38bb0000 - 0x00007ffc38cc9000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffc38880000 - 0x00007ffc3891d000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffc26060000 - 0x00007ffc262fa000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.5915_none_60b4b9d171f9c7c7\COMCTL32.dll
+0x00007ffc321b0000 - 0x00007ffc321ba000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffc38e70000 - 0x00007ffc38e9f000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffc35800000 - 0x00007ffc3580c000 	C:\Program Files\Java\jdk-22\bin\vcruntime140_1.dll
+0x00007ffbd1170000 - 0x00007ffbd11fe000 	C:\Program Files\Java\jdk-22\bin\msvcp140.dll
+0x00007ffb91810000 - 0x00007ffb92558000 	C:\Program Files\Java\jdk-22\bin\server\jvm.dll
+0x00007ffc399a0000 - 0x00007ffc39a0b000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffc381a0000 - 0x00007ffc381eb000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007ffc26790000 - 0x00007ffc267b7000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffc38180000 - 0x00007ffc38192000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007ffc360e0000 - 0x00007ffc360f2000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffc35730000 - 0x00007ffc3573a000 	C:\Program Files\Java\jdk-22\bin\jimage.dll
+0x00007ffc26c20000 - 0x00007ffc26e21000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffc13d30000 - 0x00007ffc13d64000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffc38370000 - 0x00007ffc383f2000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffbfed90000 - 0x00007ffbfedae000 	C:\Program Files\Java\jdk-22\bin\java.dll
+0x00007ffc3a140000 - 0x00007ffc3a8ae000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ffc39a70000 - 0x00007ffc39b9b000 	C:\WINDOWS\System32\ole32.dll
+0x00007ffc39640000 - 0x00007ffc39993000 	C:\WINDOWS\System32\combase.dll
+0x00007ffc363c0000 - 0x00007ffc36b64000 	C:\WINDOWS\SYSTEM32\windows.storage.dll
+0x00007ffc37ca0000 - 0x00007ffc37ccb000 	C:\WINDOWS\SYSTEM32\Wldp.dll
+0x00007ffc39cd0000 - 0x00007ffc39d9d000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ffc39580000 - 0x00007ffc3962d000 	C:\WINDOWS\System32\SHCORE.dll
+0x00007ffc39050000 - 0x00007ffc390ab000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ffc38270000 - 0x00007ffc38294000 	C:\WINDOWS\SYSTEM32\profapi.dll
+0x00007ffbd1090000 - 0x00007ffbd1167000 	C:\Program Files\Java\jdk-22\bin\jsvml.dll
+0x00007ffc356f0000 - 0x00007ffc35700000 	C:\Program Files\Java\jdk-22\bin\net.dll
+0x00007ffc37a00000 - 0x00007ffc37a6a000 	C:\WINDOWS\system32\mswsock.dll
+0x00007ffbfcac0000 - 0x00007ffbfcad6000 	C:\Program Files\Java\jdk-22\bin\nio.dll
+0x00007ffbf7600000 - 0x00007ffbf7617000 	C:\Program Files\Java\jdk-22\bin\zip.dll
+0x00007ffc356b0000 - 0x00007ffc356c0000 	C:\Program Files\Java\jdk-22\bin\verify.dll
+0x00007ffc32370000 - 0x00007ffc3237a000 	C:\Program Files\Java\jdk-22\bin\management.dll
+0x00007ffc19ef0000 - 0x00007ffc19efb000 	C:\Program Files\Java\jdk-22\bin\management_ext.dll
+0x00007ffc38e40000 - 0x00007ffc38e48000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffc00b40000 - 0x00007ffc00b57000 	C:\WINDOWS\system32\napinsp.dll
+0x00007ffbf6eb0000 - 0x00007ffbf6ecb000 	C:\WINDOWS\system32\pnrpnsp.dll
+0x00007ffc32000000 - 0x00007ffc3201d000 	C:\WINDOWS\system32\wshbth.dll
+0x00007ffc35600000 - 0x00007ffc3561d000 	C:\WINDOWS\system32\NLAapi.dll
+0x00007ffc376e0000 - 0x00007ffc3771b000 	C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL
+0x00007ffc37720000 - 0x00007ffc377ea000 	C:\WINDOWS\SYSTEM32\DNSAPI.dll
+0x00007ffc39630000 - 0x00007ffc39638000 	C:\WINDOWS\System32\NSI.dll
+0x00007ffbf6d60000 - 0x00007ffbf6d72000 	C:\WINDOWS\System32\winrnr.dll
+0x000000005b220000 - 0x000000005b246000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x00007ffc28630000 - 0x00007ffc2863a000 	C:\Windows\System32\rasadhlp.dll
+0x00007ffc28df0000 - 0x00007ffc28e70000 	C:\WINDOWS\System32\fwpuclnt.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-22\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.5915_none_60b4b9d171f9c7c7;C:\Program Files\Java\jdk-22\bin\server;C:\Program Files\Bonjour
+
+VM Arguments:
+jvm_args: -Dlog4j2.configurationFile=file:\\\c:/Users/ACEL/Downloads/sebelumpecahvariant/.rmv/config/log4j2.properties 
+java_command: c:\Users\ACEL\.vscode\extensions\rocketsoftware.rocket-mvbasic-2.8.1\server\ls4b.jar offline system UniVerse
+java_class_path (initial): c:\Users\ACEL\.vscode\extensions\rocketsoftware.rocket-mvbasic-2.8.1\server\ls4b.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 3                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 4                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+   size_t InitialHeapSize                          = 100663296                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1581252608                                {product} {ergonomic}
+   size_t MaxNewSize                               = 947912704                                 {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5832780                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122912730                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122912730                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1581252608                             {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+PATH=C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Eclipse Adoptium\jdk-17.0.6.10-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\AMD\ATI.ACE\Core-Static;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Users\ACEL\AppData\Local\Microsoft\WindowsApps;C:\adb;C:\Program Files\dotnet\;C:\msys64\usr\bin;C:\msys64\mingw64\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\fluter\flutter\bin;C:\dart-sdk\bin;C:\imagick;C:\Program Files\Tesseract-OCR;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Users\ACEL\AppData\Local\Programs\Python\Launcher\;C:\Users\ACEL\AppData\Local\Microsoft\WindowsApps;C:\Users\ACEL\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ACEL\AppData\Roaming\Composer\vendor\bin;C:\Users\ACEL\AppData\Local\GitHubDesktop\bin;C:\Users\ACEL\AppData\Local\Programs\Python\Python312;C:\Users\ACEL\AppData\Local\Programs\Python\Python312\Scripts;C:\Users\ACEL\AppData\Roaming\npm;C:\Users\ACEL\AppData\Local\Pub\Cache\bin;C:\Users\ACEL\.dotnet\tools;C:\Users\ACEL\AppData\Local\Programs\Antigravity\bin
+USERNAME=ACEL
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
+TMP=C:\Users\ACEL\AppData\Local\Temp
+TEMP=C:\Users\ACEL\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.5915)
+OS uptime: 1 days 10:09 hours
+
+CPU: total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 142 stepping 9 microcode 0xb4, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt, rdtscp, f16c
+Processor Information for all 4 processors :
+  Max Mhz: 2400, Current Mhz: 1300, Mhz Limit: 1296
+
+Memory: 4k page, system-wide physical 6031M (264M free)
+TotalPageFile size 19451M (AvailPageFile size 4M)
+current process WorkingSet (physical memory assigned to process): 161M, peak: 161M
+current process commit charge ("private bytes"): 243M, peak: 243M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (22+36-2370) for windows-amd64 JRE (22+36-2370), built on 2024-02-15T22:15:19Z by "mach5one" with MS VC++ 17.6 (VS2022)
+
+END.

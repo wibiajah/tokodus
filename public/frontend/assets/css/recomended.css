@@ -1,0 +1,612 @@
+/* ===================================
+   RECOMMENDED PRODUCT SLIDER - Version 325
+   ✅ FIXED SPACING MOBILE
+   =================================== */
+
+:root {
+  --primary-325: #FF6B35;
+  --subprimary-325: #f7b963;
+  --edition-325: #2C3E50;
+  --secondary-325: #1f4390;
+  --tertiary-325: #555;
+  --contrast-325: #eeeeef;
+}
+
+/* ===================================
+   SECTION SPACING - DESKTOP & MOBILE
+   =================================== */
+.promo-product-325 {
+  position: relative;
+  width: 100%;
+  padding: 2rem 0 4rem 0;
+  background-color: var(--contrast-325);
+  margin-top: -40px; /* Desktop overlap */
+}
+
+.promo-title-container-325 {
+  display: block;
+  position: relative;
+  padding: 1rem 8%;
+  margin-bottom: 1.5rem;
+}
+
+.promo-title-325 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+}
+
+.promo-title-325 span {
+  font-weight: 700;
+  color: var(--secondary-325);
+}
+
+.promo-deskripsi-325 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--tertiary-325);
+}
+
+/* ===================================
+   COUNTDOWN
+   =================================== */
+.countdown-325 {
+  width: 15rem;
+  background-color: #ffd700;
+  border-radius: 15px;
+  padding: 8px 15px;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--secondary-325);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1px;
+  margin: 0 8% 2rem auto;
+}
+
+.countdown-325 .days-325,
+.countdown-325 .time-325 {
+  color: var(--contrast-325);
+  font-size: 15px;
+}
+
+/* ===================================
+   SLIDER CONTAINER
+   =================================== */
+.promo-product-slider-container-325 {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: auto;
+  min-height: 28rem;
+  margin-bottom: 3rem;
+  padding: 0 8%;
+  margin-top: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.promo-product-slider-325 {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  padding: 10px 0;
+}
+
+.promo-product-slider-325:active {
+  cursor: grabbing;
+}
+
+.promo-product-slider-325::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===================================
+   PRODUCT CARD
+   =================================== */
+.product-card-325 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  flex: 0 0 auto;
+  width: 220px;
+  height: 260px;
+  border-radius: 15px;
+  background-color: #fff;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===================================
+   DESKTOP HOVER EFFECTS
+   =================================== */
+@media (min-width: 769px) {
+  .product-card-325:hover {
+    transform: scale(1.05);
+    box-shadow: 0.5rem 1rem 1rem #d6d6d6;
+  }
+
+  .product-card-325:hover .product-label-325 {
+    left: 0;
+  }
+
+  .product-card-325:hover .product-detail-325 {
+    transform: translate(8%, 0);
+  }
+
+  .product-card-325:hover .ratings-325 {
+    transform: translateX(-5%);
+  }
+
+  .product-card-325:hover .card-icon-325,
+  .product-card-325:hover .shopping-cart-icon-325 {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .product-card-325:hover .default-image-325 {
+    opacity: 0;
+  }
+
+  .product-card-325:hover .hover-image-325 {
+    opacity: 1;
+    transform: translate(-40%, -60%);
+  }
+
+  .product-card-325:hover .badge-stock-325 {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .product-card-325:hover .badge-discount-325 {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .product-card-325:hover .original-price-325 {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+  }
+  
+  .product-card-325:hover .final-price-325 {
+    margin-top: -20px;
+  }
+
+  .card-icon-325:hover,
+  .shopping-cart-icon-325:hover {
+    color: var(--secondary-325);
+    transform: scale(1.1);
+  }
+}
+
+/* ===================================
+   PRODUCT LABEL (SKU)
+   =================================== */
+.product-label-325 {
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  width: 1.9rem;
+  height: 100%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  transition: left 0.5s ease-in-out;
+  background-color: var(--secondary-325);
+  z-index: 10;
+  padding: 8px 0;
+}
+
+.product-label-325 span {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+/* ===================================
+   PRODUCT IMAGE
+   =================================== */
+.product-image-325 {
+  height: 70%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.product-image-325 img {
+  width: auto;
+  height: 85%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.default-image-325 {
+  position: relative;
+  z-index: 1;
+}
+
+.hover-image-325 {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 2;
+}
+
+/* ===================================
+   BADGES
+   =================================== */
+.badge-discount-325 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: #e74a3b;
+  color: #fff;
+  z-index: 20;
+  opacity: 1;
+  visibility: visible;
+}
+
+.badge-stock-325 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 8px;
+  border-radius: 15px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  z-index: 20;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===================================
+   PRODUCT DETAILS
+   =================================== */
+.product-detail-325 {
+  width: 100%;
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+  padding: 0 10px;
+}
+
+.ratings-325 {
+  position: relative;
+  top: -12%;
+  left: 58%;
+  font-size: 13px;
+  transition: transform 0.5s ease-in-out;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  line-height: 1;
+}
+
+.star-325 {
+  display: inline-block;
+  transition: color 0.2s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.star-325.filled-325 {
+  color: var(--primary-325);
+}
+
+.star-325.half-325 {
+  color: var(--primary-325);
+  opacity: 0.5;
+}
+
+.star-325.empty-325 {
+  color: #d0d0d0;
+}
+
+.product-title-325 {
+  position: relative;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #888;
+  left: 10%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 85%;
+}
+
+.product-title-325 p {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-deskripsi-325 {
+  position: relative;
+  top: -6%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--edition-325);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  padding: 0 5px;
+}
+
+.product-deskripsi-325 p {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-price-325 {
+  position: relative;
+  top: -2%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 40px;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.original-price-325 {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.7rem;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, height 0.3s ease-in-out, margin 0.3s ease-in-out;
+  height: auto;
+}
+
+.final-price-325 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--secondary-325);
+  transition: all 0.3s ease-in-out;
+}
+
+/* ===================================
+   ACTION ICONS
+   =================================== */
+.card-icon-325 {
+  position: absolute;
+  bottom: 8%;
+  left: 8%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
+  color: #888;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 30;
+}
+
+.card-icon-325 svg {
+  width: 18px;
+  height: 18px;
+}
+
+.shopping-cart-icon-325 {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
+  color: #888;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 30;
+}
+
+.shopping-cart-icon-325 svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ===================================
+   MOBILE RESPONSIVE - FIXED!
+   =================================== */
+@media (max-width: 768px) {
+  /* ✅ SPACING MOBILE - OVERLAP DIKURANGI! */
+  .promo-product-325 {
+    margin-top: -50px !important; /* ✅ DIKURANGI dari -70px jadi -50px */
+    padding-top: 15px !important; /* ✅ DITAMBAH dari 8px jadi 15px */
+    padding-bottom: 3rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .promo-title-container-325 {
+    margin-bottom: 1rem !important;
+    padding: 12px 4% !important; /* ✅ DITAMBAH dari 8px jadi 12px */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* ✅ COUNTDOWN */
+  .countdown-325 {
+    margin: 0 4% 1rem auto !important;
+    width: 20rem;
+    font-size: 14px;
+  }
+  
+  /* ✅ CARD MOBILE */
+  .product-card-325 {
+    width: 180px;
+    height: 220px;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: rgba(31, 67, 144, 0.1);
+  }
+
+  /* ✅ NO HOVER EFFECTS */
+  .product-card-325:hover {
+    transform: none !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important;
+  }
+
+  .product-card-325:hover .product-detail-325 {
+    transform: none !important;
+  }
+
+  .product-card-325:hover .ratings-325 {
+    transform: none !important;
+  }
+
+  .product-card-325:hover .default-image-325 {
+    opacity: 1 !important;
+  }
+
+  .product-card-325:hover .hover-image-325 {
+    opacity: 0 !important;
+  }
+
+  .product-card-325:hover .original-price-325 {
+    opacity: 1 !important;
+    visibility: visible !important;
+    height: auto !important;
+  }
+  
+  .product-card-325:hover .final-price-325 {
+    margin-top: 0 !important;
+  }
+  
+  .product-card-325:hover .badge-stock-325,
+  .product-card-325:hover .badge-discount-325 {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .product-label-325 {
+    left: -2rem !important;
+  }
+
+  .card-icon-325,
+  .shopping-cart-icon-325 {
+    display: none !important;
+  }
+
+  .promo-product-slider-325 {
+    cursor: default !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  .promo-product-slider-container-325 {
+    padding: 0 4%;
+    min-height: 22rem !important;
+    margin-bottom: 1.5rem !important;
+    margin-top: 0 !important;
+  }
+  
+  .product-card-325:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+/* ===================================
+   SMALL MOBILE - 480px
+   =================================== */
+@media (max-width: 480px) {
+  .promo-product-325 {
+    margin-top: -55px !important; /* ✅ DIKURANGI dari -75px jadi -55px */
+    padding-top: 12px !important; /* ✅ DITAMBAH dari 5px jadi 12px */
+  }
+  
+  .promo-title-container-325 {
+    padding: 10px 4% !important;
+  }
+  
+  .countdown-325 {
+    width: 18rem;
+    font-size: 13px;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .product-card-325 {
+    width: 160px;
+    height: 200px;
+  }
+  
+  .promo-product-slider-container-325 {
+    min-height: 20rem !important;
+  }
+}
+
+/* ===================================
+   EXTRA SMALL MOBILE - 360px
+   =================================== */
+@media (max-width: 360px) {
+  .promo-product-325 {
+    margin-top: -50px !important; /* ✅ DIKURANGI dari -70px jadi -50px */
+    padding-top: 10px !important; /* ✅ DITAMBAH dari 5px jadi 10px */
+  }
+  
+  .promo-title-container-325 {
+    padding: 8px 4% !important;
+  }
+  
+  .countdown-325 {
+    width: 16rem;
+    font-size: 12px;
+  }
+  
+  .product-card-325 {
+    width: 150px;
+    height: 185px;
+  }
+  
+  .promo-product-slider-container-325 {
+    min-height: 19rem !important;
+  }
+}

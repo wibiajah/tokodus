@@ -1,6 +1,6 @@
-{{-- resources/views/layouts/sidebars/kepala-toko.blade.php --}}
 
-<!-- Dashboard Kepala Toko -->
+
+<!-- Dashboard -->
 <a href="{{ route('kepala-toko.dashboard') }}" 
    class="nav-item {{ request()->routeIs('kepala-toko.dashboard') ? 'active' : '' }}"
    title="Dashboard">
@@ -9,18 +9,49 @@
 </a>
 
 <div class="sidebar-divider"></div>
+<div class="sidebar-heading">Manajemen Produk</div>
+
+<!-- Daftar Produk -->
+<a href="{{ route('kepala-toko.products.index') }}" 
+   class="nav-item {{ request()->routeIs('kepala-toko.products.*') ? 'active' : '' }}"
+   title="Daftar Produk">
+    <i class="fas fa-box"></i>
+    <span class="nav-text">Daftar Produk</span>
+</a>
+
+<!-- Stok Toko Saya -->
+<a href="{{ route('kepala-toko.stocks.index') }}" 
+   class="nav-item {{ request()->routeIs('kepala-toko.stocks.*') ? 'active' : '' }}"
+   title="Kelola Stok">
+    <i class="fas fa-warehouse"></i>
+    <span class="nav-text">Kelola Stok</span>
+</a>
+
+
+
+
+<div class="sidebar-divider"></div>
 <div class="sidebar-heading">Manajemen Toko</div>
 
-<a href="#" class="nav-item" title="Informasi Toko">
+<!-- Informasi Toko -->
+<a href="#" 
+   class="nav-item" 
+   title="Informasi Toko">
     <i class="fas fa-store"></i>
     <span class="nav-text">Informasi Toko</span>
+    <span class="badge badge-secondary badge-counter">Soon</span>
 </a>
 
 <!-- Manajemen Staff -->
-<a href="#" class="nav-item" data-toggle="collapse" data-target="#collapseStaff" title="Manajemen Staff">
+<a href="#" 
+   class="nav-item" 
+   data-toggle="collapse" 
+   data-target="#collapseStaff" 
+   title="Manajemen Staff">
     <i class="fas fa-users"></i>
     <span class="nav-text">Manajemen Staff</span>
     <i class="fas fa-chevron-down nav-arrow"></i>
+    <span class="badge badge-secondary badge-counter">Soon</span>
 </a>
 <div id="collapseStaff" class="collapse nav-collapse">
     <h6 class="collapse-header">Menu Staff:</h6>
@@ -31,14 +62,21 @@
 <div class="sidebar-divider"></div>
 <div class="sidebar-heading">Transaksi</div>
 
-<a href="#" class="nav-item" title="Orderan">
+<!-- Orderan -->
+<a href="{{ route('kepala-toko.orders.index') }}" 
+   class="nav-item {{ request()->routeIs('kepala-toko.orders.*') ? 'active' : '' }}"
+   title="Orderan">
     <i class="fas fa-shopping-cart"></i>
     <span class="nav-text">Orderan</span>
-    <span class="badge badge-warning badge-counter">Soon</span>
 </a>
 
-<a href="#" class="nav-item" title="Laporan">
+<!-- Laporan -->
+<a href="#" 
+   class="nav-item" 
+   title="Laporan">
     <i class="fas fa-chart-line"></i>
     <span class="nav-text">Laporan</span>
-    <span class="badge badge-warning badge-counter">Soon</span>
+    <span class="badge badge-secondary badge-counter">Soon</span>
 </a>
+
+<div class="sidebar-divider d-none d-md-block"></div>

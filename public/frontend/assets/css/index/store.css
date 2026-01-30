@@ -1,0 +1,419 @@
+/* ========================================
+   SECTION 8: STORE SECTION CSS
+   ======================================== */
+
+/* Stores Section Container */
+#stores {
+  width: 100%;
+  background-color: #eeeeef;
+  padding: 40px 0;
+}
+
+.stores {
+  width: 100%;
+  padding: 20px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 80vw;
+  height: 70vh;
+  padding: 20px;
+  position: relative;
+  margin: auto;
+  margin-bottom: 5%;
+}
+
+/* Maps and Dropdown Section Container */
+.map-dropdown-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  gap: 30px;
+}
+
+/* Map Container */
+.map-container {
+  width: 50%;
+  height: 100%;
+  min-height: 450px;
+}
+
+.map-container iframe {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Right side (Dropdown and Store Info) */
+.dropdown-store-info {
+  width: 45%;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+/* Dropdown button container */
+.dropdown-container {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Dropdown button */
+.dropdown-btn {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #1f4390;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  z-index: 1;
+  width: auto;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-btn:hover {
+  background-color: #2d5bb8;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(30, 66, 143, 0.95);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 50%;
+  min-width: 200px;
+  margin-top: 5px;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+/* Style for dropdown items */
+.dropdown-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-content li {
+  color: #eeeeef;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content li:hover {
+  border-radius: 9px;
+  background-color: #f7b963;
+}
+
+.dropdown-content li:first-child:hover {
+  border-radius: 10px 10px 9px 9px;
+}
+
+.dropdown-content li:last-child:hover {
+  border-radius: 9px 9px 10px 10px;
+}
+
+/* Store Info Styling */
+.store-info {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 60%;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.store-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: left;
+  color: #1f4390;
+}
+
+.store-info p {
+  margin: 8px 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+  color: #333;
+}
+
+.store-info p strong {
+  font-weight: bold;
+  color: #000;
+}
+
+/* Style for link in store info */
+.store-info a {
+  color: #1f4390;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.store-info a:hover {
+  color: #f7b963;
+  text-decoration: underline;
+}
+
+/* Marketplace Links */
+.marketplace-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.marketplace-links a {
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+.marketplace-links a:hover {
+  transform: scale(1.1);
+}
+
+.marketplace-links img {
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.marketplace-links img:hover {
+  transform: scale(1.2);
+}
+
+/* WhatsApp Float Button */
+.whatsapp-float {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 1.5%;
+  right: 1.5%;
+  background-color: #f7b963;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background-color: #e1a153;
+  transform: scale(1.1);
+}
+
+.whatsapp-float img {
+  position: relative;
+  left: 7%;
+  width: 30px;
+  height: 30px;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media screen and (max-width: 1280px) {
+  .store-info {
+    max-width: 80%;
+  }
+
+  .dropdown-content {
+    width: 60%;
+    left: -10%;
+  }
+
+  .map-container {
+    width: 60%;
+    height: 80%;
+  }
+}
+
+@media screen and (max-width: 1104px) {
+  .store-info {
+    max-width: 80%;
+  }
+
+  .dropdown-content {
+    width: 60%;
+    left: -10%;
+  }
+
+  .map-container {
+    width: 60%;
+    height: 80%;
+  }
+}
+
+@media screen and (max-width: 884px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    width: 90vw;
+    padding: 10px;
+  }
+
+  .map-dropdown-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map-container {
+    width: 80%;
+    height: 350px;
+  }
+
+  .dropdown-store-info {
+    width: 50%;
+    margin-top: 20px;
+  }
+
+  .store-info {
+    max-width: 90%;
+  }
+
+  .whatsapp-float {
+    width: 45px;
+    height: 45px;
+    font-size: 28px;
+  }
+
+  .whatsapp-float img {
+    width: 28px;
+    height: 28px;
+    left: 10%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    width: 95vw;
+    padding: 10px;
+  }
+
+  .map-dropdown-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map-container {
+    width: 80%;
+    height: 350px;
+  }
+
+  .dropdown-store-info {
+    width: 50%;
+    margin-top: 15px;
+  }
+
+  .dropdown-btn {
+    width: 40%;
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .store-info {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .whatsapp-float {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+  }
+
+  .whatsapp-float img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Mobile Resolution */
+@media only screen and (max-width: 440px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    width: 95vw;
+    padding: 10px;
+  }
+
+  .map-dropdown-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 250px;
+  }
+
+  .dropdown-store-info {
+    width: 70%;
+    margin-top: 15px;
+  }
+
+  .dropdown-btn {
+    width: 50%;
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .store-info {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .marketplace-links {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .whatsapp-float {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+  }
+
+  .whatsapp-float img {
+    width: 25px;
+    height: 25px;
+    left: 10%;
+  }
+}

@@ -29,7 +29,7 @@ class TokoController extends Controller
         }
 
         if ($request->filled('kepala_toko')) {
-            $query->whereHas('kepalaToko', function($q) use ($request) {
+            $query->whereHas('kepalaToko', function ($q) use ($request) {
                 $q->where('id', $request->kepala_toko);
             });
         }
@@ -63,7 +63,7 @@ class TokoController extends Controller
         $kepalaTokos = User::where('role', 'kepala_toko')
             ->whereIn('toko_id', [self::HEAD_OFFICE_ID, null])
             ->get();
-        
+
         return view('superadmin.toko.create', compact('kepalaTokos'));
     }
 
@@ -72,12 +72,15 @@ class TokoController extends Controller
         $validated = $request->validate([
             'nama_toko' => ['required', 'string', 'max:255'],
             'alamat' => ['nullable', 'string'],
+                'postal_code' => ['nullable', 'string', 'max:10'],
             'telepon' => ['nullable', 'string', 'max:20'],
             'email' => ['nullable', 'email'],
             'googlemap' => ['nullable', 'url'],
             'googlemap_iframe' => ['nullable', 'string'],
             'foto' => ['nullable', 'image', 'max:2048'],
             'kepala_toko_id' => ['nullable', 'exists:users,id'],
+            'latitude' => ['required', 'numeric', 'between:-90,90'],
+            'longitude' => ['required', 'numeric', 'between:-180,180'],
         ]);
 
         DB::beginTransaction();
@@ -99,10 +102,7 @@ class TokoController extends Controller
                 ]);
             }
 
-            NotificationHelper::notifyRoles(
-                ['super_admin'],
-                NotificationHelper::tokoCreated($toko, auth()->user())
-            );
+            NotificationHelper::tokoCreated($toko, auth()->user());
 
             DB::commit();
             return redirect()->route('superadmin.toko.index')->with('success', 'Toko berhasil ditambahkan!');
@@ -130,12 +130,12 @@ class TokoController extends Controller
 
         // Ambil kepala toko yang available (di HEAD_OFFICE) atau kepala toko saat ini
         $kepalaTokos = User::where('role', 'kepala_toko')
-            ->where(function($q) use ($toko) {
+            ->where(function ($q) use ($toko) {
                 $q->whereIn('toko_id', [self::HEAD_OFFICE_ID, null])
-                  ->orWhere('toko_id', $toko->id);
+                    ->orWhere('toko_id', $toko->id);
             })
             ->get();
-        
+
         return view('superadmin.toko.edit', compact('toko', 'kepalaTokos'));
     }
 
@@ -149,6 +149,7 @@ class TokoController extends Controller
         $validated = $request->validate([
             'nama_toko' => ['required', 'string', 'max:255'],
             'alamat' => ['nullable', 'string'],
+             'postal_code' => ['nullable', 'string', 'max:10'],
             'telepon' => ['nullable', 'string', 'max:20'],
             'email' => ['nullable', 'email'],
             'googlemap' => ['nullable', 'url'],
@@ -156,6 +157,8 @@ class TokoController extends Controller
             'foto' => ['nullable', 'image', 'max:2048'],
             'status' => ['required', 'in:aktif,tidak_aktif'],
             'kepala_toko_id' => ['nullable', 'exists:users,id'],
+            'latitude' => ['required', 'numeric', 'between:-90,90'],
+            'longitude' => ['required', 'numeric', 'between:-180,180'],
         ]);
 
         DB::beginTransaction();
@@ -197,10 +200,7 @@ class TokoController extends Controller
                 }
             }
 
-            NotificationHelper::notifyRoles(
-                ['super_admin'],
-                NotificationHelper::tokoUpdated($toko, auth()->user())
-            );
+            NotificationHelper::tokoUpdated($toko, auth()->user());
 
             DB::commit();
             return redirect()->route('superadmin.toko.index')->with('success', 'Toko berhasil diperbarui!');
@@ -230,10 +230,7 @@ class TokoController extends Controller
 
             $toko->delete();
 
-            NotificationHelper::notifyRoles(
-                ['super_admin'],
-                NotificationHelper::tokoDeleted($namaToko, auth()->user())
-            );
+            NotificationHelper::tokoDeleted($namaToko, auth()->user());
 
             DB::commit();
             return redirect()->route('superadmin.toko.index')->with('success', 'Toko berhasil dihapus!');
@@ -253,20 +250,11 @@ class TokoController extends Controller
         $newStatus = $toko->status === 'aktif' ? 'tidak_aktif' : 'aktif';
         $toko->update(['status' => $newStatus]);
 
-        $message = $newStatus === 'aktif' 
+        $message = $newStatus === 'aktif'
             ? "Toko {$toko->nama_toko} telah diaktifkan"
             : "Toko {$toko->nama_toko} telah dinonaktifkan";
-        
-        NotificationHelper::notifyRoles(
-            ['super_admin'],
-            [
-                'title' => 'Status Toko Diubah',
-                'message' => $message,
-                'type' => 'info',
-                'action_url' => route('toko.show', $toko->id),
-                'icon' => 'fas fa-toggle-on'
-            ]
-        );
+
+        NotificationHelper::tokoStatusChanged($toko, auth()->user());
 
         $statusText = $newStatus === 'aktif' ? 'diaktifkan' : 'dinonaktifkan';
         return redirect()->back()
@@ -303,17 +291,8 @@ class TokoController extends Controller
                 ]);
 
                 $newKepala = User::find($newKepalaTokoId);
-                
-                NotificationHelper::notifyRoles(
-                    ['super_admin'],
-                    [
-                        'title' => 'Kepala Toko Diperbarui',
-                        'message' => "Kepala toko {$toko->nama_toko} telah diubah menjadi {$newKepala->name}",
-                        'type' => 'success',
-                        'action_url' => route('toko.show', $toko->id),
-                        'icon' => 'fas fa-user-tie'
-                    ]
-                );
+
+                NotificationHelper::kepalaTokoChanged($toko, $newKepala, auth()->user());
 
                 DB::commit();
                 return redirect()->back()
@@ -326,16 +305,7 @@ class TokoController extends Controller
                     ]);
                 }
 
-                NotificationHelper::notifyRoles(
-                    ['super_admin'],
-                    [
-                        'title' => 'Kepala Toko Dihapus',
-                        'message' => "Kepala toko {$toko->nama_toko} telah dihapus",
-                        'type' => 'warning',
-                        'action_url' => route('toko.show', $toko->id),
-                        'icon' => 'fas fa-user-times'
-                    ]
-                );
+                NotificationHelper::kepalaTokoRemoved($toko, auth()->user());
 
                 DB::commit();
                 return redirect()->back()

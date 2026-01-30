@@ -1,0 +1,352 @@
+:root {
+    --primary-323: #e1a153;
+    --subprimary-323: #f7b963;
+    --edition-323: #1f4390;
+    --secondary-323: #1f4390;
+    --tertiary-323: #000;
+    --contrast-323: #eeeeef;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Ubuntu", sans-serif;
+    background-color: var(--contrast-323);
+    color: var(--tertiary-323);
+    overflow-x: hidden;
+}
+
+/* ===================================
+   JARAK DENGAN BANNER - DESKTOP ONLY
+   =================================== */
+@media screen and (min-width: 769px) {
+    #explore {
+        margin-top: -150px !important;
+        position: relative;
+        z-index: 10;
+        padding-top: 0 !important;
+    }
+}
+
+/* JANGAN TARIK DI MOBILE */
+@media screen and (max-width: 768px) {
+    #explore {
+        margin-top: 0 !important;
+        padding-top: clamp(20px, 4vh, 30px) !important;
+    }
+}
+
+/* ===================================
+   EXPLORE CATEGORIES - DESKTOP
+   100% Responsive & Production Ready
+   =================================== */
+.category-slide-323 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    height: 100vh;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(80px, 12vh, 140px) clamp(20px, 2vw, 40px) clamp(20px, 3vh, 40px);
+    margin-top: 0 !important;
+}
+
+.category-container-323 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: min(1400px, 90vw);
+    position: relative;
+    height: clamp(380px, 55vh, 600px);
+    margin-bottom: clamp(40px, 6vh, 80px);
+}
+
+.category-title-323 {
+    position: absolute;
+    top: clamp(18%, 22vh, 26%);
+    right: clamp(5%, 10vw, 12%);
+    font-size: clamp(2.8rem, 5.5vw, 7rem);
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke-width: clamp(2px, 0.32vw, 6px);
+    -webkit-text-stroke-color: var(--edition-323);
+    line-height: 1.2;
+    text-align: right;
+    user-select: none;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.image-container-323 {
+    position: absolute;
+    bottom: clamp(-22%, -18vh, -14%);
+    left: clamp(1%, 2vw, 3%);
+    width: clamp(300px, 34vw, 580px);
+    margin: 0;
+    z-index: 1;
+    border-radius: clamp(20px, 2vw, 30px);
+    background-color: var(--edition-323);
+    user-select: none;
+    transform-origin: bottom left;
+}
+
+.category-image-323 {
+    width: 100%;
+    height: auto;
+    border-radius: clamp(20px, 2vw, 30px);
+    user-select: none;
+    transform: scale(clamp(0.75, 0.8, 0.85));
+    transform-origin: bottom left;
+}
+
+.category-slider-container-323 {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    bottom: clamp(60px, 9vh, 110px);
+    right: clamp(5%, 10vw, 12%);
+    width: clamp(45%, 54vw, 58%);
+    max-width: 900px;
+    border-radius: clamp(20px, 2vw, 30px);
+    z-index: 3;
+    overflow: hidden;
+    background-color: var(--contrast-323);
+    border: clamp(12px, 1.5vw, 20px) solid var(--contrast-323);
+    cursor: grab;
+}
+
+.category-slider-container-323.grabbing-323 {
+    cursor: grabbing;
+}
+
+.category-slider-container-323::-webkit-scrollbar {
+    display: none;
+}
+
+.category-slider-323 {
+    display: flex;
+    position: relative;
+    gap: clamp(12px, 1.5vw, 20px);
+    padding: clamp(15px, 1.5vw, 20px);
+    border-radius: clamp(20px, 2vw, 30px);
+    will-change: transform;
+    white-space: nowrap;
+    transition: transform 0.5s ease-out;
+}
+
+.category-card-323 {
+    background-color: #fff;
+    border-radius: clamp(15px, 1.5vw, 20px);
+    padding: clamp(15px, 1.5vw, 20px);
+    width: clamp(150px, 12.5vw, 195px);
+    height: clamp(115px, 9.5vw, 155px);
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.category-card-323:hover {
+    transform: scale(1.05);
+}
+
+.category-card-323 img {
+    width: clamp(40px, 3.5vw, 52px);
+    height: clamp(40px, 3.5vw, 52px);
+    margin-bottom: clamp(8px, 1vw, 12px);
+    user-select: none;
+}
+
+.card-title-323 {
+    font-size: clamp(0.75rem, 1vw, 1rem);
+    font-weight: 600;
+    color: var(--edition-323);
+    text-decoration: none;
+    text-wrap: wrap;
+    display: block;
+    margin-top: clamp(6px, 0.8vw, 10px);
+    user-select: none;
+    line-height: 1.3;
+}
+
+.card-title-323:hover {
+    color: var(--subprimary-323);
+}
+
+/* ===================================
+   MOBILE ELEMENTS - Hidden on Desktop
+   =================================== */
+.category-slide-323-mobile,
+.category-container-323-mobile,
+.category-title-323-mobile,
+.image-container-323-mobile,
+.category-slider-container-323-mobile {
+    display: none;
+}
+
+/* ===================================
+   MOBILE MODE - VERTICAL LAYOUT
+   ✅✅✅ BAGIAN INI YANG PENTING! ✅✅✅
+   =================================== */
+@media screen and (max-width: 768px) {
+    /* Hide Desktop Elements */
+    .category-slide-323,
+    .category-container-323,
+    .category-title-323,
+    .image-container-323,
+    .category-slider-container-323 {
+        display: none !important;
+    }
+
+    /* Show Mobile Elements */
+    .category-slide-323-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        padding: 20px 15px 5px 15px !important; /* ✅ PADDING BAWAH 5PX! */
+        position: relative;
+        margin: 0 !important;
+    }
+
+    .category-container-323-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+
+    .category-title-323-mobile {
+        display: block;
+        font-size: clamp(2rem, 10vw, 3rem);
+        font-weight: 700;
+        color: transparent;
+        -webkit-text-stroke-width: clamp(2px, 0.6vw, 3px);
+        -webkit-text-stroke-color: var(--edition-323);
+        line-height: 1.1;
+        text-align: center;
+        user-select: none;
+        margin-bottom: 15px;
+        margin-top: 0;
+        z-index: 2;
+    }
+
+    .image-container-323-mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: clamp(70%, 80vw, 85%);
+        margin-bottom: 15px;
+        margin-top: 0;
+        border-radius: clamp(20px, 4vw, 30px);
+        background-color: var(--edition-323);
+        padding: clamp(15px, 3vw, 20px);
+    }
+
+    .category-image-323-mobile {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        border-radius: clamp(15px, 3vw, 20px);
+        user-select: none;
+    }
+
+    .category-slider-container-323-mobile {
+        display: flex;
+        width: 100%;
+        max-width: 500px;
+        border-radius: clamp(15px, 3vw, 20px);
+        overflow: hidden;
+        background-color: var(--contrast-323);
+        border: clamp(12px, 2.5vw, 15px) solid var(--contrast-323);
+        cursor: grab;
+        margin-top: -40px !important; /* ✅ NEGATIVE MARGIN! */
+    }
+
+    .category-slider-container-323-mobile.grabbing-323-mobile {
+        cursor: grabbing;
+    }
+
+    .category-slider-323-mobile {
+        display: flex;
+        gap: clamp(12px, 3vw, 15px);
+        padding: clamp(12px, 3vw, 15px);
+        will-change: transform;
+        transition: transform 0.5s ease-out;
+    }
+
+    .category-card-323-mobile {
+        background-color: #fff;
+        border-radius: clamp(12px, 2.5vw, 15px);
+        padding: clamp(12px, 3vw, 15px);
+        width: clamp(120px, 35vw, 150px);
+        height: clamp(95px, 28vw, 120px);
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+    }
+
+    .category-card-323-mobile:active {
+        transform: scale(0.95);
+    }
+
+    .category-card-323-mobile img {
+        width: clamp(35px, 10vw, 45px);
+        height: clamp(35px, 10vw, 45px);
+        margin-bottom: clamp(6px, 1.5vw, 8px);
+    }
+
+    .card-title-323-mobile {
+        font-size: clamp(0.7rem, 3vw, 0.85rem);
+        font-weight: 600;
+        color: var(--edition-323);
+        text-decoration: none;
+        display: block;
+        margin-top: clamp(6px, 1.5vw, 8px);
+        user-select: none;
+        white-space: normal;
+        word-wrap: break-word;
+        line-height: 1.2;
+    }
+}
+
+/* Small Mobile - 480px */
+@media screen and (max-width: 480px) {
+    .category-slide-323-mobile {
+        padding: 20px 15px 5px 15px !important; /* ✅ TETAP 5PX */
+    }
+    
+    .category-slider-container-323-mobile {
+        margin-top: -42px !important; /* ✅ LEBIH NEGATIF */
+    }
+}
+
+/* Extra Small Mobile - 360px */
+@media screen and (max-width: 360px) {
+    .category-slide-323-mobile {
+        padding: 15px 15px 5px 15px !important; /* ✅ TETAP 5PX */
+    }
+    
+    .category-slider-container-323-mobile {
+        margin-top: -40px !important;
+    }
+}

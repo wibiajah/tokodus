@@ -1,0 +1,442 @@
+/* ========================================
+   ORDER DETAIL MODALS - CSS
+   ======================================== */
+
+/* Modal Overlay */
+.order-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.order-modal-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Modal Container */
+.order-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    flex-direction: column;
+}
+
+.order-modal.active {
+    display: flex;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Modal Header */
+.order-modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.order-modal-header h2 {
+    font-size: 1.25rem;
+    color: #000;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.order-modal-header h2 i {
+    font-size: 1.4rem;
+}
+
+.order-modal-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: #f3f4f6;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    font-size: 1.5rem;
+    color: #666;
+    line-height: 1;
+}
+
+.order-modal-close:hover {
+    background: #e5e7eb;
+    color: #000;
+    transform: rotate(90deg);
+}
+
+/* Modal Body */
+.order-modal-body {
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.order-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.order-modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.order-modal-body::-webkit-scrollbar-thumb {
+    background: #2b4c9f;
+    border-radius: 10px;
+}
+
+.order-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #1f4390;
+}
+
+/* Modal Info Box */
+.modal-info-box {
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.modal-order-info {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.modal-order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+}
+
+.modal-order-row span {
+    color: #6b7280;
+}
+
+.modal-order-row strong {
+    color: #111;
+}
+
+/* Form Elements */
+.form-group-modal {
+    margin-bottom: 1.25rem;
+}
+
+.form-label-modal {
+    display: block;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 0.5rem;
+    font-size: 0.938rem;
+}
+
+.form-textarea-modal {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 0.938rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    resize: vertical;
+    transition: all 0.3s;
+}
+
+.form-textarea-modal:focus {
+    outline: none;
+    border-color: #2b4c9f;
+    box-shadow: 0 0 0 3px rgba(43, 76, 159, 0.1);
+}
+
+.form-hint-modal {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.813rem;
+    color: #6b7280;
+}
+
+/* Alert Boxes */
+.modal-alert-warning,
+.modal-alert-info {
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.modal-alert-warning {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    color: #92400e;
+}
+
+.modal-alert-info {
+    background: #dbeafe;
+    border: 2px solid #3b82f6;
+    color: #1e40af;
+}
+
+.modal-alert-warning i,
+.modal-alert-info i {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.modal-alert-warning strong,
+.modal-alert-info strong {
+    font-weight: 700;
+}
+
+/* Modal Footer */
+.order-modal-footer {
+    padding: 1rem 2rem;
+    border-top: 2px solid #e5e5e5;
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.order-modal-btn {
+    flex: 1;
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.938rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.order-modal-btn-cancel {
+    background: #f3f4f6;
+    color: #666;
+}
+
+.order-modal-btn-cancel:hover {
+    background: #e5e7eb;
+    color: #000;
+}
+
+.order-modal-btn-danger {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    color: white;
+}
+
+.order-modal-btn-danger:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.order-modal-btn-success {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: white;
+}
+
+.order-modal-btn-success:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+/* Center Content (for Report Modal) */
+.modal-center-content {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.modal-icon-large {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-icon-large i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.modal-subtitle {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 0.5rem;
+}
+
+.modal-description {
+    color: #6b7280;
+    font-size: 0.938rem;
+    margin-bottom: 0;
+}
+
+.modal-divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 1.5rem 0;
+}
+
+/* Contact Section */
+.modal-contact-section {
+    padding-top: 0.5rem;
+}
+
+.modal-contact-title {
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 0.938rem;
+}
+
+.modal-contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modal-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: white;
+}
+
+.modal-contact-item:hover {
+    border-color: #2b4c9f;
+    background: #f8f9fb;
+    transform: translateX(4px);
+}
+
+.modal-contact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+}
+
+.modal-contact-icon.whatsapp {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.modal-contact-icon.email {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.modal-contact-info {
+    flex: 1;
+    text-align: left;
+}
+
+.modal-contact-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.modal-contact-value {
+    font-weight: 600;
+    color: #111;
+    font-size: 0.938rem;
+}
+
+.modal-note {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.813rem;
+    color: #6b7280;
+}
+
+.modal-note strong {
+    color: #1f4390;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .order-modal {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .order-modal-header,
+    .order-modal-body,
+    .order-modal-footer {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+    
+    .order-modal-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .order-modal-btn {
+        font-size: 0.875rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .order-modal-footer {
+        flex-direction: column;
+    }
+
+    .order-modal-btn {
+        width: 100%;
+    }
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+    overflow: hidden;
+}

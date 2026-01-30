@@ -1,0 +1,797 @@
+/* ==========================================
+   TOKODUS RESPONSIVE CSS - MOBILE ONLY
+   File: home-responsive.css
+   ========================================== */
+
+/* ------ Tablet Resolution ------ */
+@media screen and (max-width: 1480px) {
+  html {    
+    font-size: 85%;
+  }
+}
+
+@media screen and (max-width: 1380px) {
+  html {
+    font-size: 85%;
+  }
+  
+  /* Product Card 123 Responsive */
+  .recommended-slider-container-123 {
+    padding: 0 30px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 180px;
+    width: 180px;
+    height: 280px;
+  }
+  
+  .product-card-1-123 {
+    width: 220px;
+    height: 280px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  html {
+    font-size: 85%;
+  }
+  
+  .promo-wrapper-123 {
+    padding: 0 30px;
+  }
+  
+  .recommended-slider-container-123 {
+    padding: 0 20px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 170px;
+    width: 170px;
+    height: 270px;
+  }
+  
+  .product-card-1-123 {
+    width: 210px;
+    height: 270px;
+  }
+}
+
+@media screen and (max-width: 1104px) {
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 165px;
+    width: 165px;
+    height: 265px;
+  }
+  
+  .product-card-1-123 {
+    width: 200px;
+    height: 265px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  /* Product Card Grid */
+  .product-card-container-123 {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 15px !important;
+    padding: 0 20px;
+  }
+  
+  .product-card-1-123 {
+    width: 100%;
+    max-width: 200px;
+    height: 260px;
+    margin: 0 auto;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 160px;
+    width: 160px;
+    height: 260px;
+  }
+  
+  /* DISABLE ALL HOVER EFFECTS */
+  .product-card-1-123:hover {
+    height: 260px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+    transform: none !important;
+  }
+  
+  .product-card-1-123:hover .label-1-123 {
+    left: -60px !important;
+  }
+  
+  .product-card-1-123:hover .product-image-1-123 {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  .product-card-1-123:hover .product-detail-1-123 {
+    padding-left: 0 !important;
+  }
+  
+  .product-card-1-123:hover .icons-1-123 {
+    opacity: 0 !important;
+  }
+  
+  .product-card-1-123:hover .default-img-1-123 {
+    opacity: 1 !important;
+  }
+  
+  .product-card-1-123:hover .hover-img-1-123 {
+    opacity: 0 !important;
+  }
+  
+  .product-card-1-123:active {
+    transform: none !important;
+  }
+}
+
+@media screen and (max-width: 884px) {
+  html {
+    font-size: 65%;
+  }
+  
+  /* UKURAN CARD LEBIH KECIL & RAPIH */
+  .product-card-1-123 {
+    width: 100%;
+    max-width: 180px;
+    height: 240px;
+    margin: 0 auto;
+  }
+  
+  .recommended-slider-container-123 {
+    padding: 0 15px;
+  }
+  
+  .recommended-slider-123 {
+    gap: 12px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 240px;
+  }
+  
+  /* TOTAL DISABLE HOVER - CARD STATIS */
+  .product-card-1-123,
+  .product-card-1-123:hover,
+  .product-card-1-123:focus,
+  .product-card-1-123:active {
+    height: 240px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .recommended-slider-123 .product-card-1-123,
+  .recommended-slider-123 .product-card-1-123:hover,
+  .recommended-slider-123 .product-card-1-123:focus,
+  .recommended-slider-123 .product-card-1-123:active {
+    height: 240px !important;
+  }
+  
+  .product-card-1-123 .label-1-123,
+  .product-card-1-123:hover .label-1-123,
+  .product-card-1-123:focus .label-1-123,
+  .product-card-1-123:active .label-1-123 {
+    left: -60px !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-image-1-123,
+  .product-card-1-123:hover .product-image-1-123,
+  .product-card-1-123:focus .product-image-1-123,
+  .product-card-1-123:active .product-image-1-123 {
+    margin-left: 0 !important;
+    width: 100% !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-detail-1-123,
+  .product-card-1-123:hover .product-detail-1-123,
+  .product-card-1-123:focus .product-detail-1-123,
+  .product-card-1-123:active .product-detail-1-123 {
+    padding-left: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .icons-1-123,
+  .product-card-1-123:hover .icons-1-123,
+  .product-card-1-123:focus .icons-1-123,
+  .product-card-1-123:active .icons-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .default-img-1-123,
+  .product-card-1-123:hover .default-img-1-123,
+  .product-card-1-123:focus .default-img-1-123,
+  .product-card-1-123:active .default-img-1-123 {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .hover-img-1-123,
+  .product-card-1-123:hover .hover-img-1-123,
+  .product-card-1-123:focus .hover-img-1-123,
+  .product-card-1-123:active .hover-img-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .recommended-slider-container-123 {
+    padding: 0 15px;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .promo-wrapper-123 {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 170px;
+    width: 170px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Product Card Grid - 2 columns LEBIH KECIL & RAPIH */
+  .product-card-container-123 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  /* UKURAN CARD LEBIH KECIL */
+  .product-card-1-123,
+  .product-card-1-123:hover,
+  .product-card-1-123:focus,
+  .product-card-1-123:active {
+    width: 100%;
+    max-width: 200px;
+    height: 240px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+    transform: none !important;
+    transition: none !important;
+    margin: 0 auto;
+  }
+  
+  .recommended-slider-container-123 {
+    padding: 0 10px;
+  }
+  
+  .recommended-slider-123 {
+    gap: 10px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123,
+  .recommended-slider-123 .product-card-1-123:hover,
+  .recommended-slider-123 .product-card-1-123:focus,
+  .recommended-slider-123 .product-card-1-123:active {
+    flex: 0 0 140px;
+    width: 140px;
+    height: 230px !important;
+  }
+  
+  .product-card-1-123 .label-1-123,
+  .product-card-1-123:hover .label-1-123,
+  .product-card-1-123:focus .label-1-123,
+  .product-card-1-123:active .label-1-123 {
+    left: -60px !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-image-1-123,
+  .product-card-1-123:hover .product-image-1-123,
+  .product-card-1-123:focus .product-image-1-123,
+  .product-card-1-123:active .product-image-1-123 {
+    margin-left: 0 !important;
+    width: 100% !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-detail-1-123,
+  .product-card-1-123:hover .product-detail-1-123,
+  .product-card-1-123:focus .product-detail-1-123,
+  .product-card-1-123:active .product-detail-1-123 {
+    padding-left: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .icons-1-123,
+  .product-card-1-123:hover .icons-1-123,
+  .product-card-1-123:focus .icons-1-123,
+  .product-card-1-123:active .icons-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .default-img-1-123,
+  .product-card-1-123:hover .default-img-1-123,
+  .product-card-1-123:focus .default-img-1-123,
+  .product-card-1-123:active .default-img-1-123 {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .hover-img-1-123,
+  .product-card-1-123:hover .hover-img-1-123,
+  .product-card-1-123:focus .hover-img-1-123,
+  .product-card-1-123:active .hover-img-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Product Card Grid - 1 column LEBIH KECIL */
+  .product-card-container-123 {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+    max-width: 220px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+  
+  .promo-product-123 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  
+  .promo-wrapper-123 {
+    padding: 0 15px;
+  }
+  
+  .countdown-123 {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .recommended-slider-container-123 {
+    padding: 0 10px;
+  }
+  
+  .recommended-slider-123 {
+    gap: 10px;
+  }
+  
+  /* UKURAN CARD LEBIH KECIL & RAPIH */
+  .product-card-1-123,
+  .product-card-1-123:hover,
+  .product-card-1-123:focus,
+  .product-card-1-123:active {
+    width: 100%;
+    max-width: 200px;
+    height: 240px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+    transform: none !important;
+    transition: none !important;
+    margin: 0 auto;
+  }
+  
+  .recommended-slider-123 .product-card-1-123,
+  .recommended-slider-123 .product-card-1-123:hover,
+  .recommended-slider-123 .product-card-1-123:focus,
+  .recommended-slider-123 .product-card-1-123:active {
+    flex: 0 0 130px;
+    width: 130px;
+    height: 220px !important;
+  }
+  
+  .product-card-1-123 .label-1-123,
+  .product-card-1-123:hover .label-1-123,
+  .product-card-1-123:focus .label-1-123,
+  .product-card-1-123:active .label-1-123 {
+    left: -60px !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-image-1-123,
+  .product-card-1-123:hover .product-image-1-123,
+  .product-card-1-123:focus .product-image-1-123,
+  .product-card-1-123:active .product-image-1-123 {
+    margin-left: 0 !important;
+    width: 100% !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-detail-1-123,
+  .product-card-1-123:hover .product-detail-1-123,
+  .product-card-1-123:focus .product-detail-1-123,
+  .product-card-1-123:active .product-detail-1-123 {
+    padding-left: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .icons-1-123,
+  .product-card-1-123:hover .icons-1-123,
+  .product-card-1-123:focus .icons-1-123,
+  .product-card-1-123:active .icons-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .default-img-1-123,
+  .product-card-1-123:hover .default-img-1-123,
+  .product-card-1-123:focus .default-img-1-123,
+  .product-card-1-123:active .default-img-1-123 {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .hover-img-1-123,
+  .product-card-1-123:hover .hover-img-1-123,
+  .product-card-1-123:focus .hover-img-1-123,
+  .product-card-1-123:active .hover-img-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+}
+
+/* ------ Mobile Resolution (Portrait) ------ */
+@media only screen and (max-width: 440px) and (orientation: portrait) {
+  html {
+    font-size: 55%;
+  }
+  
+  /* UKURAN CARD LEBIH KECIL & CLEAN */
+  .product-card-1-123,
+  .product-card-1-123:hover,
+  .product-card-1-123:focus,
+  .product-card-1-123:active {
+    width: 100%;
+    max-width: 190px;
+    height: 230px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+    transform: none !important;
+    transition: none !important;
+    margin: 0 auto;
+  }
+  
+  .product-card-container-123 {
+    max-width: 200px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123,
+  .recommended-slider-123 .product-card-1-123:hover,
+  .recommended-slider-123 .product-card-1-123:focus,
+  .recommended-slider-123 .product-card-1-123:active {
+    flex: 0 0 120px;
+    width: 120px;
+    height: 210px !important;
+  }
+  
+  .product-card-1-123 .label-1-123,
+  .product-card-1-123:hover .label-1-123,
+  .product-card-1-123:focus .label-1-123,
+  .product-card-1-123:active .label-1-123 {
+    font-size: 14px;
+    width: 40px;
+    left: -50px !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-image-1-123,
+  .product-card-1-123:hover .product-image-1-123,
+  .product-card-1-123:focus .product-image-1-123,
+  .product-card-1-123:active .product-image-1-123 {
+    margin-left: 0 !important;
+    width: 100% !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-detail-1-123,
+  .product-card-1-123:hover .product-detail-1-123,
+  .product-card-1-123:focus .product-detail-1-123,
+  .product-card-1-123:active .product-detail-1-123 {
+    padding-left: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .icons-1-123,
+  .product-card-1-123:hover .icons-1-123,
+  .product-card-1-123:focus .icons-1-123,
+  .product-card-1-123:active .icons-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .default-img-1-123,
+  .product-card-1-123:hover .default-img-1-123,
+  .product-card-1-123:focus .default-img-1-123,
+  .product-card-1-123:active .default-img-1-123 {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .hover-img-1-123,
+  .product-card-1-123:hover .hover-img-1-123,
+  .product-card-1-123:focus .hover-img-1-123,
+  .product-card-1-123:active .hover-img-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-deskripsi-1-123 {
+    font-size: 0.95rem;
+  }
+  
+  .promo-title {
+    font-size: 2rem;
+  }
+  
+  .promo-deskripsi {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 414px) and (orientation: portrait) {
+  html {
+    font-size: 50%;
+  }
+  
+  .product-card-container-123 {
+    max-width: 280px;
+  }
+}
+
+@media only screen and (max-width: 390px) and (orientation: portrait) {
+  .product-card-1-123 {
+    width: 240px;
+    height: 280px;
+  }
+  
+  /* Disable all hover effects */
+  .product-card-1-123:hover {
+    height: 280px !important;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 130px;
+    width: 130px;
+    height: 240px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123:hover {
+    height: 240px !important;
+  }
+  
+  .product-card-container-123 {
+    max-width: 260px;
+  }
+}
+
+@media only screen and (max-width: 380px) and (orientation: portrait) {
+  html {
+    font-size: 45%;
+  }
+  
+  .product-card-1-123 {
+    width: 230px;
+    height: 270px;
+  }
+  
+  .countdown-123 {
+    font-size: 12px;
+  }
+  
+  .product-title-1-123 {
+    font-size: 0.8rem;
+  }
+  
+  .ratings-1-123 {
+    font-size: 11px;
+  }
+  
+  .icon-1-123 {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 360px) and (orientation: portrait) {
+  .product-card-1-123 {
+    width: 220px;
+    height: 260px;
+  }
+  
+  /* Disable all hover effects */
+  .product-card-1-123:hover {
+    height: 260px !important;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 120px;
+    width: 120px;
+    height: 230px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123:hover {
+    height: 230px !important;
+  }
+  
+  .product-card-container-123 {
+    max-width: 240px;
+  }
+  
+  .label-1-123 {
+    font-size: 14px;
+    width: 40px;
+  }
+}
+
+@media only screen and (max-width: 349px) and (orientation: portrait) {
+  html {
+    font-size: 40%;
+  }
+  
+  .product-card-1-123 {
+    width: 200px;
+    height: 250px;
+    padding: 0.8rem;
+  }
+  
+  /* Disable all hover effects */
+  .product-card-1-123:hover {
+    height: 250px !important;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 110px;
+    width: 110px;
+    height: 220px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123:hover {
+    height: 220px !important;
+  }
+  
+  .product-card-container-123 {
+    max-width: 220px;
+    gap: 15px !important;
+  }
+  
+  .product-deskripsi-1-123 {
+    font-size: 0.9rem;
+  }
+  
+  .countdown-123 {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (max-width: 318px) and (orientation: portrait) {
+  html {
+    font-size: 40%;
+  }
+  
+  .product-card-1-123 {
+    width: 190px;
+    height: 240px;
+  }
+  
+  /* Disable all hover effects */
+  .product-card-1-123:hover {
+    height: 240px !important;
+  }
+  
+  .recommended-slider-container-123 {
+    padding: 0 5px;
+  }
+  
+  .recommended-slider-123 {
+    gap: 10px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    flex: 0 0 105px;
+    width: 105px;
+    height: 210px;
+  }
+  
+  .recommended-slider-123 .product-card-1-123:hover {
+    height: 210px !important;
+  }
+  
+  .label-1-123 {
+    font-size: 12px;
+    width: 35px;
+  }
+}
+
+/* Grabbing cursor for all screen sizes */
+@media screen and (max-width: 1024px) {
+  .recommended-slider-container-123 {
+    cursor: grab;
+  }
+  
+  .recommended-slider-container-123.grabbing {
+    cursor: grabbing;
+  }
+  
+  .recommended-slider-container-123.grabbing .product-card-1-123 {
+    pointer-events: none;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* TOTAL DISABLE HOVER - CARD STATIS */
+  .product-card-1-123,
+  .product-card-1-123:hover,
+  .product-card-1-123:focus,
+  .product-card-1-123:active {
+    height: auto !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .label-1-123,
+  .product-card-1-123:hover .label-1-123,
+  .product-card-1-123:focus .label-1-123,
+  .product-card-1-123:active .label-1-123 {
+    left: -60px !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-image-1-123,
+  .product-card-1-123:hover .product-image-1-123,
+  .product-card-1-123:focus .product-image-1-123,
+  .product-card-1-123:active .product-image-1-123 {
+    margin-left: 0 !important;
+    width: 100% !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .product-detail-1-123,
+  .product-card-1-123:hover .product-detail-1-123,
+  .product-card-1-123:focus .product-detail-1-123,
+  .product-card-1-123:active .product-detail-1-123 {
+    padding-left: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .icons-1-123,
+  .product-card-1-123:hover .icons-1-123,
+  .product-card-1-123:focus .icons-1-123,
+  .product-card-1-123:active .icons-1-123 {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .default-img-1-123,
+  .product-card-1-123:hover .default-img-1-123,
+  .product-card-1-123:focus .default-img-1-123,
+  .product-card-1-123:active .default-img-1-123 {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  
+  .product-card-1-123 .hover-img-1-123,
+  .product-card-1-123:hover .hover-img-1-123,
+  .product-card-1-123:focus .hover-img-1-123,
+  .product-card-1-123:active .hover-img-1-123 {
+    opacity: 0 !important;
+    display: none !important;
+    transition: none !important;
+  }
+  
+  .recommended-slider-123 {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .recommended-slider-123 .product-card-1-123 {
+    scroll-snap-align: center;
+  }
+}

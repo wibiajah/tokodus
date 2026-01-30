@@ -76,10 +76,7 @@ class UserController extends Controller
         
         $user = User::create($validated);
 
-        NotificationHelper::notifyRoles(
-            ['super_admin'],
-            NotificationHelper::userCreated($user, auth()->user())
-        );
+     
 
         DB::commit();
         return redirect()->route('superadmin.user.index')->with('success', 'User berhasil ditambahkan!');
@@ -165,10 +162,7 @@ class UserController extends Controller
                 $existingKepala->update(['toko_id' => self::HEAD_OFFICE_ID]);
                 
                 $toko = Toko::find($validated['toko_id']);
-                NotificationHelper::notifyRoles(
-                    ['super_admin'],
-                    NotificationHelper::kepalaTokoReplaced($existingKepala, $user, $toko, auth()->user())
-                );
+            
             }
         }
 
@@ -181,10 +175,7 @@ class UserController extends Controller
 
         $user->update($validated);
 
-        NotificationHelper::notifyRoles(
-            ['super_admin'],
-            NotificationHelper::userUpdated($user, auth()->user())
-        );
+      
 
         DB::commit();
         return redirect()->route('superadmin.user.index')->with('success', 'User berhasil diperbarui!');
@@ -221,10 +212,7 @@ class UserController extends Controller
             $user->delete();
 
             // Kirim notifikasi ke Super Admin
-            NotificationHelper::notifyRoles(
-                ['super_admin'],
-                NotificationHelper::userDeleted($userName, auth()->user())
-            );
+         
 
             DB::commit();
             return redirect()->route('superadmin.user.index')->with('success', 'User berhasil dihapus!');

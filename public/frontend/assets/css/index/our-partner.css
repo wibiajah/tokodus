@@ -1,0 +1,191 @@
+/* ==========================================================================
+   OUR PARTNER LOGO SECTION - Pure CSS Infinite Scroll
+   ZERO JavaScript | 100% Performance | iOS Safe
+   ========================================================================== */
+
+:root {
+    --partner-bg-436: #1f4390;
+    --partner-white-436: #fff;
+    --partner-animation-speed: 30s; /* Easy to adjust */
+}
+
+/* ==========================================================================
+   SECTION CONTAINER
+   ========================================================================== */
+.our-partner-section-436 {
+    width: 100%;
+    padding: clamp(30px, 6vw, 60px) 0;
+    background-color: var(--partner-bg-436);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ==========================================================================
+   LOGO SLIDER CONTAINER - The Magic Wrapper
+   ========================================================================== */
+.partner-logo-slider-container-436 {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--partner-bg-436);
+    
+    /* ✅ Performance optimization */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+}
+
+/* ==========================================================================
+   LOGO SLIDE - The Scrolling Track
+   ========================================================================== */
+.partner-logo-slide-436 {
+    display: inline-flex; /* ✅ Important for seamless loop */
+    align-items: center;
+    gap: clamp(40px, 8vw, 80px);
+    white-space: nowrap;
+    
+    /* ✅ THE MAGIC - Pure CSS Animation */
+    animation: scroll-partner-logos-436 var(--partner-animation-speed) linear infinite;
+    
+    /* ✅ Performance boost */
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* ✅ Pause on hover (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+    .partner-logo-slider-container-436:hover .partner-logo-slide-436 {
+        animation-play-state: paused;
+    }
+}
+
+/* ✅ Pause on mobile touch */
+@media (hover: none) and (pointer: coarse) {
+    .partner-logo-slider-container-436:active .partner-logo-slide-436 {
+        animation-play-state: paused;
+    }
+}
+
+/* ==========================================================================
+   LOGO IMAGES - Optimized Rendering
+   ========================================================================== */
+.partner-logo-slide-436 img {
+    height: clamp(2.5rem, 5vw, 3.5rem);
+    width: auto;
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+    
+    /* ✅ Prevent user interaction issues */
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+    
+    /* ✅ Smooth rendering */
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    
+    /* ✅ Performance */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATION - The Core Magic
+   ========================================================================== */
+@keyframes scroll-partner-logos-436 {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* ✅ Move exactly half the width (because we'll duplicate in HTML) */
+        transform: translateX(-50%);
+    }
+}
+
+/* ==========================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+
+/* ✅ Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .partner-logo-slide-436 {
+        animation: scroll-partner-logos-436 60s linear infinite; /* Slower */
+    }
+}
+
+/* ✅ Pause animation when tab is hidden (battery saving) */
+@media (prefers-reduced-motion: no-preference) {
+    .partner-logo-slide-436 {
+        animation-play-state: running;
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+/* Tablet - 768px */
+@media screen and (max-width: 768px) {
+    .our-partner-section-436 {
+        padding: clamp(20px, 4vw, 40px) 0;
+    }
+
+    .partner-logo-slide-436 {
+        gap: clamp(30px, 6vw, 50px);
+    }
+
+    .partner-logo-slide-436 img {
+        height: clamp(2rem, 4vw, 2.5rem);
+    }
+    
+    /* ✅ Faster animation on smaller screens */
+    .partner-logo-slide-436 {
+        animation-duration: 25s;
+    }
+}
+
+/* Mobile - 480px */
+@media screen and (max-width: 480px) {
+    .our-partner-section-436 {
+        padding: clamp(15px, 3vw, 30px) 0;
+    }
+
+    .partner-logo-slide-436 {
+        gap: clamp(25px, 8vw, 40px);
+    }
+
+    .partner-logo-slide-436 img {
+        height: clamp(1.75rem, 5vw, 2.25rem);
+    }
+    
+    /* ✅ Even faster on mobile */
+    .partner-logo-slide-436 {
+        animation-duration: 20s;
+    }
+}
+
+/* ==========================================================================
+   DARK MODE SUPPORT (Optional)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    .our-partner-section-436 {
+        background-color: var(--partner-bg-436);
+    }
+    
+    .partner-logo-slider-container-436 {
+        background-color: var(--partner-bg-436);
+    }
+}

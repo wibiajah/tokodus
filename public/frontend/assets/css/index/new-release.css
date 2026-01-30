@@ -1,0 +1,401 @@
+/* ========================================
+   SECTION 6: PRODUCT NEW RELEASE CSS
+   ======================================== */
+
+/* ------ Header Section ----- */
+.new-release-container-437 {
+  width: 100%;
+  background-color: #eeeeef;
+}
+
+.header-new-release-437 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 400px;
+  background-color: #1f4390;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.content-header-new-release-437 {
+  display: flex;
+  position: relative;
+  max-width: 60%;
+  align-items: center;
+  justify-content: center;
+  left: 15%;
+}
+
+.content-header-new-release-437 img {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  object-fit: cover;
+  top: -40%;
+  height: 10rem;
+  margin-right: 2rem;
+}
+
+.header-new-release-title-437 {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  font-size: 6rem;
+  color: #eeeeef;
+}
+
+.header-new-release-subtitile-437 {
+  display: flex;
+  white-space: nowrap;
+  position: relative;
+  right: 40%;
+  margin-top: auto;
+  font-size: 1.6rem;
+  color: #f7b963;
+}
+
+/* ---- Title Promo ---- */
+.promonewrelease-header-437 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  top: 30%;
+  width: 400px;
+  height: 250px;
+  padding: 1rem 2%;
+  background-color: #eeeeef;
+  border-radius: 20px;
+  right: 10%;
+}
+
+.promonewrelease-header-title-437 {
+  display: flex;
+  top: 5%;
+  position: relative;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.deskripsi-promonewrelease-header-437 {
+  display: flex;
+  position: relative;
+  bottom: 65%;
+  color: #f7b963;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.pcta-437 {
+  position: relative;
+  top: -10%;
+  border: none;
+  background-color: #1f4390;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  width: fit-content;
+  height: fit-content;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.pcta-437:hover {
+  background-color: #f7b963;
+}
+
+/* ----- Product Special Edition ---- */
+.spesial-edition-container-437 {
+  margin-bottom: 50px;
+}
+
+.newrealese-titile-437 {
+  display: inline-flex;
+  position: relative;
+  left: 10%;
+  top: 25%;
+  font-size: 3rem;
+}
+
+.newrealese-titile-437 h2 {
+  margin: 0;
+  color: #1f4390;
+  font-weight: 700;
+}
+
+/* ----- Navbar Edition ----- */
+.spesialedition-navbar-437 {
+  display: flex;
+  position: relative;
+  right: 12%;
+  justify-content: end;
+}
+
+.spesialedition-navbar-menu-437 {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 0;
+}
+
+.spesialedition-navbar-menu-437 li {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1f4390;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.spesialedition-navbar-menu-437 span {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.spesialedition-navbar-menu-437 li:hover {
+  color: #f7b963;
+}
+
+.spesialedition-navbar-menu-437 li.active {
+  color: #f7b963;
+}
+
+/* Product Grid */
+.spesial-edition-437 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
+  padding: 1rem 10%;
+  column-gap: 30px;
+  row-gap: 50px;
+  margin-bottom: 30px;
+  padding-bottom: 50px;
+}
+
+.spesial-edition-437 {
+  display: none;
+}
+
+.spesial-edition-437.active {
+  display: grid;
+}
+
+/* Pagination Controls Styling */
+.pagination-437 {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.pagination-437 button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background-color: #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-437 button:hover {
+  background-color: #ccc;
+}
+
+.pagination-437 button.active {
+  background-color: #1f4390;
+  color: #fff;
+}
+
+.pagination-437 button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet Resolution */
+@media screen and (max-width: 1280px) {
+  .header-new-release-subtitile-437 {
+    right: 43%;
+  }
+
+  .promonewrelease-header-437 {
+    top: 30%;
+  }
+
+  .promonewrelease-header-title-437 {
+    top: 2%;
+    font-size: 4.5rem;
+  }
+
+  .deskripsi-promonewrelease-header-437 {
+    bottom: 80%;
+    font-size: 1.5rem;
+  }
+
+  .pcta-437 {
+    top: -15%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .spesial-edition-437 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 884px) {
+  .header-new-release-437 {
+    height: 350px;
+  }
+
+  .content-header-new-release-437 {
+    max-width: 60%;
+    left: 15%;
+  }
+
+  .header-new-release-subtitile-437 {
+    right: 48%;
+    font-size: 1.6rem;
+  }
+
+  .promonewrelease-header-437 {
+    top: 35%;
+    width: 300px;
+    height: 250px;
+    right: 5%;
+  }
+
+  .promonewrelease-header-title-437 {
+    top: 5%;
+    font-size: 4.5rem;
+  }
+
+  .deskripsi-promonewrelease-header-437 {
+    bottom: 60%;
+    font-size: 1.5rem;
+  }
+
+  .spesial-edition-437 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .spesial-edition-437 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile Resolution */
+@media only screen and (max-width: 440px) {
+  .header-new-release-437 {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 300px;
+  }
+
+  .content-header-new-release-437 {
+    max-width: 100%;
+    top: 10%;
+    left: 25%;
+  }
+
+  .header-new-release-subtitile-437 {
+    white-space: nowrap;
+    width: 100%;
+    right: 53%;
+  }
+
+  .promonewrelease-header-437 {
+    top: 15%;
+    width: 250px;
+    height: 200px;
+    left: 0%;
+  }
+
+  .promonewrelease-header-title-437 {
+    left: 10%;
+    top: 10%;
+  }
+
+  .deskripsi-promonewrelease-header-437 {
+    left: 20%;
+    bottom: 35%;
+  }
+
+  .pcta-437 {
+    left: 20%;
+    top: -5%;
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .promonewrelease-header-437 {
+    width: 230px;
+    height: 180px;
+  }
+
+  .promonewrelease-header-title-437 {
+    display: flex;
+    left: 10%;
+    top: 10%;
+    position: relative;
+    font-size: 3rem;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+
+  .deskripsi-promonewrelease-header-437 {
+    display: flex;
+    position: relative;
+    left: 12%;
+    bottom: 35%;
+    color: #f7b963;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .promonewrelease-header-437 {
+    top: 20%;
+    width: 200px;
+    height: 130px;
+  }
+
+  .promonewrelease-header-title-437 {
+    left: 10%;
+  }
+
+  .deskripsi-promonewrelease-header-437 {
+    left: 12%;
+    bottom: 45%;
+  }
+
+  .pcta-437 {
+    left: 20%;
+    top: -10%;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 349px) {
+  .promonewrelease-header-title-437 {
+    left: 13%;
+  }
+
+  .deskripsi-promonewrelease-header-437 {
+    left: 15%;
+    bottom: 45%;
+  }
+}

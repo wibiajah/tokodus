@@ -1,28 +1,5 @@
 <x-admin-layout title="Manajemen Toko">
     <style>
-        /* ===========================
-           MODERN STORE HEADER & FILTER - SCOPED
-        =========================== */
-        .toko-management-page .tokos-header {
-            background: linear-gradient(135deg, #224abe 0%, #224abe 100%);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            color: white;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .toko-management-page .tokos-header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin: 0 0 10px 0;
-        }
-
-        .toko-management-page .tokos-header p {
-            margin: 0;
-            opacity: 0.9;
-        }
-
         /* Filter Section */
         .toko-management-page .filter-section {
             background: white;
@@ -69,7 +46,7 @@
         .toko-management-page .filter-input:focus {
             outline: none;
             border-color: #224abe;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(34, 74, 190, 0.1);
         }
 
         .toko-management-page .filter-stats {
@@ -109,30 +86,6 @@
             color: white;
         }
 
-        .toko-management-page .btn-add-toko {
-            background: linear-gradient(135deg, #224abe 0%, #224abe 100%);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 12px;
-            border: none;
-            font-size: 15px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            text-decoration: none;
-        }
-
-        .toko-management-page .btn-add-toko:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-            color: white;
-            text-decoration: none;
-        }
-
         .toko-management-page .no-results {
             text-align: center;
             padding: 60px 20px;
@@ -157,22 +110,41 @@
             color: #999;
         }
 
-        /* Modern Card Design with Slide-Up Effect */
+        /* ===========================
+   DYNAMIC GRID SYSTEM - ZOOM AWARE
+=========================== */
+        #tokoCardsContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            width: 100%;
+            margin: 0;
+        }
+
+        .toko-card-item {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Modern Store Card Design - DESKTOP */
         .modern-store-card {
             width: 100%;
+            aspect-ratio: 5/6;
+            min-height: 240px;
+            max-height: 310px;
             background: white;
-            border-radius: 30px;
-            box-shadow: 0 20px 40px -15px rgba(34, 74, 190, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px -8px rgba(34, 74, 190, 0.15);
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
-            height: 400px;
         }
 
         .modern-store-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px -15px rgba(34, 74, 190, 0.3);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px -10px rgba(34, 74, 190, 0.3);
         }
 
         /* Image Container with Curved Bottom-Right Corner */
@@ -183,7 +155,7 @@
             top: 0;
             left: 0;
             background-color: #E9D5FF;
-            border-bottom-right-radius: 100px;
+            border-bottom-right-radius: 60px;
             overflow: hidden;
         }
 
@@ -209,36 +181,35 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #224abe 0%, #1a3a9e 100%);
+            background: #224abe;
         }
 
         .card-image-placeholder i {
-            font-size: 64px;
+            font-size: 42px;
             color: rgba(255, 255, 255, 0.3);
         }
 
         /* Status Badge Overlay */
         .card-status-overlay {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 11px;
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 10px;
             font-weight: 600;
             backdrop-filter: blur(10px);
             z-index: 10;
             letter-spacing: 0.5px;
+            color: white;
         }
 
         .status-active {
-            background: rgba(34, 74, 190, 0.95);
-            color: white;
+            background: rgba(40, 167, 69, 0.95);
         }
 
         .status-inactive {
             background: rgba(108, 117, 125, 0.95);
-            color: white;
         }
 
         /* Sliding White Panel */
@@ -248,15 +219,15 @@
             left: 0;
             width: 100%;
             background: #FFFFFF;
-            border-radius: 30px;
-            padding: 20px 24px 24px;
+            border-radius: 20px;
+            padding: 14px 16px 16px;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 15;
-            transform: translateY(calc(100% - 120px));
+            transform: translateY(calc(100% - 85px));
         }
 
         .modern-store-card:hover .card-slide-panel {
-            transform: translateY(calc(100% - 200px));
+            transform: translateY(calc(100% - 160px));
         }
 
         /* Title Section - Always Visible */
@@ -267,10 +238,10 @@
         .card-store-title {
             color: #2d3748;
             font-weight: 800;
-            font-size: 17px;
+            font-size: 13px;
             letter-spacing: 0.02em;
             line-height: 1.3;
-            margin: 0 0 8px 0;
+            margin: 0 0 6px 0;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -282,7 +253,7 @@
             width: 100%;
             height: 1px;
             background: #e2e8f0;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -302,13 +273,13 @@
 
         .modern-store-card:hover .card-hidden-info {
             opacity: 1;
-            max-height: 150px;
+            max-height: 100px;
         }
 
         .info-row {
             display: flex;
             flex-direction: column;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .info-row:last-child {
@@ -316,34 +287,38 @@
         }
 
         .info-label {
-            font-size: 11px;
+            font-size: 9px;
             font-weight: 600;
             color: #9CA3AF;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .info-value {
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 500;
             color: #4A5568;
             line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         /* Quick Actions Icons */
         .card-quick-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
             padding-top: 0;
             border-top: none;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .quick-action-icon {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -352,6 +327,8 @@
             color: #224abe;
             transition: all 0.3s ease;
             text-decoration: none;
+            border: none;
+            cursor: pointer;
         }
 
         .quick-action-icon:hover {
@@ -361,74 +338,359 @@
             text-decoration: none;
         }
 
-        .quick-action-icon i {
-            font-size: 1.1rem;
+        .quick-action-icon.whatsapp-icon:hover {
+            background: #25D366;
+            color: white;
         }
 
-        @media (max-width: 768px) {
-            .toko-management-page .filter-grid {
-                grid-template-columns: 1fr;
+        .quick-action-icon.email-icon:hover {
+            background: #ea4335;
+            color: white;
+        }
+
+        .quick-action-icon.maps-icon:hover {
+            background: #4285f4;
+            color: white;
+        }
+
+        .quick-action-icon i {
+            font-size: 0.9rem;
+        }
+
+        /* ===========================
+   MOBILE SIMPLE CARD DESIGN
+=========================== */
+        .mobile-simple-card {
+            display: none;
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 1600px) {
+            #tokoCardsContainer {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            }
+        }
+
+        @media (min-width: 1400px) and (max-width: 1599px) {
+            #tokoCardsContainer {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+        }
+
+        @media (min-width: 1200px) and (max-width: 1399px) {
+            #tokoCardsContainer {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+            #tokoCardsContainer {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
             }
 
             .modern-store-card {
-                height: 300px;
+                min-height: 240px;
             }
-            
-            .card-slide-panel {
-                transform: translateY(calc(100% - 110px));
+        }
+
+        /* ===========================
+   TABLET MODE (768px - 991px)
+=========================== */
+        @media (min-width: 768px) and (max-width: 991px) {
+            #tokoCardsContainer {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 18px;
             }
 
-            .modern-store-card:hover .card-slide-panel {
-                transform: translateY(calc(100% - 220px));
+            .modern-store-card {
+                min-height: 230px;
             }
-            
-            .card-store-title {
-                font-size: 15px;
+
+            .toko-management-page .filter-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
-            .info-value {
+
+            .toko-management-page .tokos-header {
+                padding: 20px;
+            }
+
+            .toko-management-page .tokos-header h1 {
+                font-size: 22px;
+            }
+        }
+
+        /* ===========================
+   MOBILE MODE - SIMPLE CARD (< 768px)
+=========================== */
+        @media (max-width: 767px) {
+            .modern-store-card {
+                display: none !important;
+            }
+
+            .mobile-simple-card {
+                display: block !important;
+            }
+
+            #tokoCardsContainer {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .mobile-simple-card {
+                background: white;
+                border-radius: 12px;
+                padding: 12px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .mobile-simple-card:active {
+                transform: scale(0.97);
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+            }
+
+            .mobile-card-image {
+                width: 100%;
+                aspect-ratio: 1/1;
+                border-radius: 10px;
+                overflow: hidden;
+                background: #224abe;
+                margin-bottom: 10px;
+                position: relative;
+            }
+
+            .mobile-card-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .mobile-card-image .placeholder {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mobile-card-image .placeholder i {
+                font-size: 32px;
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+            .mobile-status-badge {
+                position: absolute;
+                top: 6px;
+                right: 6px;
+                padding: 4px 8px;
+                border-radius: 8px;
+                font-size: 8px;
+                font-weight: 700;
+                color: white;
+                backdrop-filter: blur(5px);
+                text-transform: uppercase;
+            }
+
+            .mobile-card-content {
+                text-align: center;
+            }
+
+            .mobile-card-name {
+                font-size: 12px;
+                font-weight: 700;
+                color: #2d3748;
+                margin: 0 0 4px 0;
+                line-height: 1.3;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                min-height: 30px;
+            }
+
+            .mobile-card-kepala {
+                font-size: 10px;
+                color: #718096;
+                margin: 0 0 8px 0;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .mobile-card-actions {
+                display: flex;
+                gap: 6px;
+                justify-content: center;
+            }
+
+            .mobile-action-btn {
+                width: 28px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f1f5f9;
+                border-radius: 50%;
+                color: #224abe;
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .mobile-action-btn:active {
+                transform: scale(0.9);
+            }
+
+            .mobile-action-btn.whatsapp {
+                color: #25D366;
+            }
+
+            .mobile-action-btn.email {
+                color: #ea4335;
+            }
+
+            .mobile-action-btn.maps {
+                color: #4285f4;
+            }
+
+            .mobile-action-btn i {
+                font-size: 12px;
+            }
+
+            .toko-management-page .tokos-header {
+                padding: 16px;
+                border-radius: 12px;
+                margin-bottom: 16px;
+            }
+
+            .toko-management-page .tokos-header h1 {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+
+            .toko-management-page .tokos-header p {
+                font-size: 12px;
+            }
+
+            .toko-management-page .btn-add-toko {
+                padding: 10px 16px;
+                font-size: 12px;
+                border-radius: 8px;
+                gap: 6px;
+            }
+
+            .toko-management-page .btn-add-toko i {
+                font-size: 12px;
+            }
+
+            .toko-management-page .filter-section {
+                padding: 16px;
+                border-radius: 12px;
+                margin-bottom: 16px;
+            }
+
+            .toko-management-page .filter-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .toko-management-page .filter-label {
+                font-size: 12px;
+            }
+
+            .toko-management-page .filter-input {
+                padding: 10px 12px;
+                font-size: 13px;
+                border-radius: 8px;
+            }
+
+            .toko-management-page .filter-stats {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .toko-management-page .filter-result {
+                font-size: 12px;
+                text-align: center;
+            }
+
+            .toko-management-page .btn-reset-filter {
+                width: 100%;
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            .toko-management-page .no-results {
+                padding: 40px 16px;
+            }
+
+            .toko-management-page .no-results i {
+                font-size: 48px;
+            }
+
+            .toko-management-page .no-results h4 {
+                font-size: 16px;
+            }
+
+            .toko-management-page .no-results p {
                 font-size: 12px;
             }
         }
 
-        @media (max-width: 576px) {
-            .modern-store-card {
-                border-radius: 25px;
-                height: 280px;
-            }
-            
-            .card-image-wrapper {
-                border-bottom-right-radius: 80px;
-            }
-            
-            .card-slide-panel {
-                border-radius: 25px;
-                padding: 16px 20px 20px;
-                transform: translateY(calc(100% - 100px));
+        @media (max-width: 399px) {
+            #tokoCardsContainer {
+                gap: 10px;
             }
 
-            .modern-store-card:hover .card-slide-panel {
-                transform: translateY(calc(100% - 200px));
+            .mobile-simple-card {
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            .mobile-card-image {
+                margin-bottom: 8px;
+                border-radius: 8px;
+            }
+
+            .mobile-card-name {
+                font-size: 11px;
+                min-height: 28px;
+            }
+
+            .mobile-card-kepala {
+                font-size: 9px;
+                margin-bottom: 6px;
+            }
+
+            .mobile-action-btn {
+                width: 26px;
+                height: 26px;
+            }
+
+            .mobile-action-btn i {
+                font-size: 11px;
             }
         }
     </style>
 
     <div class="container-fluid toko-management-page">
         <!-- Header -->
-        <div class="tokos-header">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1><i class="fas fa-store"></i> Manajemen Toko</h1>
-                    <p>Kelola semua toko dan informasi terkait</p>
-                </div>
-                <a href="{{ route('superadmin.toko.create') }}" class="btn-add-toko">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>Tambah Toko</span>
-                </a>
-            </div>
-        </div>
-
-       
+        <!-- GANTI JADI INI -->
+        @include('layouts.management-header', [
+            'icon' => 'fas fa-store',
+            'title' => 'Manajemen Toko',
+            'description' => 'Kelola semua toko dan informasi terkait',
+            'buttonText' => 'Tambah Toko',
+            'buttonRoute' => route('superadmin.toko.create'),
+            'buttonIcon' => 'fas fa-plus-circle',
+        ])
 
         <!-- Filter Section -->
         <div class="filter-section">
@@ -448,7 +710,7 @@
                     </label>
                     <select id="filterKepala" class="filter-input">
                         <option value="">Semua Kepala Toko</option>
-                        @foreach($tokos->pluck('kepalaToko')->filter()->unique('id') as $kepala)
+                        @foreach ($tokos->pluck('kepalaToko')->filter()->unique('id') as $kepala)
                             <option value="{{ strtolower($kepala->name) }}">{{ $kepala->name }}</option>
                         @endforeach
                     </select>
@@ -480,7 +742,8 @@
 
             <div class="filter-stats">
                 <div class="filter-result">
-                    Menampilkan <strong id="resultCount">{{ count($tokos) }}</strong> dari <strong>{{ count($tokos) }}</strong> toko
+                    Menampilkan <strong id="resultCount">{{ count($tokos) }}</strong> dari
+                    <strong>{{ count($tokos) }}</strong> toko
                 </div>
                 <button class="btn-reset-filter" onclick="resetFilters()">
                     <i class="fas fa-redo"></i> Reset Filter
@@ -489,82 +752,131 @@
         </div>
 
         <!-- Cards Grid -->
-        <div class="row" id="tokoCardsContainer">
+        <div id="tokoCardsContainer">
             @forelse($tokos as $toko)
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 toko-card-item" 
-                     data-name="{{ strtolower($toko->nama_toko) }}" 
-                     data-kepala="{{ strtolower($toko->kepalaToko?->name ?? '') }}"
-                     data-status="{{ $toko->status }}"
-                     data-created="{{ $toko->created_at->timestamp }}">
+                <div class="toko-card-item" data-name="{{ strtolower($toko->nama_toko) }}"
+                    data-kepala="{{ strtolower($toko->kepalaToko?->name ?? '') }}" data-status="{{ $toko->status }}"
+                    data-created="{{ $toko->created_at->timestamp }}">
+
+                    <!-- DESKTOP CARD -->
                     <div class="modern-store-card" onclick="openDetailModal({{ $toko->id }})">
-                        <!-- Image Container with Curved Corner -->
                         <div class="card-image-wrapper">
-                            @if($toko->foto)
+                            @if ($toko->foto)
                                 <img src="{{ asset('storage/' . $toko->foto) }}" alt="{{ $toko->nama_toko }}">
                             @else
                                 <div class="card-image-placeholder">
                                     <i class="fas fa-store"></i>
                                 </div>
                             @endif
-                            
-                            <!-- Status Badge Overlay -->
-                            <div class="card-status-overlay {{ $toko->status === 'aktif' ? 'status-active' : 'status-inactive' }}">
+
+                            <div
+                                class="card-status-overlay {{ $toko->status === 'aktif' ? 'status-active' : 'status-inactive' }}">
                                 {{ $toko->status === 'aktif' ? '● Aktif' : '● Tidak Aktif' }}
                             </div>
                         </div>
-                        
-                        <!-- Sliding White Content Panel -->
+
                         <div class="card-slide-panel">
-                            <!-- Title Section - Always Visible -->
                             <div class="card-title-section">
                                 <h6 class="card-store-title">{{ Str::upper($toko->nama_toko) }}</h6>
                             </div>
-                            
-                            <!-- Divider Line -->
+
                             <div class="card-divider"></div>
-                            
-                            <!-- Hidden Info - Shows on Hover -->
+
                             <div class="card-hidden-info">
                                 <div class="info-row">
                                     <span class="info-label">Kepala Toko</span>
-                                    <span class="info-value">{{ $toko->kepalaToko?->name ?? 'Belum ditentukan' }}</span>
+                                    <span
+                                        class="info-value">{{ $toko->kepalaToko?->name ?? 'Belum ditentukan' }}</span>
                                 </div>
-                                
-                                @if($toko->alamat)
-                                <div class="info-row">
-                                    <span class="info-label">Alamat</span>
-                                    <span class="info-value">{{ $toko->alamat }}</span>
-                                </div>
+
+                                @if ($toko->alamat)
+                                    <div class="info-row">
+                                        <span class="info-label">Alamat</span>
+                                        <span class="info-value">{{ $toko->alamat }}</span>
+                                    </div>
                                 @endif
                             </div>
-                            
-                            <!-- Quick Actions Icons -->
+
                             <div class="card-quick-actions">
-                                @if($toko->telepon)
-                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $toko->telepon) }}" 
-                                       target="_blank" 
-                                       class="quick-action-icon"
-                                       onclick="event.stopPropagation()"
-                                       title="WhatsApp">
+                                @if ($toko->telepon)
+                                    @php
+                                        $cleanPhone = preg_replace('/[^0-9]/', '', $toko->telepon);
+                                        $waPhone =
+                                            strpos($cleanPhone, '0') === 0
+                                                ? '62' . substr($cleanPhone, 1)
+                                                : $cleanPhone;
+                                    @endphp
+                                    <a href="https://wa.me/{{ $waPhone }}" target="_blank"
+                                        class="quick-action-icon whatsapp-icon" onclick="event.stopPropagation()"
+                                        title="Chat WhatsApp">
                                         <i class="fab fa-whatsapp"></i>
                                     </a>
                                 @endif
-                                
-                                @if($toko->email)
-                                    <a href="mailto:{{ $toko->email }}" 
-                                       class="quick-action-icon"
-                                       onclick="event.stopPropagation()"
-                                       title="Email">
+
+                                @if ($toko->email)
+                                    <a href="mailto:{{ $toko->email }}" class="quick-action-icon email-icon"
+                                        onclick="event.stopPropagation()" title="Kirim Email">
                                         <i class="fas fa-envelope"></i>
                                     </a>
                                 @endif
-                                
-                                @if($toko->googlemap)
-                                    <a href="{{ $toko->googlemap }}" 
-                                       target="_blank" 
-                                       class="quick-action-icon"
-                                       onclick="event.stopPropagation()"
-                                       title="Google Maps">
+
+                                @if ($toko->googlemap)
+                                    <a href="{{ $toko->googlemap }}" target="_blank"
+                                        class="quick-action-icon maps-icon" onclick="event.stopPropagation()"
+                                        title="Buka Google Maps">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MOBILE SIMPLE CARD -->
+                    <div class="mobile-simple-card" onclick="openDetailModal({{ $toko->id }})">
+                        <div class="mobile-card-image">
+                            @if ($toko->foto)
+                                <img src="{{ asset('storage/' . $toko->foto) }}" alt="{{ $toko->nama_toko }}">
+                            @else
+                                <div class="placeholder">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                            @endif
+
+                            <div
+                                class="mobile-status-badge {{ $toko->status === 'aktif' ? 'status-active' : 'status-inactive' }}">
+                                {{ $toko->status === 'aktif' ? 'Aktif' : 'Nonaktif' }}
+                            </div>
+                        </div>
+
+                        <div class="mobile-card-content">
+                            <h6 class="mobile-card-name">{{ Str::upper($toko->nama_toko) }}</h6>
+                            <p class="mobile-card-kepala">{{ $toko->kepalaToko?->name ?? 'Belum ditentukan' }}</p>
+
+                            <div class="mobile-card-actions">
+                                @if ($toko->telepon)
+                                    @php
+                                        $cleanPhone = preg_replace('/[^0-9]/', '', $toko->telepon);
+                                        $waPhone =
+                                            strpos($cleanPhone, '0') === 0
+                                                ? '62' . substr($cleanPhone, 1)
+                                                : $cleanPhone;
+                                    @endphp
+                                    <a href="https://wa.me/{{ $waPhone }}" target="_blank"
+                                        class="mobile-action-btn whatsapp" onclick="event.stopPropagation()">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                @endif
+
+                                @if ($toko->email)
+                                    <a href="mailto:{{ $toko->email }}" class="mobile-action-btn email"
+                                        onclick="event.stopPropagation()">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                @endif
+
+                                @if ($toko->googlemap)
+                                    <a href="{{ $toko->googlemap }}" target="_blank" class="mobile-action-btn maps"
+                                        onclick="event.stopPropagation()">
                                         <i class="fas fa-map-marked-alt"></i>
                                     </a>
                                 @endif
@@ -583,7 +895,7 @@
             @endforelse
         </div>
 
-        <!-- No Results Message (Hidden by default) -->
+        <!-- No Results Message -->
         <div class="no-results" id="noResults" style="display: none;">
             <i class="fas fa-search"></i>
             <h4>Tidak Ada Hasil</h4>
@@ -591,38 +903,104 @@
         </div>
     </div>
 
-    <!-- Include Modal -->
     @include('superadmin.toko.detailmodal', ['tokos' => $tokos])
 
-    <!-- Pass data to JavaScript -->
     <script>
+        // ===========================
+        // DATA & INITIALIZATION
+        // ===========================
         window.tokosData = @json($tokos);
-        window.kepalaTokosData = @json(\App\Models\User::where('role', 'kepala_toko')->get());
         window.csrfToken = '{{ csrf_token() }}';
 
-        // Filter Function
+        // ===========================
+        // ZOOM DETECTION & DYNAMIC GRID
+        // ===========================
+        (function() {
+            'use strict';
+
+            let currentZoomLevel = 1;
+            let resizeTimeout;
+
+            function detectZoomLevel() {
+                const devicePixelRatio = window.devicePixelRatio || 1;
+                const screenWidth = screen.width;
+                const windowWidth = window.outerWidth;
+                const widthRatio = windowWidth / screenWidth;
+                const zoomLevel = Math.round((devicePixelRatio / widthRatio) * 100) / 100;
+                return zoomLevel;
+            }
+
+            function adjustGridBasedOnZoom() {
+                const container = document.getElementById('tokoCardsContainer');
+                if (!container) return;
+
+                if (window.innerWidth <= 767) return;
+
+                const containerWidth = container.offsetWidth;
+                const zoomLevel = detectZoomLevel();
+
+                let minCardWidth = 220;
+
+                if (zoomLevel >= 1.5) {
+                    minCardWidth = 180;
+                } else if (zoomLevel >= 1.25) {
+                    minCardWidth = 200;
+                } else if (zoomLevel >= 1.1) {
+                    minCardWidth = 240;
+                } else if (zoomLevel >= 1.0) {
+                    minCardWidth = 260;
+                } else if (zoomLevel >= 0.9) {
+                    minCardWidth = 240;
+                } else if (zoomLevel >= 0.75) {
+                    minCardWidth = 220;
+                } else {
+                    minCardWidth = 200;
+                }
+
+                container.style.gridTemplateColumns = `repeat(auto-fit, minmax(${minCardWidth}px, 1fr))`;
+
+                currentZoomLevel = zoomLevel;
+            }
+
+            adjustGridBasedOnZoom();
+
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(adjustGridBasedOnZoom, 150);
+            });
+
+            setInterval(function() {
+                const newZoomLevel = detectZoomLevel();
+                if (Math.abs(newZoomLevel - currentZoomLevel) > 0.05) {
+                    adjustGridBasedOnZoom();
+                }
+            }, 500);
+        })();
+
+        // ===========================
+        // FILTER FUNCTIONS
+        // ===========================
         function filterTokos() {
             const nameFilter = document.getElementById('filterName').value.toLowerCase();
             const kepalaFilter = document.getElementById('filterKepala').value.toLowerCase();
             const statusFilter = document.getElementById('filterStatus').value;
             const dateFilter = document.getElementById('filterDate').value;
-            
+
             const cards = Array.from(document.querySelectorAll('.toko-card-item'));
             const container = document.getElementById('tokoCardsContainer');
             const noResults = document.getElementById('noResults');
-            
+
             let visibleCount = 0;
 
-            // Filter cards
             cards.forEach(card => {
                 const name = card.getAttribute('data-name');
                 const kepala = card.getAttribute('data-kepala');
                 const status = card.getAttribute('data-status');
-                
+
                 const matchName = !nameFilter || name.includes(nameFilter);
                 const matchKepala = !kepalaFilter || kepala.includes(kepalaFilter);
                 const matchStatus = !statusFilter || status === statusFilter;
-                
+
                 if (matchName && matchKepala && matchStatus) {
                     card.style.display = 'block';
                     visibleCount++;
@@ -631,11 +1009,10 @@
                 }
             });
 
-            // Sort by date
             const sortedCards = cards.sort((a, b) => {
                 const dateA = parseInt(a.getAttribute('data-created'));
                 const dateB = parseInt(b.getAttribute('data-created'));
-                
+
                 if (dateFilter === 'newest') {
                     return dateB - dateA;
                 } else {
@@ -643,24 +1020,19 @@
                 }
             });
 
-            // Re-append sorted cards
             sortedCards.forEach(card => container.appendChild(card));
 
-            // Update result count
             document.getElementById('resultCount').textContent = visibleCount;
 
-            // Show/hide no results message
             if (visibleCount === 0) {
                 container.style.display = 'none';
                 noResults.style.display = 'block';
             } else {
-                container.style.display = 'flex';
-                container.style.flexWrap = 'wrap';
+                container.style.display = 'grid';
                 noResults.style.display = 'none';
             }
         }
 
-        // Reset Filters
         function resetFilters() {
             document.getElementById('filterName').value = '';
             document.getElementById('filterKepala').value = '';
@@ -669,18 +1041,18 @@
             filterTokos();
         }
 
-        // Add event listeners
         document.getElementById('filterName').addEventListener('input', filterTokos);
         document.getElementById('filterKepala').addEventListener('change', filterTokos);
         document.getElementById('filterStatus').addEventListener('change', filterTokos);
         document.getElementById('filterDate').addEventListener('change', filterTokos);
 
-        // Initial sort on page load
         document.addEventListener('DOMContentLoaded', function() {
             filterTokos();
         });
 
-        // Function to open detail modal
+        // ===========================
+        // TOKO INTERACTION FUNCTIONS
+        // ===========================
         function openDetailModal(tokoId) {
             console.log('Opening modal for toko ID:', tokoId);
             showTokoDetail(tokoId);

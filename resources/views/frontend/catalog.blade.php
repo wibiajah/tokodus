@@ -1,1070 +1,1507 @@
 <x-frontend-layout>
     <x-slot:title>{{ $page_title }}</x-slot:title>
+    <!-- ✅ LOAD CSS SPECIAL PRODUCT -->
+    <!-- Preconnect untuk performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="style" href="{{ asset('frontend/assets/css/catalogproduct.css') }}"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('frontend/assets/css/catalogproduct.css') }}">
+    </noscript>
 
-      <section class="catalog-section" id="catalog">
-        <div class="catalog-container">
-            <div class="catalog-header">
-                <h1>Katalog Produk</h1>
-                <p>Temukan produk packaging terbaik untuk kebutuhan Anda</p>
+    <!-- TAMBAHKAN INI -->
+
+    <!-- Page Header -->
+    <div class="page-header-323">
+        <h1>Katalog Produk</h1>
+        <p>Temukan produk packaging terbaik untuk kebutuhan Anda</p>
+    </div>
+
+    <section class="catalog-section-323" id="catalog">
+        <div class="catalog-container-323">
+            <!-- MOBILE SEARCH & FILTER (GABUNG) - Tampil hanya di mobile -->
+            <div class="mobile-search-filter-wrapper-323">
+                <div class="mobile-search-filter-323">
+                    <!-- Search Input dengan Icon -->
+                    <div class="mobile-search-box-323">
+                        <svg class="mobile-search-icon-323" xmlns="http://www.w3.org/2000/svg" width="18"
+                            height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" id="mobileSearchInput" placeholder="Search..."
+                            value="{{ $activeFilters['search'] ?? '' }}" />
+                    </div>
+
+                    <!-- Filter Button (Buka Sidebar) -->
+                    <button class="mobile-filter-btn-323" id="mobileFilterBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
+                        <span>Filter</span>
+                    </button>
+                </div>
             </div>
-
-            <div class="filter-search-container">
-              <div class="search-box">
-    <svg class="search-icon-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.35-4.35"></path>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Cari produk..." value="{{ $activeFilters['search'] ?? '' }}" />
-</div>
-                <button class="filter-toggle-btn" id="filterToggleBtn">
+            <!-- Filter Search Container -->
+            <div class="filter-search-container-323">
+                <div class="search-box-323">
+                    <svg class="search-icon-svg-323" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Cari produk..."
+                        value="{{ $activeFilters['search'] ?? '' }}" />
+                </div>
+                <button class="filter-toggle-btn-323" id="filterToggleBtn">
                     <i data-feather="filter"></i><span>Filter</span>
                 </button>
-                <select id="sortSelect" class="sort-select">
-                    <option value="newest" {{ ($activeFilters['sort'] ?? '') == 'newest' ? 'selected' : '' }}>Terbaru</option>
-                    <option value="oldest" {{ ($activeFilters['sort'] ?? '') == 'oldest' ? 'selected' : '' }}>Terlama</option>
-                    <option value="name-asc" {{ ($activeFilters['sort'] ?? '') == 'name-asc' ? 'selected' : '' }}>Nama A-Z</option>
-                    <option value="name-desc" {{ ($activeFilters['sort'] ?? '') == 'name-desc' ? 'selected' : '' }}>Nama Z-A</option>
-                    <option value="price-low" {{ ($activeFilters['sort'] ?? '') == 'price-low' ? 'selected' : '' }}>Harga Terendah</option>
-                    <option value="price-high" {{ ($activeFilters['sort'] ?? '') == 'price-high' ? 'selected' : '' }}>Harga Tertinggi</option>
-                    <option value="rating" {{ ($activeFilters['sort'] ?? '') == 'rating' ? 'selected' : '' }}>Rating Tertinggi</option>
+                <select id="sortSelect" class="sort-select-323">
+                    <option value="newest" {{ ($activeFilters['sort'] ?? '') == 'newest' ? 'selected' : '' }}>Terbaru
+                    </option>
+                    <option value="oldest" {{ ($activeFilters['sort'] ?? '') == 'oldest' ? 'selected' : '' }}>Terlama
+                    </option>
+                    <option value="name-asc" {{ ($activeFilters['sort'] ?? '') == 'name-asc' ? 'selected' : '' }}>Nama
+                        A-Z</option>
+                    <option value="name-desc" {{ ($activeFilters['sort'] ?? '') == 'name-desc' ? 'selected' : '' }}>Nama
+                        Z-A</option>
+                    <option value="price-low" {{ ($activeFilters['sort'] ?? '') == 'price-low' ? 'selected' : '' }}>
+                        Harga Terendah</option>
+                    <option value="price-high" {{ ($activeFilters['sort'] ?? '') == 'price-high' ? 'selected' : '' }}>
+                        Harga Tertinggi</option>
+                    <option value="rating" {{ ($activeFilters['sort'] ?? '') == 'rating' ? 'selected' : '' }}>Rating
+                        Tertinggi</option>
                 </select>
             </div>
 
-            <div class="catalog-content">
-                <aside class="filter-sidebar" id="filterSidebar">
-                    <div class="filter-header">
+            <div class="catalog-content-323">
+                <!-- NEW SIDEBAR DESIGN -->
+                <aside class="filter-sidebar-323" id="filterSidebar">
+                    <div class="filter-header-323">
                         <h3>Filter Produk</h3>
-                        <button class="close-filter" id="closeFilterBtn"><i data-feather="x"></i></button>
+                        <button class="close-filter-323" id="closeFilterBtn">
+                            <i data-feather="x"></i>
+                        </button>
                     </div>
 
-                    <div class="filter-group">
-                        <h4>Rentang Stok</h4>
-                        <label>
-                            <input type="radio" name="stock-range" value="all" {{ empty($activeFilters['stock_range']) || $activeFilters['stock_range'] == 'all' ? 'checked' : '' }} />
-                            <span>Semua Stok</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="stock-range" value="1-50" {{ ($activeFilters['stock_range'] ?? '') == '1-50' ? 'checked' : '' }} />
-                            <span>1 - 50</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="stock-range" value="51-100" {{ ($activeFilters['stock_range'] ?? '') == '51-100' ? 'checked' : '' }} />
-                            <span>51 - 100</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="stock-range" value="101-500" {{ ($activeFilters['stock_range'] ?? '') == '101-500' ? 'checked' : '' }} />
-                            <span>101 - 500</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="stock-range" value="500+" {{ ($activeFilters['stock_range'] ?? '') == '500+' ? 'checked' : '' }} />
-                            <span>500+</span>
-                        </label>
-                    </div>
-
-                    <div class="filter-group">
+                    <!-- Availability Filter -->
+                    <div class="filter-group-323">
                         <h4>Ketersediaan</h4>
-                        <label>
-                            <input type="radio" name="availability" value="all" {{ empty($activeFilters['availability']) || $activeFilters['availability'] == 'all' ? 'checked' : '' }} />
-                            <span>Semua Produk</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="availability" value="available" {{ ($activeFilters['availability'] ?? '') == 'available' ? 'checked' : '' }} />
-                            <span>Tersedia</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="availability" value="out-of-stock" {{ ($activeFilters['availability'] ?? '') == 'out-of-stock' ? 'checked' : '' }} />
-                            <span>Stok Habis</span>
-                        </label>
+                        <select class="filter-select-323" name="availability">
+                            <option value="all"
+                                {{ empty($activeFilters['availability']) || $activeFilters['availability'] == 'all' ? 'selected' : '' }}>
+                                Semua Produk</option>
+                            <option value="available"
+                                {{ ($activeFilters['availability'] ?? '') == 'available' ? 'selected' : '' }}>Tersedia
+                            </option>
+                            <option value="out-of-stock"
+                                {{ ($activeFilters['availability'] ?? '') == 'out-of-stock' ? 'selected' : '' }}>Stok
+                                Habis</option>
+                        </select>
                     </div>
 
-                    <div class="filter-group">
+                    <!-- Tipe Produk -->
+                    <div class="filter-group-323">
+                        <h4>Tipe Produk</h4>
+                        <select class="filter-select-323" name="tipe">
+                            <option value="" {{ empty($activeFilters['tipe']) ? 'selected' : '' }}>Semua Tipe
+                            </option>
+                            <option value="innerbox"
+                                {{ ($activeFilters['tipe'] ?? '') == 'innerbox' ? 'selected' : '' }}>Innerbox</option>
+                            <option value="masterbox"
+                                {{ ($activeFilters['tipe'] ?? '') == 'masterbox' ? 'selected' : '' }}>Masterbox
+                            </option>
+                        </select>
+                    </div>
+
+                    @if (isset($jenisBahan) && $jenisBahan->count() > 0)
+                        <!-- Jenis Bahan -->
+                        <div class="filter-group-323">
+                            <h4>Jenis Bahan</h4>
+                            <select class="filter-select-323" name="jenis_bahan">
+                                <option value="" {{ empty($activeFilters['jenis_bahan']) ? 'selected' : '' }}>
+                                    Semua Bahan</option>
+                                @foreach ($jenisBahan as $bahan)
+                                    <option value="{{ $bahan }}"
+                                        {{ ($activeFilters['jenis_bahan'] ?? '') == $bahan ? 'selected' : '' }}>
+                                        {{ $bahan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+
+                    <!-- Rentang Stok -->
+                    <div class="filter-group-323">
+                        <h4>Rentang Stok</h4>
+                        <select class="filter-select-323" name="stock-range">
+                            <option value="all"
+                                {{ empty($activeFilters['stock_range']) || $activeFilters['stock_range'] == 'all' ? 'selected' : '' }}>
+                                Semua Stok</option>
+                            <option value="1-50"
+                                {{ ($activeFilters['stock_range'] ?? '') == '1-50' ? 'selected' : '' }}>1 - 50</option>
+                            <option value="51-100"
+                                {{ ($activeFilters['stock_range'] ?? '') == '51-100' ? 'selected' : '' }}>51 - 100
+                            </option>
+                            <option value="101-500"
+                                {{ ($activeFilters['stock_range'] ?? '') == '101-500' ? 'selected' : '' }}>101 - 500
+                            </option>
+                            <option value="500+"
+                                {{ ($activeFilters['stock_range'] ?? '') == '500+' ? 'selected' : '' }}>500+</option>
+                        </select>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="filter-group-323">
                         <h4>Kategori</h4>
-                        <div class="filter-scrollable">
+                        <div class="categories-list-323">
                             @php
-                                $selectedCategories = is_array($activeFilters['categories'] ?? null) 
-                                    ? $activeFilters['categories'] 
-                                    : (isset($activeFilters['categories']) ? explode(',', $activeFilters['categories']) : []);
+                                $selectedCategories = is_array($activeFilters['categories'] ?? null)
+                                    ? $activeFilters['categories']
+                                    : (isset($activeFilters['categories'])
+                                        ? explode(',', $activeFilters['categories'])
+                                        : []);
                             @endphp
-                            @foreach($categories as $category)
-                            <label>
-                                <input type="checkbox" name="category" value="{{ $category->id }}" 
-                                    {{ in_array($category->id, $selectedCategories) ? 'checked' : '' }} />
-                                <span>{{ $category->name }}</span>
-                                <small>({{ $category->products_count }})</small>
-                            </label>
+                            @foreach ($categories as $category)
+                                <div class="category-item-323 {{ in_array($category->id, $selectedCategories) ? 'active' : '' }}"
+                                    data-category="{{ $category->id }}">
+                                    <input type="checkbox" name="category" value="{{ $category->id }}"
+                                        {{ in_array($category->id, $selectedCategories) ? 'checked' : '' }}
+                                        style="display:none;" />
+                                    <span class="category-name-323">{{ $category->name }}</span>
+                                    <span class="category-count-323">({{ $category->products_count }})</span>
+                                </div>
                             @endforeach
                         </div>
                     </div>
 
-                    <div class="filter-group">
-                        <h4>Toko</h4>
-                        <div class="filter-scrollable">
-                            @php
-                                $selectedTokos = is_array($activeFilters['tokos'] ?? null) 
-                                    ? $activeFilters['tokos'] 
-                                    : (isset($activeFilters['tokos']) ? explode(',', $activeFilters['tokos']) : []);
-                            @endphp
-                            @foreach($tokos as $toko)
-                            <label>
-                                <input type="checkbox" name="toko" value="{{ $toko->id }}" 
-                                    {{ in_array($toko->id, $selectedTokos) ? 'checked' : '' }} />
-                                <span>{{ $toko->nama_toko }}</span>
-                            </label>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
+                    <!-- Price Range -->
+                    <div class="filter-group-323">
                         <h4>Range Harga</h4>
-                        <div class="price-inputs">
-                            <input type="number" id="minPrice" placeholder="Min" min="0" value="{{ $activeFilters['min_price'] ?? '' }}" />
-                            <span>-</span>
-                            <input type="number" id="maxPrice" placeholder="Max" min="0" value="{{ $activeFilters['max_price'] ?? '' }}" />
+                        <div class="price-range-323">
+                            <div class="price-input-323">
+                                <label>Min</label>
+                                <input type="number" id="minPrice" placeholder="0" min="0"
+                                    value="{{ $activeFilters['min_price'] ?? '' }}" />
+                            </div>
+                            <div class="price-input-323">
+                                <label>Max</label>
+                                <input type="number" id="maxPrice" placeholder="50000" min="0"
+                                    value="{{ $activeFilters['max_price'] ?? '' }}" />
+                            </div>
                         </div>
-                        <button class="apply-btn" id="applyPriceBtn">Terapkan</button>
+                        <button class="apply-price-btn-323" id="applyPriceBtn">
+                            <i data-feather="search"></i>Cari Produk
+                        </button>
                     </div>
 
-                    <div class="filter-group">
+                    <!-- Diskon -->
+                    <div class="filter-group-323">
                         <h4>Diskon</h4>
-                        <label>
-                            <input type="checkbox" name="discount" value="true" {{ ($activeFilters['discount'] ?? '') == 'true' ? 'checked' : '' }} />
+                        <label class="checkbox-label-323">
+                            <input type="checkbox" name="discount" value="true"
+                                {{ ($activeFilters['discount'] ?? '') == 'true' ? 'checked' : '' }} />
                             <span>Produk Diskon</span>
                         </label>
                     </div>
 
-                    <button class="reset-btn" id="resetFilterBtn">
+                    <button class="reset-btn-323" id="resetFilterBtn">
                         <i data-feather="refresh-cw"></i>Reset Filter
                     </button>
                 </aside>
 
-                <div class="products-container">
-                    @if(!empty(array_filter($activeFilters)))
-                    <div class="active-filters" id="activeFilters">
-                        <span>Filter Aktif:</span>
-                        <div class="filter-tags" id="filterTags">
-                            @if(!empty($activeFilters['search']))
-                                <span class="filter-tag">Search: {{ $activeFilters['search'] }}</span>
-                            @endif
-                            @if(!empty($selectedCategories))
-                                @foreach($categories->whereIn('id', $selectedCategories) as $cat)
-                                    <span class="filter-tag">{{ $cat->name }}</span>
-                                @endforeach
-                            @endif
-                            @if(!empty($selectedTokos))
-                                @foreach($tokos->whereIn('id', $selectedTokos) as $toko)
-                                    <span class="filter-tag">{{ $toko->nama_toko }}</span>
-                                @endforeach
-                            @endif
-                            @if(!empty($activeFilters['discount']))
-                                <span class="filter-tag">Diskon</span>
-                            @endif
-                            @if(!empty($activeFilters['stock_range']) && $activeFilters['stock_range'] != 'all')
-                                <span class="filter-tag">Stok: {{ $activeFilters['stock_range'] }}</span>
-                            @endif
-                        </div>
-                        <button class="clear-all" id="clearAllFilters">Hapus Semua</button>
+                <div class="products-container-323">
+                    <!-- Products Header -->
+                    <div class="products-header-323">
+                        <h2>Menampilkan <strong>{{ $products->total() }}</strong> produk</h2>
                     </div>
+
+                    @if (!empty(array_filter($activeFilters)))
+                        <div class="active-filters-323" id="activeFilters">
+                            <span>Filter Aktif:</span>
+                            <div class="filter-tags-323" id="filterTags">
+                                @if (!empty($activeFilters['search']))
+                                    <span class="filter-tag-323">Search: {{ $activeFilters['search'] }}</span>
+                                @endif
+                                @if (!empty($activeFilters['tipe']))
+                                    <span class="filter-tag-323">Tipe: {{ ucfirst($activeFilters['tipe']) }}</span>
+                                @endif
+                                @if (!empty($activeFilters['jenis_bahan']))
+                                    <span class="filter-tag-323">Bahan: {{ $activeFilters['jenis_bahan'] }}</span>
+                                @endif
+                                @if (!empty($selectedCategories))
+                                    @foreach ($categories->whereIn('id', $selectedCategories) as $cat)
+                                        <span class="filter-tag-323">{{ $cat->name }}</span>
+                                    @endforeach
+                                @endif
+                                @if (!empty($activeFilters['discount']))
+                                    <span class="filter-tag-323">Diskon</span>
+                                @endif
+                                @if (!empty($activeFilters['stock_range']) && $activeFilters['stock_range'] != 'all')
+                                    <span class="filter-tag-323">Stok: {{ $activeFilters['stock_range'] }}</span>
+                                @endif
+                                @if (!empty($activeFilters['min_price']) || !empty($activeFilters['max_price']))
+                                    <span class="filter-tag-323">
+                                        Harga: Rp{{ number_format($activeFilters['min_price'] ?? 0, 0, ',', '.') }} -
+                                        Rp{{ number_format($activeFilters['max_price'] ?? 50000, 0, ',', '.') }}
+                                    </span>
+                                @endif
+                            </div>
+                            <button class="clear-all-323" id="clearAllFilters">Hapus Semua</button>
+                        </div>
                     @endif
 
-                    <div class="products-grid" id="productsGrid">
+                    <div class="products-grid-323" id="productsGrid">
                         @php
-                            $defaultPlaceholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="500"%3E%3Crect width="100%25" height="100%25" fill="%23e0e0e0"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial" font-size="20" fill="%23666" text-anchor="middle" dominant-baseline="middle"%3ENo Image%3C/text%3E%3C/svg%3E';
+                            $defaultPlaceholder =
+                                'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="500"%3E%3Crect width="100%25" height="100%25" fill="%23e0e0e0"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial" font-size="20" fill="%23666" text-anchor="middle" dominant-baseline="middle"%3ENo Image%3C/text%3E%3C/svg%3E';
                         @endphp
-                        
-                        @forelse($products as $product)
-                        <div class="product-card-1">
-                            <div class="label-1">{{ $product->sku }}</div>
-                            
-                            <div class="product-image-1">
-                                    <a href="{{ route('product.detail', $product->id) }}">
-                                @if($product->photo_urls && count($product->photo_urls) > 0)
-                                    <img src="{{ $product->photo_urls[0] }}" 
-                                         class="default-img-1" 
-                                         alt="{{ $product->title }}"
-                                         onerror="this.src='{{ $defaultPlaceholder }}'">
-                                    @if(count($product->photo_urls) > 1)
-                                        <img src="{{ $product->photo_urls[1] }}" 
-                                             class="hover-img-1" 
-                                             alt="{{ $product->title }}"
-                                             onerror="this.style.display='none'">
-                                    @endif
-                                @else
-                                    <img src="{{ $product->thumbnail ?? $defaultPlaceholder }}" 
-                                         class="default-img-1" 
-                                         alt="{{ $product->title }}"
-                                         onerror="this.src='{{ $defaultPlaceholder }}'">
-                                @endif
-                                
-                                @if($product->has_discount)
-                                <span class="badge-discount">-{{ $product->discount_percentage }}%</span>
-                                @endif
-                                @if(!$product->is_available)
-                                <span class="badge-stock">Stok Habis</span>
-                                @endif
-                            </div>
 
-                            <div class="product-detail-1">
-                                <div class="product-header-1">
-                                    <div class="product-title-1">
-                                        @if($product->categories && $product->categories->count() > 0)
-                                            @foreach($product->categories as $index => $category)
-                                                {{ $category->name }}{{ $index < $product->categories->count() - 1 ? ', ' : '' }}
-                                            @endforeach
-                                        @else
-                                            Produk
+                        @forelse($products as $product)
+                            <a href="{{ route('product.detail', $product->id) }}" class="product-card-323"
+                                style="text-decoration: none; color: inherit;">
+                                <div class="product-image-323">
+                                    @if ($product->photo_urls && count($product->photo_urls) > 0)
+                                        <img alt="{{ $product->sku }}" class="default-image-323"
+                                            src="{{ $product->photo_urls[0] }}"
+                                            onerror="this.src='{{ $defaultPlaceholder }}'" />
+                                        @if (count($product->photo_urls) > 1)
+                                            <img alt="{{ $product->sku }}" class="hover-image-323"
+                                                src="{{ $product->photo_urls[1] }}"
+                                                onerror="this.style.display='none'" />
                                         @endif
+                                    @else
+                                        <img alt="{{ $product->sku }}" class="default-image-323"
+                                            src="{{ $product->thumbnail ?? $defaultPlaceholder }}" loading="lazy"
+                                            onerror="this.src='{{ $defaultPlaceholder }}'" />
+                                    @endif
+
+                                    @if ($product->has_discount)
+                                        <span class="badge-discount-323">-{{ $product->discount_percentage }}%</span>
+                                    @endif
+                                    @if (!$product->is_available)
+                                        <span class="badge-stock-323">Stok Habis</span>
+                                    @endif
+                                </div>
+
+                                <div class="product-label-323">
+                                    <span>{{ $product->sku }}</span>
+                                </div>
+
+                                <div class="product-detail-323">
+                                    <div class="product-title-323">
+                                        <p>{{ $product->tipe_display }}</p>
                                     </div>
-                                    <div class="ratings-1">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            @if($i <= floor($product->rating))
-                                                ★
-                                            @else
-                                                ☆
-                                            @endif
+                                    <div class="ratings-323" title="{{ $product->rating }} dari 5">
+                                        @php
+                                            $fullStars = floor($product->rating);
+                                            $halfStar = $product->rating - $fullStars >= 0.5;
+                                            $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                        @endphp
+
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <span class="star-323 filled-323">★</span>
+                                        @endfor
+
+                                        @if ($halfStar)
+                                            <span class="star-323 half-323">★</span>
+                                        @endif
+
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <span class="star-323 empty-323">☆</span>
                                         @endfor
                                     </div>
-                                </div>
-                                
-                                <div class="product-deskripsi-1">{{ $product->title }}</div>
-                                
-                                <div class="product-stock-1">
-                                    <i data-feather="package"></i>
-                                    <span>Stok: {{ number_format($product->total_stock) }}</span>
-                                </div>
-                                
-                                <div class="product-price-1">
-                                    @if($product->has_discount)
-                                    <span class="original-price-1">{{ $product->formatted_original_price }}</span>
-                                    @endif
-                                    <span class="final-price-1">{{ $product->formatted_price }}</span>
-                                </div>
-                                
-                                @if($product->variants && is_array($product->variants) && count($product->variants) > 0)
-                                <div class="product-variants-1">
-                                    <div class="variant-label">Varian:</div>
-                                    <div class="variant-list">
-                                        @foreach($product->variants as $variantType => $options)
-                                            @if(is_array($options))
-                                                @foreach($options as $option)
-                                                    <span class="variant-item">{{ $option }}</span>
-                                                @endforeach
-                                            @endif
-                                        @endforeach
+                                    <div class="product-deskripsi-323">
+                                        <p>{{ $product->title }}</p>
                                     </div>
-                                </div>
-                                @endif
-                                
-                                <div class="icons-1">
-                                    <div style="display: flex; gap: 12px;">
-                                        <span class="icon-1">❤</span>
-                                        <span class="icon-1">📤</span>
+                                    <div class="product-price-323">
+                                        @if ($product->has_discount)
+                                            <span
+                                                class="original-price-323">{{ $product->formatted_original_price }}</span>
+                                        @endif
+                                        <span class="final-price-323">{{ $product->formatted_price }}</span>
                                     </div>
-                                    <a href="{{ route('product.detail', $product->id) }}" class="icon-1" style="text-decoration: none;">🛒</a>
+
+                                    <!-- Icon Actions - Stop Propagation -->
+                                    <span
+                                        class="wishlist-icon-323 {{ in_array($product->id, $wishlistIds ?? []) ? 'active' : '' }}"
+                                        data-product-id="{{ $product->id }}"
+                                        onclick="event.preventDefault(); event.stopPropagation(); toggleWishlist({{ $product->id }}, this);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="share-icon-323"
+                                        onclick="event.preventDefault(); event.stopPropagation(); shareProduct({{ $product->id }});">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="22" y1="2" x2="11" y2="13">
+                                            </line>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                        </svg>
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
+                            </a>
                         @empty
-                        <div class="no-products">
-                            <i data-feather="inbox"></i>
-                            <h3>Tidak ada produk</h3>
-                            <p>Tidak ada produk yang sesuai dengan filter Anda</p>
-                        </div>
+                            <div class="no-products-323">
+                                <i data-feather="inbox"></i>
+                                <h3>Tidak ada produk</h3>
+                                <p>Tidak ada produk yang sesuai dengan filter Anda</p>
+                            </div>
                         @endforelse
                     </div>
 
-                    @if($products->hasPages())
-                    <div class="pagination">{{ $products->links() }}</div>
+                    @if ($products->hasPages())
+                        <div class="pagination-323">{{ $products->links() }}</div>
                     @endif
                 </div>
             </div>
+
         </div>
+
     </section>
- <style>
-      /* Catalog Section Styles */
-.catalog-section {
-    padding: 120px 7% 80px;
-    background: var(--contrast);
-    min-height: 100vh;
-}
-
-.catalog-container {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.catalog-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.catalog-header h1 {
-    font-size: 3rem;
-    color: var(--secondary);
-    margin-bottom: 10px;
-}
-
-.catalog-header p {
-    font-size: 1.2rem;
-    color: var(--tertiary);
-}
-
-/* Filter Search Container - FORCE ALIGNMENT SOLUTION */
-.filter-search-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 40px;
-    align-items: stretch;
-    height: 48px;
-}
-
-.search-box {
-    flex: 1;
-    position: relative;
-    height: 48px;
-    display: flex;
-    align-items: center;
-}
-
-.search-icon-svg {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--secondary);
-    z-index: 1;
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-}
-
-.search-box i svg {
-    width: 18px !important;
-    height: 18px !important;
-    display: block;
-}
-
-.search-box input {
-    width: 100%;
-    padding: 0 15px 0 45px;
-    border: 2px solid #e0e0e0;
-    border-radius: 25px;
-    font-size: 1rem;
-    transition: all 0.3s;
-    height: 48px !important;
-    line-height: 44px;
-    box-sizing: border-box;
-    display: block;
-}
-
-.search-box input:focus {
-    border-color: var(--secondary);
-    outline: none;
-}
-
-.filter-toggle-btn {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 0 20px;
-    background: var(--secondary);
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s;
-    height: 48px !important;
-    line-height: 48px;
-    box-sizing: border-box;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.filter-toggle-btn:hover {
-    background: var(--primary);
-    color: var(--tertiary);
-}
-
-.filter-toggle-btn i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-}
-
-.filter-toggle-btn i svg {
-    width: 18px !important;
-    height: 18px !important;
-    display: block;
-}
-
-.sort-select {
-    padding: 0 20px;
-    border: 2px solid #e0e0e0;
-    border-radius: 25px;
-    font-size: 1rem;
-    cursor: pointer;
-    background: #fff;
-    transition: all 0.3s;
-    height: 48px !important;
-    line-height: 44px;
-    box-sizing: border-box;
-    min-width: 200px;
-    flex-shrink: 0;
-}
-
-.sort-select:focus {
-    border-color: var(--secondary);
-    outline: none;
-}
-
-/* Catalog Content */
-.catalog-content {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
-}
-
-/* Filter Sidebar */
-.filter-sidebar {
-    background: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    height: fit-content;
-    position: sticky;
-    top: 100px;
-}
-
-.filter-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.filter-header h3 {
-    font-size: 1.5rem;
-    color: var(--secondary);
-}
-
-.close-filter {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.close-filter i svg {
-    width: 24px !important;
-    height: 24px !important;
-}
-
-.filter-group {
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.filter-group:last-of-type {
-    border-bottom: none;
-}
-
-.filter-group h4 {
-    font-size: 1.1rem;
-    color: var(--tertiary);
-    margin-bottom: 15px;
-}
-
-.filter-group label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 0.95rem;
-}
-
-.filter-group input[type="checkbox"],
-.filter-group input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
-
-.filter-group small {
-    color: #999;
-    margin-left: auto;
-}
-
-.filter-scrollable {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.filter-scrollable::-webkit-scrollbar {
-    width: 6px;
-}
-
-.filter-scrollable::-webkit-scrollbar-thumb {
-    background: #ddd;
-    border-radius: 3px;
-}
-
-/* Price Inputs */
-.price-inputs {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.price-inputs input {
-    flex: 1;
-    width: 0;
-    min-width: 0;
-    padding: 10px 8px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.price-inputs input:focus {
-    border-color: var(--secondary);
-    outline: none;
-}
-
-.price-inputs span {
-    color: #999;
-    font-weight: 500;
-    flex-shrink: 0;
-}
-
-.apply-btn {
-    width: 100%;
-    padding: 10px;
-    background: var(--secondary);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: all 0.3s;
-}
-
-.apply-btn:hover {
-    background: var(--primary);
-    color: var(--tertiary);
-}
-
-.reset-btn {
-    width: 100%;
-    padding: 12px;
-    background: #f5f5f5;
-    color: var(--tertiary);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-.reset-btn:hover {
-    background: #e0e0e0;
-}
-
-.reset-btn i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-}
-
-.reset-btn i svg {
-    width: 18px !important;
-    height: 18px !important;
-}
-
-/* Active Filters */
-.active-filters {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    flex-wrap: wrap;
-}
-
-.active-filters > span {
-    font-weight: 600;
-    color: var(--tertiary);
-}
-
-.filter-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    flex: 1;
-}
-
-.filter-tag {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: var(--secondary);
-    color: #fff;
-    border-radius: 20px;
-    font-size: 0.85rem;
-}
-
-.filter-tag button {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-.clear-all {
-    padding: 6px 15px;
-    background: #e74a3b;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    white-space: nowrap;
-}
-
-/* Product Grid */
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-}
-
-/* Product Card Styles */
-.product-card-1 {
-    position: relative;
-    width: 100%;
-    height: 360px;
-    background: #fff;
-    border-radius: 20px;
-    padding: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: all 0.4s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card-1:hover {
-    height: 440px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.label-1 {
-    position: absolute;
-    left: -60px;
-    top: 0;
-    width: 50px;
-    height: 100%;
-    background: #1f4390;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: left 0.4s ease;
-    z-index: 5;
-}
-
-.product-card-1:hover .label-1 {
-    left: 0;
-}
-
-.product-image-1 {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    margin-bottom: 10px;
-    transition: all 0.4s ease;
-    z-index: 1;
-    overflow: hidden;
-    border-radius: 12px;
-}
-
-.product-card-1:hover .product-image-1 {
-    margin-left: 45px;
-    width: calc(100% - 45px);
-}
-
-.product-image-1 img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.4s ease;
-}
-
-.hover-img-1 {
-    opacity: 0;
-}
-
-.product-card-1:hover .default-img-1 {
-    opacity: 0;
-}
-
-.product-card-1:hover .hover-img-1 {
-    opacity: 1;
-}
-
-.badge-discount {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    background: #e74a3b;
-    color: #fff;
-    z-index: 2;
-}
-
-.badge-stock {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    z-index: 2;
-}
-
-.product-detail-1 {
-    flex-grow: 1;
-    transition: all 0.4s ease;
-    text-align: left;
-}
-
-.product-card-1:hover .product-detail-1 {
-    padding-left: 45px;
-}
-
-.product-header-1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.product-title-1 {
-    font-size: 0.85rem;
-    color: #888;
-}
-
-.ratings-1 {
-    color: #ffcc00;
-    font-size: 12px;
-}
-
-.product-deskripsi-1 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1f4390;
-    margin: 8px 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 2.6rem;
-}
-
-.product-stock-1 {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 10px;
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.product-stock-1 i {
-    width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.product-stock-1 i svg {
-    width: 16px !important;
-    height: 16px !important;
-}
-
-.product-variants-1 {
-    margin-bottom: 10px;
-    font-size: 0.85rem;
-}
-
-.variant-label {
-    font-weight: 600;
-    color: #666;
-    margin-bottom: 5px;
-}
-
-.variant-list {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.variant-item {
-    color: #1f4390;
-    font-weight: 500;
-    padding-left: 10px;
-    position: relative;
-}
-
-.variant-item::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: #1f4390;
-}
-
-.product-price-1 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.original-price-1 {
-    text-decoration: line-through;
-    color: #999;
-    font-size: 0.9rem;
-}
-
-.final-price-1 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--secondary);
-}
-
-.icons-1 {
-    display: flex;
-    justify-content: space-between;
-    opacity: 0;
-    transition: all 0.4s ease;
-    border-top: 1px solid #eee;
-    padding-top: 10px;
-}
-
-.product-card-1:hover .icons-1 {
-    opacity: 1;
-}
-
-.icon-1 {
-    font-size: 16px;
-    color: #888;
-    cursor: pointer;
-}
-
-.icon-1:hover {
-    color: #1f4390;
-}
-
-/* No Products/Results */
-.no-products,
-.no-results {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.no-products i,
-.no-results i {
-    width: 80px;
-    height: 80px;
-    color: #ddd;
-    margin-bottom: 20px;
-}
-
-.no-products i svg,
-.no-results i svg {
-    width: 80px !important;
-    height: 80px !important;
-}
-
-.no-products h3,
-.no-results h3 {
-    font-size: 1.5rem;
-    color: var(--tertiary);
-    margin-bottom: 10px;
-}
-
-.no-products p,
-.no-results p {
-    color: #666;
-}
-
-/* Pagination */
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    gap: 10px;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .catalog-content {
-        grid-template-columns: 1fr;
+
+    <style>
+        /* ===================================
+   CATALOG PRODUK - FULL CSS
+   Fixed Responsive & Dynamic Layout
+   =================================== */
+
+        /* ROOT VARIABLES */
+        .root-323,
+        .catalog-section-323 {
+            --primary-323: #FF6B35;
+            --secondary-323: #1f4390;
+            --subprimary-323: #95E1D3;
+            --edition-323: #2C3E50;
+            --lebaran-323: #00A86B;
+            --christmas-323: #C41E3A;
+            --imlek-323: #DC143C;
+            --tertiary: #555;
+            --contrast: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===================================
+   PAGE HEADER
+   =================================== */
+        .page-header-323 {
+            text-align: center;
+            padding: 140px 0 40px;
+            background: #f5f5f5;
+        }
+
+        .page-header-323 h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-323);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header-323 p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* ===================================
+   CATALOG SECTION
+   =================================== */
+        .catalog-section-323 {
+            padding: 0 0 80px;
+            background: var(--contrast);
+            min-height: 100vh;
+        }
+
+        .catalog-container-323 {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 8%;
+        }
+
+        /* ===================================
+   FILTER SEARCH CONTAINER
+   =================================== */
+        .filter-search-container-323 {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: stretch;
+            height: 48px;
+        }
+
+        .search-box-323 {
+            flex: 1;
+            position: relative;
+            height: 48px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon-svg-323 {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-323);
+            z-index: 1;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .search-box-323 input {
+            width: 100%;
+            padding: 0 15px 0 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            height: 48px !important;
+            line-height: 44px;
+            box-sizing: border-box;
+            display: block;
+        }
+
+        .search-box-323 input:focus {
+            border-color: var(--secondary-323);
+            outline: none;
+        }
+
+        .filter-toggle-btn-323 {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 20px;
+            background: var(--secondary-323);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            height: 48px !important;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .filter-toggle-btn-323:hover {
+            background: var(--primary-323);
+        }
+
+        .sort-select-323 {
+            padding: 0 40px 0 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.3s;
+            height: 48px !important;
+            line-height: 44px;
+            box-sizing: border-box;
+            min-width: 200px;
+            flex-shrink: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231f4390' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 16px;
+            color: var(--secondary-323);
+        }
+
+        .sort-select-323:hover {
+            border-color: var(--secondary-323);
+            box-shadow: 0 2px 8px rgba(31, 67, 144, 0.15);
+        }
+
+        .sort-select-323 option {
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            color: #333;
+            background: #fff;
+        }
+
+        .sort-select-323 option:hover {
+            background: #f5f5f5;
+        }
+
+        .sort-select-323 option:checked {
+            background: var(--secondary-323);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .sort-select-323:focus {
+            border-color: var(--secondary-323);
+            outline: none;
+        }
+
+        /* ===================================
+   CATALOG CONTENT LAYOUT
+   =================================== */
+        .catalog-content-323 {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+        }
+
+        /* ===================================
+   FILTER SIDEBAR
+   =================================== */
+        .filter-sidebar-323 {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            width: 350px;
+        }
+
+        .filter-header-323 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .filter-header-323 h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-323);
+        }
+
+        .close-filter-323 {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .filter-group-323 {
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .filter-group-323:last-of-type {
+            border-bottom: none;
+        }
+
+        .filter-group-323 h4 {
+            font-size: 1.1rem;
+            color: var(--tertiary);
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .filter-select-323 {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-select-323:focus {
+            border-color: var(--secondary-323);
+            outline: none;
+        }
+
+        .categories-list-323 {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .categories-list-323::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .categories-list-323::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 3px;
+        }
+
+        .category-item-323 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 0.3rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .category-item-323:hover {
+            background: #f5f5f5;
+        }
+
+        .category-item-323.active {
+            background: var(--secondary-323);
+            color: white;
+        }
+
+        .category-name-323 {
+            flex: 1;
+        }
+
+        .category-count-323 {
+            background: #f0f0f0;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .category-item-323.active .category-count-323 {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .price-range-323 {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .price-input-323 {
+            flex: 1;
+        }
+
+        .price-input-323 label {
+            display: block;
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: normal;
+            margin-bottom: 0.3rem;
+        }
+
+        .price-input-323 input {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .price-input-323 input:focus {
+            border-color: var(--secondary-323);
+            outline: none;
+        }
+
+        /* Tombol Apply Price - TAMBAHKAN INI */
+        .apply-price-btn-323 {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            background: var(--secondary-323);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .apply-price-btn-323:hover {
+            background: var(--primary-323);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(31, 67, 144, 0.3);
+        }
+
+        .apply-price-btn-323:active {
+            transform: translateY(0);
+        }
+
+        .checkbox-label-323 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .checkbox-label-323 input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .reset-btn-323 {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            background: #f5f5f5;
+            color: var(--tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .reset-btn-323:hover {
+            background: #e0e0e0;
+        }
+
+        /* ===================================
+   PRODUCTS SECTION - FLEXBOX RESPONSIVE
+   =================================== */
+        .products-container-323 {
+            flex: 1;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .products-header-323 {
+            background: white;
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .products-header-323 h2 {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .products-header-323 strong {
+            color: var(--secondary-323);
+        }
+
+        /* ===================================
+   ACTIVE FILTERS
+   =================================== */
+        .active-filters-323 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+
+        .active-filters-323>span {
+            font-weight: 600;
+            color: var(--tertiary);
+        }
+
+        .filter-tags-323 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .filter-tag-323 {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--secondary-323);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .clear-all-323 {
+            padding: 6px 15px;
+            background: #e74a3b;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+
+
+        /* ===================================
+   NO PRODUCTS
+   =================================== */
+        .no-products-323 {
+            width: 100%;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .no-products-323 i {
+            width: 80px;
+            height: 80px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .no-products-323 h3 {
+            font-size: 1.5rem;
+            color: var(--tertiary);
+            margin-bottom: 10px;
+        }
+
+        .no-products-323 p {
+            color: #666;
+        }
+
+        /* ===================================
+   PAGINATION
+   =================================== */
+        /* ===================================
+   PAGINATION STYLING - LARGER & MOBILE FRIENDLY
+   =================================== */
+        .pagination-323 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* Laravel Pagination Links */
+        .pagination-323 nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination-323 ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pagination-323 li {
+            display: inline-block;
+        }
+
+        .pagination-323 a,
+        .pagination-323 span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 45px;
+            min-height: 45px;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary-323);
+            background: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Hover Effect */
+        .pagination-323 a:hover {
+            background: var(--secondary-323);
+            color: #fff;
+            border-color: var(--secondary-323);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(31, 67, 144, 0.2);
+        }
+
+        /* Active Page */
+        .pagination-323 .active span {
+            background: var(--secondary-323);
+            color: #fff;
+            border-color: var(--secondary-323);
+            font-weight: 700;
+        }
+
+        /* Disabled (Previous/Next when not available) */
+        .pagination-323 .disabled span {
+            background: #f5f5f5;
+            color: #ccc;
+            border-color: #e0e0e0;
+            cursor: not-allowed;
+        }
+
+        /* Previous & Next Arrows */
+        .pagination-323 a[rel="prev"],
+        .pagination-323 a[rel="next"] {
+            font-weight: 700;
+            padding: 12px 20px;
+        }
+
+        /* Dots (...) */
+        .pagination-323 .dots {
+            border: none;
+            background: transparent;
+            color: #999;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* TAMBAHKAN RESPONSIVE MOBILE */
+        @media (max-width: 768px) {
+            .products-header-323 {
+                padding: 1.5rem 1.2rem;
+                /* Lebih tinggi di mobile */
+                margin-top: 5px;
+                /* Jarak dari search bar */
+            }
+        }
+
+        /* ===================================
+   FIX MOBILE: Gedein "Menampilkan X produk" & Kecilkan "Category"
+   =================================== */
+
+        /* Gedein dropdown Category di mobile */
+        @media (max-width: 768px) {
+            .mobile-category-select-323 {
+                font-size: 1.5rem !important;
+                /* Lebih kecil dari 0.85rem */
+                font-weight: 400 !important;
+                /* Kurangi bold */
+            }
+
+            /* Gedein teks "Menampilkan X produk" */
+            .products-header-323 h2 {
+                font-size: 1.5rem !important;
+                /* Lebih besar dari 0.95rem */
+            }
+
+            .products-header-323 strong {
+                font-size: 1.5rem !important;
+                /* Lebih besar lagi untuk angka */
+            }
+        }
+
+        /* ===================================
+   RESPONSIVE PAGINATION
+   =================================== */
+        @media (max-width: 768px) {
+
+            .pagination-323 a,
+            .pagination-323 span {
+                min-width: 42px;
+                min-height: 42px;
+                padding: 10px 14px;
+                font-size: 0.95rem;
+            }
+
+            .pagination-323 a[rel="prev"],
+            .pagination-323 a[rel="next"] {
+                padding: 10px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pagination-323 {
+                gap: 6px;
+            }
+
+            .pagination-323 a,
+            .pagination-323 span {
+                min-width: 38px;
+                min-height: 38px;
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .pagination-323 a[rel="prev"],
+            .pagination-323 a[rel="next"] {
+                padding: 8px 14px;
+            }
+        }
+
+        /* ===================================
+   RESPONSIVE - TABLET (1024px)
+   =================================== */
+        @media (max-width: 1024px) {
+            .catalog-container-323 {
+                padding: 0 3%;
+            }
+
+            .catalog-content-323 {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-sidebar-323 {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 300px;
+                height: 100vh;
+                z-index: 10000;
+                overflow-y: auto;
+                transition: left 0.3s;
+            }
+
+            .filter-sidebar-323.active {
+                left: 0;
+            }
+
+            .close-filter-323 {
+                display: block;
+            }
+
+            .filter-toggle-btn-323 {
+                display: flex;
+            }
+
+            .products-grid-323 {
+                justify-content: center;
+            }
+
+
+        }
+
+        /* ===================================
+   RESPONSIVE - MOBILE (768px)
+   =================================== */
+        @media screen and (max-width: 768px) {
+            .catalog-container-323 {
+                padding: 0 4%;
+            }
+
+            /* ✅ TEKS SHAPUS SEMUA di mobile */
+                .clear-all-323 {
+        font-size: 1rem !important; /* ✅ GEDEIN di mobile */
+        font-weight: 600 !important; /* ✅ Lebih tebal */
+        padding: 8px 18px !important; /* ✅ Padding lebih besar */
     }
 
-    .filter-sidebar {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 300px;
-        height: 100vh;
-        z-index: 10000;
-        overflow-y: auto;
-        transition: left 0.3s;
+    /* ✅ TEKS FILTER AKTIF di mobile */
+    .active-filters-323 > span {
+        font-size: 1.1rem !important; /* ✅ GEDEIN di mobile */
+        font-weight: 700 !important; /* ✅ Lebih tebal */
     }
+            .page-header-323 {
+                padding: 100px 0 30px;
+            }
 
-    .filter-sidebar.active {
-        left: 0;
-    }
+            .page-header-323 h1 {
+                font-size: 2.8rem;
+            }
 
-    .close-filter {
-        display: block;
-    }
+            .page-header-323 p {
+                font-size: 1.3rem;
+                color: #666;
+            }
 
-    .filter-toggle-btn {
-        display: flex;
-    }
-}
+            .filter-search-container-323 {
+                flex-direction: column;
+                height: auto;
+            }
 
-@media screen and (max-width: 768px) {
-    .catalog-section {
-        padding: 100px 5% 60px;
-    }
+            .search-box-323,
+            .sort-select-323,
+            .filter-toggle-btn-323 {
+                width: 100%;
+            }
 
-    .catalog-header h1 {
-        font-size: 2rem;
-    }
+        }
 
-    .filter-search-container {
-        flex-direction: column;
-        height: auto;
-    }
+        /* ===================================
+   RESPONSIVE - SMALL MOBILE (480px)
+   =================================== */
+        @media (max-width: 480px) {
+            .catalog-container-323 {
+                padding: 0 3%;
+            }
 
-    .search-box {
-        width: 100%;
-    }
+            .filter-sidebar-323 {
+                width: 100%;
+            }
 
-    .sort-select {
-        width: 100%;
-        min-width: unset;
-    }
+        }
 
-    .filter-toggle-btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .product-card-1 {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        min-height: 200px;
-    }
-
-    .product-card-1:hover {
-        height: auto;
-    }
-
-    .label-1 {
-        left: 0 !important;
-        width: 30px !important;
-        font-size: 12px !important;
-    }
-
-    .product-image-1 {
-        margin-left: 30px !important;
-        width: calc(100% - 30px) !important;
-    }
-
-    .product-card-1:hover .product-image-1 {
-        margin-left: 30px !important;
-        width: calc(100% - 30px) !important;
-    }
-
-    .product-detail-1 {
-        padding-left: 30px !important;
-    }
-
-    .product-deskripsi-1 {
-        font-size: 0.95rem !important;
-        font-weight: 600 !important;
-        line-height: 1.2;
-    }
-
-    .icons-1 {
-        opacity: 1 !important;
-        margin-top: 5px;
-    }
-}
-
-@media (max-width: 480px) {
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .filter-sidebar {
-        width: 100%;
-        left: -100%;
-    }
-
-    .product-card-1 {
-        max-width: 100%;
-    }
-}
-        
+        /* Disable animation saat scroll untuk performa */
+        @media (max-width: 768px) {
+            .scrolling .product-deskripsi-323 p {
+                animation-play-state: paused !important;
+            }
+        }
     </style>
-    <script src="{{ asset('frontend/assets/js/catalog-filter.js') }}"></script>
+
+
+
+    <style>
+        /* ===================================
+   MOBILE SEARCH & FILTER - GABUNG
+   Hanya tampil di mobile (max-width: 768px)
+   =================================== */
+        /* Filter Button - Fixed Width */
+        .mobile-filter-btn-323 {
+            position: relative;
+            width: 90px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 0 12px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 1.5rem;
+
+            color: #333;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+        }
+
+        .mobile-filter-btn-323 svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .mobile-filter-btn-323:hover,
+        .mobile-filter-btn-323:active {
+            border-color: var(--secondary-323);
+            background: var(--secondary-323);
+            color: #fff;
+        }
+
+        .mobile-filter-btn-323:hover svg,
+        .mobile-filter-btn-323:active svg {
+            stroke: #fff;
+        }
+
+        .mobile-search-filter-wrapper-323 {
+            display: none;
+            /* Hidden di desktop */
+            width: 100%;
+            padding: 8px 0 5px 0;
+            background: transparent;
+            margin-bottom: 0;
+        }
+
+        .mobile-search-filter-323 {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Search Box - Flex Grow */
+        .mobile-search-box-323 {
+            flex: 1;
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-search-icon-323 {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            z-index: 1;
+            width: 16px;
+            height: 16px;
+        }
+
+        .mobile-search-box-323 input {
+            width: 100%;
+            height: 40px;
+            padding: 0 12px 0 36px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #333;
+            background: #fff;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .mobile-search-box-323 input::placeholder {
+            color: #999;
+        }
+
+        .mobile-search-box-323 input:focus {
+            border-color: var(--secondary-323);
+            background: #fff;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(31, 67, 144, 0.15);
+        }
+
+        /* Filter Dropdown - Fixed Width */
+        .mobile-filter-dropdown-323 {
+            position: relative;
+            width: 110px;
+            flex-shrink: 0;
+        }
+
+        .mobile-category-select-323 {
+            width: 100%;
+            height: 40px;
+            padding: 0 28px 0 12px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #333;
+            background: #fff;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .mobile-category-select-323:focus {
+            border-color: var(--secondary-323);
+            background: #fff;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(31, 67, 144, 0.15);
+        }
+
+        .mobile-dropdown-arrow-323 {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+            width: 12px;
+            height: 12px;
+        }
+
+        /* ===================================
+   RESPONSIVE - MOBILE ONLY
+   =================================== */
+        @media (max-width: 768px) {
+            .mobile-search-filter-wrapper-323 {
+                display: block !important;
+                /* Force tampil di mobile */
+            }
+
+            /* SEMBUNYIKAN search & filter desktop di mobile */
+            .filter-search-container-323 {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mobile-search-filter-wrapper-323 {
+                padding: 12px 0;
+            }
+
+            .mobile-search-filter-323 {
+                gap: 8px;
+            }
+
+            .mobile-search-box-323 input {
+                font-size: 0.9rem;
+            }
+
+            .mobile-category-select-323 {
+                font-size: 0.85rem;
+                width: 110px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .mobile-filter-dropdown-323 {
+                width: 100px;
+            }
+
+            .mobile-category-select-323 {
+                padding: 0 28px 0 12px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileSearchInput = document.getElementById('mobileSearchInput');
+    const mobileFilterBtn = document.getElementById('mobileFilterBtn');
+    const desktopSearchInput = document.getElementById('searchInput');
+    const filterSidebar = document.getElementById('filterSidebar');
+    const closeFilterBtn = document.getElementById('closeFilterBtn');
+
+    // ✅ SYNC mobile search dengan desktop search DAN TRIGGER REALTIME
+    if (mobileSearchInput && desktopSearchInput) {
+        mobileSearchInput.addEventListener('input', function() {
+            desktopSearchInput.value = this.value; // Sync value
+            
+            // ✅ TRIGGER REALTIME SEARCH (debounce 500ms)
+            clearTimeout(window.mobileSearchTimeout);
+            window.mobileSearchTimeout = setTimeout(() => {
+                // Trigger event input pada desktop search
+                const event = new Event('input', { bubbles: true });
+                desktopSearchInput.dispatchEvent(event);
+            }, 500);
+        });
+    }
+
+    // Handle mobile filter button - BUKA SIDEBAR
+    if (mobileFilterBtn && filterSidebar) {
+        mobileFilterBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            filterSidebar.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    // Close filter sidebar
+    if (closeFilterBtn && filterSidebar) {
+        closeFilterBtn.addEventListener('click', function() {
+            filterSidebar.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close on outside click
+    if (filterSidebar) {
+        filterSidebar.addEventListener('click', function(e) {
+            if (e.target === filterSidebar) {
+                filterSidebar.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+});
+</script>
+    <script>
+        // Pause animation saat scroll di mobile
+        if (window.innerWidth <= 768) {
+            let scrollTimer;
+            window.addEventListener('scroll', function() {
+                document.body.classList.add('scrolling');
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(function() {
+                    document.body.classList.remove('scrolling');
+                }, 150);
+            }, {
+                passive: true
+            });
+        }
+    </script>
+    <script src="{{ asset('frontend/assets/js/catalog-filter.js') }}" defer></script>
+    {{-- Load external wishlist handler --}}
+    <script src="{{ asset('frontend/assets/js/wishlist/wishlist-handler.js') }}" defer></script>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator
+                .userAgent) || window.innerWidth <= 768;
+
+            if (isIOS) {
+                console.log('iOS detected: Running text animation disabled');
+                return;
+            }
+
+            const descriptions = document.querySelectorAll('.product-deskripsi-323 p');
+            const maxAnimated = isMobile ? 5 : 15;
+
+            Array.from(descriptions).slice(0, maxAnimated).forEach(desc => {
+                const textWidth = desc.scrollWidth;
+                const containerWidth = desc.parentElement.offsetWidth;
+
+                if (textWidth > containerWidth) {
+                    // ✅ UBAH: Hanya atur desc, BUKAN parentElement
+                    desc.style.textAlign = 'left';
+                    const distance = textWidth - containerWidth + 20;
+                    const animationDuration = isMobile ? '12s' : '8s';
+
+                    desc.style.animation =
+                        `scroll-alternate ${animationDuration} ease-in-out 3s infinite alternate`;
+                    desc.style.setProperty('--scroll-distance', `-${distance}px`);
+                } else {
+                    // ✅ UBAH: Hanya atur desc, BUKAN parentElement
+                    desc.style.textAlign = 'center';
+                }
+            });
+
+            if (!isMobile) {
+                let resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        Array.from(descriptions).slice(0, 15).forEach(desc => {
+                            const textWidth = desc.scrollWidth;
+                            const containerWidth = desc.parentElement.offsetWidth;
+
+                            if (textWidth > containerWidth) {
+                                // ✅ UBAH: Hanya atur desc, BUKAN parentElement
+                                desc.style.textAlign = 'left';
+                                const distance = textWidth - containerWidth + 20;
+                                desc.style.animation =
+                                    `scroll-alternate 8s ease-in-out 3s infinite alternate`;
+                                desc.style.setProperty('--scroll-distance',
+                                    `-${distance}px`);
+                            } else {
+                                // ✅ UBAH: Hanya atur desc, BUKAN parentElement
+                                desc.style.textAlign = 'center';
+                                desc.style.animation = 'none';
+                            }
+                        });
+                    }, 1000);
+                }, {
+                    passive: true
+                });
+            }
+        });
+    </script>
+
+    {{-- Set konfigurasi wishlist --}}
+    <script>
+        window.wishlistConfig = {
+            isAuthenticated: {{ auth('customer')->check() ? 'true' : 'false' }},
+            loginUrl: "{{ route('home') }}",
+            csrfToken: "{{ csrf_token() }}"
+        };
+    </script>
+
 </x-frontend-layout>

@@ -1,0 +1,826 @@
+/* Small Banner Section Only - style.css */
+
+:root {
+  --primary: #e1a153;
+  --subprimary: #f7b963;
+  --edition: #1f4390;
+  --secondary: #1f4390;
+  --tertiary: #000;
+  --contrast: #eeeeef;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+body {
+  font-family: "ubuntu", sans-serif;
+  background-color: var(--contrast);
+  color: var(--tertiary);
+  overflow-x: hidden;
+}
+
+/* ---- Small Banner Section ---- */
+.small-benner-container {
+  display: flex;
+  position: relative;
+  top: 1rem;
+  left: 5%;
+  width: 90%;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5%;
+    margin-top: -20px; /* TAMBAHKAN INI untuk merapatkan dari atas */
+}
+
+.small-benner1 {
+  background-color: var(--contrast);
+  width: 600px;
+  height: 300px;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.small-benner1 .small-image-1 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  right: 40%;
+  width: 50%;
+  height: auto;
+  z-index: 2;
+}
+
+.content-1 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  width: auto;
+  left: 55%;
+  z-index: 2;
+  gap: 10px;
+}
+
+.content-1 .sbennertitle {
+  display: flex;
+  width: 250px;
+  font-size: 24px;
+  color: #333;
+}
+
+.content-1 .sbennersubtitle {
+  display: flex;
+  width: 200px;
+  font-size: 14px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.scta-1 {
+  position: relative;
+  border: none;
+  background-color: var(--edition);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 60%;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.content-1 .scta-1:hover {
+  background-color: var(--primary);
+}
+
+.background-benner1-1 {
+  display: inline;
+  position: relative;
+  right: 115%;
+  width: 100%;
+  height: 200%;
+  padding: 0 25%;
+  background-color: var(--primary);
+  transform: skew(-30deg, 0deg);
+  transition: 0.5s ease;
+  z-index: 0;
+}
+
+.background-benner1-2 {
+  display: inline;
+  position: relative;
+  right: 45%;
+  width: 100%;
+  height: 200%;
+  padding: 0 25%;
+  background-color: var(--primary);
+  transform: skew(-30deg, 0deg);
+  transition: 0.5s ease;
+  z-index: 1;
+}
+
+.small-benner1:hover .background-benner1-1 {
+  position: relative;
+  right: 120%;
+  transition: 0.5s ease;
+}
+
+.small-benner1:hover .background-benner1-2 {
+  position: relative;
+  right: 40%;
+  transition: 0.5s ease;
+}
+
+.small-benner2 {
+  background-color: var(--contrast);
+  width: 600px;
+  height: 300px;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.small-benner2 .small-image-2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  right: 40%;
+  width: 50%;
+  height: auto;
+  z-index: 2;
+}
+
+.content-2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  width: auto;
+  left: 55%;
+  z-index: 2;
+  gap: 10px;
+}
+
+.content-2 .sbennertitle {
+  display: flex;
+  width: 250px;
+  font-size: 24px;
+  color: #333;
+}
+
+.content-2 .sbennersubtitle {
+  display: flex;
+  width: 200px;
+  font-size: 14px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.scta-2 {
+  position: relative;
+  border: none;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 60%;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.content-2 .scta-2:hover {
+  background-color: var(--secondary);
+}
+
+.background-benner2-1 {
+  display: inline;
+  position: relative;
+  right: 115%;
+  width: 100%;
+  height: 200%;
+  padding: 0 25%;
+  background-color: var(--edition);
+  transform: skew(-30deg, 0deg);
+  transition: 0.5s ease;
+  z-index: 0;
+}
+
+.background-benner2-2 {
+  display: inline;
+  position: relative;
+  right: 45%;
+  width: 100%;
+  height: 200%;
+  padding: 0 25%;
+  background-color: var(--edition);
+  transform: skew(-30deg, 0deg);
+  transition: 0.5s ease;
+  z-index: 1;
+}
+
+.small-benner2:hover .background-benner2-1 {
+  position: relative;
+  right: 120%;
+  transition: 0.5s ease;
+}
+
+.small-benner2:hover .background-benner2-2 {
+  position: relative;
+  right: 40%;
+  transition: 0.5s ease;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1280px) {
+  html {
+    font-size: 85%;
+  }
+
+  .background-benner1-1 {
+    right: 120%;
+    height: 180%;
+    padding: 0 25%;
+  }
+
+  .background-benner1-2 {
+    right: 45%;
+    height: 180%;
+    padding: 0 25%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 125%;
+  }
+
+  .small-benner1:hover .background-benner1-2 {
+    right: 40%;
+  }
+
+  .background-benner2-1 {
+    right: 120%;
+    height: 180%;
+    padding: 0 25%;
+  }
+
+  .background-benner2-2 {
+    right: 45%;
+    height: 180%;
+    padding: 0 25%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 125%;
+  }
+
+  .small-benner2:hover .background-benner2-2 {
+    right: 40%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .small-benner-container {
+    margin-top: -30px; /* Lebih santai */
+  }
+}
+
+@media screen and (min-width: 1367px) {
+  .small-benner-container {
+    margin-top: -10px; /* Untuk desktop besar */
+  }
+}
+/* TAMBAHKAN INI - Tablet Landscape */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .small-benner-container {
+    margin-top: -120px !important; /* Jarak lebih besar untuk tablet */
+    margin-bottom: 10%;
+  }
+}
+
+@media screen and (min-width: 885px) and (max-width: 1023px) {
+  .small-benner-container {
+    margin-top: -120px; /* Tambah jarak dari product cards */
+  }
+}
+
+/* iPad Pro & Tablet Besar (1024px - 1366px) */
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+  .small-benner-container {
+    margin-top: -30px !important; /* Rapat untuk iPad Pro */
+    margin-bottom: 8%;
+  }
+}
+
+@media screen and (max-width: 884px) {
+  html {
+    font-size: 65%;
+  }
+
+  .small-benner-container {
+    position: relative;
+    margin-top: -120px; /* Ubah dari -25% menjadi 60px */
+    margin-bottom: 10%;
+    width: 90%;
+    gap: 20px;
+  }
+
+  .small-benner1,
+  .small-benner2 {
+    width: 450px;
+    height: 200px;
+  }
+
+  .small-benner1 .small-image-1,
+  .small-benner2 .small-image-2 {
+    position: relative;
+    right: 60%;
+    width: 50%;
+  }
+
+  .content-1,
+  .content-2 {
+    left: 47%;
+    gap: 8px;
+  }
+
+  .content-1 .sbennertitle,
+  .content-2 .sbennertitle {
+    font-size: 20px;
+    width: 200px;
+  }
+
+  .content-1 .sbennersubtitle,
+  .content-2 .sbennersubtitle {
+    font-size: 12px;
+    width: 170px;
+    margin-top: 5px;
+  }
+
+  .scta-1,
+  .scta-2 {
+    width: 50%;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .background-benner1-1 {
+    right: 135%;
+    height: 180%;
+    padding: 0 25%;
+  }
+
+  .background-benner1-2 {
+    right: 55%;
+    height: 180%;
+    padding: 0 25%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 140%;
+  }
+
+  .small-benner1:hover .background-benner1-2 {
+    right: 50%;
+  }
+
+  .background-benner2-1 {
+    right: 135%;
+    height: 180%;
+    padding: 0 25%;
+  }
+
+  .background-benner2-2 {
+    right: 55%;
+    height: 180%;
+    padding: 0 25%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 140%;
+  }
+
+  .small-benner2:hover .background-benner2-2 {
+    right: 50%;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .small-benner1 .small-image-1 {
+    right: 68%;
+  }
+
+  .small-benner2 .small-image-2 {
+    right: 70%;
+  }
+
+  .content-1,
+  .content-2 {
+    left: 40%;
+    gap: 5px;
+  }
+
+  .background-benner1-1 {
+    right: 140%;
+  }
+
+  .background-benner1-2 {
+    right: 55%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 145%;
+  }
+
+  .small-benner1:hover .background-benner1-2 {
+    right: 50%;
+  }
+
+  .background-benner2-1 {
+    right: 140%;
+  }
+
+  .background-benner2-2 {
+    right: 55%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 145%;
+  }
+
+  .small-benner2:hover .background-benner2-2 {
+    right: 50%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .background-benner1-1 {
+    right: 142%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 147%;
+  }
+
+  .background-benner2-1 {
+    right: 142%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 147%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .small-benner1 .small-image-1,
+  .small-benner2 .small-image-2 {
+    right: 72%;
+  }
+
+  .content-1,
+  .content-2 {
+    left: 38%;
+    gap: 5px;
+  }
+
+  .background-benner1-1 {
+    right: 147%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 152%;
+  }
+
+  .background-benner2-1 {
+    right: 147%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 152%;
+  }
+}
+
+@media only screen and (max-width: 440px) and (orientation: portrait) {
+  html {
+    font-size: 55%;
+  }
+
+  .small-benner-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -80px !important;
+    margin-bottom: 10%;
+  }
+
+  .small-benner1,
+  .small-benner2 {
+    width: 450px;
+    height: 200px;
+  }
+
+  .small-benner1 .small-image-1,
+  .small-benner2 .small-image-2 {
+    position: relative;
+    right: 60%;
+    width: 50%;
+  }
+
+  .content-1,
+  .content-2 {
+    left: 47%;
+    gap: 8px;
+  }
+
+  .content-1 .sbennertitle,
+  .content-2 .sbennertitle {
+    font-size: 20px;
+    width: 200px;
+  }
+
+  .content-1 .sbennersubtitle,
+  .content-2 .sbennersubtitle {
+    font-size: 12px;
+    width: 170px;
+    margin-top: 5px;
+  }
+
+  .scta-1,
+  .scta-2 {
+    width: 50%;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .background-benner1-1 {
+    right: 135%;
+  }
+
+  .background-benner1-2 {
+    right: 55%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 140%;
+  }
+
+  .small-benner1:hover .background-benner1-2 {
+    right: 50%;
+  }
+
+  .background-benner2-1 {
+    right: 135%;
+  }
+
+  .background-benner2-2 {
+    right: 55%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 140%;
+  }
+
+  .small-benner2:hover .background-benner2-2 {
+    right: 50%;
+  }
+}
+
+@media (min-width: 380px) and (max-width: 439px) {
+  .small-benner-container {
+    margin-top: -85px !important;
+  }
+}
+
+@media only screen and (max-width: 390px) and (orientation: portrait) {
+  .small-benner-container {
+    margin-top: -90px !important;
+  }
+  
+  .small-benner1 .small-image-1,
+  .small-benner2 .small-image-2 {
+    right: 70%;
+  }
+
+  .content-1,
+  .content-2 {
+    left: 40%;
+    gap: 8px;
+  }
+
+  .content-1 .sbennertitle,
+  .content-2 .sbennertitle {
+    font-size: 18px;
+  }
+
+  .background-benner1-1 {
+    right: 142%;
+  }
+
+  .background-benner1-2 {
+    right: 57%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 147%;
+  }
+
+  .small-benner1:hover .background-benner1-2 {
+    right: 52%;
+  }
+
+  .background-benner2-1 {
+    right: 142%;
+  }
+
+  .background-benner2-2 {
+    right: 57%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 147%;
+  }
+
+  .small-benner2:hover .background-benner2-2 {
+    right: 52%;
+  }
+}
+
+@media only screen and (max-width: 380px) and (orientation: portrait) {
+  html {
+    font-size: 45%;
+  }
+
+  .small-benner-container {
+    margin-top: -95px !important;
+  }
+
+  .background-benner1-1 {
+    right: 145%;
+  }
+
+  .background-benner1-2 {
+    right: 60%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 150%;
+  }
+
+  .small-benner1:hover .background-benner1-2 {
+    right: 55%;
+  }
+
+  .background-benner2-1 {
+    right: 145%;
+  }
+
+  .background-benner2-2 {
+    right: 60%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 150%;
+  }
+
+  .small-benner2:hover .background-benner2-2 {
+    right: 55%;
+  }
+}
+
+@media only screen and (max-width: 360px) and (orientation: portrait) {
+  .small-benner-container {
+    margin-top: -100px !important;
+  }
+  
+  .small-benner1 .small-image-1,
+  .small-benner2 .small-image-2 {
+    right: 75%;
+  }
+
+  .background-benner1-1 {
+    right: 150%;
+  }
+
+  .background-benner1-2 {
+    right: 65%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 155%;
+  }
+
+  .small-benner1:hover .background-benner1-2 {
+    right: 60%;
+  }
+
+  .background-benner2-1 {
+    right: 150%;
+  }
+
+  .background-benner2-2 {
+    right: 65%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 155%;
+  }
+
+  .small-benner2:hover .background-benner2-2 {
+    right: 60%;
+  }
+}
+
+@media only screen and (max-width: 349px) and (orientation: portrait) {
+  html {
+    font-size: 40%;
+  }
+
+  .small-benner-container {
+    margin-top: -105px !important;
+  }
+
+  .small-benner1,
+  .small-benner2 {
+    width: 450px;
+    height: 150px;
+  }
+
+  .content-1,
+  .content-2 {
+    left: 40%;
+  }
+
+  .content-1 .sbennertitle,
+  .content-2 .sbennertitle {
+    width: 150px;
+    font-size: 14px;
+  }
+
+  .content-1 .sbennersubtitle,
+  .content-2 .sbennersubtitle {
+    font-size: 10px;
+    width: 160px;
+    margin-top: 2px;
+  }
+
+  .small-benner1 .small-image-1,
+  .small-benner2 .small-image-2 {
+    right: 70%;
+  }
+
+  .scta-1,
+  .scta-2 {
+    width: 60%;
+    font-size: 10px;
+  }
+
+  .background-benner1-1 {
+    right: 145%;
+  }
+
+  .background-benner1-2 {
+    right: 60%;
+  }
+
+  .small-benner1:hover .background-benner1-1 {
+    right: 150%;
+  }
+
+  .small-benner1:hover .background-benner1-2 {
+    right: 55%;
+  }
+
+  .background-benner2-1 {
+    right: 145%;
+  }
+
+  .background-benner2-2 {
+    right: 60%;
+  }
+
+  .small-benner2:hover .background-benner2-1 {
+    right: 150%;
+  }
+
+  .small-benner2:hover .background-benner2-2 {
+    right: 55%;
+  }
+
+  
+}

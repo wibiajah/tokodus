@@ -33,7 +33,8 @@
 @php
 $isProductActive =
     request()->routeIs('superadmin.categories.*') ||
-    request()->routeIs('superadmin.stocks.*') ||
+    request()->routeIs('superadmin.stock-overview') ||
+    request()->routeIs('superadmin.products.stock.*') ||
     request()->routeIs('superadmin.vouchers.*');
 @endphp
 
@@ -64,7 +65,7 @@ $isProductActive =
 
     <a class="collapse-item {{ request()->routeIs('superadmin.stocks.*') ? 'active' : '' }}"
        href="{{ route('superadmin.stocks.index') }}">
-        <i class="fas fa-warehouse"></i>
+        <i class="fas fa-ticket-alt"></i>
         <span>Inventori</span>
     </a>
 
@@ -76,6 +77,36 @@ $isProductActive =
 </div>
 
 <div class="sidebar-divider"></div>
+
+<!-- ORDERS -->
+<div class="sidebar-heading">Order Management</div>
+
+<a href="{{ route('superadmin.orders.index') }}" 
+   class="nav-item {{ request()->routeIs('superadmin.orders.*') ? 'active' : '' }}"
+   title="Kelola Order">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="nav-text">Orders</span>
+    @if(isset($newOrdersCount) && $newOrdersCount > 0)
+    <span class="badge badge-danger ml-auto">{{ $newOrdersCount }}</span>
+    @endif
+</a>
+
+<a href="{{ route('superadmin.reviews.index') }}" 
+   class="nav-item {{ request()->routeIs('superadmin.reviews.*') ? 'active' : '' }}"
+   title="Kelola Review Produk">
+    <i class="fas fa-star"></i>
+    <span class="nav-text">Reviews</span>
+    
+    <!-- ✅ BADGE - Muncul ketika ada review baru yang belum dilihat -->
+    @if(isset($unviewedReviewsCount) && $unviewedReviewsCount > 0)
+    <span class="badge badge-danger ml-auto" id="review-badge">
+        {{ $unviewedReviewsCount }}
+    </span>
+    @endif
+</a>
+<div class="sidebar-divider"></div>
+
+
 
 <style>
 /* Wrapper untuk parent menu + dropdown toggle */
@@ -160,5 +191,12 @@ $isProductActive =
 
 .collapse-item span {
     font-size: 0.9rem;
+}
+
+/* Badge untuk notifikasi */
+.nav-item .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
 }
 </style>

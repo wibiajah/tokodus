@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductStock;
+use App\Models\ProductVariantStock;
 use App\Models\Toko;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -12,13 +13,35 @@ use Illuminate\Support\Facades\Log;
 class StockController extends Controller
 {
     // Overview stok real time semua produk di semua toko
-    public function index()
-    {
-        $products = Product::with(['stocks.toko'])->get();
-        $tokos = Toko::all();
+   public function index()
+{
+    $tokoId = auth()->user()->toko_id;
+    
+    // ✅ FIX: Hanya tampilkan produk yang BELUM DIHAPUS dan sudah ada stoknya
+    $products = Product::with([
+        'categories:id,name',
+        'variants' => function($q) {
+            $q->whereNull('parent_id')->with('children');
+        }
+    ])
+    ->whereHas('variantStocks', function($q) use ($tokoId) {
+        $q->where('toko_id', $tokoId);
+    })
+    ->whereNull('deleted_at') // ✅ TAMBAHKAN INI: Filter produk yang belum dihapus
+    ->get();
 
-        return view('superadmin.stocks.index', compact('products', 'tokos'));
+    // ✅ FIX: Hitung stok untuk setiap produk
+    foreach ($products as $product) {
+        // Hitung total stok di toko ini untuk produk ini
+        $product->toko_stock_value = ProductVariantStock::whereHas('variant', function($q) use ($product) {
+            $q->where('product_id', $product->id);
+        })
+        ->where('toko_id', $tokoId)
+        ->sum('stock');
     }
+
+    return view('kepala-toko.stocks.index', compact('products'));
+}
 
     // Detail stok per produk (untuk halaman detail lengkap)
     public function show(Product $product)

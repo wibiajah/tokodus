@@ -752,6 +752,50 @@ function renderProductDetail(product) {
                     </div>
                 </div>
 
+
+                <!-- Product Info Cards (SKU & Tipe) -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="info-card" style="height: 100%;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3" style="font-size: 2rem; color: #224abe;">
+                    <i class="fas fa-barcode"></i>
+                </div>
+                <div>
+                    <div class="info-label mb-1">Kode SKU</div>
+                    <div class="info-value-inline" style="font-family: monospace; font-size: 1.1rem;">
+                        ${product.sku || '-'}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="info-card" style="height: 100%;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3" style="font-size: 2rem; color: #224abe;">
+                    ${product.tipe === 'masterbox' ? '<i class="fas fa-boxes"></i>' : '<i class="fas fa-box"></i>'}
+                </div>
+                <div>
+                    <div class="info-label mb-1">Tipe Box</div>
+                    <div>
+                        ${product.tipe === 'innerbox' ? 
+                            `<span class="badge" style="background: #e3f2fd; color: #1976d2; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
+                                <i class="fas fa-box mr-1"></i> Inner Box
+                            </span>` :
+                        product.tipe === 'masterbox' ?
+                            `<span class="badge" style="background: #f3e5f5; color: #7b1fa2; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
+                                <i class="fas fa-boxes mr-1"></i> Master Box
+                            </span>` :
+                            '<span class="text-muted">-</span>'
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                 <!-- Price Display -->
                 <div class="price-display">
                     <span class="price-label">Harga Produk</span>

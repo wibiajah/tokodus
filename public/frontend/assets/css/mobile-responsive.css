@@ -1,0 +1,442 @@
+/* ========== MOBILE DROPDOWN ANIMATION (SEPERTI SB ADMIN) ========== */
+@media only screen and (max-width: 768px) {
+    
+    /* ✅ HAMBURGER MENU DROPDOWN - Slide Down dengan Jarak dari Kiri */
+    .navbar-nav {
+        position: fixed !important;
+        top: 65px !important;
+        left: 20px !important;
+        right: 20px !important;
+        width: auto !important;
+        max-width: calc(100% - 40px) !important;
+        height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        background: linear-gradient(180deg, #1f4390 0%, #2d5bb7 100%) !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+        transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                    opacity 0.4s ease !important;
+        opacity: 0 !important;
+        z-index: 998 !important;
+        border-radius: 16px !important;
+    }
+    
+    .navbar-nav.active {
+        max-height: 450px !important;
+        height: auto !important;
+        opacity: 1 !important;
+        animation: slideDownBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    
+    /* ✅ PROFILE SIDEBAR DROPDOWN - HORIZONTAL LAYOUT */
+    .floating-sidebar-home {
+        position: fixed !important;
+        top: 65px !important;
+        right: 20px !important;
+        width: 220px !important;
+        max-width: 220px !important;
+        height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fc 100%) !important;
+        box-shadow: -5px 8px 24px rgba(0, 0, 0, 0.3) !important;
+        transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                    opacity 0.4s ease !important;
+        opacity: 0 !important;
+        z-index: 999 !important;
+        padding-top: 0 !important;
+        border-radius: 16px !important;
+    }
+    
+    .floating-sidebar-home.active {
+        max-height: 500px !important;
+        height: auto !important;
+        opacity: 1 !important;
+        padding-top: 12px !important;
+        animation: slideDownBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    
+    /* ✅ BOUNCE ANIMATION - Seperti SB Admin */
+    @keyframes slideDownBounce {
+        0% {
+            opacity: 0;
+            transform: translateY(-25px) scale(0.9);
+        }
+        60% {
+            opacity: 1;
+            transform: translateY(8px) scale(1.02);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    
+    /* ✅ STAGGERED ANIMATION untuk Hamburger Menu Items */
+    .navbar-nav.active .navbar-nav-menu li {
+        animation: slideInItem 0.5s ease-out backwards;
+    }
+    
+    .navbar-nav.active .navbar-nav-menu li:nth-child(1) { animation-delay: 0.05s; }
+    .navbar-nav.active .navbar-nav-menu li:nth-child(2) { animation-delay: 0.1s; }
+    .navbar-nav.active .navbar-nav-menu li:nth-child(3) { animation-delay: 0.15s; }
+    .navbar-nav.active .navbar-nav-menu li:nth-child(4) { animation-delay: 0.2s; }
+    .navbar-nav.active .navbar-nav-menu li:nth-child(5) { animation-delay: 0.25s; }
+    
+    @keyframes slideInItem {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    /* ✅ Profile Sidebar Menu Items Animation */
+    .floating-sidebar-home.active .sidebar-menu-item-home {
+        animation: slideInItem 0.5s ease-out backwards;
+    }
+    
+    .floating-sidebar-home.active .sidebar-menu-item-home:nth-child(1) { animation-delay: 0.05s; }
+    .floating-sidebar-home.active .sidebar-menu-item-home:nth-child(2) { animation-delay: 0.1s; }
+    .floating-sidebar-home.active .sidebar-menu-item-home:nth-child(3) { animation-delay: 0.15s; }
+    .floating-sidebar-home.active .sidebar-menu-item-home:nth-child(4) { animation-delay: 0.2s; }
+    .floating-sidebar-home.active .sidebar-menu-item-home:nth-child(5) { animation-delay: 0.25s; }
+    
+    /* ✅ Overlay Animation */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 997;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .sidebar-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* ✅ Hamburger Menu Styling */
+    .navbar-nav-menu {
+        padding: 12px 0 !important;
+    }
+    
+    .navbar-nav-menu li {
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        text-decoration: none !important;
+    }
+    
+    .navbar-nav-menu li::before,
+    .navbar-nav-menu li::after {
+        display: none !important;
+        content: none !important;
+    }
+    
+    .navbar-nav-menu li:last-child {
+        border: none !important;
+        border-bottom: none !important;
+    }
+    
+    /* ✅ HAMBURGER MENU LINKS - DENGAN BOUNCE HOVER */
+    .navbar-nav-menu a {
+        display: block !important;
+        padding: 14px 20px !important;
+        font-size: 0.9rem !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+        color: #ffffff !important;
+        font-weight: 500 !important;
+        position: relative !important;
+        z-index: 1 !important;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+    
+    .navbar-nav-menu a:hover,
+    .navbar-nav-menu a:active {
+        transform: scale(1.05) translateX(5px) !important;
+        color: #fff !important;
+    }
+    
+    .navbar-nav-menu a::before,
+    .navbar-nav-menu a::after {
+        display: none !important;
+        content: none !important;
+    }
+    
+    /* ✅ Profile Sidebar - SUPER COMPACT LAYOUT */
+    .sidebar-content-home {
+        padding: 14px 0 !important;
+    }
+    
+    .sidebar-menu-item-home {
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        text-decoration: none !important;
+    }
+    
+    .sidebar-menu-item-home::before,
+    .sidebar-menu-item-home::after {
+        display: none !important;
+        content: none !important;
+    }
+    
+    .sidebar-menu-item-home:last-child {
+        border: none !important;
+        border-bottom: none !important;
+    }
+    
+    /* ✅ PROFILE MENU LINK - DENGAN BOUNCE HOVER */
+    .sidebar-menu-link-home {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 12px !important;
+        padding: 16px 16px !important;
+        font-size: 0.95rem !important;
+        text-align: left !important;
+        font-weight: 600 !important;
+        color: #2d3748 !important;
+        text-decoration: none !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        width: 100% !important;
+        cursor: pointer !important;
+        position: relative !important;
+        z-index: 1 !important;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+    
+    .sidebar-menu-link-home:hover,
+    .sidebar-menu-link-home:active {
+        transform: scale(1.05) translateX(5px) !important;
+    }
+    
+    .sidebar-menu-link-home::before,
+    .sidebar-menu-link-home::after {
+        display: none !important;
+        content: none !important;
+    }
+    
+    .sidebar-menu-link-home i {
+        font-size: 1.5rem !important;
+        color: #1f4390 !important;
+        flex-shrink: 0 !important;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+    
+    .sidebar-menu-link-home:hover i,
+    .sidebar-menu-link-home:active i {
+        transform: scale(1.15) rotate(5deg) !important;
+    }
+    
+    .sidebar-menu-link-home > span {
+        text-align: left !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    
+    /* ✅ Badge di Icon */
+    .icon-wrapper-home {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .sidebar-menu-link-home .badge-home {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: #e74a3b;
+        color: white;
+        padding: 2px 5px;
+        border-radius: 10px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        min-width: 16px;
+        text-align: center;
+        line-height: 1;
+    }
+    
+    /* ✅ LOGOUT LINK MOBILE - DENGAN BOUNCE HOVER */
+    .sidebar-logout-item-mobile {
+        display: block !important;
+    }
+    
+    .logout-link-mobile {
+        color: #e74a3b !important;
+        border: none !important;
+        border-left: none !important;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+    
+    .logout-link-mobile:hover,
+    .logout-link-mobile:active {
+        transform: scale(1.05) translateX(5px) !important;
+    }
+    
+    .logout-link-mobile i {
+        color: #e74a3b !important;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+    
+    .logout-link-mobile:hover i,
+    .logout-link-mobile:active i {
+        transform: scale(1.15) rotate(-5deg) !important;
+    }
+    
+    /* ✅ Hide Logout button desktop di Mobile */
+    .sidebar-logout-desktop {
+        display: none !important;
+    }
+
+    /* ========== MOBILE: HIDE USER NAME, SHOW ONLY AVATAR + HAMBURGER ========== */
+    .navbar-extra .user-button {
+        padding: 6px 10px !important;
+        gap: 4px !important;
+        min-width: auto !important;
+        width: auto !important;
+    }
+    
+    /* Hide user name text on mobile */
+    .navbar-extra .user-name-text {
+        display: none !important;
+    }
+    
+    /* Adjust avatar size for mobile */
+    .navbar-extra .user-avatar-small {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    
+    /* Adjust person icon size for mobile */
+    .navbar-extra .bi-person-circle {
+        font-size: 28px !important;
+    }
+    
+    /* Keep hamburger icon visible - GEDEIN ICONNYA */
+    .navbar-extra .sidebar-indicator {
+        font-size: 1.5rem !important;
+        margin-left: 0 !important;
+    }
+
+    /* ========== JARAK ANTARA CART & USER BUTTON ========== */
+    .navbar-extra .user-button-container {
+        margin-left: 10px !important;
+    }
+}
+
+/* ========== SMALL MOBILE (max-width: 437px) ========== */
+@media only screen and (max-width: 437px) {
+    .navbar-nav {
+        left: 15px !important;
+        right: 15px !important;
+        max-width: calc(100% - 30px) !important;
+    }
+    
+    .floating-sidebar-home {
+        width: 200px !important;
+        max-width: 200px !important;
+        right: 15px !important;
+    }
+    
+    .sidebar-menu-link-home {
+        padding: 14px 14px !important;
+        font-size: 0.9rem !important;
+        gap: 10px !important;
+    }
+    
+    .sidebar-menu-link-home i {
+        font-size: 1.4rem !important;
+    }
+}
+
+/* ========== EXTRA SMALL MOBILE (max-width: 360px) ========== */
+@media only screen and (max-width: 360px) {
+    .navbar-nav {
+        left: 12px !important;
+        right: 12px !important;
+        max-width: calc(100% - 24px) !important;
+    }
+    
+    .floating-sidebar-home {
+        width: 180px !important;
+        max-width: 180px !important;
+        right: 12px !important;
+    }
+    
+    .sidebar-menu-link-home {
+        padding: 12px 12px !important;
+        font-size: 0.85rem !important;
+        gap: 8px !important;
+    }
+    
+    .sidebar-menu-link-home i {
+        font-size: 1.3rem !important;
+    }
+    
+    .sidebar-menu-link-home .badge-home {
+        font-size: 0.5rem !important;
+        padding: 1px 3px !important;
+        min-width: 12px !important;
+    }
+
+    /* ✅ EXTRA SMALL: Avatar & Icon lebih kecil */
+    .navbar-extra .user-button {
+        padding: 5px 8px !important;
+        gap: 3px !important;
+    }
+    
+    .navbar-extra .user-avatar-small {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    
+    .navbar-extra .bi-person-circle {
+        font-size: 26px !important;
+    }
+    
+    .navbar-extra .sidebar-indicator {
+        font-size: 1rem !important;
+    }
+
+    /* Keep margin on extra small */
+    .navbar-extra .user-button-container {
+        margin-left: 8px !important;
+    }
+}

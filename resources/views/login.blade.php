@@ -12,9 +12,9 @@
                     <h1>Buat Akun</h1>
 
                     <div class="social-login">
-                        <button type="button" class="social-btn google" aria-label="Login with Google">
+                        <a href="{{ route('customer.auth.google') }}" class="social-btn-2 google-2" aria-label="Login with Google">
                             <i class="fab fa-google"></i>
-                        </button>
+                        </a>
                         <button type="button" class="social-btn facebook" aria-label="Login with Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </button>
@@ -68,9 +68,9 @@
                     <h1>Masuk</h1>
 
                     <div class="social-login">
-                        <button type="button" class="social-btn google" aria-label="Login with Google">
+                       <a href="{{ route('customer.auth.google') }}" class="social-btn-2 google-2" aria-label="Login with Google">
                             <i class="fab fa-google"></i>
-                        </button>
+                       </a>
                         <button type="button" class="social-btn facebook" aria-label="Login with Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </button>
